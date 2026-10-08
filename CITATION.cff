@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+message: "If you use this toolkit or its results, please cite the master's thesis it is part of (preferred citation below)."
+title: "5LTEP-L2: 5L-TEP Layer 2 Semantic Policies Toolkit"
+abstract: >-
+  Reference implementation, in progress, of Layer 2 (Semantic Policies) of the
+  Five-Layer Trust Engineering Pyramid (5L-TEP, SOFTENG 2026) for open government
+  data: domain rules defined after the data exists, one file per atomic check,
+  with a human description (intention, justification, sources) and an explicit
+  execution block (allowed template, exact portal, dataset, resource and
+  columns), validated by a JSON Schema and cross-reference checks. The
+  evaluation engine is not implemented yet. Part of the master's thesis cited
+  below.
+type: software
+authors:
+  - family-names: Pinheiro
+    given-names: Luciano Santos
+    affiliation: "CESAR School, Recife, Brazil"
+    email: lsp3@cesar.school
+  - family-names: Sérgio
+    given-names: Anderson Tenório
+    affiliation: "CESAR School, Recife, Brazil"
+    email: ats@cesar.school
+repository-code: "https://github.com/lsp3cesarschool/5ltep-layer2"
+license: MIT
+version: 0.1.0
+keywords:
+  - data quality
+  - semantic constraints
+  - domain rules
+  - data contracts
+  - trust engineering
+  - open government data
+  - CKAN
+  - FAIR
+preferred-citation:
+  type: thesis
+  thesis-type: "Master's thesis"
+  title: "Engenharia da Confiança (5L-TEP) Aplicada a Dados Abertos do IBAMA: Automação, Inteligência Artificial e Human-in-the-Loop para Avaliação da Qualidade de Big Data através da Plataforma CUPIM"
+  authors:
+    - family-names: Pinheiro
+      given-names: Luciano Santos
+      email: lsp3@cesar.school
+  institution:
+    name: "CESAR School, Programa de Pós-Graduação em Engenharia de Software"
+    city: Recife
+    country: BR
+  year: 2027
+  notes: "In preparation. Advisor: Prof. Anderson Tenório Sérgio (ats@cesar.school)."

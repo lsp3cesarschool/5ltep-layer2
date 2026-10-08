@@ -1,0 +1,161 @@
+# yaml-language-server: $schema=../../schema/rule-v1.schema.json
+# Formato de autoria 1.0; aplicação pendente, sem execução ou validação de domínio.
+# Exemplo derivado de IB-13. Não compara coordenada de lavratura com local do fato.
+schema_version: "1.0"
+id: territory.municipality-state
+version: "0.1.0"
+status: example
+origin: cross_reference
+seed_ids:
+  - IB-13
+
+description:
+  language: pt-BR
+  title: "Código do município compatível com a UF do mesmo local"
+  text: >
+    Verificar se os dois primeiros dígitos do código IBGE do município
+    correspondem ao código numérico da UF informada, depois de resolver
+    a sigla da UF na referência declarada. Ambos devem descrever o mesmo local.
+  justification: >
+    Uma divergência pode indicar erro de codificação ou uso de campos
+    referentes a contextos diferentes. O resultado é um sinal para revisão.
+    Esta regra não infere onde ocorreu uma infração a partir da posição
+    em que o auto foi lavrado e não testa se um ponto está no município.
+  field_meanings:
+    - application: ibama_autos
+      source: ibama_autos
+      column: COD_MUNICIPIO
+      meaning: "Código IBGE do município; contexto no recurso ainda a confirmar."
+    - application: ibama_autos
+      source: ibama_autos
+      column: UF
+      meaning: "Sigla da UF referente ao mesmo contexto do município."
+  exceptions:
+    - "Município do fato e UF da lavratura não podem ser comparados entre si."
+    - "Código histórico exige referência compatível com a data e o domínio."
+    - "Valor ausente ou UF sem correspondência fica indeterminado."
+  examples:
+    - case: "O código 2611606 e a sigla PE descrevem o mesmo local."
+      expected: "Sem sinal: prefixo 26 corresponde a PE."
+    - case: "O código 2611606 e a sigla AL descrevem o mesmo local."
+      expected: "Com sinal: prefixo 26 difere do código 27 de AL."
+  counterexamples:
+    - case: >
+        Ocorrência marítima registrada na cidade mais próxima, com coordenada
+        no mar e município/UF consistentes para o local administrativo declarado.
+      expected: "A posição no mar não produz sinal nesta regra."
+  sources:
+    - title: "IBGE — Códigos dos municípios"
+      url: "https://www.ibge.gov.br/explica/codigos-dos-municipios.php"
+      locator: "Apresentação da codificação de municípios e UFs"
+      version: null
+      check:
+        status: pending
+        checked_at: null
+        checked_by: null
+        scope: "Conferir o trecho, a versão e a cobertura antes de habilitar."
+
+classification:
+  category: DC
+  knowledge_areas: [GEO]
+  severity: warning
+  dimension: consistency
+  limit_nature: logical
+  jurisdiction: BR
+
+execution:
+  template: hierarchical-code
+  # Mapas/listas têm tamanho variável; cada modelo define seus parâmetros.
+  # Contagens são derivadas pelo motor, sem parameter_count manual.
+  applications:
+    ibama_autos:
+      status: pending_mapping
+      mapping_review:
+        status: pending
+        evidence: >
+          Confirmar, no dicionário ou documentação do recurso, que COD_MUNICIPIO
+          e UF descrevem o mesmo contexto. Nome e tipo não comprovam isso.
+        reviewed_at: null
+        reviewed_by: null
+      sources:
+        ibama_autos:
+          kind: dataset
+          portal: "https://dadosabertos.ibama.gov.br"
+          dataset: fiscalizacao-auto-de-infracao
+          resource:
+            selector:
+              name: "Autos de infração"
+              format: CSV
+          reader:
+            format: csv
+            encoding: detect
+            delimiter: detect
+            header: true
+          # Cabeçalhos exatos, preservados em Unicode; não são traduzidos.
+          columns:
+            COD_MUNICIPIO:
+              type: string
+              trim: true
+              missing_values: [""]
+              pattern: '[0-9]{7}'
+            UF:
+              type: string
+              trim: true
+              missing_values: [""]
+            SEQ_AUTO_INFRACAO:
+              type: string
+              trim: true
+              missing_values: [""]
+
+        uf_codes:
+          kind: reference
+          artifact: references/ibge-uf-codes.csv
+          # Nulos documentam dependências não preparadas; não são válidos
+          # para habilitar esta aplicação.
+          version: null
+          sha256: null
+          license: null
+          coverage: null
+          reader:
+            format: csv
+            encoding: UTF-8
+            delimiter: ","
+            header: true
+          columns:
+            sigla_uf:
+              type: string
+              trim: true
+              missing_values: [""]
+            codigo_uf:
+              type: string
+              trim: true
+              missing_values: [""]
+              pattern: '[0-9]{2}'
+
+      parameters:
+        child:
+          source: ibama_autos
+          column: COD_MUNICIPIO
+        parent:
+          source: ibama_autos
+          column: UF
+        prefix_length: 2
+        parent_lookup:
+          source: uf_codes
+          key_column: sigla_uf
+          value_column: codigo_uf
+          on_multiple_matches: error
+
+      evaluation:
+        unit: auto
+        identity:
+          source: ibama_autos
+          columns: [SEQ_AUTO_INFRACAO]
+        on_duplicate_identity: indeterminate
+
+      policies:
+        missing_input: indeterminate
+        invalid_input: indeterminate
+        unmatched_reference: indeterminate
+        missing_required_column: inapplicable
+        ambiguous_resource: inapplicable
