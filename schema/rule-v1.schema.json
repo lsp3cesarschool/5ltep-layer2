@@ -2,18 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lsp3cesarschool.github.io/5ltep-layer2/schema/rule-v1.schema.json",
   "title": "5L-TEP Layer 2 rule, format 1.0",
-  "description": "One check per file in rules/ (any subfolder). `description` is for people; `sources` and `check` are for the engine. Every source is a CKAN resource. One schema for every rule. `python main.py validate` also checks that each source.column used by `check` is declared in `sources`.",
+  "description": "One check per file in rules/ (any subfolder); the file name without .yaml is the rule's identifier (lowercase letters, digits and hyphens). `description` is for people; `sources` and `check` are for the engine. Every source is a CKAN resource. One schema for every rule. `python main.py validate` also checks that each source.column used by `check` is declared in `sources`.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "id", "version", "origin", "description", "sources", "check"],
+  "required": ["schema_version", "version", "origin", "description", "sources", "check"],
   "properties": {
     "schema_version": {"const": "1.0", "description": "Version of this format."},
-    "id": {
-      "type": "string",
-      "maxLength": 120,
-      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*(\\.[a-z][a-z0-9]*(-[a-z0-9]+)*)+$",
-      "description": "Stable identifier with at least one dot, e.g. territory.municipality-state. The file is named <id>.yaml."
-    },
     "version": {
       "type": "string",
       "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$",
@@ -34,6 +28,12 @@
           "description": "BCP 47 tag of the texts, e.g. pt-BR, en, es."
         },
         "title": {"$ref": "#/$defs/text", "maxLength": 200},
+        "title_translations": {
+          "type": "object",
+          "propertyNames": {"pattern": "^[A-Za-z]{2,3}(-[A-Za-z]{4})?(-([A-Za-z]{2}|[0-9]{3}))?$"},
+          "additionalProperties": {"$ref": "#/$defs/text", "maxLength": 200},
+          "description": "Optional: the title in other languages, keyed by BCP 47 tag, e.g. en. The dashboard shows the title in its own language when there is one, else `title`."
+        },
         "text": {"$ref": "#/$defs/text"},
         "justification": {"$ref": "#/$defs/text"},
         "exceptions": {"type": "array", "items": {"$ref": "#/$defs/text"}},

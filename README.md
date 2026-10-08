@@ -23,13 +23,13 @@ Each file in `rules/` holds one check that crosses data from one or more **CKAN*
 
 | Part | For whom | Content |
 |---|---|---|
-| `schema_version`, `id`, `version`, `origin` | everyone | format version, stable identifier, rule version, who proposed it |
-| `description` | people (dashboard) | title, what is checked, justification, exceptions and examples, in a language declared by a BCP 47 tag |
+| `schema_version`, `version`, `origin` | everyone | format version, rule version, who proposed it; the file name is the rule's identifier |
+| `description` | people (dashboard) | title (optionally translated in `title_translations`), what is checked, justification, exceptions and examples, in a language declared by a BCP 47 tag |
 | `sources` | the engine | for each CKAN resource: portal, dataset, exact resource name and format, how to unpack it (`archive`), how to read it (`file`) and the columns read, each with its meaning |
 | `check` | the engine | an allowed template and its parameters, written as `source.column` |
 
 Only `sources` and `check` define what is computed. Free SQL, code or expressions are never
-accepted. The example [`rules/territory/territory.municipality-state.yaml`](rules/territory/territory.municipality-state.yaml)
+accepted. The example [`rules/territorio/municipio-uf.yaml`](rules/territorio/municipio-uf.yaml)
 looks up each infraction notice's municipality code (IBAMA portal) in the table of municipalities
 published by the Brazilian electoral court (TSE portal) and compares the state.
 
@@ -39,7 +39,7 @@ published by the Brazilian electoral court (TSE portal) and compares the state.
 python -m venv .venv
 .venv/Scripts/python -m pip install -r requirements.txt   # Linux/macOS: .venv/bin/python
 python main.py validate                                   # every rules/**/*.yaml
-python main.py validate rules/territory --format json
+python main.py validate rules/territorio --format json
 python -m pytest
 python main.py run                                        # local test run: downloads the sources, outputs in work/out
 ```
@@ -53,11 +53,14 @@ Portuguese, the initial interface language). It checks:
   required fields, closed sets of fields and tokens, parameters of each template;
 - **cross references:** every `source.column` used by `check` is declared in `sources`; declared but
   unused sources or columns are warnings;
-- **folders:** one `<id>.yaml` per rule, at any subfolder depth, and unique ids.
+- **file names:** the file name is the rule's identifier (lowercase letters without accents, digits
+  and hyphens) and must be unique across `rules/`, at any subfolder depth.
 
 ## Write a rule
 
-Copy the example, give it a new `id` and file name, and edit it. Find the exact dataset and resource
+Copy the example, give it a new file name (its identifier), and edit it. The first rules are written in
+Portuguese; `description.title_translations` can carry the title in other languages (`en: "..."`), and
+the English dashboard shows it when present, otherwise the original title. Find the exact dataset and resource
 names in `<portal>/api/3/action/package_show?id=<dataset>`, and download the file once to check what
 is inside the archive, its encoding, delimiter and headers. Quote versions and codes. Version 1.0
 specifies one template, `lookup-equals`; other templates are added to the same schema as they get a

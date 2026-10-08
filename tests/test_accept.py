@@ -51,16 +51,16 @@ def test_unexpected_file_is_refused(artifact, tmp_path):
 
 
 def test_record_lists_must_hold_numbers_only(artifact, tmp_path):
-    target = artifact / "docs" / "data" / "rules" / "territory.municipality-state.json"
+    target = artifact / "docs" / "data" / "rules" / "municipio-uf.json"
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(json.dumps({"rule": "territory.municipality-state",
+    target.write_text(json.dumps({"rule": "municipio-uf",
                                   "records": {"mismatch": {"auto_infracao_1986.csv": ["217"]}}}), encoding="utf-8")
     with pytest.raises(accept.Refused, match="número de registro"):
         accept.check(artifact, tmp_path / "repo")
 
 
 def test_record_lists_cannot_carry_other_fields(artifact, tmp_path):
-    target = artifact / "docs" / "data" / "rules" / "territory.municipality-state.json"
+    target = artifact / "docs" / "data" / "rules" / "municipio-uf.json"
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps({"rule": "x", "values": ["2611606"]}), encoding="utf-8")
     with pytest.raises(accept.Refused, match="campos não esperados"):

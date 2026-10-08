@@ -1,11 +1,12 @@
 schema_version: "1.0"
-id: territory.municipality-state
-version: "0.2.0"
+version: "0.3.0"
 origin: cross_reference
 
 description:
   language: pt-BR
   title: "Código do município compatível com a UF do mesmo local"
+  title_translations:
+    en: "Municipality code consistent with the state of the same place"
   text: >
     Para cada auto de infração, procura o código IBGE do município na tabela
     oficial de municípios publicada pelo TSE e confere se a UF do auto é a UF

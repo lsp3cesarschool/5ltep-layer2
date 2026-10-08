@@ -183,7 +183,7 @@ function orderedRules() {
   const mode = el("order").value;
   const rules = [...PAGE.rules];
   if (mode === "signals") rules.sort((a, b) => (b.signals ?? -1) - (a.signals ?? -1) || a.file.localeCompare(b.file));
-  else if (mode === "title") rules.sort((a, b) => (a.title || a.id).localeCompare(b.title || b.id, LANG));
+  else if (mode === "title") rules.sort((a, b) => ruleTitle(a).text.localeCompare(ruleTitle(b).text, LANG));
   else if (mode === "file") rules.sort((a, b) => a.file.localeCompare(b.file));
   else {
     const saved = store("l2-order") || [];
@@ -191,7 +191,8 @@ function orderedRules() {
     rules.sort((a, b) => pos(a) - pos(b) || a.file.localeCompare(b.file));
   }
   const q = el("rule-search").value.trim().toLowerCase();
-  return q ? rules.filter((r) => [r.id, r.title, r.text, r.file].join(" ").toLowerCase().includes(q)) : rules;
+  return q ? rules.filter((r) => [r.id, r.title, ...Object.values(r.title_translations || {}), r.text, r.file]
+    .join(" ").toLowerCase().includes(q)) : rules;
 }
 
 function move(id, delta) {
@@ -210,6 +211,15 @@ function move(id, delta) {
 }
 
 function outcomeLabel(o) { return t("out_" + o); }
+
+// The rule's title in the dashboard's language when the rule has one (description.language or
+// title_translations, matched by primary language subtag), else the title it has.
+function ruleTitle(rule) {
+  const primary = (tag) => (tag || "").toLowerCase().split("-")[0];
+  if (primary(rule.language) === LANG) return { text: rule.title || rule.id, lang: rule.language };
+  const match = Object.entries(rule.title_translations || {}).find(([tag]) => primary(tag) === LANG);
+  return match ? { text: match[1], lang: match[0] } : { text: rule.title || rule.id, lang: rule.language };
+}
 
 function ruleHistory(rule) {
   const rows = PAGE.history.filter((run) => run.rules && run.rules[rule.id]).slice(-12).reverse();
@@ -260,7 +270,8 @@ async function showList(rule, outcome, panel, button) {
 
 function card(rule, index, count) {
   const head = h("div", { class: "card-head" },
-    h("div", {}, h("h3", {}, rule.title || rule.id), h("div", { class: "id" }, `${rule.file} · v${rule.version || "?"}`)),
+    h("div", {}, h("h3", { lang: ruleTitle(rule).lang || null }, ruleTitle(rule).text),
+      h("div", { class: "id" }, `${rule.file} · v${rule.version || "?"}`)),
     h("div", { class: "move" },
       h("button", { type: "button", title: t("up"), "aria-label": t("up"), disabled: index === 0, onclick: () => move(rule.id, -1) }, "↑"),
       h("button", { type: "button", title: t("down"), "aria-label": t("down"), disabled: index === count - 1, onclick: () => move(rule.id, 1) }, "↓")));

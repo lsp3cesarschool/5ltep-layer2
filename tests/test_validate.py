@@ -10,9 +10,9 @@ import main
 from src import validate
 
 ROOT = Path(__file__).resolve().parent.parent
-EXAMPLE = ROOT / "rules" / "territory" / "territory.municipality-state.yaml"
+EXAMPLE = ROOT / "rules" / "territorio" / "municipio-uf.yaml"
 TEXT = EXAMPLE.read_text(encoding="utf-8")
-RULE_ID = "territory.municipality-state"
+RULE_ID = "municipio-uf"
 
 
 def check(tmp_path, text, name=RULE_ID + ".yaml"):
@@ -73,7 +73,7 @@ def test_cli_json_output(tmp_path, capsys):
 @pytest.mark.parametrize("old, new, code", [
     ("origin: cross_reference\n", "origin: cross_reference\norigin: expert\n", "yaml.duplicate_key"),
     ("origin: cross_reference", "origin: &o cross_reference", "yaml.anchor"),
-    ('version: "0.2.0"', "version: !!str 0.2.0", "yaml.tag"),
+    ('version: "0.3.0"', "version: !!str 0.3.0", "yaml.tag"),
     ('schema_version: "1.0"\n', 'schema_version: "1.0"\nextra: {<<: {a: 1}}\n', "yaml.merge_key"),
 ])
 def test_unsafe_yaml_is_refused(tmp_path, old, new, code):
@@ -86,7 +86,7 @@ def test_version_directive_and_multiple_documents_are_refused(tmp_path):
 
 
 def test_unquoted_version_is_refused(tmp_path):
-    found = check(tmp_path, edit('version: "0.2.0"', "version: 0.2"))
+    found = check(tmp_path, edit('version: "0.3.0"', "version: 0.2"))
     assert codes(found) == ["schema.type"]
 
 
@@ -109,7 +109,8 @@ def test_portuguese_token_is_refused_with_line(tmp_path):
     assert '"cross_reference"' in found[0].message
 
 
-@pytest.mark.parametrize("field", ["status: example", "seed_ids: [IB-13]", "classification: {category: DC}"])
+@pytest.mark.parametrize("field", ["status: example", "seed_ids: [IB-13]", "classification: {category: DC}",
+                                   "id: municipio-uf"])
 def test_removed_fields_are_refused(tmp_path, field):
     found = check(tmp_path, edit("origin: cross_reference\n", f"origin: cross_reference\n{field}\n"))
     assert codes(found) == ["schema.unknown_field"]
@@ -193,8 +194,16 @@ def test_unicode_headers_are_kept_exactly(tmp_path):
 
 # --- folders -------------------------------------------------------------------------
 
-def test_file_name_must_match_id(tmp_path):
-    assert codes(check(tmp_path, TEXT, name="other.yaml")) == ["id.file_name"]
+@pytest.mark.parametrize("name", ["Municipio-UF.yaml", "município-uf.yaml", "municipio_uf.yaml", "territory.municipio.yaml"])
+def test_file_name_is_the_identifier(tmp_path, name):
+    assert codes(check(tmp_path, TEXT, name=name)) == ["file.name"]
+
+
+def test_title_translations(tmp_path):
+    assert "title_translations" in TEXT
+    text = edit('    en: "Municipality', '    es: "Código del municipio"\n    en: "Municipality')
+    assert check(tmp_path, text) == []
+    assert codes(check(tmp_path, edit('    en: "Municipality', '    english: "Municipality'))) == ["schema.pattern"]
 
 
 def test_any_subfolder_depth(tmp_path):
@@ -208,7 +217,7 @@ def test_duplicate_ids_in_a_folder(tmp_path):
     for d in ("a", "b"):
         (tmp_path / d).mkdir()
         (tmp_path / d / f"{RULE_ID}.yaml").write_text(TEXT, encoding="utf-8")
-    assert codes(validate.validate_paths([tmp_path])) == ["id.duplicate"]
+    assert codes(validate.validate_paths([tmp_path])) == ["file.duplicate_name"]
 
 
 def test_yml_extension_is_refused(tmp_path):

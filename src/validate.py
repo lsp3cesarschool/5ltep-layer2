@@ -227,23 +227,36 @@ def rule_files(paths) -> tuple[list[Path], list[Finding]]:
     return files, found
 
 
+RULE_NAME = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
+
+
+def rule_id(path: Path) -> str:
+    """A rule's identifier is its file name without .yaml."""
+    return path.stem
+
+
+def name_problem(path: Path) -> Finding | None:
+    if RULE_NAME.fullmatch(path.stem) and len(path.stem) <= 120:
+        return None
+    return Finding(ERROR, str(path), None, "", "file.name",
+                   "nome de arquivo inválido: o nome é o identificador da regra; use minúsculas sem acento, "
+                   "dígitos e hífen (ex.: municipio-uf.yaml)")
+
+
 def validate_paths(paths, check_names: bool = True) -> list[Finding]:
     files, findings = rule_files(paths)
     seen: dict[str, Path] = {}
     for path in files:
         rule, found = validate_file(path)
         findings += found
-        if rule is None or not isinstance(rule.data.get("id"), str):
-            continue
-        rule_id = rule.data["id"]
-        if rule_id in seen:
-            findings.append(Finding(ERROR, str(path), rule.line_of(["id"]), "id", "id.duplicate",
-                                    f'id "{rule_id}" já usado em {seen[rule_id]}'))
+        if check_names and (problem := name_problem(path)):
+            findings.append(problem)
+        name = rule_id(path)
+        if name in seen:
+            findings.append(Finding(ERROR, str(path), None, "", "file.duplicate_name",
+                                    f'já existe uma regra "{name}" em {seen[name]}; o nome do arquivo precisa ser único em rules/'))
         else:
-            seen[rule_id] = path
-        if check_names and path.stem != rule_id:
-            findings.append(Finding(ERROR, str(path), rule.line_of(["id"]), "id", "id.file_name",
-                                    f'o arquivo deve se chamar "{rule_id}.yaml"'))
+            seen[name] = path
     return findings
 
 

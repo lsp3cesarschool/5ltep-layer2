@@ -11,7 +11,7 @@ Sub-commands:
 
 Examples:
   python main.py validate                     # every rules/**/*.yaml
-  python main.py validate rules/territory     # one folder
+  python main.py validate rules/territorio    # one folder
   python main.py validate my-rule.yaml --no-name-check
   python main.py validate --format json
   python main.py run                          # every rule, outputs in work/out
@@ -71,7 +71,7 @@ def main(argv=None) -> int:
     p = sub.add_parser("validate", help="validate rule files")
     p.add_argument("paths", nargs="*", help="files or folders (default: rules)")
     p.add_argument("--format", choices=["text", "json"], default="text")
-    p.add_argument("--no-name-check", action="store_true", help="do not require <id>.yaml as file name")
+    p.add_argument("--no-name-check", action="store_true", help="do not check the file name (the rule identifier) format")
     p.set_defaults(func=cmd_validate)
     p = sub.add_parser("run", help="evaluate the rules against the CKAN portals")
     p.add_argument("paths", nargs="*", help="rule files or folders (default: rules)")

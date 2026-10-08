@@ -23,13 +23,13 @@ Arquivo em `rules/` está ativo; as subpastas são livres e só organizam as reg
 
 | Parte | Para quem | Conteúdo |
 |---|---|---|
-| `schema_version`, `id`, `version`, `origin` | todos | versão do formato, identificador estável, versão da regra, quem a propôs |
-| `description` | pessoas (dashboard) | título, o que é verificado, justificativa, exceções e exemplos, numa língua declarada por etiqueta BCP 47 |
+| `schema_version`, `version`, `origin` | todos | versão do formato, versão da regra, quem a propôs; o nome do arquivo é o identificador da regra |
+| `description` | pessoas (dashboard) | título (com tradução opcional em `title_translations`), o que é verificado, justificativa, exceções e exemplos, numa língua declarada por etiqueta BCP 47 |
 | `sources` | o motor | para cada recurso CKAN: portal, dataset, nome e formato exatos do recurso, como desempacotar (`archive`), como ler (`file`) e as colunas lidas, cada uma com seu significado |
 | `check` | o motor | um modelo permitido e seus parâmetros, escritos como `fonte.coluna` |
 
 Só `sources` e `check` definem o que é calculado. SQL, código ou expressões livres nunca são
-aceitos. O exemplo [`rules/territory/territory.municipality-state.yaml`](rules/territory/territory.municipality-state.yaml)
+aceitos. O exemplo [`rules/territorio/municipio-uf.yaml`](rules/territorio/municipio-uf.yaml)
 procura o código do município de cada auto de infração (portal do IBAMA) na tabela de municípios
 publicada pelo TSE (portal do TSE) e compara a UF.
 
@@ -39,7 +39,7 @@ publicada pelo TSE (portal do TSE) e compara a UF.
 python -m venv .venv
 .venv/Scripts/python -m pip install -r requirements.txt   # Linux/macOS: .venv/bin/python
 python main.py validate                                   # todos os rules/**/*.yaml
-python main.py validate rules/territory --format json
+python main.py validate rules/territorio --format json
 python -m pytest
 python main.py run                                        # ensaio local: baixa as fontes, saídas em work/out
 ```
@@ -53,11 +53,14 @@ português, idioma inicial da interface). Ele confere:
   regras: campos obrigatórios, conjuntos fechados de campos e valores, parâmetros de cada modelo;
 - **referências cruzadas:** toda `fonte.coluna` usada em `check` está declarada em `sources`; fonte
   ou coluna declarada e não usada gera aviso;
-- **pastas:** um `<id>.yaml` por regra, em qualquer profundidade de subpasta, e ids únicos.
+- **nomes de arquivo:** o nome do arquivo é o identificador da regra (minúsculas sem acento, dígitos
+  e hífen) e precisa ser único em `rules/`, em qualquer profundidade de subpasta.
 
 ## Escrever uma regra
 
-Copie o exemplo, dê a ele novo `id` e novo nome de arquivo, e edite. Os nomes exatos do dataset e do
+Copie o exemplo, dê a ele um novo nome de arquivo (que é o identificador) e edite. As primeiras regras
+estão em português; `description.title_translations` pode trazer o título em outras línguas
+(`en: "..."`), e o dashboard em inglês mostra essa versão quando existe, senão o título original. Os nomes exatos do dataset e do
 recurso estão em `<portal>/api/3/action/package_show?id=<dataset>`; baixe o arquivo uma vez para
 conferir o conteúdo do zip, a codificação, o separador e os cabeçalhos. Ponha versões e códigos
 entre aspas. A versão 1.0 especifica um modelo, `lookup-equals`; outros modelos entram no mesmo

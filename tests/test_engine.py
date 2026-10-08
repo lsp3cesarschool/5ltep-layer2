@@ -23,7 +23,7 @@ from src.fetch import Fetched, ResourceKey
 from src.loader import load_rule
 
 ROOT = Path(__file__).resolve().parent.parent
-RULE = load_rule(ROOT / "rules" / "territory" / "territory.municipality-state.yaml").data
+RULE = load_rule(ROOT / "rules" / "territorio" / "municipio-uf.yaml").data
 
 TSE = (
     '"DT_GERACAO";"HH_GERACAO";"CD_UF_TSE";"CD_UF_IBGE";"SG_UF";"NM_UF";"CD_MUNICIPIO_TSE";'
@@ -114,7 +114,7 @@ def test_failed_source_makes_the_rule_not_evaluated(tmp_path, monkeypatch):
     assert totals["evaluated"] == 0 and totals["sources_ok"] == 0
     page = json.loads((tmp_path / "out" / "docs" / "data" / "layer2.json").read_text(encoding="utf-8"))
     assert page["rules"][0]["status"] == "not_evaluated"
-    assert not (tmp_path / "out" / "docs" / "data" / "rules" / "territory.municipality-state.json").exists()
+    assert not (tmp_path / "out" / "docs" / "data" / "rules" / "municipio-uf.json").exists()
 
 
 @pytest.mark.skipif(os.environ.get("L2_NETWORK") != "1", reason="downloads ~120 MB; set L2_NETWORK=1")

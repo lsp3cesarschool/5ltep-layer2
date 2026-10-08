@@ -195,14 +195,19 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
     for path in files:
         loaded, findings = validate.validate_file(path)
         errors = [f for f in findings if f.level == validate.ERROR]
-        if loaded is not None and not errors and path.stem != loaded.data["id"]:
-            errors.append(validate.Finding(validate.ERROR, str(path), None, "id", "id.file_name",
-                                           f'o arquivo deve se chamar "{loaded.data["id"]}.yaml"'))
-        entry = {"file": path, "data": loaded.data if loaded else None, "rule_text": path.read_bytes()}
+        if problem := validate.name_problem(path):
+            errors.append(problem)
+        entry = {"id": validate.rule_id(path), "file": path, "data": loaded.data if loaded else None,
+                 "rule_text": path.read_bytes()}
         if errors:
             entry.update(status=NOT_EVALUATED, reason_code="invalid_rule",
                          reason="; ".join(f.render() for f in errors)[:1000])
         rules.append(entry)
+    names = [r["id"] for r in rules]
+    for entry in rules:
+        if names.count(entry["id"]) > 1 and "status" not in entry:
+            entry.update(status=NOT_EVALUATED, reason_code="invalid_rule",
+                         reason=f'há mais de uma regra chamada "{entry["id"]}" em rules/')
     log(f"{len(rules)} regra(s); {sum('status' not in r for r in rules)} válida(s)")
 
     # fetch every resource once
@@ -218,7 +223,7 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
                 f = fetched[key]
                 log(f"  {f.status}" + (f" — {f.reason}" if f.reason else
                                        f" — {f.download['bytes'] / 1e6:.1f} MB, sha256 {f.download['sha256'][:12]}…"))
-            fetched[key].used_by.append(entry["data"]["id"])
+            fetched[key].used_by.append(entry["id"])
 
     # read and evaluate each rule
     for entry in rules:
@@ -235,25 +240,25 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
                 failed = (f"source_{f.status}", f'fonte "{source_id}" ({f.key.label}): {f.reason}')
         if failed:
             entry.update(status=NOT_EVALUATED, reason_code=failed[0], reason=failed[1])
-            log(f"{rule['id']}: não avaliada — {failed[1]}")
+            log(f"{entry['id']}: não avaliada — {failed[1]}")
             continue
         reads: dict[str, Read] = {}
         try:
             for source_id, source in rule["sources"].items():
                 f = fetched[ResourceKey.of(source)]
-                read = read_source(f, source, reads_dir / f"{rule['id']}.{source_id}.csv")
+                read = read_source(f, source, reads_dir / f"{entry['id']}.{source_id}.csv")
                 reads[source_id] = read
                 entry["sources"][source_id].update(records=read.records, members=read.members)
             result = evaluate(rule, reads)
         except ReadError as exc:
             entry.update(status=NOT_EVALUATED, reason_code=exc.code, reason=exc.message)
-            log(f"{rule['id']}: não avaliada — {exc.message}")
+            log(f"{entry['id']}: não avaliada — {exc.message}")
             continue
         finally:
             for read in reads.values():
                 read.path.unlink(missing_ok=True)
         entry.update(status=EVALUATED, evaluated_at=now(), **result)
-        log(f"{rule['id']}: {result['total']} registros; " +
+        log(f"{entry['id']}: {result['total']} registros; " +
             ", ".join(f"{k} {v}" for k, v in result["counts"].items()))
 
     if not keep_downloads:

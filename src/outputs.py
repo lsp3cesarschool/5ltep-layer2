@@ -69,9 +69,10 @@ def _card(entry: dict, rules_root: Path, run: dict) -> dict:
     desc = data.get("description", {})
     rel = _rule_path(entry, rules_root)
     card = {
-        "id": data.get("id", entry["file"].stem), "version": data.get("version"), "origin": data.get("origin"),
+        "id": entry["id"], "version": data.get("version"), "origin": data.get("origin"),
         "file": rel, "folder": rel.rsplit("/", 1)[0] if "/" in rel else "",
-        "language": desc.get("language"), "title": desc.get("title"), "text": desc.get("text"),
+        "language": desc.get("language"), "title": desc.get("title"),
+        "title_translations": desc.get("title_translations", {}), "text": desc.get("text"),
         "justification": desc.get("justification"), "exceptions": desc.get("exceptions", []),
         "examples": desc.get("examples", []), "template": (data.get("check") or {}).get("template"),
         "evaluated_source": evaluated_source(data["check"]) if data.get("check") else None,
