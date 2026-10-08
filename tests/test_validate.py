@@ -10,9 +10,9 @@ import main
 from src import validate
 
 ROOT = Path(__file__).resolve().parent.parent
-EXAMPLE = ROOT / "rules" / "territorio" / "municipio-uf.yaml"
+EXAMPLE = ROOT / "rules" / "territory" / "municipality-state.yaml"
 TEXT = EXAMPLE.read_text(encoding="utf-8")
-RULE_ID = "municipio-uf"
+RULE_ID = "municipality-state"
 
 
 def check(tmp_path, text, name=RULE_ID + ".yaml"):
@@ -73,7 +73,7 @@ def test_cli_json_output(tmp_path, capsys):
 @pytest.mark.parametrize("old, new, code", [
     ("origin: cross_reference\n", "origin: cross_reference\norigin: expert\n", "yaml.duplicate_key"),
     ("origin: cross_reference", "origin: &o cross_reference", "yaml.anchor"),
-    ('version: "0.3.0"', "version: !!str 0.3.0", "yaml.tag"),
+    ('rule_version: "0.4.0"', "rule_version: !!str 0.4.0", "yaml.tag"),
     ('schema_version: "1.0"\n', 'schema_version: "1.0"\nextra: {<<: {a: 1}}\n', "yaml.merge_key"),
 ])
 def test_unsafe_yaml_is_refused(tmp_path, old, new, code):
@@ -86,7 +86,7 @@ def test_version_directive_and_multiple_documents_are_refused(tmp_path):
 
 
 def test_unquoted_version_is_refused(tmp_path):
-    found = check(tmp_path, edit('version: "0.3.0"', "version: 0.2"))
+    found = check(tmp_path, edit('rule_version: "0.4.0"', "rule_version: 0.4"))
     assert codes(found) == ["schema.type"]
 
 
@@ -110,7 +110,7 @@ def test_portuguese_token_is_refused_with_line(tmp_path):
 
 
 @pytest.mark.parametrize("field", ["status: example", "seed_ids: [IB-13]", "classification: {category: DC}",
-                                   "id: municipio-uf"])
+                                   "id: municipality-state", "version: \"0.4.0\""])
 def test_removed_fields_are_refused(tmp_path, field):
     found = check(tmp_path, edit("origin: cross_reference\n", f"origin: cross_reference\n{field}\n"))
     assert codes(found) == ["schema.unknown_field"]

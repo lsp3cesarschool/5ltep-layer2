@@ -240,7 +240,7 @@ def name_problem(path: Path) -> Finding | None:
         return None
     return Finding(ERROR, str(path), None, "", "file.name",
                    "nome de arquivo inválido: o nome é o identificador da regra; use minúsculas sem acento, "
-                   "dígitos e hífen (ex.: municipio-uf.yaml)")
+                   "dígitos e hífen (ex.: municipality-state.yaml)")
 
 
 def validate_paths(paths, check_names: bool = True) -> list[Finding]:

@@ -29,7 +29,7 @@ Arquivo em `rules/` está ativo; as subpastas são livres e só organizam as reg
 | `check` | o motor | um modelo permitido e seus parâmetros, escritos como `fonte.coluna` |
 
 Só `sources` e `check` definem o que é calculado. SQL, código ou expressões livres nunca são
-aceitos. O exemplo [`rules/territorio/municipio-uf.yaml`](rules/territorio/municipio-uf.yaml)
+aceitos. O exemplo [`rules/territory/municipality-state.yaml`](rules/territory/municipality-state.yaml)
 procura o código do município de cada auto de infração (portal do IBAMA) na tabela de municípios
 publicada pelo TSE (portal do TSE) e compara a UF.
 
@@ -39,7 +39,7 @@ publicada pelo TSE (portal do TSE) e compara a UF.
 python -m venv .venv
 .venv/Scripts/python -m pip install -r requirements.txt   # Linux/macOS: .venv/bin/python
 python main.py validate                                   # todos os rules/**/*.yaml
-python main.py validate rules/territorio --format json
+python main.py validate rules/territory --format json
 python -m pytest
 python main.py run                                        # ensaio local: baixa as fontes, saídas em work/out
 ```

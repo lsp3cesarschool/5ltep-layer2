@@ -29,7 +29,7 @@ Each file in `rules/` holds one check that crosses data from one or more **CKAN*
 | `check` | the engine | an allowed template and its parameters, written as `source.column` |
 
 Only `sources` and `check` define what is computed. Free SQL, code or expressions are never
-accepted. The example [`rules/territorio/municipio-uf.yaml`](rules/territorio/municipio-uf.yaml)
+accepted. The example [`rules/territory/municipality-state.yaml`](rules/territory/municipality-state.yaml)
 looks up each infraction notice's municipality code (IBAMA portal) in the table of municipalities
 published by the Brazilian electoral court (TSE portal) and compares the state.
 
@@ -39,7 +39,7 @@ published by the Brazilian electoral court (TSE portal) and compares the state.
 python -m venv .venv
 .venv/Scripts/python -m pip install -r requirements.txt   # Linux/macOS: .venv/bin/python
 python main.py validate                                   # every rules/**/*.yaml
-python main.py validate rules/territorio --format json
+python main.py validate rules/territory --format json
 python -m pytest
 python main.py run                                        # local test run: downloads the sources, outputs in work/out
 ```

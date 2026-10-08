@@ -22,7 +22,7 @@ ALLOWED = [
     r"docs/data/rules/[a-z0-9.-]+\.json",
 ]
 MAX_FILE_BYTES = 50 * 1024 * 1024
-LIST_KEYS = {"rule", "version", "evaluated_at", "run_id", "environment", "run_url", "note", "numbering",
+LIST_KEYS = {"rule", "rule_version", "evaluated_at", "run_id", "environment", "run_url", "note", "numbering",
              "sources", "counts", "total", "records"}
 
 

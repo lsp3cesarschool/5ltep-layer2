@@ -249,7 +249,7 @@ async function showList(rule, outcome, panel, button) {
   try { data = await LISTS[rule.id]; } catch (e) { delete LISTS[rule.id]; panel.replaceChildren(h("p", { class: "crit" }, t("list_error"))); return; }
   const byFile = data.records?.[outcome] || {};
   const sha = data.sources[rule.evaluated_source]?.sha256;
-  const subset = { rule: data.rule, version: data.version, evaluated_at: data.evaluated_at, outcome,
+  const subset = { rule: data.rule, rule_version: data.rule_version, evaluated_at: data.evaluated_at, outcome,
     numbering: data.numbering, source_sha256: sha, records: byFile };
   const blob = URL.createObjectURL(new Blob([JSON.stringify(subset, null, 1)], { type: "application/json" }));
   const files = Object.entries(byFile).map(([file, nums]) => {
@@ -271,7 +271,7 @@ async function showList(rule, outcome, panel, button) {
 function card(rule, index, count) {
   const head = h("div", { class: "card-head" },
     h("div", {}, h("h3", { lang: ruleTitle(rule).lang || null }, ruleTitle(rule).text),
-      h("div", { class: "id" }, `${rule.file} · v${rule.version || "?"}`)),
+      h("div", { class: "id" }, `${rule.file} · v${rule.rule_version || "?"}`)),
     h("div", { class: "move" },
       h("button", { type: "button", title: t("up"), "aria-label": t("up"), disabled: index === 0, onclick: () => move(rule.id, -1) }, "↑"),
       h("button", { type: "button", title: t("down"), "aria-label": t("down"), disabled: index === count - 1, onclick: () => move(rule.id, 1) }, "↓")));
@@ -365,7 +365,7 @@ function renderProvenance() {
   el("engine").replaceChildren(...kv.flatMap(([k, v]) => [h("span", {}, t(k)), h("span", { class: "v" }, v ?? "–")]),
     ...(PAGE.run_url ? [h("span", {}, t("k_run")), h("a", { class: "v", href: PAGE.run_url, target: "_blank", rel: "noopener" }, PAGE.run_id)] : []));
   const rows = [
-    ...(PAGE.rule_files || []).map((r) => [t("hx_rule"), `${r.file} (v${r.version})`, r.sha256]),
+    ...(PAGE.rule_files || []).map((r) => [t("hx_rule"), `${r.file} (v${r.rule_version})`, r.sha256]),
     ...PAGE.sources.map((s) => [t("hx_source"), s.label, s.download?.sha256]),
   ];
   el("hashes").replaceChildren(h("tr", {}, h("th", {}, t("hx_kind")), h("th", {}, t("hx_name")), h("th", {}, t("hx_sha"))),

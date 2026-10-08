@@ -11,7 +11,7 @@ Sub-commands:
 
 Examples:
   python main.py validate                     # every rules/**/*.yaml
-  python main.py validate rules/territorio    # one folder
+  python main.py validate rules/territory     # one folder
   python main.py validate my-rule.yaml --no-name-check
   python main.py validate --format json
   python main.py run                          # every rule, outputs in work/out

@@ -69,7 +69,7 @@ def _card(entry: dict, rules_root: Path, run: dict) -> dict:
     desc = data.get("description", {})
     rel = _rule_path(entry, rules_root)
     card = {
-        "id": entry["id"], "version": data.get("version"), "origin": data.get("origin"),
+        "id": entry["id"], "rule_version": data.get("rule_version"), "origin": data.get("origin"),
         "file": rel, "folder": rel.rsplit("/", 1)[0] if "/" in rel else "",
         "language": desc.get("language"), "title": desc.get("title"),
         "title_translations": desc.get("title_translations", {}), "text": desc.get("text"),
@@ -95,7 +95,7 @@ def write(run: dict, out: Path, rules_root: Path) -> dict:
     # results/ -----------------------------------------------------------------------------------
     manifest = {**ident, "started_at": run["started_at"], "finished_at": run["finished_at"],
                 "engine": _engine(),
-                "rules": [{"id": c["id"], "version": c["version"], "file": c["file"],
+                "rules": [{"id": c["id"], "rule_version": c["rule_version"], "file": c["file"],
                            "sha256": hashlib.sha256(e["rule_text"]).hexdigest()}
                           for c, e in zip(cards, run["rules"])],
                 "sources": [{"label": s["label"], "status": s["status"], "resource_id": s["resource"].get("id"),
@@ -134,7 +134,7 @@ def write(run: dict, out: Path, rules_root: Path) -> dict:
     for card, entry in zip(cards, run["rules"]):
         target = data / "rules" / f"{card['id']}.json"
         if entry["status"] == EVALUATED:
-            _write(target, {"rule": card["id"], "version": card["version"], "evaluated_at": entry["evaluated_at"],
+            _write(target, {"rule": card["id"], "rule_version": card["rule_version"], "evaluated_at": entry["evaluated_at"],
                             **ident, "numbering": "registro por arquivo do recurso; 1 = primeira linha após o cabeçalho",
                             "sources": {sid: {"label": s["resource"], "sha256": s["sha256"], "records": s.get("records")}
                                         for sid, s in entry["sources"].items()},
