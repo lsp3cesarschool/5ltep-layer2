@@ -77,18 +77,30 @@ src/validate.py    esquema e referências cruzadas
 src/fetch.py       resolução e download no CKAN, com integridade de cada fonte
 src/engine.py      leitura das colunas declaradas, DuckDB, modelos
 src/outputs.py     results/ e docs/data/ (só contagens e números de registro)
+src/accept.py      conferência do artefato da rodada pelo job de publicação
+docs/              dashboard (index.html, app.js, style.css; data/ é gravado pelas rodadas)
+.github/workflows/ layer2.yml (rodada semanal), tests.yml
 schema/            JSON Schema do formato de autoria
 rules/             um arquivo por regra, agrupado por espaço de nomes
 tests/             testes automáticos
 ```
 
+## Como funciona uma rodada
+
+`.github/workflows/layer2.yml` roda toda quarta-feira às 04:30 UTC (ou manualmente). O job
+**evaluate**, com token só de leitura, baixa cada recurso CKAN uma vez, registra se cada portal e
+recurso estava disponível (status HTTP, SHA-256 dos bytes, colunas encontradas), cruza os dados com
+DuckDB sem acesso externo e envia as saídas como artefato. O job **publish** confere o artefato
+(`python main.py accept`: só os arquivos esperados, JSON válido, listas só com números de registro,
+histórico anterior preservado) e faz o commit de `results/` e `docs/data/`. O dashboard em `docs/`
+(GitHub Pages a partir de `/docs`) mostra as regras, a saúde de cada fonte, o histórico e a
+proveniência; cada visitante pode ordenar os cartões de regras, e essa ordem fica só no navegador
+dele. Só são publicadas contagens e números de registro, nunca valores dos portais.
+
 ## Próximos passos
 
-Funcionando localmente, ainda não publicado: o motor, que baixa cada recurso CKAN uma vez por rodada, registra se cada portal e
-recurso estava disponível (status HTTP, SHA-256 dos bytes, colunas encontradas), cruza os dados
-localmente com DuckDB sem acesso externo e publica contagens e números de registro, nunca valores do
-portal. Depois: o dashboard, formulários de issue para quem não escreve YAML e as instâncias de
-controle da ANEEL e da Prefeitura do Recife.
+Formulários de issue para quem não escreve YAML, mais modelos e as instâncias de controle da ANEEL e
+da Prefeitura do Recife.
 
 ## Licença e citação
 

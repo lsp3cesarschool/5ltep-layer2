@@ -7,6 +7,7 @@ Sub-commands:
   run        fetch every CKAN resource the rules name (once each), evaluate the rules and write
              results/ and docs/data/ under --out (default work/out: a local run is a test,
              never a published result)
+  accept     (publish job) check a run's artifact and copy it into results/ and docs/data/
 
 Examples:
   python main.py validate                     # every rules/**/*.yaml
@@ -52,6 +53,18 @@ def cmd_run(args) -> int:
     return 0
 
 
+def cmd_accept(args) -> int:
+    from src import accept
+
+    try:
+        files = accept.apply(Path(args.dir), Path("."))
+    except accept.Refused as exc:
+        print(f"artefato recusado: {exc}")
+        return 1
+    print(f"artefato aceito: {len(files)} arquivo(s)")
+    return 0
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="5L-TEP Layer 2 (Semantic Policies)")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -66,6 +79,9 @@ def main(argv=None) -> int:
     p.add_argument("--work", default="work", help="folder for downloads and work files (default: work)")
     p.add_argument("--keep-downloads", action="store_true", help="keep the downloaded files after the run")
     p.set_defaults(func=cmd_run)
+    p = sub.add_parser("accept", help="check a run's artifact and copy it into results/ and docs/data/")
+    p.add_argument("--dir", required=True, help="folder of the downloaded artifact")
+    p.set_defaults(func=cmd_accept)
     args = parser.parse_args(argv)
     return args.func(args)
 

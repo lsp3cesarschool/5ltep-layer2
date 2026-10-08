@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5L-TEP Layer 2 · Semantic Policies</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Every label marked data-i18n is translated by app.js (English / Portuguese). -->
+<nav class="topbar">
+  <a href="https://github.com/lsp3cesarschool/5ltep-layer2" data-i18n="back">← Back to the repository</a>
+  <span class="muted">·</span>
+  <a href="https://github.com/lsp3cesarschool/5ltep-layer2#readme">README</a>
+  <span class="muted">·</span>
+  <a href="https://github.com/lsp3cesarschool/5ltep-layer2/blob/main/LEIAME.md" lang="pt">LEIAME</a>
+  <span class="lang-switch">
+    <a id="lang-en" href="?lang=en">English</a>
+    <span class="muted">·</span>
+    <a id="lang-pt" href="?lang=pt" lang="pt">Português</a>
+  </span>
+</nav>
+<header>
+  <div>
+    <p class="eyebrow" data-i18n="eyebrow">5L-TEP · Layer 2 · Semantic Policies</p>
+    <h1 id="title" data-i18n="loading">Loading…</h1>
+    <p class="muted" id="subtitle"></p>
+  </div>
+  <div class="actions">
+    <a class="button" target="_blank" rel="noopener" data-i18n="run"
+       href="https://github.com/lsp3cesarschool/5ltep-layer2/actions/workflows/layer2.yml">Run now ↗</a>
+    <a class="button secondary" target="_blank" rel="noopener" data-i18n="rules_btn"
+       href="https://github.com/lsp3cesarschool/5ltep-layer2/tree/main/rules">Rule files ↗</a>
+    <a class="button secondary" target="_blank" rel="noopener" data-i18n="manifest_btn"
+       href="https://github.com/lsp3cesarschool/5ltep-layer2/blob/main/results/manifest.json">Manifest ↗</a>
+  </div>
+</header>
+<p class="intro" data-i18n="intro">Each rule crosses data published on CKAN open data portals. Every week this repository
+  downloads each resource once, records whether each portal answered and what it served, and counts, for every rule, the
+  records that deserve a second look. A signal is something to review, never a verdict on the data; no value from the
+  portals is published here, only counts and record numbers.</p>
+<main>
+  <section class="tiles" id="tiles" aria-label="Key numbers"></section>
+
+  <section id="rules-section">
+    <div class="section-head">
+      <h2 data-i18n="rules_h">Rules</h2>
+      <div class="rules-tools">
+        <label class="muted" for="order" data-i18n="order">Order</label>
+        <select id="order">
+          <option value="custom" data-i18n="o_custom">My order</option>
+          <option value="signals" data-i18n="o_signals">Most signals first</option>
+          <option value="title" data-i18n="o_title">Title</option>
+          <option value="file" data-i18n="o_file">Folder and file</option>
+        </select>
+        <label class="muted"><input type="checkbox" id="group"> <span data-i18n="group">group by folder</span></label>
+        <input type="search" id="rule-search" data-i18n-placeholder="search_rules" placeholder="Search rules">
+      </div>
+    </div>
+    <p class="muted small" data-i18n="order_note">Use ↑ ↓ to arrange the cards; your order is kept in this browser only and changes nothing in the evaluation.</p>
+    <div id="rules"></div>
+  </section>
+
+  <section id="sources-section">
+    <div class="section-head"><h2 data-i18n="sources_h">Source health</h2></div>
+    <p class="muted" data-i18n="sources_note">Each CKAN resource is downloaded once per run, however many rules use it. A rule whose
+      source failed is not evaluated in that run: there is no partial result and no reuse of an earlier download.</p>
+    <div class="table-wrap"><table class="files" id="sources"></table></div>
+  </section>
+
+  <section id="history-section">
+    <div class="section-head"><h2 data-i18n="history_h">History</h2></div>
+    <p class="muted" data-i18n="history_note">Signals per rule in each run, and the runs in which a source failed.</p>
+    <div class="table-wrap"><table class="files" id="history"></table></div>
+  </section>
+
+  <section id="prov-section">
+    <div class="section-head"><h2 data-i18n="prov_h">Provenance of this result</h2></div>
+    <p class="muted" data-i18n="prov_note">What this run evaluated: the engine version, each rule file and the bytes of each source,
+      identified by SHA-256. Record numbers are valid only for those bytes.</p>
+    <div class="two">
+      <div class="panel"><h3 data-i18n="engine_h">Run</h3><div class="kv" id="engine"></div></div>
+      <div class="panel"><h3 data-i18n="hashes_h">Rules and sources</h3>
+        <div class="table-wrap"><table class="mini" id="hashes"></table></div></div>
+    </div>
+  </section>
+
+  <section id="datasets-section">
+    <div class="section-head"><h2 data-i18n="datasets_h">Datasets crossed</h2></div>
+    <div class="table-wrap"><table class="files" id="datasets"></table></div>
+  </section>
+</main>
+<footer class="muted small" id="footer"></footer>
+<script src="app.js"></script>
+</body>
+</html>

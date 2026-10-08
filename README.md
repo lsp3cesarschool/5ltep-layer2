@@ -77,18 +77,30 @@ src/validate.py    schema and cross references
 src/fetch.py       CKAN resolution and download, with integrity of each source
 src/engine.py      reading of the declared columns, DuckDB, templates
 src/outputs.py     results/ and docs/data/ (counts and record numbers only)
+src/accept.py      the publish job's check of a run's artifact
+docs/              dashboard (index.html, app.js, style.css; data/ is written by the runs)
+.github/workflows/ layer2.yml (weekly run), tests.yml
 schema/            JSON Schema of the authoring format
 rules/             one file per rule, grouped by namespace
 tests/             automated tests
 ```
 
+## How a run works
+
+`.github/workflows/layer2.yml` runs every Wednesday at 04:30 UTC (or by hand). The **evaluate** job,
+with a read-only token, downloads each CKAN resource once, records whether each portal and resource
+was available (HTTP status, SHA-256 of the bytes, columns found), crosses the data with DuckDB
+without external access and uploads its outputs as an artifact. The **publish** job checks the
+artifact (`python main.py accept`: expected files only, valid JSON, record lists made of numbers,
+earlier history kept) and commits `results/` and `docs/data/`. The dashboard in `docs/` (GitHub
+Pages from `/docs`) shows the rules, the health of each source, the history and the provenance; each
+visitor can order the rule cards, and that order is kept in their browser only. Only counts and
+record numbers are published, never values from the portals.
+
 ## Next steps
 
-Working locally, not yet published: the engine, which downloads each CKAN resource once per run, records whether each
-portal and resource was available (HTTP status, SHA-256 of the bytes, columns found), crosses the
-data locally with DuckDB without external access, and publishes counts and record numbers, never
-values from the portal. Then: the dashboard, issue forms for authors who do not write YAML, and the
-control instances for ANEEL and the city of Recife.
+Issue forms for authors who do not write YAML, more templates, and the control instances for ANEEL
+and the city of Recife.
 
 ## License and citation
 

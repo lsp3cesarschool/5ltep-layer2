@@ -24,7 +24,7 @@ from pathlib import Path
 
 import duckdb
 
-from src.engine import EVALUATED, NOT_EVALUATED, SIGNALS
+from src.engine import EVALUATED, SIGNALS, evaluated_source
 from src.fetch import OK
 
 HISTORY_KEPT_ON_PAGE = 52
@@ -74,6 +74,7 @@ def _card(entry: dict, rules_root: Path, run: dict) -> dict:
         "language": desc.get("language"), "title": desc.get("title"), "text": desc.get("text"),
         "justification": desc.get("justification"), "exceptions": desc.get("exceptions", []),
         "examples": desc.get("examples", []), "template": (data.get("check") or {}).get("template"),
+        "evaluated_source": evaluated_source(data["check"]) if data.get("check") else None,
         "datasets": [{"source": sid, "label": s.get("resource")} for sid, s in entry.get("sources", {}).items()],
         "status": entry["status"], "reason_code": entry.get("reason_code"), "reason": entry.get("reason"),
     }
@@ -146,7 +147,7 @@ def write(run: dict, out: Path, rules_root: Path) -> dict:
               "signals": sum(c["signals"] for c in evaluated)}
     _write(data / "layer2.json", {"layer": 2, **ident, "generated_at": run["finished_at"],
                                   "started_at": run["started_at"], "totals": totals, "rules": cards,
-                                  "sources": sources, "engine": manifest["engine"],
+                                  "sources": sources, "engine": manifest["engine"], "rule_files": manifest["rules"],
                                   "history": history[-HISTORY_KEPT_ON_PAGE:]})
 
     if not cards:

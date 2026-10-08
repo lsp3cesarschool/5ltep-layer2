@@ -1,0 +1,93 @@
+name: 5L-TEP Layer 2 Semantic Policies
+
+# Weekly, Wednesdays at 04:30 UTC: away from Layer 1 (Mondays 03:30), Layer 3 (5th of the month) and
+# Layer 4 (every 6 h at :10). A schedule does not make the layers depend on each other.
+# Manual: Actions > this workflow > Run workflow.
+#
+# Two jobs, so that the job that reads the portals and evaluates the rules cannot write:
+#   evaluate  validates the rules, downloads each CKAN resource once, evaluates every rule with
+#             DuckDB (no external access during evaluation) and hands the outputs over as an
+#             artifact; read-only token, no stored credentials;
+#   publish   checks the artifact (main.py accept: expected paths, valid JSON, record lists made of
+#             numbers, history kept) and commits results/ and docs/data/; runs no rule.
+on:
+  schedule:
+    - cron: '30 4 * * 3'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: layer2-writes
+  cancel-in-progress: false
+
+env:
+  PYTHON_VERSION: '3.12'
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: python -m pip install -r requirements.txt
+      - run: python main.py validate
+
+      - name: Evaluate the rules
+        run: |
+          out="$RUNNER_TEMP/l2-out"
+          mkdir -p "$out/results"
+          # the history continues: the run appends one entry to the published one
+          if [ -f results/history.json ]; then cp results/history.json "$out/results/"; fi
+          python main.py run --out "$out" --work "$RUNNER_TEMP/l2-work"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: l2-results
+          path: ${{ runner.temp }}/l2-out
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs: evaluate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false     # the token is used only by the push below
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: python -m pip install -r requirements.txt
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
+        with:
+          name: l2-results
+          path: ${{ runner.temp }}/l2-artifact
+
+      - name: Accept the results (checked)
+        run: python main.py accept --dir "$RUNNER_TEMP/l2-artifact"
+
+      - name: Commit results
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "5L-TEP L2 Bot"
+          git config user.email "5ltep-l2-bot@users.noreply.github.com"
+          git add results/ docs/data/
+          git diff --cached --quiet && exit 0
+          git commit -m "chore(l2): results [$(date -u +%Y-%m-%dT%H:%M:%SZ)]"
+          remote="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git pull --rebase "$remote" "$GITHUB_REF_NAME"
+          git push "$remote" "HEAD:$GITHUB_REF_NAME"
