@@ -1,0 +1,46 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: cross_reference
+
+description:
+  language: pt-BR
+  title: "Termo de apreensão ligado a auto não publicado"
+  title_translations:
+    en: "Seizure term linked to an unpublished infraction notice"
+  text: >
+    Confere se o SEQ_AUTO_INFRACAO informado em cada termo de apreensão existe no extrato de autos de infração.
+  justification: >
+    O termo de apreensão aponta o auto a que pertence; um auto apontado e ausente do extrato indica
+    vínculo quebrado ou extratos de coberturas diferentes. Direção distinta da verificação feita a
+    partir do auto. É sinal para revisão, não veredito sobre o auto.
+  exceptions:
+    - "Termos sem SEQ_AUTO_INFRACAO ficam fora do escopo."
+  examples:
+    - case: "Termo com SEQ_AUTO_INFRACAO presente no extrato de autos"
+      expected: "Conforme"
+    - case: "Termo com SEQ_AUTO_INFRACAO ausente do extrato de autos"
+      expected: "Sinal"
+
+sources:
+  ibama_apreensao:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-termo-de-apreensao
+    resource: {name: "Termo de apreensão", format: CSV}
+    archive: {type: zip, members: "apreensao.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      SEQ_AUTO_INFRACAO: "Identificador sequencial do auto de infração"
+  ibama_autos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-auto-de-infracao
+    resource: {name: "Autos de infração", format: CSV}
+    archive: {type: zip, members: "auto_infracao_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      SEQ_AUTO_INFRACAO: "Identificador sequencial do auto de infração"
+
+check:
+  template: lookup-exists
+  key: {from: ibama_apreensao.SEQ_AUTO_INFRACAO, to: ibama_autos.SEQ_AUTO_INFRACAO}
+  where:
+    - {column: ibama_apreensao.SEQ_AUTO_INFRACAO, empty: false}

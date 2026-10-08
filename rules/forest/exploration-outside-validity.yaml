@@ -1,0 +1,38 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Exploração fora da validade da autorização"
+  title_translations:
+    en: "Harvest outside the authorisation's validity"
+  text: >
+    Confere se a data da exploração está entre a emissão e a validade da autorização (limites inclusivos).
+  justification: >
+    A exploração só é permitida durante a vigência da autorização; data fora do intervalo indica erro
+    de registro ou exploração sem autorização vigente. As datas usam ano com dois dígitos. É sinal
+    para revisão.
+  exceptions:
+    - "Prorrogações e renovações não publicadas aqui podem estender a validade."
+  examples:
+    - case: "Emissão 01/02/20, exploração 15/06/20, validade 01/02/21"
+      expected: "Conforme"
+    - case: "Emissão 01/02/20, exploração 15/03/21, validade 01/02/21"
+      expected: "Sinal"
+
+sources:
+  ibama_if100:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: volumes-explorados-if-100
+    resource: {name: "Volumes Explorados - IF 100%", format: CSV}
+    archive: {type: zip, members: "volumes_explorados_if_100_ano_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      DATA_DE_EMISSAO: {meaning: "Emissão da autorização", type: date, format: "%d/%m/%y"}
+      DATA_DA_EXPLORACAO: {meaning: "Data da exploração da árvore", type: date, format: "%d/%m/%y"}
+      DATA_DE_VALIDADE: {meaning: "Fim da validade da autorização", type: date, format: "%d/%m/%y"}
+
+check:
+  template: temporal-order
+  sequence: [ibama_if100.DATA_DE_EMISSAO, ibama_if100.DATA_DA_EXPLORACAO, ibama_if100.DATA_DE_VALIDADE]

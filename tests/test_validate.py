@@ -125,7 +125,7 @@ def test_unknown_source_field_points_to_its_line(tmp_path):
 
 
 def test_template_without_contract_is_refused(tmp_path):
-    assert "schema.enum" in codes(check(tmp_path, edit("template: lookup-equals", "template: temporal-order")))
+    assert "schema.enum" in codes(check(tmp_path, edit("template: lookup-equals", "template: point-in-area")))
 
 
 def test_check_parameters_are_closed(tmp_path):
@@ -194,9 +194,24 @@ def test_unicode_headers_are_kept_exactly(tmp_path):
 
 # --- folders -------------------------------------------------------------------------
 
-@pytest.mark.parametrize("name", ["Municipio-UF.yaml", "município-uf.yaml", "municipio_uf.yaml", "territory.municipio.yaml"])
+@pytest.mark.parametrize("name", ["Municipio-UF.yaml", "municipio_uf.yaml", "territory.municipio.yaml",
+                                  "municipio--uf.yaml", "-municipio.yaml", "municipio uf.yaml",
+                                  "municı́pio.yaml".replace("ı́", "í")])   # NFD
 def test_file_name_is_the_identifier(tmp_path, name):
     assert codes(check(tmp_path, TEXT, name=name)) == ["file.name"]
+
+
+@pytest.mark.parametrize("name", ["município-uf.yaml", "市町村-州.yaml", "муниципалитет-1.yaml", "λ-2.yaml"])
+def test_file_names_in_any_language(tmp_path, name):
+    assert check(tmp_path, TEXT, name=name) == []
+
+
+def test_names_equal_after_normalising_are_duplicates(tmp_path):
+    (tmp_path / "a").mkdir()
+    (tmp_path / "b").mkdir()
+    (tmp_path / "a" / "município-uf.yaml").write_text(TEXT, encoding="utf-8")
+    (tmp_path / "b" / "município-uf.yaml").write_text(TEXT, encoding="utf-8")
+    assert codes(validate.validate_paths([tmp_path])) == ["file.duplicate_name"]
 
 
 def test_title_translations(tmp_path):

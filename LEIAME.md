@@ -53,8 +53,11 @@ português, idioma inicial da interface). Ele confere:
   regras: campos obrigatórios, conjuntos fechados de campos e valores, parâmetros de cada modelo;
 - **referências cruzadas:** toda `fonte.coluna` usada em `check` está declarada em `sources`; fonte
   ou coluna declarada e não usada gera aviso;
-- **nomes de arquivo:** o nome do arquivo é o identificador da regra (minúsculas sem acento, dígitos
-  e hífen) e precisa ser único em `rules/`, em qualquer profundidade de subpasta.
+- **nomes de arquivo:** o nome do arquivo é o identificador da regra e pode estar em qualquer língua:
+  letras minúsculas de qualquer alfabeto, dígitos e hífen simples, sem espaços, em Unicode NFC
+  (`municipality-state.yaml`, `município-uf.yaml`, `市町村-州.yaml`). Precisa ser único em `rules/`, em
+  qualquer profundidade de subpasta, também depois de normalizar e ignorar maiúsculas (senão Windows e
+  macOS confundiriam dois nomes). As regras deste repositório usam nomes em inglês, como as pastas.
 
 ## Escrever uma regra
 

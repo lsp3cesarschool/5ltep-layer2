@@ -11,6 +11,7 @@ from __future__ import annotations
 import datetime as dt
 import json
 import re
+import unicodedata
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
@@ -152,42 +153,54 @@ def schema_findings(rule: LoadedRule) -> list[Finding]:
 
 # --- cross references --------------------------------------------------------------
 
-def _split(ref: str) -> tuple[str, str]:
-    source, _, column = ref.partition(".")
-    return source, column
-
-
-def _used_lookup_equals(check: dict) -> list[tuple[str, list]]:
-    """(source.column, path inside the rule) for every column the template reads."""
-    return [(check[part][end], ["check", part, end]) for part in ("key", "compare") for end in ("from", "to")]
-
-
-USED_COLUMNS = {"lookup-equals": _used_lookup_equals}
-
-
 def cross_findings(rule: LoadedRule) -> list[Finding]:
+    from src import templates
+
     data, found = rule.data, []
     sources, check = data["sources"], data["check"]
+    template = check["template"]
 
     def add(level, path, code, message):
         found.append(Finding(level, str(rule.path), rule.line_of(path), dotted(path), code, message))
 
+    def spec(source, column):
+        value = sources[source]["columns"][column]
+        return value if isinstance(value, dict) else {"type": "text"}
+
     used = set()
-    for ref, path in USED_COLUMNS[check["template"]](check):
-        source, column = _split(ref)
+    for ref, path in templates.used_refs(check):
+        source, column = templates.split(ref)
         if source not in sources:
             add(ERROR, path, "ref.unknown_source", f'fonte "{source}" não existe em sources')
         elif column not in sources[source]["columns"]:
             add(ERROR, path, "ref.undeclared_column", f'coluna "{column}" não declarada na fonte "{source}"')
         else:
             used.add((source, column))
-
-    if check["template"] == "lookup-equals":
-        sides = {end: {_split(check[part][end])[0] for part in ("key", "compare")} for end in ("from", "to")}
-        for end, names in sides.items():
-            if len(names) > 1:
+    evaluated = templates.evaluated_source(check)
+    if found:
+        pass        # a reference is wrong: the structural checks below would only repeat it
+    elif template in ("lookup-equals", "lookup-exists"):
+        parts = ("key", "compare") if template == "lookup-equals" else ("key",)
+        for end in ("from", "to"):
+            refs = [r for p in parts for r in (check[p][end] if isinstance(check[p][end], list) else [check[p][end]])]
+            if len({templates.split(r)[0] for r in refs}) > 1:
                 add(ERROR, ["check", "compare", end], "check.mixed_sources",
                     f'key.{end} e compare.{end} precisam ser da mesma fonte')
+    else:
+        for ref, path in templates.used_refs(check):
+            if path[1] != "where" and templates.split(ref)[0] != evaluated:
+                add(ERROR, path, "check.mixed_sources", f'todas as colunas de {template} precisam ser da mesma fonte')
+        wanted = ("date", "datetime") if template == "temporal-order" else ("number",)
+        for ref, path in templates.used_refs(check):
+            if path[1] == "where" or templates.split(ref)[0] != evaluated:
+                continue
+            if spec(*templates.split(ref)).get("type") not in wanted:
+                add(ERROR, path, "check.column_type",
+                    f'{template} precisa de coluna declarada com type {" ou ".join(wanted)}: "{ref}"')
+    for i, cond in enumerate(check.get("where", [])):
+        if not found and templates.split(cond["column"])[0] != evaluated:
+            add(ERROR, ["check", "where", i, "column"], "check.where_source",
+                f'where só usa colunas da fonte avaliada ("{evaluated}")')
 
     for source_id, source in sources.items():
         if not any(s == source_id for s, _ in used):
@@ -227,20 +240,33 @@ def rule_files(paths) -> tuple[list[Path], list[Finding]]:
     return files, found
 
 
-RULE_NAME = re.compile(r"[a-z0-9]+(-[a-z0-9]+)*")
-
-
 def rule_id(path: Path) -> str:
     """A rule's identifier is its file name without .yaml."""
     return path.stem
 
 
+def _name_char(c: str) -> bool:
+    """Lowercase letter of any script (or a letter without case, as in Chinese), combining mark, digit."""
+    cat = unicodedata.category(c)
+    return (cat in ("Ll", "Lo", "Lm", "Mn", "Mc", "Nd")) and c == c.lower()
+
+
+def name_key(name: str) -> str:
+    """Two names that are equal under this key name the same rule (Windows and macOS would mix them up)."""
+    return unicodedata.normalize("NFC", name).casefold()
+
+
 def name_problem(path: Path) -> Finding | None:
-    if RULE_NAME.fullmatch(path.stem) and len(path.stem) <= 120:
+    """File names may use any language, safely: NFC, lowercase letters of any script, digits, single
+    hyphens between them, at most 120 characters."""
+    name = path.stem
+    words = name.split("-")
+    if (name == unicodedata.normalize("NFC", name) and 0 < len(name) <= 120
+            and all(w and all(_name_char(c) for c in w) for w in words)):
         return None
     return Finding(ERROR, str(path), None, "", "file.name",
-                   "nome de arquivo inválido: o nome é o identificador da regra; use minúsculas sem acento, "
-                   "dígitos e hífen (ex.: municipality-state.yaml)")
+                   "nome de arquivo inválido: o nome é o identificador da regra; use letras minúsculas (de "
+                   "qualquer alfabeto, em NFC), dígitos e hífen simples, sem espaços (ex.: municipality-state.yaml)")
 
 
 def validate_paths(paths, check_names: bool = True) -> list[Finding]:
@@ -251,7 +277,7 @@ def validate_paths(paths, check_names: bool = True) -> list[Finding]:
         findings += found
         if check_names and (problem := name_problem(path)):
             findings.append(problem)
-        name = rule_id(path)
+        name = name_key(rule_id(path))
         if name in seen:
             findings.append(Finding(ERROR, str(path), None, "", "file.duplicate_name",
                                     f'já existe uma regra "{name}" em {seen[name]}; o nome do arquivo precisa ser único em rules/'))

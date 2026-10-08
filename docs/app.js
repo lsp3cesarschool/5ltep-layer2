@@ -39,6 +39,10 @@ const I18N = {
     st_ok: "✓ available", st_portal_unreachable: "✕ portal did not answer", st_resource_not_found: "✕ resource not found",
     st_resource_ambiguous: "✕ more than one resource matches", st_download_failed: "✕ download failed",
     history_h: "History", history_note: "Signals per rule in each run, and the runs in which a source failed.",
+    speed_h: "Download speed", table_view: "Table view",
+    speed_note: "Megabytes per second in each run: total bytes over total download time, for the resources of this instance's portal and, separately, of the other portals the rules cross. It follows how fast the portals deliver their files over time; a slow run delays results but changes nothing in them.",
+    sp_primary: "{name} (this instance's portal)", sp_secondary: "other portals", sp_run: "Run (UTC)", sp_mbps: "MB/s",
+    sp_resources: "resources", sp_bytes: "MB", sp_none: "No download speed recorded yet.",
     prov_h: "Provenance of this result",
     prov_note: "What this run evaluated: the engine version, each rule file and the bytes of each source, identified by SHA-256. Record numbers are valid only for those bytes.",
     engine_h: "Run", hashes_h: "Rules and sources",
@@ -85,6 +89,10 @@ const I18N = {
     st_ok: "✓ disponível", st_portal_unreachable: "✕ portal não respondeu", st_resource_not_found: "✕ recurso não encontrado",
     st_resource_ambiguous: "✕ mais de um recurso casa", st_download_failed: "✕ download falhou",
     history_h: "Histórico", history_note: "Sinais por regra em cada rodada, e as rodadas em que alguma fonte falhou.",
+    speed_h: "Velocidade de download", table_view: "Ver como tabela",
+    speed_note: "Megabytes por segundo em cada rodada: total de bytes dividido pelo tempo total de download, para os recursos do portal desta instância e, separadamente, dos demais portais que as regras cruzam. Mostra a velocidade com que os portais entregam os arquivos ao longo do tempo; uma rodada lenta atrasa os resultados, mas não muda nada neles.",
+    sp_primary: "{name} (portal desta instância)", sp_secondary: "demais portais", sp_run: "Rodada (UTC)", sp_mbps: "MB/s",
+    sp_resources: "recursos", sp_bytes: "MB", sp_none: "Nenhuma velocidade de download registrada ainda.",
     prov_h: "Proveniência deste resultado",
     prov_note: "O que esta rodada avaliou: versão do motor, cada arquivo de regra e os bytes de cada fonte, identificados por SHA-256. Os números de registro valem só para esses bytes.",
     engine_h: "Rodada", hashes_h: "Regras e fontes",
@@ -244,7 +252,7 @@ async function showList(rule, outcome, panel, button) {
   panel.dataset.outcome = outcome;
   button.textContent = t("hide_list");
   panel.replaceChildren(h("p", { class: "muted" }, t("loading_list")));
-  LISTS[rule.id] ??= fetch(`data/${rule.list}`, { cache: "no-cache" }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
+  LISTS[rule.id] ??= fetch(`data/rules/${encodeURIComponent(rule.id)}.json`, { cache: "no-cache" }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
   let data;
   try { data = await LISTS[rule.id]; } catch (e) { delete LISTS[rule.id]; panel.replaceChildren(h("p", { class: "crit" }, t("list_error"))); return; }
   const byFile = data.records?.[outcome] || {};
@@ -263,7 +271,7 @@ async function showList(rule, outcome, panel, button) {
   panel.replaceChildren(
     h("div", { class: "tools" },
       h("a", { href: blob, download: `${rule.id}.${outcome}.json` }, t("download")),
-      h("a", { href: `data/${rule.list}`, target: "_blank", rel: "noopener" }, t("download_all"))),
+      h("a", { href: `data/rules/${encodeURIComponent(rule.id)}.json`, target: "_blank", rel: "noopener" }, t("download_all"))),
     h("p", { class: "muted small" }, t("numbering", { sha: short(sha) })),
     files);
 }
@@ -356,6 +364,57 @@ function renderHistory() {
     }));
 }
 
+const SVG = "http://www.w3.org/2000/svg";
+function s(tag, attrs = {}, text) {
+  const n = document.createElementNS(SVG, tag);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  if (text !== undefined) n.textContent = text;
+  return n;
+}
+
+// Grouped bars: one pair (primary, secondary) per run, last 26 runs.
+function renderSpeed() {
+  const runs = PAGE.history.filter((r) => r.download_speed).slice(-26);
+  const name = (() => { try { return new URL(PAGE.primary_portal).hostname; } catch (e) { return "portal"; } })();
+  el("speed-legend").replaceChildren(
+    h("li", {}, h("span", { class: "swatch", style: "background:var(--series-1)" }), t("sp_primary", { name })),
+    h("li", {}, h("span", { class: "swatch", style: "background:var(--series-2)" }), t("sp_secondary")));
+  if (!runs.length) { el("speed-chart").replaceChildren(h("p", { class: "muted" }, t("sp_none"))); return; }
+  const W = 860, H = 230, L = 44, B = 34, T = 26;
+  const max = Math.max(1, ...runs.flatMap((r) => ["primary", "secondary"].map((k) => r.download_speed[k]?.mb_per_s || 0)));
+  const step = (W - L - 10) / runs.length, bw = Math.max(3, Math.min(18, step / 2.6));
+  const y = (v) => T + (H - T - B) * (1 - v / max);
+  const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": t("speed_h") });
+  for (let i = 0; i <= 4; i++) {
+    const v = (max * i) / 4;
+    svg.append(s("line", { class: "grid", x1: L, x2: W - 10, y1: y(v), y2: y(v) }),
+      s("text", { class: "axis-label", x: L - 6, y: y(v) + 4, "text-anchor": "end" }, v.toFixed(v < 10 ? 1 : 0)));
+  }
+  runs.forEach((r, i) => {
+    const x0 = L + i * step + step / 2 - bw;
+    ["primary", "secondary"].forEach((k, j) => {
+      const v = r.download_speed[k]?.mb_per_s;
+      if (v === null || v === undefined) return;
+      const rect = s("rect", { class: `bar-${k}`, x: x0 + j * bw, y: y(v), width: bw - 1, height: Math.max(1, y(0) - y(v)), rx: 2 });
+      rect.append(s("title", {}, `${when(r.at)} · ${k === "primary" ? t("sp_primary", { name }) : t("sp_secondary")}: ${v} MB/s`));
+      svg.append(rect);
+    });
+    if (runs.length <= 8 || i % Math.ceil(runs.length / 8) === 0) {
+      svg.append(s("text", { class: "axis-label", x: L + i * step + step / 2, y: H - 12, "text-anchor": "middle" }, when(r.at).slice(0, 10)));
+    }
+  });
+  svg.append(s("text", { class: "axis-label", x: L - 6, y: 11, "text-anchor": "end" }, t("sp_mbps")));
+  el("speed-chart").replaceChildren(svg);
+  el("speed-table").replaceChildren(
+    h("tr", {}, h("th", {}, t("sp_run")), h("th", {}, `${name} ${t("sp_mbps")}`), h("th", {}, t("sp_resources")), h("th", {}, t("sp_bytes")),
+      h("th", {}, `${t("sp_secondary")} ${t("sp_mbps")}`), h("th", {}, t("sp_resources")), h("th", {}, t("sp_bytes"))),
+    ...[...runs].reverse().map((r) => h("tr", {}, h("td", {}, when(r.at)),
+      ...["primary", "secondary"].flatMap((k) => {
+        const d = r.download_speed[k] || {};
+        return [h("td", {}, d.mb_per_s ?? "–"), h("td", {}, num(d.resources)), h("td", {}, d.bytes ? (d.bytes / 1e6).toFixed(1) : "–")];
+      }))));
+}
+
 function renderProvenance() {
   const e = PAGE.engine || {};
   const kv = [["k_env", PAGE.environment === "local" ? t("env_local") : t("env_actions")],
@@ -402,7 +461,7 @@ async function main() {
   el("order").addEventListener("change", () => { store("l2-sort", el("order").value); renderRules(); });
   el("group").addEventListener("change", () => { store("l2-group", el("group").checked); renderRules(); });
   el("rule-search").addEventListener("input", renderRules);
-  renderTiles(); renderRules(); renderSources(); renderHistory(); renderProvenance(); renderDatasets();
+  renderTiles(); renderRules(); renderSources(); renderSpeed(); renderHistory(); renderProvenance(); renderDatasets();
   el("footer").replaceChildren(t("footer"), " ",
     h("a", { href: "data/layer2.json" }, "layer2.json"), " · ", h("a", { href: "data/status.json" }, "status.json"));
 }

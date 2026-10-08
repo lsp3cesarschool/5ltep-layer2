@@ -1,0 +1,43 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "APP e reserva legal líquida acima da área do imóvel"
+  title_translations:
+    en: "Permanent protection and net legal reserve above the property area"
+  text: >
+    Confere se APP + reserva legal líquida (descontada a sobreposição) não passam da área total do imóvel declarada no ADA.
+  justification: >
+    As áreas declaradas são partes do imóvel; APP somada à reserva legal líquida maior que a área
+    total indica erro de declaração ou de unidade. Usa a reserva legal líquida porque a APP pode ser
+    computada na reserva legal (Lei 12.651/2012, art. 15). Áreas em hectares, com ponto decimal;
+    campo vazio conta como zero. É sinal para revisão.
+  exceptions:
+    - "Se a reserva legal líquida não descontar toda a sobreposição com APP, a soma pode exceder sem erro."
+  examples:
+    - case: "ATI 100 ha, APP 10 ha, reserva líquida 20 ha"
+      expected: "Conforme"
+    - case: "ATI 100 ha, APP 60 ha, reserva líquida 50 ha"
+      expected: "Sinal"
+
+sources:
+  ibama_ada:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: ato-declaratorio-ambiental-ada
+    resource: {name: "Ato Declaratório Ambiental (ADA)", format: CSV}
+    archive: {type: zip, members: "ADA_atoDeclaratorio_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      "Área Total do Imóvel(ATI)": {meaning: "Área total do imóvel, em hectares", type: number, decimal: "."}
+      "APP(ha)": {meaning: "Área de preservação permanente, em hectares", type: number, decimal: "."}
+      "Área Líquida ARL (ha)": {meaning: "Reserva legal líquida (sem sobreposição), em hectares", type: number, decimal: "."}
+
+check:
+  template: field-comparison
+  left: {sum: ["ibama_ada.APP(ha)", "ibama_ada.Área Líquida ARL (ha)"]}
+  op: "<="
+  right: "ibama_ada.Área Total do Imóvel(ATI)"
+  tolerance: 0.01
+  empty_as_zero: true

@@ -53,8 +53,11 @@ Portuguese, the initial interface language). It checks:
   required fields, closed sets of fields and tokens, parameters of each template;
 - **cross references:** every `source.column` used by `check` is declared in `sources`; declared but
   unused sources or columns are warnings;
-- **file names:** the file name is the rule's identifier (lowercase letters without accents, digits
-  and hyphens) and must be unique across `rules/`, at any subfolder depth.
+- **file names:** the file name is the rule's identifier and may be in any language: lowercase letters
+  of any script, digits and single hyphens, no spaces, in Unicode NFC (`municipality-state.yaml`,
+  `município-uf.yaml`, `市町村-州.yaml`). It must be unique across `rules/`, at any subfolder depth,
+  also after normalisation and case folding (Windows and macOS would otherwise mix two names up).
+  This repository's own rules use English names, like its folders.
 
 ## Write a rule
 

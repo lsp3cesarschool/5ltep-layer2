@@ -1,0 +1,35 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Pagamento anterior ao auto"
+  title_translations:
+    en: "Payment dated before the infraction notice"
+  text: >
+    Confere se a data de pagamento não é anterior à data do auto, em cada parcela arrecadada.
+  justification: >
+    O pagamento de multa pressupõe o auto; pagamento datado antes do auto indica erro de data ou de vínculo. É sinal para revisão.
+  exceptions:
+    - "Pagamentos vinculados a outro débito do mesmo autuado podem aparecer associados ao auto."
+  examples:
+    - case: "Auto em 10/03/2015, pagamento em 20/04/2015"
+      expected: "Conforme"
+    - case: "Auto em 10/03/2015, pagamento em 20/02/2015"
+      expected: "Sinal"
+
+sources:
+  ibama_arrecadacao:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: arrecadacao-de-multas-ambientais-bens-tutelados
+    resource: {name: "Arrecadação de Multas por Bens Tutelados", format: CSV}
+    archive: {type: zip, members: "arrecadacao_de_multas_ambientais_por_bens_tutelados_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      "Data Auto": {meaning: "Data do auto de infração", type: date, format: "%d/%m/%Y"}
+      "Data Pagamento": {meaning: "Data do pagamento da parcela", type: date, format: "%d/%m/%Y"}
+
+check:
+  template: temporal-order
+  sequence: ["ibama_arrecadacao.Data Auto", "ibama_arrecadacao.Data Pagamento"]

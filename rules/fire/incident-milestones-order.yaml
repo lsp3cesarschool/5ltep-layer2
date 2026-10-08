@@ -1,0 +1,45 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Marcos do incêndio fora de ordem"
+  title_translations:
+    en: "Fire incident milestones out of order"
+  text: >
+    Confere, em cada registro de ocorrência de incêndio, a ordem início ≤ detecção ≤ primeiro ataque ≤ controle ≤ extinção. Marcos vazios são ignorados.
+  justification: >
+    O combate segue uma sequência; um marco anterior ao que o precede indica erro de data ou hora.
+    É uma hipótese de processo, não impossibilidade universal: fases podem se sobrepor em registros
+    consolidados. É sinal para revisão.
+  exceptions:
+    - "Incêndio detectado antes do início estimado pode ocorrer quando o início é estimado depois."
+    - "Registros com menos de dois marcos ficam sem informação."
+  examples:
+    - case: "Início 10:00, detecção 10:30, ataque 11:00, controle 15:00, extinção 18:00"
+      expected: "Conforme"
+    - case: "Extinção às 09:00 com início às 10:00 no mesmo dia"
+      expected: "Sinal"
+
+sources:
+  ibama_roi:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: sisfogo-roi
+    resource: {name: "ROI formato csv", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      "DATA/HORA INICIO FOGO": {meaning: "Início do fogo", type: datetime, format: "%d/%m/%Y %H:%M:%S"}
+      "DATA/HORA DETECCAO": {meaning: "Detecção do incêndio", type: datetime, format: "%d/%m/%Y %H:%M:%S"}
+      "DATA/HORA PRIMEIRO ATAQUE": {meaning: "Primeiro ataque ao fogo", type: datetime, format: "%d/%m/%Y %H:%M:%S"}
+      "DATA/HORA CONTROLE INCENDIO": {meaning: "Controle do incêndio", type: datetime, format: "%d/%m/%Y %H:%M:%S"}
+      "DATA/HORA EXTINCAO INCENDIO": {meaning: "Extinção do incêndio", type: datetime, format: "%d/%m/%Y %H:%M:%S"}
+
+check:
+  template: temporal-order
+  sequence:
+    - "ibama_roi.DATA/HORA INICIO FOGO"
+    - "ibama_roi.DATA/HORA DETECCAO"
+    - "ibama_roi.DATA/HORA PRIMEIRO ATAQUE"
+    - "ibama_roi.DATA/HORA CONTROLE INCENDIO"
+    - "ibama_roi.DATA/HORA EXTINCAO INCENDIO"

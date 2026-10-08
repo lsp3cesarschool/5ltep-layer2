@@ -1,0 +1,34 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Vencimento da licença anterior à emissão"
+  title_translations:
+    en: "Licence expiring before it was issued"
+  text: >
+    Confere se a data de vencimento da licença não é anterior à data de emissão.
+  justification: >
+    Uma licença vence depois de emitida; a ordem inversa indica erro de data. É sinal para revisão.
+  exceptions:
+    - "Licenças sem vencimento informado ficam sem informação."
+  examples:
+    - case: "Emissão 10/01/2020, vencimento 10/01/2024"
+      expected: "Conforme"
+    - case: "Emissão 10/01/2020, vencimento 10/01/2019"
+      expected: "Sinal"
+
+sources:
+  ibama_licencas:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: licencas-ambientais-de-atividades-e-empreendimentos-licenciados-pelo-ibama
+    resource: {name: "Licenças ambientais de atividades e ...", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      DAT_EMISSAO: {meaning: "Data de emissão da licença", type: date, format: "%d/%m/%Y"}
+      DAT_VENCIMENTO: {meaning: "Data de vencimento da licença", type: date, format: "%d/%m/%Y"}
+
+check:
+  template: temporal-order
+  sequence: [ibama_licencas.DAT_EMISSAO, ibama_licencas.DAT_VENCIMENTO]

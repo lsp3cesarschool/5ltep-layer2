@@ -1,0 +1,39 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Volume explorado acima do autorizado"
+  title_translations:
+    en: "Harvested volume above the authorised volume"
+  text: >
+    Confere, em cada árvore do inventário 100%, se o volume explorado não passa do volume autorizado.
+  justification: >
+    A exploração se limita ao volume autorizado para a árvore; volume explorado maior indica erro de
+    registro ou exploração acima do autorizado (Resolução CONAMA 406/2009). Os volumes usam ponto
+    como separador decimal. É sinal para revisão.
+  exceptions:
+    - "Produtos diferentes da mesma árvore ou unidades diferentes (m³, st) não são distinguidos aqui."
+  examples:
+    - case: "Autorizado 3.5, explorado 3.2"
+      expected: "Conforme"
+    - case: "Autorizado 3.5, explorado 4.1"
+      expected: "Sinal"
+
+sources:
+  ibama_if100:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: volumes-explorados-if-100
+    resource: {name: "Volumes Explorados - IF 100%", format: CSV}
+    archive: {type: zip, members: "volumes_explorados_if_100_ano_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      VOLUME_AUTORIZADO: {meaning: "Volume autorizado da árvore", type: number, decimal: "."}
+      VOLUME_EXPLORADO: {meaning: "Volume explorado da árvore", type: number, decimal: "."}
+
+check:
+  template: field-comparison
+  left: ibama_if100.VOLUME_EXPLORADO
+  op: "<="
+  right: ibama_if100.VOLUME_AUTORIZADO

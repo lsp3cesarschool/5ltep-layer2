@@ -1,0 +1,37 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Fato infracional posterior à lavratura do auto"
+  title_translations:
+    en: "Offence dated after the infraction notice was issued"
+  text: >
+    Confere se a data do fato infracional não é posterior à data de lavratura do auto, comparando por dia.
+  justification: >
+    O auto registra um fato já ocorrido; fato datado depois da lavratura indica erro de data ou de
+    registro. As duas datas são comparadas por dia, porque parte dos autos traz só a data. É sinal para revisão, não veredito sobre o auto.
+  exceptions:
+    - "Autos sem data do fato (a maioria dos registros antigos) ficam sem informação."
+    - "Autos migrados ou corrigidos podem ter datas reescritas; a regra não distingue esses casos."
+  examples:
+    - case: "Fato em 2020-03-01 e lavratura em 2020-03-05"
+      expected: "Conforme"
+    - case: "Fato em 2020-03-09 e lavratura em 2020-03-05"
+      expected: "Sinal: fato posterior à lavratura"
+
+sources:
+  ibama_autos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-auto-de-infracao
+    resource: {name: "Autos de infração", format: CSV}
+    archive: {type: zip, members: "auto_infracao_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      DT_FATO_INFRACIONAL: {meaning: "Data do fato infracional", type: date, format: ["%Y-%m-%d %H:%M:%S", "%Y-%m-%d"]}
+      DAT_HORA_AUTO_INFRACAO: {meaning: "Data e hora de lavratura do auto", type: date, format: ["%Y-%m-%d %H:%M:%S", "%Y-%m-%d"]}
+
+check:
+  template: temporal-order
+  sequence: [ibama_autos.DT_FATO_INFRACIONAL, ibama_autos.DAT_HORA_AUTO_INFRACAO]

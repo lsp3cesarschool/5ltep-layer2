@@ -1,0 +1,263 @@
+"""Templates: the fixed SQL behind each `check.template`.
+
+A rule never carries SQL. It names columns (`source.column`), fixed values and a few options; each
+template here turns them into one SQL statement that gives every record of the evaluated source
+exactly one outcome. Column names reach DuckDB only as quoted identifiers of tables the engine
+built, and fixed values only as SQL literals produced by `_literal`.
+
+Typed columns: a column declared with `type: date|datetime` is parsed with its `format` (strptime
+codes, as in DuckDB and Python); `type: number` is parsed with its `decimal` separator ("," means
+"." is a thousands separator). A value that is present but cannot be parsed is `invalid_value`; an
+empty value is `missing_value`. Neither is ever counted as consistent.
+
+`where` (any template): conditions on columns of the evaluated source, compared as trimmed text.
+Records outside them are `out_of_scope`: counted, so the outcomes still add up to the records read,
+but not a signal.
+"""
+
+from __future__ import annotations
+
+import math
+
+OUTCOMES = ("match", "mismatch", "key_not_found", "missing_value", "invalid_value", "ambiguous_key", "out_of_scope")
+SIGNALS = ("mismatch", "key_not_found", "missing_value", "invalid_value", "ambiguous_key")
+
+
+def ident(name: str) -> str:
+    return '"' + name.replace('"', '""') + '"'
+
+
+def _literal(value) -> str:
+    if isinstance(value, bool) or value is None:
+        raise ValueError("valor fixo inválido")
+    if isinstance(value, (int, float)):
+        if isinstance(value, float) and not math.isfinite(value):
+            raise ValueError("valor fixo inválido")
+        return repr(value)
+    return "'" + str(value).replace("'", "''") + "'"
+
+
+def split(ref: str) -> tuple[str, str]:
+    source, _, column = ref.partition(".")
+    return source, column
+
+
+class Columns:
+    """SQL expressions for `source.column` references, aware of each column's declared type."""
+
+    def __init__(self, sources: dict, aliases: dict[str, str]):
+        self.sources, self.aliases = sources, aliases       # aliases: source id -> table alias in the FROM
+
+    def spec(self, ref: str) -> dict:
+        source, column = split(ref)
+        spec = self.sources[source]["columns"][column]
+        return spec if isinstance(spec, dict) else {"meaning": spec, "type": "text"}
+
+    def raw(self, ref: str) -> str:
+        source, column = split(ref)
+        return f"trim({self.aliases[source]}.{ident(column)})"
+
+    def empty(self, ref: str) -> str:
+        return f"coalesce({self.raw(ref)}, '') = ''"
+
+    def typed(self, ref: str, as_date: bool = False) -> str:
+        spec, raw = self.spec(ref), self.raw(ref)
+        kind = spec.get("type", "text")
+        if kind in ("date", "datetime"):
+            formats = spec["format"] if isinstance(spec["format"], list) else [spec["format"]]
+            value = f"try_strptime({raw}, [{', '.join(_literal(f) for f in formats)}])"
+            return f"CAST({value} AS DATE)" if (as_date or kind == "date") else value
+        if kind == "number":
+            if spec.get("decimal", ".") == ",":
+                raw = f"replace(replace({raw}, '.', ''), ',', '.')"
+            return f"TRY_CAST({raw} AS DOUBLE)"
+        return raw
+
+    def invalid(self, ref: str, as_date: bool = False) -> str:
+        return f"(NOT {self.empty(ref)} AND {self.typed(ref, as_date)} IS NULL)"
+
+
+def where_sql(conditions: list[dict], cols: Columns) -> str:
+    parts = []
+    for c in conditions:
+        raw = f"coalesce({cols.raw(c['column'])}, '')"
+        if "equals" in c:
+            parts.append(f"{raw} = {_literal(str(c['equals']))}")
+        elif "not_equals" in c:
+            parts.append(f"{raw} <> {_literal(str(c['not_equals']))}")
+        elif "in" in c:
+            parts.append(f"{raw} IN ({', '.join(_literal(str(v)) for v in c['in'])})")
+        elif "not_in" in c:
+            parts.append(f"{raw} NOT IN ({', '.join(_literal(str(v)) for v in c['not_in'])})")
+        elif "empty" in c:
+            parts.append(f"{raw} {'=' if c['empty'] else '<>'} ''")
+    return " AND ".join(parts) if parts else "TRUE"
+
+
+# --- templates: each returns (evaluated source, FROM clause, CASE expression) ----------------------
+
+def _key(ref: str, cols: Columns) -> str:
+    """A key compared as a number when its column is declared `type: number` (so 1234567 and
+    1234567.0000000000 match), else as trimmed text."""
+    return cols.typed(ref) if cols.spec(ref).get("type") == "number" else cols.raw(ref)
+
+
+def _lookup_key(key: dict, cols: Columns) -> str:
+    """The key of the lookup source: one column, or several joined by `to_join`."""
+    to = key["to"] if isinstance(key["to"], list) else [key["to"]]
+    if len(to) == 1:
+        return _key(to[0], cols)
+    sep = _literal(key.get("to_join", "-"))
+    return " || ".join(f"coalesce({cols.raw(r)}, '')" if n == 0 else f"{sep} || coalesce({cols.raw(r)}, '')"
+                       for n, r in enumerate(to))
+
+
+def _to_source(key: dict) -> str:
+    return split(key["to"][0] if isinstance(key["to"], list) else key["to"])[0]
+
+
+def lookup_equals(check: dict, sources: dict):
+    f_src, t_src = split(check["key"]["from"])[0], _to_source(check["key"])
+    cols = Columns(sources, {f_src: "f", t_src: "t"})
+    t_val = cols.raw(check["compare"]["to"])
+    lookup = (f"(SELECT {_lookup_key(check['key'], cols)} AS k, min({t_val}) AS v, count(DISTINCT {t_val}) AS n "
+              f"FROM {ident('src_' + t_src)} AS t GROUP BY 1 HAVING k IS NOT NULL AND CAST(k AS VARCHAR) <> '')")
+    key, val = check["key"]["from"], check["compare"]["from"]
+    case = (f"CASE WHEN {cols.empty(key)} OR {cols.empty(val)} THEN 'missing_value' "
+            f"WHEN {cols.invalid(key)} THEN 'invalid_value' "
+            f"WHEN l.k IS NULL THEN 'key_not_found' WHEN l.n > 1 THEN 'ambiguous_key' "
+            f"WHEN {cols.raw(val)} = l.v THEN 'match' ELSE 'mismatch' END")
+    return f_src, f"{ident('src_' + f_src)} AS f LEFT JOIN {lookup} AS l ON {_key(key, cols)} = l.k", case, cols
+
+
+def lookup_exists(check: dict, sources: dict):
+    """The key of each record must exist in the lookup source. With `split`, the key field holds
+    several keys (e.g. "123-A,456-B"); every one must exist."""
+    f_src, t_src = split(check["key"]["from"])[0], _to_source(check["key"])
+    cols = Columns(sources, {f_src: "f", t_src: "t"})
+    lookup = (f"(SELECT DISTINCT {_lookup_key(check['key'], cols)} AS k FROM {ident('src_' + t_src)} AS t)")
+    key = check["key"]["from"]
+    f_tab = ident("src_" + f_src)
+    if "split" not in check["key"]:
+        case = (f"CASE WHEN {cols.empty(key)} THEN 'missing_value' WHEN {cols.invalid(key)} THEN 'invalid_value' "
+                f"WHEN l.k IS NULL THEN 'key_not_found' ELSE 'match' END")
+        return f_src, f"{f_tab} AS f LEFT JOIN {lookup} AS l ON {_key(key, cols)} = l.k", case, cols
+    sep = _literal(check["key"]["split"])
+    items = (f"(SELECT f.__member, f.__record, trim(unnest(string_split({cols.raw(key)}, {sep}))) AS item "
+             f"FROM {f_tab} AS f)")
+    found = (f"(SELECT i.__member, i.__record, count(*) AS n, bool_and(l.k IS NOT NULL) AS all_found "
+             f"FROM {items} AS i LEFT JOIN {lookup} AS l ON i.item = l.k WHERE i.item <> '' GROUP BY 1, 2)")
+    case = (f"CASE WHEN {cols.empty(key)} OR m.n IS NULL THEN 'missing_value' "
+            f"WHEN NOT m.all_found THEN 'key_not_found' ELSE 'match' END")
+    return f_src, (f"{f_tab} AS f LEFT JOIN {found} AS m ON f.__member = m.__member AND f.__record = m.__record"), case, cols
+
+
+def temporal_order(check: dict, sources: dict):
+    """Dates in `sequence` must not decrease; empty dates are skipped (at least two must be present).
+    A date and a datetime are compared by day. `max_interval` caps first-to-last present dates."""
+    seq = check["sequence"]
+    src, _ = split(seq[0])
+    cols = Columns(sources, {src: "f"})
+    by_day = any(cols.spec(r).get("type") == "date" for r in seq)
+    values = ", ".join(cols.typed(r, by_day) for r in seq)
+    present = f"list_filter([{values}], x -> x IS NOT NULL)"
+    invalid = " OR ".join(cols.invalid(r, by_day) for r in seq)
+    over = "FALSE"
+    if "max_interval" in check:
+        limit = check["max_interval"]
+        unit, amount = ("YEAR", limit["years"]) if "years" in limit else ("DAY", limit["days"])
+        over = f"list_last({present}) > list_first({present}) + INTERVAL {int(amount)} {unit}"
+    case = (f"CASE WHEN {invalid} THEN 'invalid_value' WHEN len({present}) < 2 THEN 'missing_value' "
+            f"WHEN {present} <> list_sort({present}) OR {over} THEN 'mismatch' ELSE 'match' END")
+    return src, f"{ident('src_' + src)} AS f", case, cols
+
+
+_OPS = {"<": "<", "<=": "<=", "=": "=", ">=": ">=", ">": ">"}
+
+
+def _side(side, cols: Columns, empty_as_zero: bool):
+    """(SQL value, refs used) of a field-comparison side: a column, a fixed number, or a sum/difference."""
+    if isinstance(side, (int, float)) and not isinstance(side, bool):
+        return _literal(side), []
+    if isinstance(side, str):
+        return cols.typed(side), [side]
+    plus, minus = side.get("sum", []), side.get("minus", [])
+    term = (lambda r: f"coalesce({cols.typed(r)}, 0)") if empty_as_zero else cols.typed
+    expr = " + ".join(term(r) for r in plus) or "0"
+    if minus:
+        expr = f"({expr}) - ({' + '.join(term(r) for r in minus)})"
+    if "times" in side:
+        expr = f"({expr}) * {_literal(float(side['times']))}"
+    return f"({expr})", plus + minus
+
+
+def field_comparison(check: dict, sources: dict):
+    first = check["left"] if isinstance(check["left"], str) else (check["left"].get("sum") or check["left"].get("minus"))[0]
+    src, _ = split(first)
+    cols = Columns(sources, {src: "f"})
+    zero = bool(check.get("empty_as_zero", False))
+    left, l_refs = _side(check["left"], cols, zero)
+    right, r_refs = _side(check["right"], cols, zero)
+    refs = l_refs + r_refs
+    tol = _literal(float(check.get("tolerance", 0)))
+    op = _OPS[check["op"]]
+    if op == "=":
+        ok = f"abs({left} - {right}) <= {tol}"
+    elif op in ("<", "<="):
+        ok = f"{left} {op} {right} + {tol}"
+    else:
+        ok = f"{left} {op} {right} - {tol}"
+    invalid = " OR ".join(cols.invalid(r) for r in refs) or "FALSE"
+    missing = "FALSE" if zero else (" OR ".join(cols.empty(r) for r in refs) or "FALSE")
+    if zero:   # with empty_as_zero, a record with every referenced value empty has nothing to compare
+        missing = " AND ".join(cols.empty(r) for r in refs)
+    case = (f"CASE WHEN {invalid} THEN 'invalid_value' WHEN {missing} THEN 'missing_value' "
+            f"WHEN {ok} THEN 'match' ELSE 'mismatch' END")
+    return src, f"{ident('src_' + src)} AS f", case, cols
+
+
+TEMPLATES = {"lookup-equals": lookup_equals, "lookup-exists": lookup_exists,
+             "temporal-order": temporal_order, "field-comparison": field_comparison}
+
+
+def evaluated_source(check: dict) -> str:
+    template = check["template"]
+    if template in ("lookup-equals", "lookup-exists"):
+        return split(check["key"]["from"])[0]
+    if template == "temporal-order":
+        return split(check["sequence"][0])[0]
+    left = check["left"]
+    return split(left if isinstance(left, str) else (left.get("sum") or left.get("minus"))[0])[0]
+
+
+def used_refs(check: dict) -> list[tuple[str, list]]:
+    """(source.column, path inside the rule) for every column the check reads, `where` included."""
+    t = check["template"]
+    out = []
+    if t in ("lookup-equals", "lookup-exists"):
+        parts = ("key", "compare") if t == "lookup-equals" else ("key",)
+        for p in parts:
+            for e in ("from", "to"):
+                v = check[p][e]
+                out += [(r, ["check", p, e, i]) for i, r in enumerate(v)] if isinstance(v, list) else [(v, ["check", p, e])]
+    elif t == "temporal-order":
+        out += [(r, ["check", "sequence", i]) for i, r in enumerate(check["sequence"])]
+    elif t == "field-comparison":
+        for side in ("left", "right"):
+            v = check[side]
+            if isinstance(v, str):
+                out.append((v, ["check", side]))
+            elif isinstance(v, dict):
+                for k in ("sum", "minus"):
+                    out += [(r, ["check", side, k, i]) for i, r in enumerate(v.get(k, []))]
+    out += [(c["column"], ["check", "where", i, "column"]) for i, c in enumerate(check.get("where", []))]
+    return out
+
+
+def statement(check: dict, sources: dict) -> tuple[str, str]:
+    """(evaluated source, SQL creating table `outcome(__member, __record, outcome)`)."""
+    src, frm, case, cols = TEMPLATES[check["template"]](check, sources)
+    scope = where_sql(check.get("where", []), cols)
+    sql = (f"CREATE TABLE outcome AS SELECT f.__member, f.__record, "
+           f"CASE WHEN NOT ({scope}) THEN 'out_of_scope' ELSE {case} END AS outcome FROM {frm}")
+    return src, sql

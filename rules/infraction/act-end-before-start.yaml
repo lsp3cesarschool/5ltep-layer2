@@ -1,0 +1,36 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Fim do ato inequívoco anterior ao início"
+  title_translations:
+    en: "Unequivocal act ending before it starts"
+  text: >
+    Confere se a data de fim do ato inequívoco não é anterior à data de início, no mesmo auto.
+  justification: >
+    Um intervalo termina depois de começar; fim antes do início indica datas trocadas ou erro de
+    digitação. É sinal para revisão, não veredito sobre o auto.
+  exceptions:
+    - "Autos sem início ou sem fim do ato ficam sem informação."
+  examples:
+    - case: "Início 2019-01-01, fim 2019-02-01"
+      expected: "Conforme"
+    - case: "Início 2019-02-01, fim 2019-01-01"
+      expected: "Sinal"
+
+sources:
+  ibama_autos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-auto-de-infracao
+    resource: {name: "Autos de infração", format: CSV}
+    archive: {type: zip, members: "auto_infracao_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      DT_INICIO_ATO_INEQUIVOCO: {meaning: "Início do ato inequívoco", type: date, format: ["%Y-%m-%d %H:%M:%S", "%Y-%m-%d"]}
+      DT_FIM_ATO_INEQUIVOCO: {meaning: "Fim do ato inequívoco", type: date, format: ["%Y-%m-%d %H:%M:%S", "%Y-%m-%d"]}
+
+check:
+  template: temporal-order
+  sequence: [ibama_autos.DT_INICIO_ATO_INEQUIVOCO, ibama_autos.DT_FIM_ATO_INEQUIVOCO]

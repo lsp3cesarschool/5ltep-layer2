@@ -17,9 +17,9 @@ from pathlib import Path
 
 ALLOWED = [
     r"results/run_log\.jsonl", r"results/manifest\.json", r"results/sources\.json", r"results/history\.json",
-    r"results/rules/[a-z0-9.-]+/result\.json",
+    r"results/rules/[^/\\.][^/\\]*/result\.json",
     r"docs/data/layer2\.json", r"docs/data/status\.json", r"docs/data/status\.pt\.json",
-    r"docs/data/rules/[a-z0-9.-]+\.json",
+    r"docs/data/rules/[^/\\.][^/\\]*\.json",
 ]
 MAX_FILE_BYTES = 50 * 1024 * 1024
 LIST_KEYS = {"rule", "rule_version", "evaluated_at", "run_id", "environment", "run_url", "note", "numbering",

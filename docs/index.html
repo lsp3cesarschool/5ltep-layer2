@@ -68,6 +68,17 @@
     <div class="table-wrap"><table class="files" id="sources"></table></div>
   </section>
 
+  <section id="speed-section">
+    <div class="section-head"><h2 data-i18n="speed_h">Download speed</h2></div>
+    <p class="muted" data-i18n="speed_note">Megabytes per second in each run: total bytes over total download time, for the
+      resources of this instance's portal and, separately, of the other portals the rules cross. It follows how fast the
+      portals deliver their files over time; a slow run delays results but changes nothing in them.</p>
+    <ul class="legend" id="speed-legend"></ul>
+    <div class="chart" id="speed-chart"></div>
+    <details class="more"><summary data-i18n="table_view">Table view</summary>
+      <div class="table-wrap"><table class="mini" id="speed-table"></table></div></details>
+  </section>
+
   <section id="history-section">
     <div class="section-head"><h2 data-i18n="history_h">History</h2></div>
     <p class="muted" data-i18n="history_note">Signals per rule in each run, and the runs in which a source failed.</p>

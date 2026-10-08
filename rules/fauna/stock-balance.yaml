@@ -1,0 +1,41 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Balanço do plantel divergente"
+  title_translations:
+    en: "Breeding stock balance does not add up"
+  text: >
+    Confere, em cada declaração, se plantel anterior + total de entradas − total de saídas = plantel atual.
+  justification: >
+    O plantel atual resulta do anterior somado às entradas e diminuído das saídas; diferença indica
+    erro de declaração ou de cálculo. Usa os totais (Total, Total de Entradas, Total de Saídas, Total
+    geral) para não contar nascimentos duas vezes. Valores com vírgula decimal. É sinal para revisão.
+  exceptions:
+    - "Declarações retificadoras substituem a anterior e podem ter balanço próprio."
+  examples:
+    - case: "Anterior 10, entradas 3, saídas 2, atual 11"
+      expected: "Conforme"
+    - case: "Anterior 10, entradas 3, saídas 2, atual 15"
+      expected: "Sinal"
+
+sources:
+  ibama_plantel:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: sisfauna-plantel-exato
+    resource: {name: "Sisfauna - Plantel Exato", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      Total: {meaning: "Plantel anterior (total)", type: number, decimal: ","}
+      "Total de Entradas": {meaning: "Total de entradas no período", type: number, decimal: ","}
+      "Total de Saídas": {meaning: "Total de saídas no período", type: number, decimal: ","}
+      "Total geral": {meaning: "Plantel atual (total)", type: number, decimal: ","}
+
+check:
+  template: field-comparison
+  left: {sum: ["ibama_plantel.Total", "ibama_plantel.Total de Entradas"], minus: ["ibama_plantel.Total de Saídas"]}
+  op: "="
+  right: "ibama_plantel.Total geral"
+  tolerance: 0.001

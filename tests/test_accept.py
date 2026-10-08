@@ -33,7 +33,9 @@ def test_first_run_is_accepted_and_copied(artifact, tmp_path):
     files = accept.apply(artifact, repo)
     assert "docs/data/layer2.json" in files
     assert (repo / "results" / "history.json").exists()
-    assert len((repo / "results" / "run_log.jsonl").read_text(encoding="utf-8").splitlines()) == 3
+    lines = [json.loads(x) for x in (repo / "results" / "run_log.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert [x["stage"] for x in lines].count("download_speed") == 1
+    assert {x["stage"] for x in lines} == {"fetch", "download_speed", "rule"}
 
 
 def test_run_log_is_appended(artifact, tmp_path):

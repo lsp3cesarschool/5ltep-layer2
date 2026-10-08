@@ -1,0 +1,34 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Desembargo anterior ao embargo"
+  title_translations:
+    en: "Embargo lifted before it was imposed"
+  text: >
+    Confere se a data de desembargo não é anterior à data do embargo, no mesmo termo.
+  justification: >
+    Um embargo só pode ser levantado depois de imposto; a ordem inversa indica erro de data. É sinal para revisão, não veredito sobre o termo.
+  exceptions:
+    - "Termos sem desembargo (a maioria) ficam sem informação."
+  examples:
+    - case: "Embargo em 2018-05-01, desembargo em 2019-02-01"
+      expected: "Conforme"
+    - case: "Embargo em 2018-05-01, desembargo em 2017-12-01"
+      expected: "Sinal"
+
+sources:
+  ibama_embargo:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-termo-de-embargo
+    resource: {name: "Termos de embargo", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      DAT_EMBARGO: {meaning: "Data e hora do embargo", type: datetime, format: "%Y-%m-%d %H:%M:%S"}
+      DAT_DESEMBARGO: {meaning: "Data e hora do desembargo", type: datetime, format: "%Y-%m-%d %H:%M:%S"}
+
+check:
+  template: temporal-order
+  sequence: [ibama_embargo.DAT_EMBARGO, ibama_embargo.DAT_DESEMBARGO]

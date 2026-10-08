@@ -60,6 +60,7 @@ class Fetched:
     status: str = OK
     reason: str | None = None
     used_by: list[str] = field(default_factory=list)
+    role: str = "secondary"                         # primary: the portal of this instance (portal.json)
     portal: dict = field(default_factory=dict)      # package_show: http status, seconds
     dataset: dict = field(default_factory=dict)     # title, organization, license, metadata_modified
     resource: dict = field(default_factory=dict)    # id, url, metadata of the matched resource
@@ -69,7 +70,7 @@ class Fetched:
     def record(self) -> dict:
         return {"portal": self.key.portal, "dataset_name": self.key.dataset,
                 "resource_name": self.key.name, "resource_format": self.key.format,
-                "label": self.key.label, "status": self.status, "reason": self.reason,
+                "label": self.key.label, "role": self.role, "status": self.status, "reason": self.reason,
                 "used_by": sorted(self.used_by), "package_show": self.portal, "dataset": self.dataset,
                 "resource": self.resource, "download": self.download}
 
@@ -156,6 +157,8 @@ def fetch(key: ResourceKey, folder: Path) -> Fetched:
         out.download["error"] = _error(exc)
         out.status, out.reason = DOWNLOAD_FAILED, f"download falhou: {_error(exc)}"
         return out
-    out.download.update(bytes=size, sha256=sha.hexdigest(), seconds=round(time.monotonic() - t0, 2))
+    seconds = time.monotonic() - t0
+    out.download.update(bytes=size, sha256=sha.hexdigest(), seconds=round(seconds, 2),
+                        mb_per_s=round(size / 1e6 / seconds, 3) if seconds > 0 else None)
     out.path = path
     return out

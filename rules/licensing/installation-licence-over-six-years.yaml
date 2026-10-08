@@ -1,0 +1,41 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Licença de Instalação com validade acima de seis anos"
+  title_translations:
+    en: "Installation licence valid for more than 6 years"
+  text: >
+    Confere se a Licença de Instalação vence no máximo 6 anos depois da emissão (e não antes dela).
+  justification: >
+    A Resolução CONAMA 237/1997, art. 18, limita a validade da Licença de Instalação a 6 anos. A Lei
+    15.190/2025 (arts. 6º e 7º) passou a reger licenças emitidas na sua vigência, com faixas próprias;
+    a regra usa o limite da CONAMA 237 e é hipótese de triagem, não conclusão sobre a licença.
+  exceptions:
+    - "Licenças emitidas sob a Lei 15.190/2025 podem ter limite diferente."
+    - "Renovações, prorrogações e retificações têm tipo próprio e ficam fora do escopo."
+  examples:
+    - case: "Licença de Instalação emitida em 01/01/2015, vence em 01/01/2021"
+      expected: "Conforme"
+    - case: "Licença de Instalação emitida em 01/01/2015, vence em 02/01/2021"
+      expected: "Sinal"
+
+sources:
+  ibama_licencas:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: licencas-ambientais-de-atividades-e-empreendimentos-licenciados-pelo-ibama
+    resource: {name: "Licenças ambientais de atividades e ...", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      DAT_EMISSAO: {meaning: "Data de emissão da licença", type: date, format: "%d/%m/%Y"}
+      DAT_VENCIMENTO: {meaning: "Data de vencimento da licença", type: date, format: "%d/%m/%Y"}
+      DES_TIPOLICENCA: "Tipo da licença"
+
+check:
+  template: temporal-order
+  sequence: [ibama_licencas.DAT_EMISSAO, ibama_licencas.DAT_VENCIMENTO]
+  max_interval: {years: 6}
+  where:
+    - {column: ibama_licencas.DES_TIPOLICENCA, equals: "Licença de Instalação"}

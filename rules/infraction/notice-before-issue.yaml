@@ -1,0 +1,36 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Ciência do autuado anterior à lavratura"
+  title_translations:
+    en: "Offender notified before the notice was issued"
+  text: >
+    Confere se a data de ciência da autuação não é anterior à data de lavratura do auto, comparando por dia.
+  justification: >
+    A ciência pressupõe um auto já lavrado; ciência datada antes da lavratura indica erro de data ou
+    de encadeamento do processo. É sinal para revisão, não veredito sobre o auto.
+  exceptions:
+    - "Autos sem data de ciência ficam sem informação."
+  examples:
+    - case: "Lavratura em 2021-06-10 e ciência em 2021-06-10"
+      expected: "Conforme"
+    - case: "Lavratura em 2021-06-10 e ciência em 2021-06-01"
+      expected: "Sinal: ciência anterior à lavratura"
+
+sources:
+  ibama_autos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-auto-de-infracao
+    resource: {name: "Autos de infração", format: CSV}
+    archive: {type: zip, members: "auto_infracao_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      DAT_HORA_AUTO_INFRACAO: {meaning: "Data e hora de lavratura do auto", type: date, format: ["%Y-%m-%d %H:%M:%S", "%Y-%m-%d"]}
+      DAT_CIENCIA_AUTUACAO: {meaning: "Data em que o autuado tomou ciência", type: date, format: ["%Y-%m-%d %H:%M:%S", "%Y-%m-%d"]}
+
+check:
+  template: temporal-order
+  sequence: [ibama_autos.DAT_HORA_AUTO_INFRACAO, ibama_autos.DAT_CIENCIA_AUTUACAO]

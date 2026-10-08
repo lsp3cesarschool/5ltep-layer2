@@ -1,0 +1,45 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Valor pago mais de 10 vezes o valor original do auto"
+  title_translations:
+    en: "Amount paid more than 10 times the original fine"
+  text: >
+    Sinaliza parcelas cujo valor pago passa de 10 vezes o valor original do auto, só para autos em Real.
+  justification: >
+    Uma parcela paga muito acima do valor original sugere erro de unidade (centavos, separador
+    decimal) ou de vínculo. O fator 10 é escolha exploratória do autor, não limite legal: juros,
+    multa de mora e correção existem, mas raramente multiplicam a dívida por dez. Os valores usam o
+    padrão brasileiro: vírgula decimal e ponto de milhar. Autos em moedas antigas (Cruzeiro, BTN,
+    UFIR...) ficam fora, porque o pagamento é em Real.
+  exceptions:
+    - "Débitos muito antigos, com décadas de correção, podem passar de 10 vezes legitimamente."
+    - "Autos em moeda anterior ao Real ficam fora do escopo."
+  examples:
+    - case: "Auto de R$ 1.000, parcela paga de R$ 1.250,50"
+      expected: "Conforme"
+    - case: "Auto de R$ 1.000, parcela paga de R$ 125.050,00"
+      expected: "Sinal: mais de 10 vezes"
+
+sources:
+  ibama_arrecadacao:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: arrecadacao-de-multas-ambientais-bens-tutelados
+    resource: {name: "Arrecadação de Multas por Bens Tutelados", format: CSV}
+    archive: {type: zip, members: "arrecadacao_de_multas_ambientais_por_bens_tutelados_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      "Valor do Auto": {meaning: "Valor original do auto", type: number, decimal: ","}
+      "Valor Pago": {meaning: "Valor pago na parcela", type: number, decimal: ","}
+      Moeda: "Moeda do valor do auto"
+
+check:
+  template: field-comparison
+  left: "ibama_arrecadacao.Valor Pago"
+  op: "<="
+  right: {sum: ["ibama_arrecadacao.Valor do Auto"], times: 10}
+  where:
+    - {column: ibama_arrecadacao.Moeda, equals: "Real"}

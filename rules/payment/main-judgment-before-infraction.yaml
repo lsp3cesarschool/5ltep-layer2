@@ -1,0 +1,34 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Julgamento principal anterior ao auto"
+  title_translations:
+    en: "First-instance judgment dated before the notice"
+  text: >
+    Confere se a data do julgamento principal não é anterior à data do auto.
+  justification: >
+    O julgamento decide sobre um auto já lavrado; a ordem inversa indica erro de data. É sinal para revisão.
+  exceptions:
+    - "Autos ainda não julgados ficam sem informação."
+  examples:
+    - case: "Auto em 01/02/2016, julgamento em 01/06/2017"
+      expected: "Conforme"
+    - case: "Auto em 01/02/2016, julgamento em 01/06/2015"
+      expected: "Sinal"
+
+sources:
+  ibama_julgamentos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama
+    resource: {name: "Volume de Julgamento de Auto de Infração", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      "Data Auto": {meaning: "Data do auto de infração", type: date, format: "%d/%m/%Y"}
+      "Data Julgamento Principal": {meaning: "Data do julgamento em primeira instância", type: date, format: "%d/%m/%Y"}
+
+check:
+  template: temporal-order
+  sequence: ["ibama_julgamentos.Data Auto", "ibama_julgamentos.Data Julgamento Principal"]

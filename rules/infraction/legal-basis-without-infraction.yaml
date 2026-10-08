@@ -1,0 +1,45 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: cross_reference
+
+description:
+  language: pt-BR
+  title: "Registro de enquadramento sem auto de infração correspondente"
+  title_translations:
+    en: "Legal basis record without a matching infraction notice"
+  text: >
+    Confere se o SEQ_AUTO_INFRACAO de cada registro de enquadramento existe no extrato de autos de infração.
+  justification: >
+    Os extratos de enquadramento complementam o auto; um registro filho sem auto correspondente indica
+    vínculo quebrado ou extratos de coberturas diferentes. A comparação usa a chave sequencial, não o
+    número impresso. É sinal para revisão, não veredito sobre o auto.
+  exceptions:
+    - "Extratos publicados em datas diferentes podem ter coberturas diferentes."
+    - "Registro sem SEQ_AUTO_INFRACAO fica sem informação."
+  examples:
+    - case: "Registro com SEQ_AUTO_INFRACAO presente no extrato de autos"
+      expected: "Conforme"
+    - case: "Registro com SEQ_AUTO_INFRACAO ausente do extrato de autos"
+      expected: "Sinal: vínculo sem correspondência"
+
+sources:
+  ibama_filhos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-auto-de-infracao
+    resource: {name: "Autos de infração - enquadramento legal", format: CSV}
+    archive: {type: zip, members: "enquadramento_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      SEQ_AUTO_INFRACAO: "Identificador sequencial do auto de infração"
+  ibama_autos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-auto-de-infracao
+    resource: {name: "Autos de infração", format: CSV}
+    archive: {type: zip, members: "auto_infracao_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      SEQ_AUTO_INFRACAO: "Identificador sequencial do auto de infração"
+
+check:
+  template: lookup-exists
+  key: {from: ibama_filhos.SEQ_AUTO_INFRACAO, to: ibama_autos.SEQ_AUTO_INFRACAO}

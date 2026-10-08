@@ -1,0 +1,45 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: cross_reference
+
+description:
+  language: pt-BR
+  title: "Termo de embargo citado no auto e não publicado"
+  title_translations:
+    en: "Embargo term cited by the notice but not published"
+  text: >
+    Confere se cada termo citado em CD_TERMOS_EMBARGOS (número-série, separados por vírgula) existe no extrato de termos de embargo.
+  justification: >
+    O auto lista os termos de embargo lavrados com ele; um termo citado e ausente do extrato indica
+    vínculo quebrado ou extrato incompleto. Compara número e série impressos (NUM_TAD-SER_TAD). É sinal para revisão, não veredito sobre o auto.
+  exceptions:
+    - "Autos sem termos de embargo citados ficam fora do escopo."
+  examples:
+    - case: "Auto cita 654321-C e o termo 654321 série C está publicado"
+      expected: "Conforme"
+    - case: "Auto cita 654321-C e o termo não está publicado"
+      expected: "Sinal"
+
+sources:
+  ibama_autos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-auto-de-infracao
+    resource: {name: "Autos de infração", format: CSV}
+    archive: {type: zip, members: "auto_infracao_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      CD_TERMOS_EMBARGOS: "Termos de embargo do auto, como número-série, separados por vírgula"
+  ibama_embargo:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-termo-de-embargo
+    resource: {name: "Termos de embargo", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      NUM_TAD: "Número impresso do termo de embargo"
+      SER_TAD: "Série do termo de embargo"
+
+check:
+  template: lookup-exists
+  key: {from: ibama_autos.CD_TERMOS_EMBARGOS, split: ",", to: [ibama_embargo.NUM_TAD, ibama_embargo.SER_TAD], to_join: "-"}
+  where:
+    - {column: ibama_autos.CD_TERMOS_EMBARGOS, empty: false}

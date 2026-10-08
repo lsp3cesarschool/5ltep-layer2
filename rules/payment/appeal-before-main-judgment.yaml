@@ -1,0 +1,34 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Julgamento do recurso anterior ao julgamento principal"
+  title_translations:
+    en: "Appeal judgment dated before the first-instance judgment"
+  text: >
+    Confere se a data do julgamento do recurso não é anterior à do julgamento principal.
+  justification: >
+    O recurso é julgado depois da decisão recorrida; a ordem inversa indica erro de data ou de encadeamento. É sinal para revisão.
+  exceptions:
+    - "Contexto processual documentado pode alterar a ordem esperada (por exemplo, anulação e novo julgamento)."
+  examples:
+    - case: "Principal em 01/06/2017, recurso em 01/03/2018"
+      expected: "Conforme"
+    - case: "Principal em 01/06/2017, recurso em 01/03/2017"
+      expected: "Sinal"
+
+sources:
+  ibama_julgamentos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama
+    resource: {name: "Volume de Julgamento de Auto de Infração", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      "Data Julgamento Principal": {meaning: "Data do julgamento em primeira instância", type: date, format: "%d/%m/%Y"}
+      "Data Julgamento Recurso": {meaning: "Data do julgamento do recurso", type: date, format: "%d/%m/%Y"}
+
+check:
+  template: temporal-order
+  sequence: ["ibama_julgamentos.Data Julgamento Principal", "ibama_julgamentos.Data Julgamento Recurso"]

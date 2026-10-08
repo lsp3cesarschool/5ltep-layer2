@@ -86,15 +86,29 @@ def _card(entry: dict, rules_root: Path, run: dict) -> dict:
     return card
 
 
+def download_speed(sources: list[dict]) -> dict:
+    """Download speed of this run, separately for the primary portal and the secondary ones:
+    total bytes over total download time of the resources that downloaded."""
+    speed = {}
+    for role in ("primary", "secondary"):
+        done = [s["download"] for s in sources if s["role"] == role and s["download"].get("bytes") is not None
+                and s["download"].get("seconds")]
+        size, secs = sum(d["bytes"] for d in done), sum(d["seconds"] for d in done)
+        speed[role] = {"resources": len(done), "bytes": size, "seconds": round(secs, 2),
+                       "mb_per_s": round(size / 1e6 / secs, 3) if secs else None}
+    return speed
+
+
 def write(run: dict, out: Path, rules_root: Path) -> dict:
     ident = run_identity()
     results, data = out / "results", out / "docs" / "data"
     sources = [f.record() for f in run["fetched"]]
     cards = [_card(e, rules_root, run) for e in run["rules"]]
+    speed = download_speed(sources)
 
     # results/ -----------------------------------------------------------------------------------
     manifest = {**ident, "started_at": run["started_at"], "finished_at": run["finished_at"],
-                "engine": _engine(),
+                "engine": _engine(), "primary_portal": run.get("primary_portal"), "download_speed": speed,
                 "rules": [{"id": c["id"], "rule_version": c["rule_version"], "file": c["file"],
                            "sha256": hashlib.sha256(e["rule_text"]).hexdigest()}
                           for c, e in zip(cards, run["rules"])],
@@ -114,7 +128,7 @@ def write(run: dict, out: Path, rules_root: Path) -> dict:
     history.append({"run_id": ident["run_id"], "environment": ident["environment"], "at": run["finished_at"],
                     "rules": {c["id"]: {"status": c["status"], "reason_code": c["reason_code"],
                                         "total": c.get("total"), "counts": c.get("counts")} for c in cards},
-                    "sources": {s["label"]: s["status"] for s in sources}})
+                    "sources": {s["label"]: s["status"] for s in sources}, "download_speed": speed})
     _write(history_file, history)
 
     log = results / "run_log.jsonl"
@@ -125,6 +139,8 @@ def write(run: dict, out: Path, rules_root: Path) -> dict:
                                  "source": s["label"], "status": s["status"], "reason": s["reason"],
                                  "bytes": s["download"].get("bytes"), "sha256": s["download"].get("sha256"),
                                  "seconds": s["download"].get("seconds")}, ensure_ascii=False) + "\n")
+        fh.write(json.dumps({"at": run["finished_at"], "run_id": ident["run_id"], "stage": "download_speed",
+                             **speed}, ensure_ascii=False) + "\n")
         for c in cards:
             fh.write(json.dumps({"at": run["finished_at"], "run_id": ident["run_id"], "stage": "rule",
                                  "rule": c["id"], "status": c["status"], "reason_code": c["reason_code"],
@@ -149,6 +165,7 @@ def write(run: dict, out: Path, rules_root: Path) -> dict:
     _write(data / "layer2.json", {"layer": 2, **ident, "generated_at": run["finished_at"],
                                   "started_at": run["started_at"], "totals": totals, "rules": cards,
                                   "sources": sources, "engine": manifest["engine"], "rule_files": manifest["rules"],
+                                  "primary_portal": run.get("primary_portal"), "download_speed": speed,
                                   "history": history[-HISTORY_KEPT_ON_PAGE:]})
 
     if not cards:

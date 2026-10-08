@@ -155,3 +155,12 @@ section.tiles { align-items: start; }
 .list-panel .nums { font-variant-numeric: tabular-nums; color: var(--text-2); overflow-wrap: anywhere; line-height: 1.6; }
 .list-panel .tools { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
 .hist { font-size: .84rem; }
+/* download speed: two series, primary portal and secondary portals */
+.legend { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: .85rem; color: var(--text-2); }
+.swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; }
+:root { --series-1: #2a78d6; --series-2: #eb6834; }
+.chart svg { width: 100%; height: auto; display: block; max-width: 900px; }
+.chart .grid { stroke: var(--grid); stroke-width: 1; }
+.chart .axis-label { fill: var(--muted); font-size: 11px; }
+.chart .bar-primary { fill: var(--series-1); }
+.chart .bar-secondary { fill: var(--series-2); }

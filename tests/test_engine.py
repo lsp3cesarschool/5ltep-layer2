@@ -69,7 +69,8 @@ def test_members_are_read_in_order_and_numbered_per_file(reads):
 
 def test_lookup_equals_outcomes_and_record_numbers(reads):
     result = engine.evaluate(RULE, reads)
-    assert result["counts"] == {"match": 3, "mismatch": 1, "key_not_found": 2, "missing_value": 1, "ambiguous_key": 0}
+    assert result["counts"] == {"match": 3, "mismatch": 1, "key_not_found": 2, "missing_value": 1, "invalid_value": 0,
+                                "ambiguous_key": 0, "out_of_scope": 0}
     assert result["total"] == 7 == sum(result["counts"].values())
     assert result["records"] == {
         "key_not_found": {"auto_infracao_1986.csv": [2], "auto_infracao_1987.csv": [1]},

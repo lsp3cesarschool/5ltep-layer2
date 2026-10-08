@@ -1,0 +1,48 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: cross_reference
+
+description:
+  language: pt-BR
+  title: "Termo de apreensão citado no auto e não publicado"
+  title_translations:
+    en: "Seizure term cited by the notice but not published"
+  text: >
+    Confere se cada termo citado em CD_TERMOS_APREENSAO (número-série, separados por vírgula) existe no extrato de termos de apreensão.
+  justification: >
+    O auto lista os termos de apreensão lavrados com ele; um termo citado e ausente do extrato indica
+    vínculo quebrado ou extrato incompleto. Compara número e série impressos (CD_TAD-CD_SERIE_TAD),
+    o mesmo formato do campo do auto. É sinal para revisão, não veredito sobre o auto.
+  exceptions:
+    - "Autos sem termos de apreensão citados ficam fora do escopo."
+    - "Termos cancelados continuam publicados no extrato e contam como existentes."
+  examples:
+    - case: "Auto cita 123456-A e o termo 123456 série A está publicado"
+      expected: "Conforme"
+    - case: "Auto cita 123456-A,234567-B e só o primeiro está publicado"
+      expected: "Sinal"
+
+sources:
+  ibama_autos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-auto-de-infracao
+    resource: {name: "Autos de infração", format: CSV}
+    archive: {type: zip, members: "auto_infracao_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      CD_TERMOS_APREENSAO: "Termos de apreensão do auto, como número-série, separados por vírgula"
+  ibama_apreensao:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-termo-de-apreensao
+    resource: {name: "Termo de apreensão", format: CSV}
+    archive: {type: zip, members: "apreensao.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      CD_TAD: "Número impresso do termo de apreensão"
+      CD_SERIE_TAD: "Série do termo de apreensão"
+
+check:
+  template: lookup-exists
+  key: {from: ibama_autos.CD_TERMOS_APREENSAO, split: ",", to: [ibama_apreensao.CD_TAD, ibama_apreensao.CD_SERIE_TAD], to_join: "-"}
+  where:
+    - {column: ibama_autos.CD_TERMOS_APREENSAO, empty: false}

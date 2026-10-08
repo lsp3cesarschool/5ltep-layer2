@@ -15,6 +15,7 @@ partial result and no reuse of a previous run.
 from __future__ import annotations
 
 import csv
+import json
 import fnmatch
 import io
 import zipfile
@@ -24,12 +25,11 @@ from pathlib import Path
 
 import duckdb
 
-from src import validate
+from src import templates, validate
 from src.fetch import OK, Fetched, ResourceKey, fetch
 
 EVALUATED, NOT_EVALUATED = "evaluated", "not_evaluated"
-OUTCOMES = ("match", "mismatch", "key_not_found", "missing_value", "ambiguous_key")
-SIGNALS = ("mismatch", "key_not_found", "missing_value", "ambiguous_key")   # all but match: signals to review
+OUTCOMES, SIGNALS = templates.OUTCOMES, templates.SIGNALS     # every outcome but match and out_of_scope is a signal
 
 csv.field_size_limit(1 << 30)
 
@@ -87,7 +87,9 @@ def read_source(fetched: Fetched, source: dict, out: Path) -> Read:
         writer = csv.writer(dest)
         writer.writerow(["__member", "__record", *wanted])
         for name, raw in _members(fetched, source):
-            text = io.TextIOWrapper(raw, encoding=spec["encoding"], errors="strict", newline="")
+            # utf-8-sig drops a BOM before the CSV is parsed (with it, a quoted first header keeps its quotes)
+            encoding = "utf-8-sig" if spec["encoding"] == "utf-8" else spec["encoding"]
+            text = io.TextIOWrapper(raw, encoding=encoding, errors="strict", newline="")
             reader = csv.reader(text, delimiter=spec["delimiter"])
             record = 0
             try:
@@ -115,45 +117,13 @@ def read_source(fetched: Fetched, source: dict, out: Path) -> Read:
     return result
 
 
-# --- templates ---------------------------------------------------------------------------------
+# --- evaluation --------------------------------------------------------------------------------
 
 def _ident(name: str) -> str:
-    return '"' + name.replace('"', '""') + '"'
+    return templates.ident(name)
 
 
-def _lookup_equals(con, check: dict) -> None:
-    """Creates table `outcome(__member, __record, outcome)`, one row per record of the `from` source."""
-    def part(ref):
-        source, _, column = ref.partition(".")
-        return _ident("src_" + source), _ident(column)
-
-    f_tab, f_key = part(check["key"]["from"])
-    _, f_val = part(check["compare"]["from"])
-    t_tab, t_key = part(check["key"]["to"])
-    _, t_val = part(check["compare"]["to"])
-    con.execute(f"""
-        CREATE TABLE outcome AS
-        WITH lookup AS (
-            SELECT trim({t_key}) AS k, min(trim({t_val})) AS v, count(DISTINCT trim({t_val})) AS n
-            FROM {t_tab}
-            WHERE coalesce(trim({t_key}), '') <> ''
-            GROUP BY 1
-        )
-        SELECT f.__member, f.__record,
-               CASE WHEN coalesce(trim(f.{f_key}), '') = '' OR coalesce(trim(f.{f_val}), '') = '' THEN 'missing_value'
-                    WHEN l.k IS NULL THEN 'key_not_found'
-                    WHEN l.n > 1 THEN 'ambiguous_key'
-                    WHEN trim(f.{f_val}) = l.v THEN 'match'
-                    ELSE 'mismatch' END AS outcome
-        FROM {f_tab} AS f LEFT JOIN lookup AS l ON trim(f.{f_key}) = l.k
-    """)
-
-
-TEMPLATES = {"lookup-equals": _lookup_equals}
-
-
-def evaluated_source(check: dict) -> str:
-    return check["key"]["from"].partition(".")[0]
+evaluated_source = templates.evaluated_source
 
 
 def evaluate(rule: dict, reads: dict[str, Read]) -> dict:
@@ -165,13 +135,14 @@ def evaluate(rule: dict, reads: dict[str, Read]) -> dict:
                         [str(read.path)])
         con.execute("SET enable_external_access = false")
         con.execute("SET lock_configuration = true")
-        TEMPLATES[rule["check"]["template"]](con, rule["check"])
+        _, sql = templates.statement(rule["check"], rule["sources"])
+        con.execute(sql)
         counts = dict.fromkeys(OUTCOMES, 0)
         counts.update(dict(con.execute("SELECT outcome, count(*) FROM outcome GROUP BY 1").fetchall()))
         records: dict[str, dict[str, list[int]]] = {}
         for outcome, member, numbers in con.execute(
                 "SELECT outcome, __member, list(CAST(__record AS BIGINT) ORDER BY CAST(__record AS BIGINT)) "
-                "FROM outcome WHERE outcome <> 'match' GROUP BY 1, 2 ORDER BY 1, 2").fetchall():
+                "FROM outcome WHERE outcome NOT IN ('match', 'out_of_scope') GROUP BY 1, 2 ORDER BY 1, 2").fetchall():
             records.setdefault(outcome, {})[member] = numbers
     finally:
         con.close()
@@ -183,9 +154,21 @@ def evaluate(rule: dict, reads: dict[str, Read]) -> dict:
 
 # --- a run -------------------------------------------------------------------------------------
 
+PORTAL_FILE = Path(__file__).resolve().parent.parent / "portal.json"
+
+
+def primary_portal() -> str | None:
+    """The portal of this instance (portal.json); resources of other portals are secondary."""
+    try:
+        return json.loads(PORTAL_FILE.read_text(encoding="utf-8"))["portal_url"].rstrip("/")
+    except (OSError, ValueError, KeyError):
+        return None
+
+
 def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
     """Evaluates every rule under `paths`. Returns the run: rules, fetched sources, timings."""
     started = now()
+    primary = primary_portal()
     downloads, reads_dir = work / "downloads", work / "reads"
     downloads.mkdir(parents=True, exist_ok=True)
     reads_dir.mkdir(parents=True, exist_ok=True)
@@ -203,9 +186,9 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
             entry.update(status=NOT_EVALUATED, reason_code="invalid_rule",
                          reason="; ".join(f.render() for f in errors)[:1000])
         rules.append(entry)
-    names = [r["id"] for r in rules]
+    names = [validate.name_key(r["id"]) for r in rules]
     for entry in rules:
-        if names.count(entry["id"]) > 1 and "status" not in entry:
+        if names.count(validate.name_key(entry["id"])) > 1 and "status" not in entry:
             entry.update(status=NOT_EVALUATED, reason_code="invalid_rule",
                          reason=f'há mais de uma regra chamada "{entry["id"]}" em rules/')
     log(f"{len(rules)} regra(s); {sum('status' not in r for r in rules)} válida(s)")
@@ -221,6 +204,7 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
                 log(f"baixando {key.label}")
                 fetched[key] = fetch(key, downloads)
                 f = fetched[key]
+                f.role = "primary" if key.portal == primary else "secondary"
                 log(f"  {f.status}" + (f" — {f.reason}" if f.reason else
                                        f" — {f.download['bytes'] / 1e6:.1f} MB, sha256 {f.download['sha256'][:12]}…"))
             fetched[key].used_by.append(entry["id"])
@@ -265,5 +249,5 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
         for f in fetched.values():
             if f.path:
                 f.path.unlink(missing_ok=True)
-    return {"started_at": started, "finished_at": now(), "rules": rules,
+    return {"started_at": started, "finished_at": now(), "rules": rules, "primary_portal": primary,
             "fetched": list(fetched.values()), "problems": problems}
