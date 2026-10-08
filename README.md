@@ -10,30 +10,28 @@ schema cannot hold (a municipality code must belong to the state it is paired wi
 expire before it is issued) into rule files that anyone can read, review and adapt to another
 CKAN portal.
 
-> **Status: early research prototype.** This repository currently contains the rule authoring
-> format 1.0, its JSON Schema and a validator. The engine that resolves CKAN resources and evaluates
-> the rules is not implemented yet, so there are **no results** here. The rules are examples with
+> **Status: early research prototype.** This repository currently contains the rule format 1.0,
+> its JSON Schema and a validator. The engine that downloads the CKAN resources and evaluates the
+> rules runs locally; there are **no published results** here yet. The rules are examples with
 > their foundations and open questions recorded; they are not official rules of any agency, and a
 > future signal will be something to review, never a verdict on the data.
 
 ## What a rule looks like
 
-Each file holds one atomic check, in three parts:
+Each file in `rules/` holds one check that crosses data from one or more **CKAN** portals. A file in
+`rules/` is active; subfolders are free and only organise the rules.
 
 | Part | For whom | Content |
 |---|---|---|
-| `description` | people | intention, justification, meaning of each column, exceptions, examples and sources, in any language declared by a BCP 47 tag |
-| `classification` | summaries and export | form of the check (`AR`, `TC`, `DC`, `DM`), areas of knowledge, severity, quality dimension, nature of the limit |
-| `execution` | the engine | an allowed template and its parameters, applied to exact portals, datasets, resources and column headers |
+| `schema_version`, `id`, `version`, `origin` | everyone | format version, stable identifier, rule version, who proposed it |
+| `description` | people (dashboard) | title, what is checked, justification, exceptions and examples, in a language declared by a BCP 47 tag |
+| `sources` | the engine | for each CKAN resource: portal, dataset, exact resource name and format, how to unpack it (`archive`), how to read it (`file`) and the columns read, each with its meaning |
+| `check` | the engine | an allowed template and its parameters, written as `source.column` |
 
-Only `execution` defines what is computed. Free SQL, code or expressions are never accepted: a rule
-fills the parameters of a template that the engine implements. An application stays
-`pending_mapping` until a person confirms what its columns mean; missing input, an unmatched
-reference or a missing column are recorded as indeterminate or inapplicable, never as a pass.
-
-The example [`rules/territory/territory.municipality-state.yaml`](rules/territory/territory.municipality-state.yaml)
-checks that an IBGE municipality code starts with the code of the state it is paired with, when
-both describe the same place.
+Only `sources` and `check` define what is computed. Free SQL, code or expressions are never
+accepted. The example [`rules/territory/territory.municipality-state.yaml`](rules/territory/territory.municipality-state.yaml)
+looks up each infraction notice's municipality code (IBAMA portal) in the table of municipalities
+published by the Brazilian electoral court (TSE portal) and compares the state.
 
 ## Validate rules
 
@@ -43,6 +41,7 @@ python -m venv .venv
 python main.py validate                                   # every rules/**/*.yaml
 python main.py validate rules/territory --format json
 python -m pytest
+python main.py run                                        # local test run: downloads the sources, outputs in work/out
 ```
 
 The validator reports file, line, path and a stable code for each problem (messages are in
@@ -50,29 +49,34 @@ Portuguese, the initial interface language). It checks:
 
 - **safe YAML 1.2:** one document; no duplicate keys, anchors, aliases, merge keys or explicit tags;
   UTF-8;
-- **the schema** [`schema/rule-v1.schema.json`](schema/rule-v1.schema.json): required fields, closed
-  sets of fields and tokens, parameters of each template;
-- **cross references:** every source and column named by parameters, identity and field meanings is
-  declared in the same application; declared but unused columns are warnings;
-- **enabling:** an `enabled` application needs a confirmed mapping review and prepared references
-  (version, SHA-256, licence, coverage);
-- **patterns:** `pattern` stays inside a subset of I-Regexp (RFC 9485) and matches the whole value;
-- **folders:** one `<id>.yaml` per rule and unique ids.
+- **the schema** [`schema/rule-v1.schema.json`](schema/rule-v1.schema.json), one file for every rule:
+  required fields, closed sets of fields and tokens, parameters of each template;
+- **cross references:** every `source.column` used by `check` is declared in `sources`; declared but
+  unused sources or columns are warnings;
+- **folders:** one `<id>.yaml` per rule, at any subfolder depth, and unique ids.
 
 ## Write a rule
 
-Copy the example, give it a new `id` and file name, and edit it. Editors that use the YAML language
-server (VS Code with the YAML extension, for instance) read the first line of the example and offer
-completion and inline checks from the schema. Quote dates, versions and codes. Version 1.0
-specifies one template, `hierarchical-code`; the other candidate families need their own parameter
-contract before a rule can use them.
+Copy the example, give it a new `id` and file name, and edit it. Find the exact dataset and resource
+names in `<portal>/api/3/action/package_show?id=<dataset>`, and download the file once to check what
+is inside the archive, its encoding, delimiter and headers. Quote versions and codes. Version 1.0
+specifies one template, `lookup-equals`; other templates are added to the same schema as they get a
+parameter contract.
+
+Optional, per editor: VS Code with the YAML extension reads [`.vscode/settings.json`](.vscode/settings.json),
+which maps the schema to every `rules/**/*.yaml` and gives completion and inline checks. In other
+editors, map the same schema to the same pattern (JetBrains: *JSON Schema Mappings*; Neovim, Helix,
+Zed: the `yaml-language-server` settings). Nothing in the rule files depends on the editor.
 
 ## Repository layout
 
 ```
-main.py            command line (validate)
+main.py            command line (validate, run)
 src/loader.py      safe YAML reading with line numbers
-src/validate.py    schema, cross references and pattern subset
+src/validate.py    schema and cross references
+src/fetch.py       CKAN resolution and download, with integrity of each source
+src/engine.py      reading of the declared columns, DuckDB, templates
+src/outputs.py     results/ and docs/data/ (counts and record numbers only)
 schema/            JSON Schema of the authoring format
 rules/             one file per rule, grouped by namespace
 tests/             automated tests
@@ -80,10 +84,11 @@ tests/             automated tests
 
 ## Next steps
 
-Planned, not implemented: resolution of CKAN resources by explicit selectors, preparation of
-versioned references, evaluation with DuckDB without external access, a deterministic preview of
-what each application will compute, structured logs and a run manifest, issue forms for authors
-who do not write YAML, and the control instances for ANEEL and the city of Recife.
+Working locally, not yet published: the engine, which downloads each CKAN resource once per run, records whether each
+portal and resource was available (HTTP status, SHA-256 of the bytes, columns found), crosses the
+data locally with DuckDB without external access, and publishes counts and record numbers, never
+values from the portal. Then: the dashboard, issue forms for authors who do not write YAML, and the
+control instances for ANEEL and the city of Recife.
 
 ## License and citation
 

@@ -1,10 +1,9 @@
-"""Validation of rule files: schema, cross references and regular-expression subset.
+"""Validation of rule files: schema and cross references.
 
 The JSON Schema fixes the structure and the allowed tokens. What a schema cannot say is checked
-here: every source and column a parameter, identity or field meaning names must be declared in the
-same application; an enabled application needs prepared references; `pattern` must stay inside the
-subset of I-Regexp (RFC 9485) that Python and DuckDB evaluate alike. Messages are in Portuguese,
-the initial interface language; codes are stable English identifiers.
+here: every `source.column` the check names must be declared in `sources`, and declared sources and
+columns should be used. Messages are in Portuguese, the initial interface language; codes are
+stable English identifiers.
 """
 
 from __future__ import annotations
@@ -116,8 +115,6 @@ def _translate(error) -> tuple[list, str, str]:
         options = ", ".join(json.dumps(o, ensure_ascii=False) for o in value)
         return path, "schema.enum", f"valor {json.dumps(inst, ensure_ascii=False, default=str)} não permitido; use: {options}"
     if v == "const":
-        if path[-2:] == ["mapping_review", "status"]:
-            return path, "schema.enabled_needs_review", 'aplicação "enabled" exige revisão do mapeamento "confirmed"'
         return path, "schema.const", f"valor deve ser {json.dumps(value, ensure_ascii=False)}"
     if v == "type":
         expected = value if isinstance(value, str) else value[0]
@@ -153,176 +150,54 @@ def schema_findings(rule: LoadedRule) -> list[Finding]:
     return unique
 
 
-# --- I-Regexp subset ---------------------------------------------------------------
-
-_SINGLE_CHAR_ESCAPES = set("\\.-^?*+{}[]|()nrt")
-_BOUND = 1000
-
-
-def pattern_problem(pattern: str) -> str | None:
-    """None if `pattern` is inside the accepted subset of I-Regexp, else the reason."""
-    i, in_class, atom, quantified = 0, False, False, False
-    while i < len(pattern):
-        c = pattern[i]
-        if c == "\\":
-            if i + 1 >= len(pattern):
-                return "termina com \\ sem caractere escapado"
-            n = pattern[i + 1]
-            if n in "pP":
-                return "\\p{...} ainda não é aceito; use classes explícitas"
-            if n not in _SINGLE_CHAR_ESCAPES:
-                return f"escape \\{n} fora do subconjunto; use classes como [0-9]"
-            i, atom, quantified = i + 2, True, False
-            continue
-        if in_class:
-            if c == "]":
-                in_class, atom, quantified = False, True, False
-            elif c == "[":
-                return "[ dentro de classe precisa de escape"
-            i += 1
-            continue
-        if c == "[":
-            in_class, i = True, i + 1
-            if pattern[i:i + 1] == "^":
-                i += 1
-            if pattern[i:i + 1] == "]":
-                return "classe vazia ou ] sem escape"
-            continue
-        if c in "^$":
-            return "não use ^ ou $: o padrão já precisa casar com o valor inteiro"
-        if c == "(":
-            if pattern[i + 1:i + 2] == "?":
-                return "grupos especiais (?...) não são aceitos"
-            i, atom, quantified = i + 1, False, False
-            continue
-        if c == ")":
-            i, atom, quantified = i + 1, True, False
-            continue
-        if c == "|":
-            i, atom, quantified = i + 1, False, False
-            continue
-        if c in "*+?{":
-            length = 1
-            if c == "{":
-                m = re.match(r"\{(\d+)(,(\d*))?\}", pattern[i:])
-                if not m:
-                    return "{ literal precisa de escape \\{"
-                low, high = int(m.group(1)), m.group(3)
-                if low > _BOUND or (high and (int(high) > _BOUND or int(high) < low)):
-                    return f"limites do quantificador inválidos (máximo {_BOUND})"
-                length = m.end()
-            if quantified:
-                return "quantificador preguiçoso, possessivo ou repetido não é aceito"
-            if not atom:
-                return "quantificador sem elemento antes"
-            i, atom, quantified = i + length, False, True
-            continue
-        if c in "}]":
-            return f"{c} literal precisa de escape \\{c}"
-        i, atom, quantified = i + 1, True, False
-    if in_class:
-        return "classe [ sem ]"
-    try:
-        re.compile(pattern)
-    except re.error as exc:
-        return f"expressão inválida: {exc}"
-    return None
-
-
 # --- cross references --------------------------------------------------------------
 
-def _used_columns_hierarchical(params: dict) -> list[tuple[str, str, list]]:
-    """(source, column, path inside parameters) for every column the template reads."""
-    used = []
-    for arg in ("child", "parent"):
-        ref = params.get(arg) or {}
-        used.append((ref.get("source"), ref.get("column"), ["parameters", arg, "column"]))
-    lookup = params.get("parent_lookup")
-    if lookup:
-        for arg in ("key_column", "value_column"):
-            used.append((lookup.get("source"), lookup.get(arg), ["parameters", "parent_lookup", arg]))
-    return used
+def _split(ref: str) -> tuple[str, str]:
+    source, _, column = ref.partition(".")
+    return source, column
 
 
-USED_COLUMNS = {"hierarchical-code": _used_columns_hierarchical}
+def _used_lookup_equals(check: dict) -> list[tuple[str, list]]:
+    """(source.column, path inside the rule) for every column the template reads."""
+    return [(check[part][end], ["check", part, end]) for part in ("key", "compare") for end in ("from", "to")]
+
+
+USED_COLUMNS = {"lookup-equals": _used_lookup_equals}
 
 
 def cross_findings(rule: LoadedRule) -> list[Finding]:
     data, found = rule.data, []
+    sources, check = data["sources"], data["check"]
 
     def add(level, path, code, message):
         found.append(Finding(level, str(rule.path), rule.line_of(path), dotted(path), code, message))
 
-    template = data["execution"]["template"]
-    applications = data["execution"]["applications"]
-    for app_id, app in applications.items():
-        base = ["execution", "applications", app_id]
-        sources = app["sources"]
+    used = set()
+    for ref, path in USED_COLUMNS[check["template"]](check):
+        source, column = _split(ref)
+        if source not in sources:
+            add(ERROR, path, "ref.unknown_source", f'fonte "{source}" não existe em sources')
+        elif column not in sources[source]["columns"]:
+            add(ERROR, path, "ref.undeclared_column", f'coluna "{column}" não declarada na fonte "{source}"')
+        else:
+            used.add((source, column))
 
-        def declared(source_id, column, source_path, column_path):
-            if source_id not in sources:
-                add(ERROR, source_path, "ref.unknown_source", f'fonte "{source_id}" não existe na aplicação "{app_id}"')
-                return False
-            if column not in sources[source_id]["columns"]:
-                add(ERROR, column_path, "ref.undeclared_column", f'coluna "{column}" não declarada na fonte "{source_id}"')
-                return False
-            return True
+    if check["template"] == "lookup-equals":
+        sides = {end: {_split(check[part][end])[0] for part in ("key", "compare")} for end in ("from", "to")}
+        for end, names in sides.items():
+            if len(names) > 1:
+                add(ERROR, ["check", "compare", end], "check.mixed_sources",
+                    f'key.{end} e compare.{end} precisam ser da mesma fonte')
 
-        used = set()
-        for source_id, column, rel in USED_COLUMNS[template](app["parameters"]):
-            if declared(source_id, column, base + rel[:-1] + ["source"], base + rel):
-                used.add((source_id, column))
-        lookup = app["parameters"].get("parent_lookup")
-        if lookup and lookup["source"] in sources and sources[lookup["source"]]["kind"] != "reference":
-            add(WARNING, base + ["parameters", "parent_lookup", "source"], "ref.lookup_not_reference",
-                "a consulta auxiliar costuma usar uma referência versionada (kind: reference)")
-
-        identity = app["evaluation"]["identity"]
-        for i, column in enumerate(identity["columns"]):
-            if declared(identity["source"], column, base + ["evaluation", "identity", "source"],
-                        base + ["evaluation", "identity", "columns", i]):
-                used.add((identity["source"], column))
-
-        for source_id, source in sources.items():
-            for column, spec in source["columns"].items():
-                cpath = base + ["sources", source_id, "columns", column]
-                if (source_id, column) not in used:
-                    add(WARNING, cpath, "ref.unused_column",
-                        "coluna declarada e não usada; declare só o que a verificação lê")
-                if "pattern" in spec:
-                    problem = pattern_problem(spec["pattern"])
-                    if problem:
-                        add(ERROR, cpath + ["pattern"], "pattern.subset", problem)
-
-        if app["status"] == "enabled":
-            for source_id, source in sources.items():
-                if source["kind"] != "reference":
-                    continue
-                for key in ("version", "sha256", "license", "coverage"):
-                    if source.get(key) is None:
-                        add(ERROR, base + ["sources", source_id, key], "enabled.reference_not_ready",
-                            f'aplicação "enabled" exige "{key}" preenchido na referência')
-
-    for i, meaning in enumerate(data["description"].get("field_meanings", [])):
-        path = ["description", "field_meanings", i]
-        app = applications.get(meaning["application"])
-        if app is None:
-            add(ERROR, path + ["application"], "ref.unknown_application",
-                f'aplicação "{meaning["application"]}" não existe em execution.applications')
+    for source_id, source in sources.items():
+        if not any(s == source_id for s, _ in used):
+            add(WARNING, ["sources", source_id], "ref.unused_source", "fonte declarada e não usada pelo check")
             continue
-        source = app["sources"].get(meaning["source"])
-        if source is None:
-            add(ERROR, path + ["source"], "ref.unknown_source",
-                f'fonte "{meaning["source"]}" não existe na aplicação "{meaning["application"]}"')
-        elif meaning["column"] not in source["columns"]:
-            add(ERROR, path + ["column"], "ref.undeclared_column",
-                f'coluna "{meaning["column"]}" não declarada na fonte "{meaning["source"]}"')
-    unique, seen = [], set()
-    for f in found:
-        if (f.path, f.code, f.message) not in seen:
-            seen.add((f.path, f.code, f.message))
-            unique.append(f)
-    return unique
+        for column in source["columns"]:
+            if (source_id, column) not in used:
+                add(WARNING, ["sources", source_id, "columns", column], "ref.unused_column",
+                    "coluna declarada e não usada; declare só o que a verificação lê")
+    return found
 
 
 # --- entry points ------------------------------------------------------------------

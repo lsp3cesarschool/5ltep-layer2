@@ -12,7 +12,8 @@ venv/
 env/
 
 # IDE
-.vscode/
+.vscode/*
+!.vscode/settings.json
 .idea/
 *.swp
 *.swo
@@ -27,3 +28,6 @@ raw/
 
 # Claude Code
 CLAUDE.md
+
+# Local runs: downloads, work files and test outputs
+work/

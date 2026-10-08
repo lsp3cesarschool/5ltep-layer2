@@ -1,372 +1,139 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lsp3cesarschool.github.io/5ltep-layer2/schema/rule-v1.schema.json",
-  "title": "5L-TEP Layer 2 rule, authoring format 1.0",
-  "description": "One atomic check per file: `description` for people, `classification` for summaries and export, `execution` for the engine. Cross references (sources, columns, applications) and the regular-expression subset are checked by `python main.py validate`, not by this schema alone.",
+  "title": "5L-TEP Layer 2 rule, format 1.0",
+  "description": "One check per file in rules/ (any subfolder). `description` is for people; `sources` and `check` are for the engine. Every source is a CKAN resource. One schema for every rule. `python main.py validate` also checks that each source.column used by `check` is declared in `sources`.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "id", "version", "status", "origin", "description", "classification", "execution"],
+  "required": ["schema_version", "id", "version", "origin", "description", "sources", "check"],
   "properties": {
-    "schema_version": {"const": "1.0", "description": "Version of this authoring format."},
-    "id": {"$ref": "#/$defs/rule_id"},
-    "version": {"$ref": "#/$defs/semver"},
-    "status": {
-      "enum": ["example", "proposed", "reviewed", "retired"],
-      "description": "Documentary state of the rule. `reviewed` records a review; it is not an official approval."
-    },
-    "origin": {
-      "enum": ["expert", "cross_reference", "ai"],
-      "description": "Single-valued origin (author's decision, 08/10/2026). It does not prove validity."
-    },
-    "seed_ids": {
-      "type": "array",
-      "minItems": 1,
-      "uniqueItems": true,
-      "items": {"type": "string", "pattern": "^[A-Z]{2,}(-[A-Z]+)?-[0-9]{2}[a-z]?$"},
-      "description": "Candidate checks of the catalogue this rule derives from, e.g. IB-13 or IB-21a."
-    },
-    "description": {"$ref": "#/$defs/description"},
-    "classification": {"$ref": "#/$defs/classification"},
-    "execution": {"$ref": "#/$defs/execution"}
-  },
-  "$defs": {
-    "rule_id": {
+    "schema_version": {"const": "1.0", "description": "Version of this format."},
+    "id": {
       "type": "string",
       "maxLength": 120,
       "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*(\\.[a-z][a-z0-9]*(-[a-z0-9]+)*)+$",
-      "description": "Stable, portal-neutral identifier with at least one namespace, e.g. territory.municipality-state. The file is named <id>.yaml."
+      "description": "Stable identifier with at least one dot, e.g. territory.municipality-state. The file is named <id>.yaml."
     },
-    "semver": {
+    "version": {
       "type": "string",
-      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$",
+      "description": "Version of the rule (MAJOR.MINOR.PATCH), quoted."
     },
-    "local_id": {
-      "type": "string",
-      "pattern": "^[a-z][a-z0-9_]{0,63}$",
-      "description": "Identifier local to the file (applications, sources, units)."
+    "origin": {
+      "enum": ["expert", "cross_reference", "ai"],
+      "description": "Who proposed the check. It does not prove validity."
     },
-    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
-    "nullable_text": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/text"}]},
-    "timestamp": {
-      "type": "string",
-      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}(:[0-9]{2})?(Z|[+-][0-9]{2}:[0-9]{2}))?$",
-      "description": "ISO 8601 date, or date and time with offset. Quote it in YAML."
-    },
-    "nullable_timestamp": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/timestamp"}]},
-    "language_tag": {
-      "type": "string",
-      "pattern": "^[A-Za-z]{2,3}(-[A-Za-z]{4})?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*$",
-      "description": "BCP 47 language tag (RFC 5646), e.g. pt-BR, en, es, zh-Hant. Well-formedness only."
-    },
-
     "description": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["language", "title", "text", "justification", "examples", "sources"],
+      "required": ["language", "title", "text", "justification", "examples"],
       "properties": {
-        "language": {"$ref": "#/$defs/language_tag"},
+        "language": {
+          "type": "string",
+          "pattern": "^[A-Za-z]{2,3}(-[A-Za-z]{4})?(-([A-Za-z]{2}|[0-9]{3}))?$",
+          "description": "BCP 47 tag of the texts, e.g. pt-BR, en, es."
+        },
         "title": {"$ref": "#/$defs/text", "maxLength": 200},
         "text": {"$ref": "#/$defs/text"},
         "justification": {"$ref": "#/$defs/text"},
-        "field_meanings": {
+        "exceptions": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "examples": {
           "type": "array",
+          "minItems": 1,
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["application", "source", "column", "meaning"],
-            "properties": {
-              "application": {"$ref": "#/$defs/local_id"},
-              "source": {"$ref": "#/$defs/local_id"},
-              "column": {"type": "string", "minLength": 1},
-              "meaning": {"$ref": "#/$defs/text"}
-            }
+            "required": ["case", "expected"],
+            "properties": {"case": {"$ref": "#/$defs/text"}, "expected": {"$ref": "#/$defs/text"}}
           }
-        },
-        "exceptions": {"type": "array", "items": {"$ref": "#/$defs/text"}},
-        "examples": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/case"}},
-        "counterexamples": {"type": "array", "items": {"$ref": "#/$defs/case"}},
-        "sources": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/document_source"}}
-      }
-    },
-    "case": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["case", "expected"],
-      "properties": {"case": {"$ref": "#/$defs/text"}, "expected": {"$ref": "#/$defs/text"}}
-    },
-    "document_source": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["title", "locator", "check"],
-      "properties": {
-        "title": {"$ref": "#/$defs/text"},
-        "url": {"type": "string", "pattern": "^https?://\\S+$"},
-        "locator": {"$ref": "#/$defs/text"},
-        "version": {"$ref": "#/$defs/nullable_text"},
-        "check": {"$ref": "#/$defs/source_check"}
-      }
-    },
-    "source_check": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["status", "checked_at", "checked_by", "scope"],
-      "properties": {
-        "status": {
-          "enum": ["pending", "partial", "checked"],
-          "description": "pending: not consulted; partial: excerpt or summary consulted; checked: the cited passage was read. None of them validates the rule."
-        },
-        "checked_at": {"$ref": "#/$defs/nullable_timestamp"},
-        "checked_by": {"$ref": "#/$defs/nullable_text"},
-        "scope": {"$ref": "#/$defs/text"}
-      },
-      "if": {"properties": {"status": {"enum": ["partial", "checked"]}}},
-      "then": {"properties": {"checked_at": {"$ref": "#/$defs/timestamp"}, "checked_by": {"$ref": "#/$defs/text"}}}
-    },
-
-    "classification": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["category", "severity", "dimension", "limit_nature"],
-      "properties": {
-        "category": {
-          "enum": ["AR", "TC", "DC", "DM"],
-          "description": "Form of the check: referential integrity, temporal consistency, domain and coding, domain-specific logic."
-        },
-        "knowledge_areas": {
-          "type": "array",
-          "uniqueItems": true,
-          "items": {"enum": ["BIO", "LEG", "FIS", "GEO", "ECO"]},
-          "description": "Areas of knowledge the rule depends on, in any category (author's decision, 08/10/2026)."
-        },
-        "severity": {
-          "enum": ["critical", "warning", "info"],
-          "description": "critical = crítica, warning = importante, info = informativa. Not a degree of confidence."
-        },
-        "dimension": {
-          "enum": ["accuracy", "completeness", "conformity", "consistency", "coverage", "timeliness", "uniqueness"],
-          "description": "Data quality dimension used when exporting to ODCS."
-        },
-        "limit_nature": {"enum": ["logical", "physical", "legal", "empirical", "heuristic"]},
-        "jurisdiction": {
-          "type": "string",
-          "pattern": "^[A-Z]{2}(-[A-Z0-9]{1,10})*$",
-          "description": "Country code, optionally followed by subdivisions, e.g. BR or BR-PE."
         }
       }
     },
-
-    "execution": {
+    "sources": {
       "type": "object",
-      "additionalProperties": false,
-      "required": ["template", "applications"],
-      "properties": {
-        "template": {
-          "enum": ["hierarchical-code"],
-          "description": "Allowed operation. Version 1.0 specifies only M03 hierarchical-code; the other candidate families need their own parameter contract first."
-        },
-        "applications": {
-          "type": "object",
-          "minProperties": 1,
-          "propertyNames": {"$ref": "#/$defs/local_id"},
-          "additionalProperties": {"$ref": "#/$defs/application"}
-        }
-      },
+      "minProperties": 1,
+      "propertyNames": {"pattern": "^[a-z][a-z0-9_]{0,63}$"},
+      "additionalProperties": {"$ref": "#/$defs/source"}
+    },
+    "check": {
+      "type": "object",
+      "required": ["template"],
+      "properties": {"template": {"enum": ["lookup-equals"]}},
       "allOf": [
-        {
-          "if": {"properties": {"template": {"const": "hierarchical-code"}}, "required": ["template"]},
-          "then": {
-            "properties": {
-              "applications": {"additionalProperties": {"properties": {"parameters": {"$ref": "#/$defs/params_hierarchical_code"}}}}
-            }
-          }
-        }
+        {"if": {"properties": {"template": {"const": "lookup-equals"}}}, "then": {"$ref": "#/$defs/lookup_equals"}}
       ]
+    }
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "column_ref": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}\\..+$",
+      "description": "source.column, e.g. ibama_autos.COD_MUNICIPIO. The column name is copied exactly."
     },
-    "application": {
+    "pair": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["status", "mapping_review", "sources", "parameters", "evaluation", "policies"],
-      "properties": {
-        "status": {
-          "enum": ["pending_mapping", "enabled"],
-          "description": "Only an enabled application may run. Enabling requires a confirmed mapping review and prepared references."
-        },
-        "mapping_review": {"$ref": "#/$defs/mapping_review"},
-        "sources": {
-          "type": "object",
-          "minProperties": 1,
-          "propertyNames": {"$ref": "#/$defs/local_id"},
-          "additionalProperties": {"$ref": "#/$defs/source"}
-        },
-        "parameters": {"type": "object"},
-        "evaluation": {"$ref": "#/$defs/evaluation"},
-        "policies": {"$ref": "#/$defs/policies"}
-      },
-      "if": {"properties": {"status": {"const": "enabled"}}, "required": ["status"]},
-      "then": {"properties": {"mapping_review": {"properties": {"status": {"const": "confirmed"}}}}}
+      "required": ["from", "to"],
+      "properties": {"from": {"$ref": "#/$defs/column_ref"}, "to": {"$ref": "#/$defs/column_ref"}}
     },
-    "mapping_review": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["status", "evidence", "reviewed_at", "reviewed_by"],
-      "properties": {
-        "status": {
-          "enum": ["pending", "confirmed", "rejected"],
-          "description": "Human review of what the columns of this application mean. Names and types do not prove it."
-        },
-        "evidence": {"$ref": "#/$defs/text"},
-        "reviewed_at": {"$ref": "#/$defs/nullable_timestamp"},
-        "reviewed_by": {"$ref": "#/$defs/nullable_text"}
-      },
-      "if": {"properties": {"status": {"enum": ["confirmed", "rejected"]}}},
-      "then": {"properties": {"reviewed_at": {"$ref": "#/$defs/timestamp"}, "reviewed_by": {"$ref": "#/$defs/text"}}}
-    },
-
     "source": {
       "type": "object",
-      "required": ["kind"],
-      "properties": {"kind": {"enum": ["dataset", "reference"]}},
-      "allOf": [
-        {"if": {"properties": {"kind": {"const": "dataset"}}, "required": ["kind"]}, "then": {"$ref": "#/$defs/dataset_source"}},
-        {"if": {"properties": {"kind": {"const": "reference"}}, "required": ["kind"]}, "then": {"$ref": "#/$defs/reference_source"}}
-      ]
-    },
-    "dataset_source": {
-      "type": "object",
       "additionalProperties": false,
-      "required": ["kind", "portal", "dataset", "resource", "reader", "columns"],
+      "required": ["portal", "dataset", "resource", "file", "columns"],
       "properties": {
-        "kind": {"const": "dataset"},
-        "portal": {"type": "string", "pattern": "^https://[^/\\s]+(/\\S*)?$"},
+        "portal": {"type": "string", "pattern": "^https://[^/\\s]+(/[^\\s]*)?$", "description": "Address of the CKAN portal."},
         "dataset": {"type": "string", "pattern": "^[A-Za-z0-9_-]{1,100}$", "description": "Exact CKAN name or id of the dataset."},
         "resource": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["selector"],
+          "required": ["name", "format"],
           "properties": {
-            "selector": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["name", "format"],
-              "properties": {"name": {"$ref": "#/$defs/text"}, "format": {"$ref": "#/$defs/text"}},
-              "description": "Must resolve to exactly one resource; none or several stop the application."
+            "name": {"$ref": "#/$defs/text", "description": "Exact resource name in CKAN."},
+            "format": {"$ref": "#/$defs/text", "description": "Format declared in CKAN, e.g. CSV."}
+          }
+        },
+        "archive": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "members"],
+          "properties": {
+            "type": {"enum": ["zip"]},
+            "members": {
+              "type": "string",
+              "pattern": "^[^\\s/\\\\][^/\\\\]*(/[^/\\\\]+)*$",
+              "description": "File inside the archive, or a pattern with * and ? for several files (stacked)."
             }
           }
         },
-        "reader": {"$ref": "#/$defs/reader"},
-        "columns": {"$ref": "#/$defs/columns"}
-      }
-    },
-    "reference_source": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["kind", "artifact", "version", "sha256", "license", "coverage", "reader", "columns"],
-      "properties": {
-        "kind": {"const": "reference"},
-        "artifact": {"type": "string", "pattern": "^references/[A-Za-z0-9._-]+(/[A-Za-z0-9._-]+)*$"},
-        "version": {"$ref": "#/$defs/nullable_text"},
-        "sha256": {"oneOf": [{"type": "null"}, {"type": "string", "pattern": "^[0-9a-f]{64}$"}]},
-        "license": {"$ref": "#/$defs/nullable_text"},
-        "coverage": {
-          "$ref": "#/$defs/nullable_text",
-          "description": "Temporal, territorial and population coverage, in words (provisional form in 1.0)."
+        "file": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["format", "encoding", "delimiter"],
+          "properties": {
+            "format": {"enum": ["csv"]},
+            "encoding": {"enum": ["utf-8", "latin-1", "cp1252"]},
+            "delimiter": {"enum": [";", ",", "\t", "|"]}
+          }
         },
-        "reader": {"$ref": "#/$defs/reader"},
-        "columns": {"$ref": "#/$defs/columns"}
-      }
-    },
-    "reader": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["format", "encoding", "delimiter", "header"],
-      "properties": {
-        "format": {"const": "csv"},
-        "encoding": {"type": "string", "pattern": "^(detect|[A-Za-z0-9][A-Za-z0-9._:-]{1,39})$"},
-        "delimiter": {"type": "string", "pattern": "^(detect|[^\\n\\r\"])$", "description": "detect, or a single character such as ; or ,"},
-        "header": {"const": true}
-      }
-    },
-    "columns": {
-      "type": "object",
-      "minProperties": 1,
-      "propertyNames": {"type": "string", "minLength": 1},
-      "additionalProperties": {"$ref": "#/$defs/column"},
-      "description": "Exact headers, Unicode preserved. Declare only the columns the check uses."
-    },
-    "column": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["type", "missing_values"],
-      "properties": {
-        "type": {"enum": ["string"], "description": "Only string is specified in 1.0; codes keep leading zeros."},
-        "trim": {"type": "boolean"},
-        "missing_values": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
-        "pattern": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 500,
-          "description": "Subset of I-Regexp (RFC 9485): matches the whole value, no anchors, no look-around, no back-references, no shorthand classes."
+        "columns": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {"minLength": 1},
+          "additionalProperties": {"$ref": "#/$defs/text"},
+          "description": "column: meaning. Only declared columns are read."
         }
       }
     },
-    "evaluation": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["unit", "identity", "on_duplicate_identity"],
+    "lookup_equals": {
+      "description": "For each record of the `from` source, find the key in the `to` source and compare one value.",
+      "required": ["template", "key", "compare"],
       "properties": {
-        "unit": {"$ref": "#/$defs/local_id", "description": "Local name of the counted unit, e.g. auto. Explain it in the description."},
-        "identity": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["source", "columns"],
-          "properties": {
-            "source": {"$ref": "#/$defs/local_id"},
-            "columns": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
-          }
-        },
-        "on_duplicate_identity": {"enum": ["indeterminate"]}
-      }
-    },
-    "policies": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["missing_input", "invalid_input", "unmatched_reference", "missing_required_column", "ambiguous_resource"],
-      "properties": {
-        "missing_input": {"enum": ["indeterminate"]},
-        "invalid_input": {"enum": ["indeterminate"]},
-        "unmatched_reference": {"enum": ["indeterminate"]},
-        "missing_required_column": {"enum": ["inapplicable"]},
-        "ambiguous_resource": {"enum": ["inapplicable"]}
+        "template": {"const": "lookup-equals"},
+        "key": {"$ref": "#/$defs/pair"},
+        "compare": {"$ref": "#/$defs/pair"}
       },
-      "description": "Explicit on purpose: insufficient information never becomes a favourable result."
-    },
-
-    "field_ref": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["source", "column"],
-      "properties": {"source": {"$ref": "#/$defs/local_id"}, "column": {"type": "string", "minLength": 1}}
-    },
-    "params_hierarchical_code": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["child", "parent", "prefix_length"],
-      "properties": {
-        "child": {"$ref": "#/$defs/field_ref", "description": "Column whose prefix is read."},
-        "parent": {"$ref": "#/$defs/field_ref", "description": "Column with the parent code or a value resolved by parent_lookup."},
-        "prefix_length": {"type": "integer", "minimum": 1, "maximum": 20},
-        "parent_lookup": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["source", "key_column", "value_column", "on_multiple_matches"],
-          "properties": {
-            "source": {"$ref": "#/$defs/local_id"},
-            "key_column": {"type": "string", "minLength": 1},
-            "value_column": {"type": "string", "minLength": 1},
-            "on_multiple_matches": {"enum": ["error"]}
-          }
-        }
-      }
+      "additionalProperties": false
     }
   }
 }

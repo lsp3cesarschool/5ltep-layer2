@@ -2,20 +2,24 @@
 
 Sub-commands:
 
-  validate   check rule files against the authoring format 1.0 (schema, cross references,
-             regular-expression subset); exit code 1 when any error is found
+  validate   check rule files against format 1.0 (schema and cross references);
+             exit code 1 when any error is found
+  run        fetch every CKAN resource the rules name (once each), evaluate the rules and write
+             results/ and docs/data/ under --out (default work/out: a local run is a test,
+             never a published result)
 
 Examples:
   python main.py validate                     # every rules/**/*.yaml
   python main.py validate rules/territory     # one folder
   python main.py validate my-rule.yaml --no-name-check
   python main.py validate --format json
+  python main.py run                          # every rule, outputs in work/out
 
-The engine that resolves CKAN resources and evaluates rules is not implemented yet.
 """
 
 import argparse
 import sys
+from pathlib import Path
 
 from src import validate
 
@@ -33,6 +37,21 @@ def cmd_validate(args) -> int:
     return 1 if errors else 0
 
 
+def cmd_run(args) -> int:
+    from src import engine, outputs
+
+    paths = args.paths or ["rules"]
+    run = engine.run(paths, Path(args.work), keep_downloads=args.keep_downloads)
+    if not run["rules"]:
+        print("nenhuma regra encontrada")
+        return 1
+    totals = outputs.write(run, Path(args.out), Path("rules"))
+    print(f"{totals['evaluated']}/{totals['rules']} regra(s) avaliada(s), "
+          f"{totals['sources_ok']}/{totals['sources']} fonte(s) ok, {totals['signals']} sinal(is); "
+          f"saídas em {Path(args.out) / 'results'} e {Path(args.out) / 'docs' / 'data'}")
+    return 0
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="5L-TEP Layer 2 (Semantic Policies)")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -41,6 +60,12 @@ def main(argv=None) -> int:
     p.add_argument("--format", choices=["text", "json"], default="text")
     p.add_argument("--no-name-check", action="store_true", help="do not require <id>.yaml as file name")
     p.set_defaults(func=cmd_validate)
+    p = sub.add_parser("run", help="evaluate the rules against the CKAN portals")
+    p.add_argument("paths", nargs="*", help="rule files or folders (default: rules)")
+    p.add_argument("--out", default="work/out", help="folder for results/ and docs/data/ (default: work/out)")
+    p.add_argument("--work", default="work", help="folder for downloads and work files (default: work)")
+    p.add_argument("--keep-downloads", action="store_true", help="keep the downloaded files after the run")
+    p.set_defaults(func=cmd_run)
     args = parser.parse_args(argv)
     return args.func(args)
 

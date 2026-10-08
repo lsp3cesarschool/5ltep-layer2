@@ -11,29 +11,27 @@ está pareado; uma licença não pode vencer antes de ser emitida) em arquivos d
 pessoa pode ler, revisar e adaptar a outro portal CKAN.
 
 > **Estado: protótipo inicial de pesquisa.** Este repositório contém, por enquanto, o formato de
-> autoria de regras 1.0, seu JSON Schema e um validador. O motor que resolve recursos CKAN e avalia
-> as regras ainda não foi implementado; portanto, **não há resultados** aqui. As regras são exemplos
+> regras 1.0, seu JSON Schema e um validador. O motor que baixa os recursos CKAN e avalia as regras
+> já roda localmente; **ainda não há resultados publicados** aqui. As regras são exemplos
 > com fundamentos e pendências registrados; não são regras oficiais de nenhum órgão, e um sinal
 > futuro será algo a revisar, nunca um veredito sobre os dados.
 
 ## Como é uma regra
 
-Cada arquivo contém uma verificação atômica, em três partes:
+Cada arquivo em `rules/` contém uma verificação que cruza dados de um ou mais portais **CKAN**.
+Arquivo em `rules/` está ativo; as subpastas são livres e só organizam as regras.
 
 | Parte | Para quem | Conteúdo |
 |---|---|---|
-| `description` | pessoas | intenção, justificativa, significado de cada coluna, exceções, exemplos e fontes, em qualquer língua declarada por etiqueta BCP 47 |
-| `classification` | resumos e exportação | forma da checagem (`AR`, `TC`, `DC`, `DM`), áreas de conhecimento, severidade, dimensão de qualidade, natureza do limite |
-| `execution` | o motor | um modelo permitido e seus parâmetros, aplicado a portais, conjuntos, recursos e cabeçalhos exatos |
+| `schema_version`, `id`, `version`, `origin` | todos | versão do formato, identificador estável, versão da regra, quem a propôs |
+| `description` | pessoas (dashboard) | título, o que é verificado, justificativa, exceções e exemplos, numa língua declarada por etiqueta BCP 47 |
+| `sources` | o motor | para cada recurso CKAN: portal, dataset, nome e formato exatos do recurso, como desempacotar (`archive`), como ler (`file`) e as colunas lidas, cada uma com seu significado |
+| `check` | o motor | um modelo permitido e seus parâmetros, escritos como `fonte.coluna` |
 
-Só `execution` define o que é calculado. SQL, código ou expressões livres nunca são aceitos: a regra
-preenche os parâmetros de um modelo que o motor implementa. Uma aplicação fica `pending_mapping` até
-uma pessoa confirmar o significado de suas colunas; entrada ausente, referência sem correspondência
-ou coluna ausente são registradas como indeterminadas ou inaplicáveis, nunca como aprovação.
-
-O exemplo [`rules/territory/territory.municipality-state.yaml`](rules/territory/territory.municipality-state.yaml)
-confere se o código IBGE do município começa pelo código da UF com que está pareado, quando ambos
-descrevem o mesmo lugar.
+Só `sources` e `check` definem o que é calculado. SQL, código ou expressões livres nunca são
+aceitos. O exemplo [`rules/territory/territory.municipality-state.yaml`](rules/territory/territory.municipality-state.yaml)
+procura o código do município de cada auto de infração (portal do IBAMA) na tabela de municípios
+publicada pelo TSE (portal do TSE) e compara a UF.
 
 ## Validar regras
 
@@ -43,6 +41,7 @@ python -m venv .venv
 python main.py validate                                   # todos os rules/**/*.yaml
 python main.py validate rules/territory --format json
 python -m pytest
+python main.py run                                        # ensaio local: baixa as fontes, saídas em work/out
 ```
 
 O validador informa arquivo, linha, caminho e um código estável para cada problema (mensagens em
@@ -50,29 +49,34 @@ português, idioma inicial da interface). Ele confere:
 
 - **YAML 1.2 seguro:** um documento; sem chaves repetidas, âncoras, aliases, chaves de mesclagem ou
   tags explícitas; UTF-8;
-- **o esquema** [`schema/rule-v1.schema.json`](schema/rule-v1.schema.json): campos obrigatórios,
-  conjuntos fechados de campos e valores, parâmetros de cada modelo;
-- **referências cruzadas:** toda fonte e coluna citada por parâmetros, identidade e significado dos
-  campos está declarada na mesma aplicação; coluna declarada e não usada gera aviso;
-- **habilitação:** aplicação `enabled` exige revisão do mapeamento confirmada e referências
-  preparadas (versão, SHA-256, licença, cobertura);
-- **padrões:** `pattern` fica num subconjunto de I-Regexp (RFC 9485) e casa com o valor inteiro;
-- **pastas:** um `<id>.yaml` por regra e ids únicos.
+- **o esquema** [`schema/rule-v1.schema.json`](schema/rule-v1.schema.json), um arquivo para todas as
+  regras: campos obrigatórios, conjuntos fechados de campos e valores, parâmetros de cada modelo;
+- **referências cruzadas:** toda `fonte.coluna` usada em `check` está declarada em `sources`; fonte
+  ou coluna declarada e não usada gera aviso;
+- **pastas:** um `<id>.yaml` por regra, em qualquer profundidade de subpasta, e ids únicos.
 
 ## Escrever uma regra
 
-Copie o exemplo, dê a ele novo `id` e novo nome de arquivo, e edite. Editores que usam o YAML
-language server (o VS Code com a extensão YAML, por exemplo) leem a primeira linha do exemplo e
-oferecem autocompletar e conferência imediata a partir do esquema. Ponha datas, versões e códigos
-entre aspas. A versão 1.0 especifica um modelo, `hierarchical-code`; as demais famílias candidatas
-precisam de contrato de parâmetros próprio antes de uma regra poder usá-las.
+Copie o exemplo, dê a ele novo `id` e novo nome de arquivo, e edite. Os nomes exatos do dataset e do
+recurso estão em `<portal>/api/3/action/package_show?id=<dataset>`; baixe o arquivo uma vez para
+conferir o conteúdo do zip, a codificação, o separador e os cabeçalhos. Ponha versões e códigos
+entre aspas. A versão 1.0 especifica um modelo, `lookup-equals`; outros modelos entram no mesmo
+esquema conforme ganharem contrato de parâmetros.
+
+Opcional, por editor: o VS Code com a extensão YAML lê [`.vscode/settings.json`](.vscode/settings.json),
+que liga o esquema a todo `rules/**/*.yaml` e oferece autocompletar e conferência imediata. Em outros
+editores, ligue o mesmo esquema ao mesmo padrão (JetBrains: *JSON Schema Mappings*; Neovim, Helix,
+Zed: configuração do `yaml-language-server`). Nada nos arquivos de regra depende do editor.
 
 ## Organização do repositório
 
 ```
-main.py            linha de comando (validate)
+main.py            linha de comando (validate, run)
 src/loader.py      leitura segura do YAML, com números de linha
-src/validate.py    esquema, referências cruzadas e subconjunto de padrões
+src/validate.py    esquema e referências cruzadas
+src/fetch.py       resolução e download no CKAN, com integridade de cada fonte
+src/engine.py      leitura das colunas declaradas, DuckDB, modelos
+src/outputs.py     results/ e docs/data/ (só contagens e números de registro)
 schema/            JSON Schema do formato de autoria
 rules/             um arquivo por regra, agrupado por espaço de nomes
 tests/             testes automáticos
@@ -80,10 +84,11 @@ tests/             testes automáticos
 
 ## Próximos passos
 
-Previsto, não implementado: resolução de recursos CKAN por seletores explícitos, preparação de
-referências versionadas, avaliação com DuckDB sem acesso externo, prévia determinística do que cada
-aplicação vai calcular, logs estruturados e manifesto da rodada, formulários de issue para quem não
-escreve YAML, e as instâncias de controle da ANEEL e da Prefeitura do Recife.
+Funcionando localmente, ainda não publicado: o motor, que baixa cada recurso CKAN uma vez por rodada, registra se cada portal e
+recurso estava disponível (status HTTP, SHA-256 dos bytes, colunas encontradas), cruza os dados
+localmente com DuckDB sem acesso externo e publica contagens e números de registro, nunca valores do
+portal. Depois: o dashboard, formulários de issue para quem não escreve YAML e as instâncias de
+controle da ANEEL e da Prefeitura do Recife.
 
 ## Licença e citação
 
