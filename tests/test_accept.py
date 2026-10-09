@@ -99,3 +99,11 @@ def test_signals_md_is_written_with_counts_only(artifact, tmp_path):
     assert text.startswith("# Signals in ")
     assert "## Rules (most signals first)" in text and "## Source health" in text
     assert "not evaluated" in text  # unreachable sources: every rule is not evaluated, with its reason
+
+
+def test_l2_rate_needs_checks_in_scope(artifact, tmp_path):
+    repo = tmp_path / "repo"
+    accept.apply(artifact, repo)
+    totals = json.loads((repo / "docs" / "data" / "layer2.json").read_text(encoding="utf-8"))["totals"]
+    assert totals["checks"] == 0 and totals["l2_rate"] is None  # nothing evaluated: no rate, never 100%
+    assert "- **L2 pass rate:** –" in (repo / "signals.md").read_text(encoding="utf-8")

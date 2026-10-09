@@ -43,6 +43,7 @@ deles.
 | **Modelo** | A verificação fixa que a regra preenche: `lookup-equals`, `lookup-exists`, `temporal-order`, `field-comparison` ou `flag-when`. Regras nunca contêm SQL nem código. |
 | **Sinal** | Registro que não passou na verificação ou que não pôde ser verificado (valor ausente ou ilegível, chave não encontrada). Algo a revisar, não um veredito. |
 | **Número de registro** | A linha do registro no arquivo publicado (1 é a primeira linha após o cabeçalho), válida para os bytes cujo SHA-256 a rodada registra. |
+| **Taxa de aprovação L2** | A fração das verificações no escopo sem sinal, uma verificação por registro e regra: o termo L2 do índice de qualidade Qs = w1·L1 + w2·L2 + w3·L3 + w4·L4 do artigo do 5L-TEP (SOFTENG 2026). |
 | **Saúde das fontes** | Se cada portal respondeu e cada recurso foi baixado durante a rodada. Regra com fonte em falha fica "não avaliada"; nunca é avaliada pela metade. |
 
 ## Como é uma regra
@@ -79,9 +80,9 @@ Este repositório foi desenhado para respeitar a Lei Geral de Proteção de Dado
 são baixados durante a rodada e apagados quando ela termina; no GitHub, o próprio runner é
 descartado depois do job. O motor lê só as colunas que a regra declara e publica apenas contagens,
 números de registro, hashes SHA-256 e metadados que o CKAN já publica, nunca um valor lido dos
-portais. Regras sobre dados de saúde ou educação usam `exposure: counts`, e por isso publicam
-contagens e gráficos, mas não números de registro. Os datasets mantêm as licenças de seus
-publicadores, que o dashboard lista com link.
+portais. Regras sobre dados sensíveis, como saúde ou educação, declaram `exposure: counts`: o
+dashboard mostra só contagens e gráficos, sem números de registro. Os datasets mantêm as licenças de
+seus publicadores, que o dashboard lista com link.
 
 ## Como rodar localmente
 

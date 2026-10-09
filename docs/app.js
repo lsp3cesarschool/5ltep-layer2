@@ -12,6 +12,7 @@ const I18N = {
     no_data: "No run has been published yet.",
     t_rules: "Rules evaluated", t_rules_note: "{n} not evaluated in this run", t_rules_all: "all rules evaluated",
     t_signals: "Signals to review", t_signals_note: "in {n} rule(s)",
+    t_rate: "L2 pass rate", t_rate_note: "{s} signals in {c} checks in scope", t_rate_none: "no check in scope",
     t_sources: "Sources available", t_sources_note: "{n} failed", t_sources_all: "every portal answered",
     t_records: "Records checked", t_records_note: "across {n} source file(s)",
     rules_h: "Rules", order: "Order", o_custom: "Custom", o_signals: "Most signals first", o_title: "Title",
@@ -79,6 +80,7 @@ const I18N = {
     no_data: "Nenhuma rodada foi publicada ainda.",
     t_rules: "Regras avaliadas", t_rules_note: "{n} não avaliada(s) nesta rodada", t_rules_all: "todas as regras avaliadas",
     t_signals: "Sinais a revisar", t_signals_note: "em {n} regra(s)",
+    t_rate: "Taxa de aprovação L2", t_rate_note: "{s} sinais em {c} verificações no escopo", t_rate_none: "nenhuma verificação no escopo",
     t_sources: "Fontes disponíveis", t_sources_note: "{n} com falha", t_sources_all: "todos os portais responderam",
     t_records: "Registros conferidos", t_records_note: "em {n} arquivo(s) das fontes",
     rules_h: "Regras", order: "Ordem", o_custom: "Personalizada", o_signals: "Mais sinais primeiro", o_title: "Título",
@@ -227,6 +229,8 @@ function renderTiles() {
   const files = new Set();
   for (const r of evaluated) for (const d of r.datasets) files.add(d.label);
   el("tiles").replaceChildren(
+    tile(t("t_rate"), s.l2_rate == null ? "–" : `${(s.l2_rate * 100).toLocaleString(LANG === "pt" ? "pt-BR" : "en", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`,
+      s.l2_rate == null ? t("t_rate_none") : t("t_rate_note", { s: num(s.signals), c: num(s.checks) }), "", "rules-section"),
     tile(t("t_rules"), `${num(s.evaluated)} / ${num(s.rules)}`,
       s.not_evaluated ? t("t_rules_note", { n: s.not_evaluated }) : t("t_rules_all"), s.not_evaluated ? "bad" : "", "rules-section"),
     tile(t("t_signals"), num(s.signals), t("t_signals_note", { n: evaluated.filter((r) => r.signals).length }),

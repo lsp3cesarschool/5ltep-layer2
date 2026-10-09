@@ -181,6 +181,10 @@ def write(run: dict, out: Path, rules_root: Path) -> dict:
     totals = {"rules": len(cards), "evaluated": len(evaluated), "not_evaluated": len(cards) - len(evaluated),
               "sources": len(sources), "sources_ok": sum(s["status"] == OK for s in sources),
               "signals": sum(c["signals"] for c in evaluated)}
+    # L2 pass rate (SOFTENG 2026, Qs = w1·L1 + w2·L2 + ...): checks without a signal / checks in scope,
+    # one check per (record, rule); records out of scope and rules not evaluated do not count
+    totals["checks"] = sum(c["total"] - c["counts"].get("out_of_scope", 0) for c in evaluated)
+    totals["l2_rate"] = round(1 - totals["signals"] / totals["checks"], 4) if totals["checks"] else None
     _write(data / "layer2.json", {"layer": 2, **ident, "generated_at": run["finished_at"],
                                   "started_at": run["started_at"], "totals": totals, "rules": cards,
                                   "sources": sources, "engine": manifest["engine"], "rule_files": manifest["rules"],

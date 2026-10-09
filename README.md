@@ -44,6 +44,7 @@ which line, while this repository publishes none of their values.
 | **Template** | The fixed check a rule fills in: `lookup-equals`, `lookup-exists`, `temporal-order`, `field-comparison` or `flag-when`. Rules never contain SQL or code. |
 | **Signal** | A record that failed the check or could not be checked (missing or unreadable value, key not found). Something to review, not a verdict. |
 | **Record number** | The line of the record in the published file (1 is the first line after the header), valid for the bytes whose SHA-256 the run records. |
+| **L2 pass rate** | The share of checks in scope without a signal, one check per record and rule: the L2 term of the quality score Qs = w1·L1 + w2·L2 + w3·L3 + w4·L4 of the 5L-TEP article (SOFTENG 2026). |
 | **Source health** | Whether each portal answered and each resource downloaded during a run. A rule whose source failed is marked "not evaluated"; it is never evaluated halfway. |
 
 ## How a rule looks
@@ -80,9 +81,9 @@ This repository is designed to comply with Brazil's General Data Protection Law 
 downloaded during the run and deleted when it ends; on GitHub, the runner itself is discarded after
 the job. The engine reads only the columns a rule declares, and publishes only counts, record
 numbers, SHA-256 hashes and metadata that CKAN already publishes, never a value read from the
-portals. Rules on health or education data use `exposure: counts`, so they publish counts and charts
-but no record numbers. The datasets keep their publishers' licences, which the dashboard lists with
-links.
+portals. Rules on sensitive data, such as health or education, declare `exposure: counts`: the
+dashboard shows only counts and charts, without record numbers. The datasets keep their publishers'
+licences, which the dashboard lists with links.
 
 ## Run it locally
 

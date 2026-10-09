@@ -33,6 +33,7 @@ def render(page: dict) -> str:
     totals = page.get("totals", {})
     when = (page.get("generated_at") or "").replace("T", " ")[:16]
     run = f"[{page.get('run_id')}]({page['run_url']})" if page.get("run_url") else str(page.get("run_id", "–"))
+    rate = f"{totals['l2_rate'] * 100:.1f}%" if totals.get("l2_rate") is not None else "–"
     history = page.get("history") or []
     previous = history[-2]["rules"] if len(history) >= 2 else {}
 
@@ -50,6 +51,8 @@ def render(page: dict) -> str:
         f"{totals.get('not_evaluated', 0)} not evaluated)",
         f"- **Sources:** {totals.get('sources', 0)} CKAN resources ({totals.get('sources_ok', 0)} available)",
         f"- **Records flagged:** {_n(totals.get('signals'))}",
+        f"- **L2 pass rate:** {rate} (checks without a signal / {_n(totals.get('checks'))} checks in scope; "
+        "one check per record and rule)",
         "",
         "Signal types: `mismatch` (the check failed), `key not found` (no matching record in the other",
         "source), `missing value`, `invalid value` (unreadable as the declared type), `ambiguous key` (more",
