@@ -6,9 +6,9 @@
 
 **35 regras de domínio que cruzam portais de dados abertos CKAN, aplicadas ao portal do IBAMA, o
 órgão ambiental federal.** As regras são escritas por pessoas depois que os dados são publicados,
-uma verificação por arquivo. Toda semana cada regra lê os arquivos publicados, conta os registros
-que merecem um segundo olhar e os mostra num dashboard. Um sinal é um convite à revisão, nunca um
-veredito sobre os dados.
+uma verificação por arquivo. Toda semana o motor desta camada avalia cada regra: lê os arquivos
+publicados, sinaliza os registros que merecem um segundo olhar e os mostra num dashboard. Um sinal é
+um convite à revisão, nunca um veredito sobre os dados.
 
 | Recurso | O que há lá |
 |---|---|
@@ -73,14 +73,14 @@ download deste portal e dos demais, e quanto tempo levou cada etapa.
 
 ## Tratamento de dados e privacidade
 
-As regras seguem o princípio da necessidade da Lei Geral de Proteção de Dados (LGPD, Lei
-13.709/2018), mesmo que os portais já publiquem esses dados abertamente. Os arquivos são baixados
-durante a rodada e apagados quando ela termina; no GitHub, o próprio runner é descartado depois do
-job. O motor lê só as colunas que a regra declara e publica apenas contagens, números de registro,
-hashes SHA-256 e metadados que o CKAN já publica, nunca um valor lido dos portais. Regras sobre
-dados de saúde ou educação usam `exposure: counts`, e por isso publicam contagens e gráficos, mas
-não números de registro. Os datasets mantêm as licenças de seus publicadores, que o dashboard lista
-com link.
+Este repositório foi desenhado para respeitar a Lei Geral de Proteção de Dados (LGPD, Lei
+13.709/2018), inclusive sobre dados que os portais já publicam abertamente. Na prática: Os arquivos
+são baixados durante a rodada e apagados quando ela termina; no GitHub, o próprio runner é
+descartado depois do job. O motor lê só as colunas que a regra declara e publica apenas contagens,
+números de registro, hashes SHA-256 e metadados que o CKAN já publica, nunca um valor lido dos
+portais. Regras sobre dados de saúde ou educação usam `exposure: counts`, e por isso publicam
+contagens e gráficos, mas não números de registro. Os datasets mantêm as licenças de seus
+publicadores, que o dashboard lista com link.
 
 ## Como rodar localmente
 

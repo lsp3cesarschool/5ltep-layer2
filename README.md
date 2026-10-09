@@ -6,8 +6,9 @@
 
 **35 domain rules that cross CKAN open data portals, applied to the portal of IBAMA, Brazil's
 federal environmental agency.** People write the rules after the data is published, one check per
-file. Every week each rule reads the published files, counts the records that deserve a second look
-and shows them on a dashboard. A signal is an invitation to review, never a verdict on the data.
+file. Every week the engine of this layer evaluates each rule: it reads the published files, flags
+the records that deserve a second look and shows them on a dashboard. A signal is an invitation to
+review, never a verdict on the data.
 
 | Resource | What you find there |
 |---|---|
@@ -73,13 +74,14 @@ the download speed of this portal and of the others, and how long each phase too
 
 ## Data handling and privacy
 
-The rules follow the data minimisation principle of Brazil's General Data Protection Law (LGPD, Law
-13,709/2018), even though the portals already publish these data openly. Files are downloaded during
-the run and deleted when it ends; on GitHub, the runner itself is discarded after the job. The
-engine reads only the columns a rule declares, and publishes only counts, record numbers, SHA-256
-hashes and metadata that CKAN already publishes, never a value read from the portals. Rules on
-health or education data use `exposure: counts`, so they publish counts and charts but no record
-numbers. The datasets keep their publishers' licences, which the dashboard lists with links.
+This repository is designed to comply with Brazil's General Data Protection Law (LGPD, Law
+13,709/2018), including for data the portals already publish openly. In practice: Files are
+downloaded during the run and deleted when it ends; on GitHub, the runner itself is discarded after
+the job. The engine reads only the columns a rule declares, and publishes only counts, record
+numbers, SHA-256 hashes and metadata that CKAN already publishes, never a value read from the
+portals. Rules on health or education data use `exposure: counts`, so they publish counts and charts
+but no record numbers. The datasets keep their publishers' licences, which the dashboard lists with
+links.
 
 ## Run it locally
 
