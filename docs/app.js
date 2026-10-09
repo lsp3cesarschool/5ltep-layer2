@@ -11,10 +11,10 @@ const I18N = {
     subtitle: "Last run {at} · {env}", env_actions: "GitHub Actions", env_local: "local test run: not a published result",
     no_data: "No run has been published yet.",
     t_rules: "Rules evaluated", t_rules_note: "{n} not evaluated in this run", t_rules_all: "all rules evaluated",
-    t_signals: "Signals to review", t_signals_note: "in {n} rule(s)",
-    t_rate: "L2 pass rate", t_rate_note: "{s} signals in {c} checks in scope", t_rate_none: "no check in scope",
+    t_signals: "Signals to review", t_signals_note: "in {n} of {t} rules; {z} without signals", t_signals_all: "in all {t} rules",
+    t_rate: "L2 pass rate", t_rate_note: "1 − signals ÷ checks in scope", t_rate_none: "no check in scope",
     t_sources: "Sources available", t_sources_note: "{n} failed", t_sources_all: "every portal answered",
-    t_records: "Records checked", t_records_note: "across {n} source file(s)",
+    t_checks: "Checks in scope", t_checks_note: "one per record and rule; {o} records out of scope",
     rules_h: "Rules", order: "Order", o_custom: "Custom", o_signals: "Most signals first", o_title: "Title",
     o_file: "Folder and file", group: "group by folder", search_rules: "Search rules",
     order_note: "Use ↑ ↓ to arrange the cards: the order becomes Custom, kept in this browser only; it changes nothing in the evaluation.",
@@ -79,10 +79,10 @@ const I18N = {
     subtitle: "Última rodada {at} · {env}", env_actions: "GitHub Actions", env_local: "ensaio local: não é resultado publicado",
     no_data: "Nenhuma rodada foi publicada ainda.",
     t_rules: "Regras avaliadas", t_rules_note: "{n} não avaliada(s) nesta rodada", t_rules_all: "todas as regras avaliadas",
-    t_signals: "Sinais a revisar", t_signals_note: "em {n} regra(s)",
-    t_rate: "Taxa de aprovação L2", t_rate_note: "{s} sinais em {c} verificações no escopo", t_rate_none: "nenhuma verificação no escopo",
+    t_signals: "Sinais a revisar", t_signals_note: "em {n} de {t} regras; {z} sem sinal", t_signals_all: "em todas as {t} regras",
+    t_rate: "Taxa de aprovação L2", t_rate_note: "1 − sinais ÷ verificações no escopo", t_rate_none: "nenhuma verificação no escopo",
     t_sources: "Fontes disponíveis", t_sources_note: "{n} com falha", t_sources_all: "todos os portais responderam",
-    t_records: "Registros conferidos", t_records_note: "em {n} arquivo(s) das fontes",
+    t_checks: "Verificações no escopo", t_checks_note: "uma por registro e regra; {o} registros fora do escopo",
     rules_h: "Regras", order: "Ordem", o_custom: "Personalizada", o_signals: "Mais sinais primeiro", o_title: "Título",
     o_file: "Pasta e arquivo", group: "agrupar por pasta", search_rules: "Buscar regras",
     order_note: "Use ↑ ↓ para arrumar os cartões: a ordem vira Personalizada e fica só neste navegador; não muda nada na avaliação.",
@@ -228,9 +228,8 @@ function tile(label, value, note, cls, target) {
 function renderTiles() {
   const s = PAGE.totals;
   const evaluated = PAGE.rules.filter((r) => r.status === "evaluated");
-  const records = evaluated.reduce((a, r) => a + (r.total || 0), 0);
-  const files = new Set();
-  for (const r of evaluated) for (const d of r.datasets) files.add(d.label);
+  const flagged = evaluated.filter((r) => r.signals).length;
+  const outOfScope = evaluated.reduce((a, r) => a + ((r.counts || {}).out_of_scope || 0), 0);
   // L2 pass rate (layer2.json since 09/10/2026; computed from the rules for data published before that)
   const checks = s.checks ?? evaluated.reduce((a, r) => a + (r.total || 0) - ((r.counts || {}).out_of_scope || 0), 0);
   const rate = s.l2_rate !== undefined ? s.l2_rate : (checks ? 1 - s.signals / checks : null);
@@ -240,11 +239,12 @@ function renderTiles() {
     tile(t("t_sources"), `${num(s.sources_ok)} / ${num(s.sources)}`,
       s.sources_ok < s.sources ? t("t_sources_note", { n: s.sources - s.sources_ok }) : t("t_sources_all"),
       s.sources_ok < s.sources ? "bad" : "good", "sources-section"),
-    tile(t("t_signals"), num(s.signals), t("t_signals_note", { n: evaluated.filter((r) => r.signals).length }),
+    tile(t("t_signals"), num(s.signals), flagged === evaluated.length ? t("t_signals_all", { t: num(evaluated.length) })
+      : t("t_signals_note", { n: num(flagged), t: num(evaluated.length), z: num(evaluated.length - flagged) }),
       s.signals ? "warn" : "", "rules-section"),
-    tile(t("t_records"), num(records), t("t_records_note", { n: files.size }), "", "datasets-section"),
+    tile(t("t_checks"), num(checks), t("t_checks_note", { o: num(outOfScope) }), "", "rules-section"),
     tile(t("t_rate"), rate === null ? "–" : `${pct(rate)}%`,
-      rate === null ? t("t_rate_none") : t("t_rate_note", { s: num(s.signals), c: num(checks) }), "", "rules-section"),
+      rate === null ? t("t_rate_none") : t("t_rate_note"), "", "rules-section"),
   );
 }
 
