@@ -20,7 +20,7 @@ description:
     - case: "Auto cita 123456-A e o termo 123456 série A está publicado"
       expected: "Conforme"
     - case: "Auto cita 123456-A,234567-B e só o primeiro está publicado"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_autos:

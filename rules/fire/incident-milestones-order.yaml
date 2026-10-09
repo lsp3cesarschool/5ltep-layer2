@@ -20,7 +20,7 @@ description:
     - case: "Início 10:00, detecção 10:30, ataque 11:00, controle 15:00, extinção 18:00"
       expected: "Conforme"
     - case: "Extinção às 09:00 com início às 10:00 no mesmo dia"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_roi:

@@ -22,7 +22,7 @@ description:
     - case: "Auto de R$ 1.000, parcela paga de R$ 1.250,50"
       expected: "Conforme"
     - case: "Auto de R$ 1.000, parcela paga de R$ 125.050,00"
-      expected: "Sinal: mais de 10 vezes"
+      expected: "Sinalizar: mais de 10 vezes"
 
 sources:
   ibama_arrecadacao:

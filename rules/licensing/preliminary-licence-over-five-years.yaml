@@ -20,7 +20,7 @@ description:
     - case: "Licença Prévia emitida em 01/01/2015, vence em 01/01/2020"
       expected: "Conforme"
     - case: "Licença Prévia emitida em 01/01/2015, vence em 02/01/2020"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_licencas:

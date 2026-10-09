@@ -20,7 +20,7 @@ description:
     - case: "ATI 100 ha, APP 10 ha, reserva líquida 20 ha"
       expected: "Conforme"
     - case: "ATI 100 ha, APP 60 ha, reserva líquida 50 ha"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_ada:

@@ -19,7 +19,7 @@ description:
     - case: "Termo de 2016 em (-8.05; -34.9)"
       expected: "Conforme"
     - case: "Termo de 2013 em (0.0; 0.0)"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_apreensao:

@@ -21,7 +21,7 @@ description:
     - case: "Fato em 2010-01-01, lavratura em 2014-12-31"
       expected: "Conforme"
     - case: "Fato em 2010-01-01, lavratura em 2016-01-02"
-      expected: "Sinal: mais de cinco anos"
+      expected: "Sinalizar: mais de cinco anos"
 
 sources:
   ibama_autos:

@@ -19,7 +19,7 @@ description:
     - case: "Anterior 10, entradas 3, saídas 2, atual 11"
       expected: "Conforme"
     - case: "Anterior 10, entradas 3, saídas 2, atual 15"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_plantel:

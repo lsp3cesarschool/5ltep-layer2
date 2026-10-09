@@ -22,7 +22,8 @@ import time
 import zipfile
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from pathlib import Path
+from pathlib import Path, PurePosixPath
+from urllib.parse import unquote, urlparse
 
 import duckdb
 
@@ -68,12 +69,18 @@ class Read:
 
 # --- reading -----------------------------------------------------------------------------------
 
+def published_file(fetched: Fetched) -> str:
+    """The exact name of the published file (from its URL), e.g. termo_de_embargo.csv."""
+    name = PurePosixPath(unquote(urlparse(fetched.resource.get("url") or "").path)).name
+    return name or fetched.key.name
+
+
 def _members(fetched: Fetched, source: dict):
     """(member name, binary stream) for every file to read, in name order."""
     archive = source.get("archive")
     if archive is None:
         with open(fetched.path, "rb") as fh:
-            yield fetched.key.name, fh
+            yield published_file(fetched), fh
         return
     try:
         zf = zipfile.ZipFile(fetched.path)
@@ -274,7 +281,9 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
         for source_id, source in rule["sources"].items():
             f = fetched[ResourceKey.of(source)]
             entry["sources"][source_id] = {"resource": f.key.label, "fetch_status": f.status,
-                                           "sha256": f.download.get("sha256")}
+                                           "sha256": f.download.get("sha256"), "url": f.resource.get("url"),
+                                           "file": published_file(f) if f.resource else None,
+                                           "archive_members": (source.get("archive") or {}).get("members")}
             if f.status != OK and failed is None:
                 failed = (f"source_{f.status}", f'fonte "{source_id}" ({f.key.label}): {f.reason}')
         if failed:

@@ -21,13 +21,17 @@ const I18N = {
     datasets: "Datasets", justification: "Justification", exceptions: "Exceptions", examples: "Examples", history: "History",
     no_exceptions: "None recorded.", expected: "Expected",
     chart_btn: "▸ Chart", chart_hide: "▾ Chart", ch_time_h: "Over time", ch_order_h: "In the order of the records",
-    ch_time_note: "Signals per year of {col}; the tooltip gives the share of the records in scope.",
-    ch_member_note: "Signals per file of the resource (each file is a year or a part of the publication).",
+    ch_time_note: "Flagged records per year of {col}.",
+    ch_member_note: "Flagged records per file of the resource (each file is a year or a part of the publication).",
     ch_no_time: "This rule has no date to chart over time (no timeline, and the resource is a single file).",
-    ch_order_note: "Signals along the {n} records read, in file order (dashed lines: start of each file). Clusters show where in the publication the signals are.",
-    ch_count: "count", ch_share: "share of the records in scope", ch_mode: "Show", ch_unknown: "{n} record(s) without a readable date",
-    signals_at: "{n} signal(s) on {d}", of_records: "of {n} records", not_evaluated: "✕ Not evaluated in this run",
-    no_signal: "✓ no signal on {d}",
+    ch_order_note: "Flagged records along the {n} records read, in file order (dashed lines: start of each file). Clusters show where in the publication the signals are.",
+    ch_count: "number of flagged records", ch_share: "% of the records evaluated in each period", ch_mode: "Show",
+    ch_mode_note: "Evaluated records are those the rule applies to (records out of its scope are not counted). The percentage makes years with few and many records comparable.",
+    ch_unknown: "{n} record(s) without a readable date",
+    signals_at: "{n} flagged on {d}", signals_one: "1 flagged on {d}", of_records: "of {n} records",
+    not_evaluated: "✕ Not evaluated in this run", no_signal: "✓ None flagged on {d}",
+    list_btn: "▸ Record list", list_hide: "▾ Record list",
+    list_note: "Record numbers per file (1 = first line after the header), valid for the bytes with SHA-256 {sha}. Published file: {file}.",
     see_list: "see list", hide_list: "hide list", show_all: "show all {n}", download: "Download JSON of this list",
     download_all: "Full JSON of the rule", numbering: "Record numbers per file of the resource (1 = first line after the header), valid for the bytes with SHA-256 {sha}.",
     loading_list: "Loading…", list_error: "Could not load the list.",
@@ -80,13 +84,17 @@ const I18N = {
     datasets: "Datasets", justification: "Justificativa", exceptions: "Exceções", examples: "Exemplos", history: "Histórico",
     no_exceptions: "Nenhuma registrada.", expected: "Esperado",
     chart_btn: "▸ Gráfico", chart_hide: "▾ Gráfico", ch_time_h: "Ao longo do tempo", ch_order_h: "Na ordem dos registros",
-    ch_time_note: "Sinais por ano de {col}; ao passar o mouse, a parcela dos registros no escopo.",
-    ch_member_note: "Sinais por arquivo do recurso (cada arquivo é um ano ou uma parte da publicação).",
+    ch_time_note: "Registros sinalizados por ano de {col}.",
+    ch_member_note: "Registros sinalizados por arquivo do recurso (cada arquivo é um ano ou uma parte da publicação).",
     ch_no_time: "Esta regra não tem data para o gráfico no tempo (sem timeline, e o recurso é um arquivo só).",
-    ch_order_note: "Sinais ao longo dos {n} registros lidos, na ordem dos arquivos (tracejado: início de cada arquivo). Agrupamentos mostram onde, na publicação, estão os sinais.",
-    ch_count: "contagem", ch_share: "parcela dos registros no escopo", ch_mode: "Mostrar", ch_unknown: "{n} registro(s) sem data legível",
-    signals_at: "{n} sinal(is) em {d}", of_records: "de {n} registros", not_evaluated: "✕ Não avaliada nesta rodada",
-    no_signal: "✓ nenhum sinal em {d}",
+    ch_order_note: "Registros sinalizados ao longo dos {n} registros lidos, na ordem dos arquivos (tracejado: início de cada arquivo). Agrupamentos mostram onde, na publicação, estão os sinais.",
+    ch_count: "número de registros sinalizados", ch_share: "% dos registros avaliados em cada período", ch_mode: "Mostrar",
+    ch_mode_note: "Registros avaliados são aqueles a que a regra se aplica (os fora do escopo não entram na conta). O percentual permite comparar anos com poucos e com muitos registros.",
+    ch_unknown: "{n} registro(s) sem data legível",
+    signals_at: "{n} sinalizados em {d}", signals_one: "1 sinalizado em {d}", of_records: "de {n} registros",
+    not_evaluated: "✕ Não avaliada nesta rodada", no_signal: "✓ Nenhum sinalizado em {d}",
+    list_btn: "▸ Lista de registros", list_hide: "▾ Lista de registros",
+    list_note: "Números de registro por arquivo (1 = primeira linha após o cabeçalho), válidos para os bytes com SHA-256 {sha}. Arquivo publicado: {file}.",
     see_list: "ver lista", hide_list: "ocultar lista", show_all: "mostrar todos os {n}", download: "Baixar JSON desta lista",
     download_all: "JSON completo da regra", numbering: "Números de registro por arquivo do recurso (1 = primeira linha após o cabeçalho), válidos para os bytes com SHA-256 {sha}.",
     loading_list: "Carregando…", list_error: "Não foi possível carregar a lista.",
@@ -261,36 +269,36 @@ function ruleHistory(rule) {
     }));
 }
 
-async function showList(rule, outcome, panel, button) {
-  if (!panel.hidden && panel.dataset.outcome === outcome) {
-    panel.hidden = true; button.textContent = t("see_list"); return;
-  }
-  panel.closest(".card").querySelectorAll(".outcome button").forEach((b) => { b.textContent = t("see_list"); });
+async function showList(rule, panel, button) {
+  if (!panel.hidden) { panel.hidden = true; button.textContent = t("list_btn"); return; }
   panel.hidden = false;
-  panel.dataset.outcome = outcome;
-  button.textContent = t("hide_list");
+  button.textContent = t("list_hide");
   panel.replaceChildren(h("p", { class: "muted" }, t("loading_list")));
   let data;
   try { data = await loadList(rule); } catch (e) { panel.replaceChildren(h("p", { class: "crit" }, t("list_error"))); return; }
-  const byFile = data.records?.[outcome] || {};
-  const sha = data.sources[rule.evaluated_source]?.sha256;
-  const subset = { rule: data.rule, rule_version: data.rule_version, evaluated_at: data.evaluated_at, outcome,
-    numbering: data.numbering, source_sha256: sha, records: byFile };
-  const blob = URL.createObjectURL(new Blob([JSON.stringify(subset, null, 1)], { type: "application/json" }));
-  const files = Object.entries(byFile).map(([file, nums]) => {
-    const line = h("div", { class: "nums" }, nums.slice(0, LIST_PREVIEW).join(", ") + (nums.length > LIST_PREVIEW ? " …" : ""));
-    const more = nums.length > LIST_PREVIEW
-      ? h("button", { class: "showmore", type: "button", onclick: (ev) => { line.textContent = nums.join(", "); ev.target.remove(); } },
-        t("show_all", { n: num(nums.length) }))
-      : null;
-    return [h("div", { class: "file" }, `${file} · ${num(nums.length)}`), line, more];
+  const src = data.sources?.[rule.evaluated_source] || {};
+  const file = src.file ? (src.archive_members ? `${src.file} (${src.archive_members})` : src.file) : "–";
+  const sections = SIGNAL_OUTCOMES.filter((o) => Object.keys(data.records?.[o] || {}).length).map((o) => {
+    const byFile = data.records[o];
+    const subset = { rule: data.rule, rule_version: data.rule_version, evaluated_at: data.evaluated_at, outcome: o,
+      numbering: data.numbering, source_file: src.file, source_url: src.url, archive_members: src.archive_members,
+      source_sha256: src.sha256, records: byFile };
+    const blob = URL.createObjectURL(new Blob([JSON.stringify(subset, null, 1)], { type: "application/json" }));
+    const files = Object.entries(byFile).map(([f, nums]) => {
+      const line = h("div", { class: "nums" }, nums.slice(0, LIST_PREVIEW).join(", ") + (nums.length > LIST_PREVIEW ? " …" : ""));
+      const more = nums.length > LIST_PREVIEW
+        ? h("button", { class: "showmore", type: "button", onclick: (ev) => { line.textContent = nums.join(", "); ev.target.remove(); } },
+          t("show_all", { n: num(nums.length) }))
+        : null;
+      return [h("div", { class: "file" }, `${f} · ${num(nums.length)}`), line, more];
+    });
+    return [h("h4", {}, `${outcomeLabel(o)} · ${num(rule.counts[o])} `,
+      h("a", { href: blob, download: `${rule.id}.${o}.json`, class: "small" }, t("download"))), files];
   });
   panel.replaceChildren(
-    h("div", { class: "tools" },
-      h("a", { href: blob, download: `${rule.id}.${outcome}.json` }, t("download")),
+    h("p", { class: "muted small" }, t("list_note", { sha: short(src.sha256), file }), " ",
       h("a", { href: `data/rules/${encodeURIComponent(rule.id)}.json`, target: "_blank", rel: "noopener" }, t("download_all"))),
-    h("p", { class: "muted small" }, t("numbering", { sha: short(sha) })),
-    files);
+    ...sections.flat(Infinity).filter(Boolean));
 }
 
 function loadList(rule) {
@@ -299,16 +307,22 @@ function loadList(rule) {
   return LISTS[rule.id].catch((e) => { delete LISTS[rule.id]; throw e; });
 }
 
+// Grid values for an axis from 0 to max: whole numbers when the counts are small.
+function ticks(max, whole) {
+  if (whole && max <= 8) return Array.from({ length: Math.max(1, Math.ceil(max)) + 1 }, (_, i) => i);
+  return [0, 1, 2, 3, 4].map((i) => (max * i) / 4);
+}
+
 // Stacked bars of signal outcomes per category (year or file); mode "count" or "share".
 function stackedBars(categories, mode, label) {
   const W = 860, H = 220, L = 52, B = 40, T = 22;
   const value = (c, o) => (mode === "share" ? (c.inScope ? (100 * (c.counts[o] || 0)) / c.inScope : 0) : c.counts[o] || 0);
-  const max = Math.max(mode === "share" ? 1 : 1, ...categories.map((c) => SIGNAL_OUTCOMES.reduce((a, o) => a + value(c, o), 0)));
+  let max = Math.max(1, ...categories.map((c) => SIGNAL_OUTCOMES.reduce((a, o) => a + value(c, o), 0)));
+  if (mode !== "share" && max <= 8) max = Math.ceil(max);
   const step = (W - L - 10) / Math.max(1, categories.length), bw = Math.max(2, Math.min(26, step * 0.7));
   const y = (v) => T + (H - T - B) * (1 - v / max);
   const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": label });
-  for (let i = 0; i <= 4; i++) {
-    const v = (max * i) / 4;
+  for (const v of ticks(max, mode !== "share")) {
     svg.append(s("line", { class: "grid", x1: L, x2: W - 10, y1: y(v), y2: y(v) }),
       s("text", { class: "axis-label", x: L - 6, y: y(v) + 4, "text-anchor": "end" },
         mode === "share" ? `${v.toFixed(v < 10 ? 1 : 0)}%` : num(Math.round(v))));
@@ -325,7 +339,7 @@ function stackedBars(categories, mode, label) {
         style: `fill:var(--out-${o})` });
       rect.append(s("title", {}, `${c.label} · ${outcomeLabel(o)}: ${num(c.counts[o] || 0)}` +
         (c.inScope ? ` (${((100 * (c.counts[o] || 0)) / c.inScope).toFixed(2)}%)` : "") +
-        ` · ${num(signals)} / ${num(c.inScope)}`));
+        ` · ${num(signals)} / ${num(c.inScope)} ${LANG === "pt" ? "avaliados" : "evaluated"}`));
       svg.append(rect);
       base += v;
     });
@@ -351,13 +365,13 @@ function orderHistogram(data, label) {
     }
   }
   const W = 860, H = 200, L = 52, B = 30, T = 18;
-  const max = Math.max(1, ...bins.map((b) => SIGNAL_OUTCOMES.reduce((a, o) => a + (b[o] || 0), 0)));
+  let max = Math.max(1, ...bins.map((b) => SIGNAL_OUTCOMES.reduce((a, o) => a + (b[o] || 0), 0)));
+  if (max <= 8) max = Math.ceil(max);
   const step = (W - L - 10) / BINS;
   const y = (v) => T + (H - T - B) * (1 - v / max);
   const x = (pos) => L + ((W - L - 10) * pos) / Math.max(1, total);
   const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": label });
-  for (let i = 0; i <= 4; i++) {
-    const v = (max * i) / 4;
+  for (const v of ticks(max, true)) {
     svg.append(s("line", { class: "grid", x1: L, x2: W - 10, y1: y(v), y2: y(v) }),
       s("text", { class: "axis-label", x: L - 6, y: y(v) + 4, "text-anchor": "end" }, num(Math.round(v))));
   }
@@ -421,7 +435,8 @@ async function showChart(rule, panel, button) {
   panel.replaceChildren(legend,
     h("h4", {}, t("ch_time_h")),
     ...(categories.length
-      ? [h("p", { class: "note" }, note, unknown ? ` ${t("ch_unknown", { n: num(unknown) })}.` : "", " ", t("ch_mode"), ": ", mode), timeBox]
+      ? [h("p", { class: "note" }, note, unknown ? ` ${t("ch_unknown", { n: num(unknown) })}.` : ""),
+         h("p", { class: "note" }, h("label", {}, `${t("ch_mode")}: `, mode)), h("p", { class: "note" }, t("ch_mode_note")), timeBox]
       : [h("p", { class: "note" }, t("ch_no_time"))]),
     h("h4", {}, t("ch_order_h")),
     h("p", { class: "note" }, t("ch_order_note", { n: num(total) })),
@@ -437,37 +452,42 @@ function card(rule, index, count) {
       h("button", { type: "button", title: t("up"), "aria-label": t("up"), disabled: index === 0, onclick: () => move(rule.id, -1) }, "↑"),
       h("button", { type: "button", title: t("down"), "aria-label": t("down"), disabled: index === count - 1, onclick: () => move(rule.id, 1) }, "↓")));
   const datasets = h("div", { class: "datasets-line" }, `${t("datasets")}: `, rule.datasets.map((d) => d.label).join("  ·  "));
-  const panel = h("div", { class: "list-panel", hidden: true });
   let result;
   if (rule.status !== "evaluated") {
     result = h("div", { class: "result" }, h("span", { class: "status bad" }, t("not_evaluated")),
       h("span", { class: "muted small" }, `${t("reason")}: ${rule.reason || rule.reason_code}`));
   } else {
-    const parts = SIGNAL_OUTCOMES.filter((o) => rule.counts[o] > 0).map((o) => {
-      const b = h("button", { type: "button", onclick: () => showList(rule, o, panel, b) }, t("see_list"));
-      return h("span", { class: "outcome", title: t("tip_" + o) }, h("strong", {}, num(rule.counts[o])), outcomeLabel(o), " [", b, "]");
-    });
+    const d = when(rule.evaluated_at);
+    const headline = rule.signals === 0 ? t("no_signal", { d }) : rule.signals === 1 ? t("signals_one", { d })
+      : t("signals_at", { n: num(rule.signals), d });
+    const parts = SIGNAL_OUTCOMES.filter((o) => rule.counts[o] > 0).map((o) =>
+      h("span", { class: "outcome", title: t("tip_" + o) }, h("strong", {}, num(rule.counts[o])), " ", outcomeLabel(o)));
     result = h("div", { class: "result" },
-      rule.signals
-        ? h("span", { class: "big status warn" }, t("signals_at", { n: num(rule.signals), d: when(rule.evaluated_at) }))
-        : h("span", { class: "big status good" }, t("no_signal", { d: when(rule.evaluated_at) })),
+      h("span", { class: "big status " + (rule.signals ? "warn" : "good") }, headline),
       h("span", { class: "muted small" }, t("of_records", { n: num(rule.total) })),
-      h("div", { style: "flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 18px" }, parts));
+      parts.length ? h("div", { class: "breakdown" }, parts) : null);
   }
   const details = (key, body) => h("details", {}, h("summary", {}, t(key)), h("div", {}, body));
   const chartPanel = h("div", { class: "chart-panel", hidden: true });
-  const chartButton = rule.status === "evaluated" && rule.signals
+  const listPanel = h("div", { class: "list-panel", hidden: true });
+  const flagged = rule.status === "evaluated" && rule.signals;
+  const chartButton = flagged
     ? h("button", { class: "chart-btn", type: "button", "data-chart": rule.id, onclick: (ev) => showChart(rule, chartPanel, ev.currentTarget) }, t("chart_btn"))
+    : null;
+  const listButton = flagged
+    ? h("button", { class: "chart-btn", type: "button", "data-list": rule.id, onclick: (ev) => showList(rule, listPanel, ev.currentTarget) }, t("list_btn"))
     : null;
   return h("article", { class: "card", lang: rule.language || null },
     head,
     rule.text ? h("p", { style: "margin:4px 0" }, rule.text) : null,
     datasets,
-    details("justification", h("p", {}, rule.justification || "–")),
-    details("exceptions", rule.exceptions?.length ? h("ul", {}, rule.exceptions.map((e) => h("li", {}, e))) : h("p", {}, t("no_exceptions"))),
-    rule.examples?.length ? details("examples", h("ul", {}, rule.examples.map((e) => h("li", {}, e.case, " → ", h("em", {}, e.expected))))) : null,
-    details("history", ruleHistory(rule)), chartButton,
-    result, chartPanel, panel);
+    result,
+    h("div", { class: "toggles" },
+      details("justification", h("p", {}, rule.justification || "–")),
+      details("exceptions", rule.exceptions?.length ? h("ul", {}, rule.exceptions.map((e) => h("li", {}, e))) : h("p", {}, t("no_exceptions"))),
+      rule.examples?.length ? details("examples", h("ul", {}, rule.examples.map((e) => h("li", {}, e.case, " → ", h("em", {}, e.expected))))) : null,
+      details("history", ruleHistory(rule)), chartButton, listButton),
+    chartPanel, listPanel);
 }
 
 function renderRules() {

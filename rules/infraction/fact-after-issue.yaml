@@ -19,7 +19,7 @@ description:
     - case: "Fato em 2020-03-01 e lavratura em 2020-03-05"
       expected: "Conforme"
     - case: "Fato em 2020-03-09 e lavratura em 2020-03-05"
-      expected: "Sinal: fato posterior à lavratura"
+      expected: "Sinalizar: fato posterior à lavratura"
 
 sources:
   ibama_autos:

@@ -146,7 +146,7 @@ section.tiles { align-items: start; }
 .card details[open] { display: block; }
 .card details summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: .88rem; }
 .card details > div { margin: 6px 0 4px; font-size: .9rem; }
-.result { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline; }
+.result { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline; }
 .result .big { font-size: 1.15rem; font-weight: 700; }
 .outcome { display: inline-flex; gap: 6px; align-items: baseline; font-size: .9rem; }
 .outcome button { font: inherit; font-size: .82rem; border: 0; background: none; color: var(--accent); cursor: pointer; padding: 0; }
@@ -179,3 +179,10 @@ section.tiles { align-items: start; }
 .chart .bar-outputs { fill: var(--series-4); }
 .chart .bar-publish { fill: var(--series-5); }
 .chart .bar-download { fill: var(--series-1); }
+
+.breakdown { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: .88rem; color: var(--text-2); }
+.toggles { margin-top: 6px; }
+.toggles details, .toggles .chart-btn { margin: 6px 14px 0 0; }
+.list-panel h4 { font-size: .88rem; margin: 10px 0 2px; }
+.list-panel h4 a { font-weight: 400; margin-left: 8px; }
+.chart-panel select { font: inherit; font-size: .85rem; }

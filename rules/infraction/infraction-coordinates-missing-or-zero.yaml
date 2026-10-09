@@ -21,9 +21,9 @@ description:
     - case: "Auto de 2015 em (-3,1; -60,0)"
       expected: "Conforme"
     - case: "Auto de 2012 em (0; 0)"
-      expected: "Sinal"
+      expected: "Sinalizar"
     - case: "Auto de 2020 sem latitude"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_autos:

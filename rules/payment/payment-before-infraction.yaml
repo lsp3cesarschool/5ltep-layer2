@@ -17,7 +17,7 @@ description:
     - case: "Auto em 10/03/2015, pagamento em 20/04/2015"
       expected: "Conforme"
     - case: "Auto em 10/03/2015, pagamento em 20/02/2015"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_arrecadacao:

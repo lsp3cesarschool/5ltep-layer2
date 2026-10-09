@@ -21,7 +21,7 @@ description:
     - case: "Autorizado 3.5, explorado 3.2"
       expected: "Conforme"
     - case: "Autorizado 3.5, explorado 4.1"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_if100:

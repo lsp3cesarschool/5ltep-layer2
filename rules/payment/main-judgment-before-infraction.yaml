@@ -17,7 +17,7 @@ description:
     - case: "Auto em 01/02/2016, julgamento em 01/06/2017"
       expected: "Conforme"
     - case: "Auto em 01/02/2016, julgamento em 01/06/2015"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_julgamentos:

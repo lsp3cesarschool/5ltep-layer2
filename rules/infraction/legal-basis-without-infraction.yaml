@@ -20,7 +20,7 @@ description:
     - case: "Registro com SEQ_AUTO_INFRACAO presente no extrato de autos"
       expected: "Conforme"
     - case: "Registro com SEQ_AUTO_INFRACAO ausente do extrato de autos"
-      expected: "Sinal: vínculo sem correspondência"
+      expected: "Sinalizar: vínculo sem correspondência"
 
 sources:
   ibama_filhos:

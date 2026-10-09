@@ -17,7 +17,7 @@ description:
     - case: "Embargo em 2018-05-01, desembargo em 2019-02-01"
       expected: "Conforme"
     - case: "Embargo em 2018-05-01, desembargo em 2017-12-01"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_embargo:

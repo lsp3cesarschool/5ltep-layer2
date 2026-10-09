@@ -20,7 +20,7 @@ description:
     - case: "Licença de Operação emitida em 01/01/2015, vence em 01/01/2025"
       expected: "Conforme"
     - case: "Licença de Operação emitida em 01/01/2015, vence em 02/01/2025"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_licencas:

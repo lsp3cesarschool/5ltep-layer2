@@ -18,7 +18,7 @@ description:
     - case: "Início 2019-01-01, fim 2019-02-01"
       expected: "Conforme"
     - case: "Início 2019-02-01, fim 2019-01-01"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_autos:

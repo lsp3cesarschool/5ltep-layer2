@@ -159,8 +159,10 @@ def write(run: dict, out: Path, rules_root: Path) -> dict:
         target = data / "rules" / f"{card['id']}.json"
         if entry["status"] == EVALUATED:
             _write(target, {"rule": card["id"], "rule_version": card["rule_version"], "evaluated_at": entry["evaluated_at"],
-                            **ident, "numbering": "registro por arquivo do recurso; 1 = primeira linha após o cabeçalho",
-                            "sources": {sid: {"label": s["resource"], "sha256": s["sha256"], "records": s.get("records")}
+                            **ident, "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
+                            "sources": {sid: {"label": s["resource"], "file": s.get("file"), "url": s.get("url"),
+                                              "archive_members": s.get("archive_members"), "sha256": s["sha256"],
+                                              "records": s.get("records")}
                                         for sid, s in entry["sources"].items()},
                             "counts": entry["counts"], "total": entry["total"], "records": entry["records"],
                             "members": entry["members"], "by_member": entry["by_member"], "by_period": entry["by_period"],

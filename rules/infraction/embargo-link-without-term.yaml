@@ -18,7 +18,7 @@ description:
     - case: "Auto cita 654321-C e o termo 654321 série C está publicado"
       expected: "Conforme"
     - case: "Auto cita 654321-C e o termo não está publicado"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_autos:

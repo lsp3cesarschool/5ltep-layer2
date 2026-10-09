@@ -19,7 +19,7 @@ description:
     - case: "Emissão 01/02/20, exploração 15/06/20, validade 01/02/21"
       expected: "Conforme"
     - case: "Emissão 01/02/20, exploração 15/03/21, validade 01/02/21"
-      expected: "Sinal"
+      expected: "Sinalizar"
 
 sources:
   ibama_if100:

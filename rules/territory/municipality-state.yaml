@@ -23,7 +23,7 @@ description:
     - case: "COD_MUNICIPIO 2611606 (Recife) com UF PE"
       expected: "Conforme"
     - case: "COD_MUNICIPIO 2611606 (Recife) com UF AL"
-      expected: "Divergência: a tabela do TSE indica PE"
+      expected: "Sinalizar: a tabela do TSE indica PE"
 
 sources:
   ibama_autos:
