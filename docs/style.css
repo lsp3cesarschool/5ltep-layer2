@@ -188,6 +188,8 @@ section.tiles { align-items: start; }
 .chart-panel select { font: inherit; font-size: .85rem; }
 
 /* key numbers lead to their section */
+/* top tiles: one height across the row */
+#tiles { align-items: stretch; }
 .tile.go { cursor: pointer; }
 .tile.go:hover, .tile.go:focus-visible { border-color: var(--accent); outline: none; }
 #rules-section, #sources-section, #datasets-section { scroll-margin-top: 16px; }
