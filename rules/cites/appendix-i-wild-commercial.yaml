@@ -1,0 +1,50 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Licença CITES de espécie do Apêndice I, origem silvestre, para fins comerciais"
+  title_translations:
+    en: "CITES permit for an Appendix I species of wild origin for commercial purposes"
+  text: >
+    Sinaliza licenças não canceladas em que ANEXO = I, origem W (silvestre) e finalidade comercial aparecem juntos.
+  justification: >
+    A Convenção CITES, art. III, não admite comércio de espécimes do Apêndice I retirados da natureza
+    para fins primariamente comerciais; a Res. Conf. 12.3 define os códigos de origem (W, silvestre) e
+    de finalidade (T, comercial). A combinação é sinal para conferir regime, finalidade e exceções
+    (reexportação, pré-convenção), não declaração de comércio proibido.
+  exceptions:
+    - "Certificados pré-convenção e reexportações seguem regras próprias."
+    - "Licenças canceladas ficam fora do escopo."
+  examples:
+    - case: "Apêndice II, origem W, fins comerciais"
+      expected: "Conforme"
+    - case: "Apêndice I, origem C (criação), fins comerciais"
+      expected: "Conforme"
+    - case: "Apêndice I, origem W, fins comerciais"
+      expected: "Sinalizar"
+
+sources:
+  ibama_siscites:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: siscites-licencas-de-fauna-e-flora-emitidas
+    resource: {name: "Siscites", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      ANEXO: "Apêndice CITES da espécie (I, II, III ou NC)"
+      COD_CITES_ORIGEM_ESPECIE: "Código de origem do espécime (W = silvestre)"
+      DES_CITES_OBJETIVO_OPERACAO: "Finalidade da operação"
+      SITUACAO: "Situação da licença"
+      DAT_EMISSAO: {meaning: "Data de emissão da licença", type: date, format: "%d/%m/%Y"}
+
+check:
+  template: flag-when
+  timeline: ibama_siscites.DAT_EMISSAO
+  any:
+    - all:
+        - {column: ibama_siscites.ANEXO, equals: "I"}
+        - {column: ibama_siscites.COD_CITES_ORIGEM_ESPECIE, equals: "W"}
+        - {column: ibama_siscites.DES_CITES_OBJETIVO_OPERACAO, equals: "Commercial/Trade/Fins comerciais"}
+  where:
+    - {column: ibama_siscites.SITUACAO, not_equals: "Licença Cancelada"}

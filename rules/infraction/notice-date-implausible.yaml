@@ -1,0 +1,38 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Data de lavratura do auto fora de faixa plausível"
+  title_translations:
+    en: "Infraction notice date outside a plausible range"
+  text: >
+    Sinaliza autos com data de lavratura anterior a 1970 ou posterior ao dia da rodada.
+  justification: >
+    O extrato traz autos desde 1977 (órgãos que antecederam o IBAMA); data de lavratura anterior a 1970
+    ou no futuro indica erro de digitação do ano. É sinal para revisão.
+  exceptions:
+    - "Autos de órgãos antecessores podem ter datas antigas legítimas a partir da década de 1970."
+  examples:
+    - case: "Lavratura em 1998-07-01"
+      expected: "Conforme"
+    - case: "Lavratura em 2098-07-01"
+      expected: "Sinalizar"
+
+sources:
+  ibama_autos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-auto-de-infracao
+    resource: {name: "Autos de infração", format: CSV}
+    archive: {type: zip, members: "auto_infracao_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      DAT_HORA_AUTO_INFRACAO: {meaning: "Data e hora de lavratura do auto", type: date, format: ["%Y-%m-%d %H:%M:%S", "%Y-%m-%d"]}
+
+check:
+  template: flag-when
+  timeline: ibama_autos.DAT_HORA_AUTO_INFRACAO
+  any:
+    - {column: ibama_autos.DAT_HORA_AUTO_INFRACAO, before: "1970-01-01"}
+    - {column: ibama_autos.DAT_HORA_AUTO_INFRACAO, after: "today"}

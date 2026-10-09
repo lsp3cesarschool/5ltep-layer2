@@ -1,0 +1,40 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Data do embargo fora de faixa plausível"
+  title_translations:
+    en: "Embargo date outside a plausible range"
+  text: >
+    Sinaliza termos de embargo com data anterior à criação do IBAMA (22/02/1989) ou posterior ao dia da rodada.
+  justification: >
+    O IBAMA foi criado pela Lei 7.735, de 22/02/1989; um embargo do IBAMA não pode ser anterior a essa
+    data nem estar no futuro. Datas assim indicam erro de digitação do ano (os gráficos mostraram
+    embargos em 1667 e 2063). É sinal para revisão.
+  exceptions:
+    - "Termos herdados de órgãos anteriores ao IBAMA, se existirem, teriam data anterior a 1989."
+  examples:
+    - case: "Embargo em 2015-03-10"
+      expected: "Conforme"
+    - case: "Embargo em 1667-05-04"
+      expected: "Sinalizar"
+    - case: "Embargo em 2063-01-20"
+      expected: "Sinalizar"
+
+sources:
+  ibama_embargo:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-termo-de-embargo
+    resource: {name: "Termos de embargo", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      DAT_EMBARGO: {meaning: "Data e hora do embargo", type: datetime, format: "%Y-%m-%d %H:%M:%S"}
+
+check:
+  template: flag-when
+  timeline: ibama_embargo.DAT_EMBARGO
+  any:
+    - {column: ibama_embargo.DAT_EMBARGO, before: "1989-02-22"}
+    - {column: ibama_embargo.DAT_EMBARGO, after: "today"}

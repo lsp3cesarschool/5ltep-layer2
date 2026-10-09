@@ -156,6 +156,7 @@ def evaluate(rule: dict, reads: dict[str, Read]) -> dict:
             con.execute(f"CREATE TABLE {_ident('src_' + source_id)} AS SELECT {cols} "
                         f"FROM read_csv(?, header = true, all_varchar = true, delim = ',', quote = '\"')",
                         [str(read.path)])
+        con.execute("SET TimeZone = 'UTC'")              # "today" in a rule is the day of the run in UTC
         con.execute("SET enable_external_access = false")
         con.execute("SET lock_configuration = true")
         _, sql = templates.statement(rule["check"], rule["sources"])

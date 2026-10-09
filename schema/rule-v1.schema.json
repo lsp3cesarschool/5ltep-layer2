@@ -475,6 +475,13 @@
         "timeline": {
           "$ref": "#/$defs/column_ref",
           "description": "Optional: a date column of the evaluated source; the dashboard charts the outcomes per year of it."
+        },
+        "expect": {
+          "enum": [
+            "present",
+            "absent"
+          ],
+          "description": "present (default): the key must exist in the lookup source; absent: the lookup source is a watch list and a key found in it is the signal."
         }
       }
     },
@@ -693,6 +700,14 @@
           "minLength": 1,
           "maxLength": 5,
           "description": "lookup-exists: the `from` field holds several keys separated by this text; every one must exist."
+        },
+        "normalize": {
+          "enum": [
+            "lower",
+            "binomial",
+            "before_parenthesis"
+          ],
+          "description": "Same normalization on both sides of a text key: lower case; binomial (genus and epithet, lower case); before_parenthesis (text before the first parenthesis, lower case)."
         }
       }
     },
@@ -762,6 +777,12 @@
             },
             "before": {
               "type": "string"
+            },
+            "after": {
+              "type": "string"
+            },
+            "on_or_before": {
+              "type": "string"
             }
           }
         },
@@ -798,7 +819,7 @@
           }
         }
       ],
-      "description": "A condition on one column (text, or number/date when the column is typed), or a group: all / any."
+      "description": "A condition on one column (text, or number/date when the column is typed), or a group: all / any. Date comparisons accept \"today\" (the day of the run)."
     },
     "flag_when": {
       "description": "A record is a signal when any of the conditions holds.",

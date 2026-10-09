@@ -77,12 +77,14 @@ class Columns:
         return f"(NOT {self.empty(ref)} AND {self.typed(ref, as_date)} IS NULL)"
 
 
-COMPARISONS = {"at_least": ">=", "below": "<", "on_or_after": ">=", "before": "<"}
+COMPARISONS = {"at_least": ">=", "below": "<", "on_or_after": ">=", "before": "<", "after": ">", "on_or_before": "<="}
 
 
 def _typed_literal(value, spec: dict) -> str:
     kind = spec.get("type", "text")
     if kind in ("date", "datetime"):
+        if str(value) == "today":          # the day of the run (UTC)
+            return "CAST(current_date AS DATE)" if kind == "date" else "CAST(current_date AS TIMESTAMP)"
         return f"CAST({_literal(str(value))} AS {'DATE' if kind == 'date' else 'TIMESTAMP'})"
     if kind == "number":
         return _literal(float(value))
@@ -128,17 +130,28 @@ def where_sql(conditions: list[dict], cols: Columns) -> str:
 
 # --- templates: each returns (evaluated source, FROM clause, CASE expression) ----------------------
 
-def _key(ref: str, cols: Columns) -> str:
+NORMALIZE = {
+    "lower": "lower({x})",
+    # genus and epithet: "Manilkara huberi (Ducke) A.Chev." -> "manilkara huberi"
+    "binomial": "lower(array_to_string(list_slice(string_split(regexp_replace({x}, '\\s+', ' ', 'g'), ' '), 1, 2), ' '))",
+    # text before the first parenthesis: "glifosato (glicina substituída) (480 g/L)" -> "glifosato"
+    "before_parenthesis": "lower(trim(split_part({x}, '(', 1)))",
+}
+
+
+def _key(ref: str, cols: Columns, normalize: str | None = None) -> str:
     """A key compared as a number when its column is declared `type: number` (so 1234567 and
-    1234567.0000000000 match), else as trimmed text."""
-    return cols.typed(ref) if cols.spec(ref).get("type") == "number" else cols.raw(ref)
+    1234567.0000000000 match), else as trimmed text, normalized the same way on both sides."""
+    if cols.spec(ref).get("type") == "number":
+        return cols.typed(ref)
+    return NORMALIZE[normalize].format(x=cols.raw(ref)) if normalize else cols.raw(ref)
 
 
 def _lookup_key(key: dict, cols: Columns) -> str:
     """The key of the lookup source: one column, or several joined by `to_join`."""
     to = key["to"] if isinstance(key["to"], list) else [key["to"]]
     if len(to) == 1:
-        return _key(to[0], cols)
+        return _key(to[0], cols, key.get("normalize"))
     sep = _literal(key.get("to_join", "-"))
     return " || ".join(f"coalesce({cols.raw(r)}, '')" if n == 0 else f"{sep} || coalesce({cols.raw(r)}, '')"
                        for n, r in enumerate(to))
@@ -159,21 +172,24 @@ def lookup_equals(check: dict, sources: dict):
             f"WHEN {cols.invalid(key)} THEN 'invalid_value' "
             f"WHEN l.k IS NULL THEN 'key_not_found' WHEN l.n > 1 THEN 'ambiguous_key' "
             f"WHEN {cols.raw(val)} = l.v THEN 'match' ELSE 'mismatch' END")
-    return f_src, f"{ident('src_' + f_src)} AS f LEFT JOIN {lookup} AS l ON {_key(key, cols)} = l.k", case, cols
+    return f_src, f"{ident('src_' + f_src)} AS f LEFT JOIN {lookup} AS l ON {_key(key, cols, check['key'].get('normalize'))} = l.k", case, cols
 
 
 def lookup_exists(check: dict, sources: dict):
     """The key of each record must exist in the lookup source. With `split`, the key field holds
-    several keys (e.g. "123-A,456-B"); every one must exist."""
+    several keys (e.g. "123-A,456-B"); every one must exist. With `expect: absent` the lookup source
+    is a list to watch: a key found in it is the signal."""
     f_src, t_src = split(check["key"]["from"])[0], _to_source(check["key"])
     cols = Columns(sources, {f_src: "f", t_src: "t"})
     lookup = (f"(SELECT DISTINCT {_lookup_key(check['key'], cols)} AS k FROM {ident('src_' + t_src)} AS t)")
     key = check["key"]["from"]
     f_tab = ident("src_" + f_src)
+    absent = check.get("expect") == "absent"
     if "split" not in check["key"]:
+        found = "WHEN l.k IS NULL THEN 'match' ELSE 'mismatch'" if absent else "WHEN l.k IS NULL THEN 'key_not_found' ELSE 'match'"
         case = (f"CASE WHEN {cols.empty(key)} THEN 'missing_value' WHEN {cols.invalid(key)} THEN 'invalid_value' "
-                f"WHEN l.k IS NULL THEN 'key_not_found' ELSE 'match' END")
-        return f_src, f"{f_tab} AS f LEFT JOIN {lookup} AS l ON {_key(key, cols)} = l.k", case, cols
+                f"{found} END")
+        return f_src, f"{f_tab} AS f LEFT JOIN {lookup} AS l ON {_key(key, cols, check['key'].get('normalize'))} = l.k", case, cols
     sep = _literal(check["key"]["split"])
     items = (f"(SELECT f.__member, f.__record, trim(unnest(string_split({cols.raw(key)}, {sep}))) AS item "
              f"FROM {f_tab} AS f)")

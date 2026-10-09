@@ -1,0 +1,47 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: cross_reference
+
+description:
+  language: pt-BR
+  title: "Espécie explorada fora da lista de espécies madeireiras comerciais"
+  title_translations:
+    en: "Harvested species missing from the list of commercial timber species"
+  text: >
+    Confere se o nome científico de cada árvore explorada (inventário 100%) consta da lista de espécies florestais madeireiras comerciais do Serviço Florestal Brasileiro.
+  justification: >
+    A lista do SFB (Laboratório de Produtos Florestais, nomes conferidos na Flora e Funga do Brasil)
+    reúne as espécies madeireiras comerciais. Nome explorado fora dela pode indicar erro de grafia,
+    sinonímia não resolvida ou espécie pouco comercializada. Compara gênero e espécie, em minúsculas.
+    O sinal é informativo: estar fora da lista não torna a exploração irregular.
+  exceptions:
+    - "Sinônimos e nomes populares registrados como científicos aparecem como não encontrados."
+    - "Espécies legítimas não incluídas na lista comercial também aparecem."
+  examples:
+    - case: "Manilkara huberi"
+      expected: "Conforme (na lista como Manilkara huberi (Ducke) A.Chev.)"
+    - case: "Nome científico com erro de grafia"
+      expected: "Sinalizar"
+
+sources:
+  ibama_if100:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: volumes-explorados-if-100
+    resource: {name: "Volumes Explorados - IF 100%", format: CSV}
+    archive: {type: zip, members: "volumes_explorados_if_100_ano_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      NOME_CIENTIFICO: "Nome científico da árvore explorada"
+      DATA_DA_EXPLORACAO: {meaning: "Data da exploração da árvore", type: date, format: "%d/%m/%y"}
+  sfb_madeireiras:
+    portal: https://dados.florestal.gov.br
+    dataset: especies-florestais-madeireiras-comerciais
+    resource: {name: "Dados_abertos_especies_madeireiras_SNIF_fonte_LPF_SFB", format: CSV}
+    file: {format: csv, encoding: latin-1, delimiter: ";"}
+    columns:
+      "Espécie": "Nome científico com autor"
+
+check:
+  template: lookup-exists
+  timeline: ibama_if100.DATA_DA_EXPLORACAO
+  key: {from: ibama_if100.NOME_CIENTIFICO, to: "sfb_madeireiras.Espécie", normalize: binomial}

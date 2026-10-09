@@ -1,0 +1,48 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: cross_reference
+
+description:
+  language: pt-BR
+  title: "Ingrediente ativo vendido sem produto técnico registrado no AGROFIT"
+  title_translations:
+    en: "Active ingredient sold without a registered technical product in AGROFIT"
+  text: >
+    Confere, nas vendas de 2024 em diante, se o ingrediente ativo consta como ingrediente de algum produto técnico registrado no AGROFIT (MAPA).
+  justification: >
+    A venda de agrotóxico pressupõe produto registrado; o AGROFIT lista os produtos técnicos com
+    registro e seus ingredientes ativos. Ingrediente vendido sem produto técnico no registro atual pode
+    indicar proibição, cancelamento, nome grafado de outro modo ou sal/éster registrado com outro nome.
+    Compara o texto antes do primeiro parêntese, em minúsculas. Só vendas recentes, porque o AGROFIT é a
+    foto atual do registro. É sinal para revisão.
+  exceptions:
+    - "Ingredientes registrados com outra grafia, sal ou éster aparecem como não encontrados."
+    - "Vendas anteriores a 2024 ficam fora do escopo (o registro pode ter mudado desde então)."
+  examples:
+    - case: "Glifosato vendido em 2024"
+      expected: "Conforme (há produto técnico registrado)"
+    - case: "Ingrediente vendido em 2025 sem produto técnico no AGROFIT"
+      expected: "Sinalizar"
+
+sources:
+  ibama_comercializacao:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: relatorios-de-comercializacao-de-agrotoxicos
+    resource: {name: "Dados - CSV", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      "Ingrediente ativo": "Ingrediente ativo vendido"
+      ANO: {meaning: "Ano das vendas", type: number, decimal: "."}
+  mapa_agrofit:
+    portal: https://dados.agricultura.gov.br
+    dataset: sistema-de-agrotoxicos-fitossanitarios-agrofit
+    resource: {name: "Produto Técnico", format: ".CSV"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      "INGREDIENTE_ATIVO(GRUPO_QUIMICI)(CONCENTRACAO)": "Ingrediente ativo (grupo químico) (concentração) do produto técnico registrado"
+
+check:
+  template: lookup-exists
+  key: {from: "ibama_comercializacao.Ingrediente ativo", to: "mapa_agrofit.INGREDIENTE_ATIVO(GRUPO_QUIMICI)(CONCENTRACAO)", normalize: before_parenthesis}
+  where:
+    - {column: ibama_comercializacao.ANO, at_least: 2024}

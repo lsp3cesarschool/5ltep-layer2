@@ -1,0 +1,44 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Intensidade de corte acima de 10 m³/ha em manejo sem máquinas no arraste"
+  title_translations:
+    en: "Cutting intensity above 10 m³/ha in forest management without machines for skidding"
+  text: >
+    Confere se a intensidade de corte dos planos de manejo da Amazônia Legal sem máquinas no arraste não passa de 10 m³/ha.
+  justification: >
+    A Resolução CONAMA 406/2009, art. 5º, limita a intensidade de corte na Amazônia a 30 m³/ha com
+    máquinas no arraste e a 10 m³/ha sem máquinas, salvo estudos que justifiquem outro valor. Valores
+    acima indicam erro de unidade ou de registro, ou plano que precisa dessa justificativa. Intensidade
+    com ponto decimal. É sinal para revisão.
+  exceptions:
+    - "A norma admite intensidade diferente com estudos técnicos aprovados."
+    - "Planos sem método de extração informado ficam fora do escopo."
+  examples:
+    - case: "Intensidade 6.5 m³/ha"
+      expected: "Conforme"
+    - case: "Intensidade 25.0 m³/ha"
+      expected: "Sinalizar"
+
+sources:
+  ibama_pmfs:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: sinaflor-pmfs-amazonia-legal
+    resource: {name: "PMFS Amazônia Legal", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      INTENSIDADE_CORTE: {meaning: "Intensidade de corte autorizada, em m³/ha", type: number, decimal: "."}
+      METODO_EXTRACAO: "Método de extração (I: com máquinas no arraste; II: sem máquinas)"
+      DATA_DE_EMISSAO: {meaning: "Data de emissão da autorização", type: date, format: "%d/%m/%y"}
+
+check:
+  template: field-comparison
+  timeline: ibama_pmfs.DATA_DE_EMISSAO
+  left: ibama_pmfs.INTENSIDADE_CORTE
+  op: "<="
+  right: 10
+  where:
+    - {column: ibama_pmfs.METODO_EXTRACAO, equals: "II - Sem utilização de máquinas para o arraste de toras"}

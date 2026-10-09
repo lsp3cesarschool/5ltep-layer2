@@ -1,0 +1,55 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: cross_reference
+
+description:
+  language: pt-BR
+  title: "Licença CITES comercial de espécime silvestre de espécie da lista de fauna ameaçada"
+  title_translations:
+    en: "Commercial CITES permit for a wild specimen of a threatened Brazilian fauna species"
+  text: >
+    Sinaliza licenças não canceladas, de origem silvestre (W) e finalidade comercial, cuja espécie consta da lista de fauna ameaçada do MMA (2021).
+  justification: >
+    Espécies da fauna ameaçada têm captura e comércio restritos (Portaria MMA 148/2022 e lista de
+    2021 publicada pelo MMA). Uma licença comercial de espécime retirado da natureza de espécie da lista
+    pede conferência de regime, origem e autorização. Compara gênero e espécie (as duas primeiras
+    palavras), em minúsculas. A lista do MMA inclui espécies que saíram da categoria de ameaça em 2021;
+    o sinal é informativo.
+  exceptions:
+    - "A lista do MMA traz também espécies que deixaram de ser ameaçadas em 2021 (categoria LC)."
+    - "Espécies estrangeiras não constam da lista nacional e nunca são sinalizadas por esta regra."
+  examples:
+    - case: "Licença comercial W de Arapaima gigas (fora da lista)"
+      expected: "Conforme"
+    - case: "Licença comercial W de espécie da lista do MMA"
+      expected: "Sinalizar"
+
+sources:
+  ibama_siscites:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: siscites-licencas-de-fauna-e-flora-emitidas
+    resource: {name: "Siscites", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      NOM_ESPECIE: "Nome científico da espécie licenciada"
+      COD_CITES_ORIGEM_ESPECIE: "Código de origem do espécime (W = silvestre)"
+      DES_CITES_OBJETIVO_OPERACAO: "Finalidade da operação"
+      SITUACAO: "Situação da licença"
+      DAT_EMISSAO: {meaning: "Data de emissão da licença", type: date, format: "%d/%m/%Y"}
+  mma_fauna_ameacada:
+    portal: https://dados.mma.gov.br
+    dataset: especies-ameacadas
+    resource: {name: "FAUNA - Lista de Espécies Ameaçadas - 2021.csv", format: CSV}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      "Espécie ou Subespécie": "Nome científico da espécie ou subespécie da lista"
+
+check:
+  template: lookup-exists
+  timeline: ibama_siscites.DAT_EMISSAO
+  expect: absent
+  key: {from: ibama_siscites.NOM_ESPECIE, to: "mma_fauna_ameacada.Espécie ou Subespécie", normalize: binomial}
+  where:
+    - {column: ibama_siscites.COD_CITES_ORIGEM_ESPECIE, equals: "W"}
+    - {column: ibama_siscites.DES_CITES_OBJETIVO_OPERACAO, equals: "Commercial/Trade/Fins comerciais"}
+    - {column: ibama_siscites.SITUACAO, not_equals: "Licença Cancelada"}
