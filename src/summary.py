@@ -8,6 +8,7 @@ dashboard) and no value read from the portals.
 from __future__ import annotations
 
 import json
+import math
 from pathlib import Path
 
 OUTCOMES = [("mismatch", "mismatch"), ("key_not_found", "key not found"), ("missing_value", "missing value"),
@@ -33,7 +34,7 @@ def render(page: dict) -> str:
     totals = page.get("totals", {})
     when = (page.get("generated_at") or "").replace("T", " ")[:16]
     run = f"[{page.get('run_id')}]({page['run_url']})" if page.get("run_url") else str(page.get("run_id", "–"))
-    rate = f"{totals['l2_rate'] * 100:.1f}%" if totals.get("l2_rate") is not None else "–"
+    rate = f"{math.floor(totals['l2_rate'] * 1000 + 1e-9) / 10:.1f}%" if totals.get("l2_rate") is not None else "–"
     history = page.get("history") or []
     previous = history[-2]["rules"] if len(history) >= 2 else {}
 

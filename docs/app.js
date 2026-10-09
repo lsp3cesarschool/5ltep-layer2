@@ -182,6 +182,9 @@ const num = (n) => (n === null || n === undefined ? "–" : fmt.format(n));
 // a number with up to `digits` decimals, in the page's language (0,58 in Portuguese, 0.58 in English)
 const dec = (n, digits = 1) => (n === null || n === undefined || Number.isNaN(Number(n)) ? "–"
   : Number(n).toLocaleString(LANG === "pt" ? "pt-BR" : "en", { maximumFractionDigits: digits }));
+// a percentage with one decimal, rounded down: 99,98% shows 99,9%, so only a rate without signals reads 100,0%
+const pct = (rate) => (Math.floor(rate * 1000 + 1e-9) / 10).toLocaleString(LANG === "pt" ? "pt-BR" : "en",
+  { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 // Dates in the format of the page's language, always in UTC: 09/10/2026 00:17 (pt), 9 Oct 2026, 00:17 (en).
 // English uses the month's name, so that day and month are never confused.
 const LOCALE = LANG === "pt" ? "pt-BR" : "en-GB";
@@ -228,9 +231,12 @@ function renderTiles() {
   const records = evaluated.reduce((a, r) => a + (r.total || 0), 0);
   const files = new Set();
   for (const r of evaluated) for (const d of r.datasets) files.add(d.label);
+  // L2 pass rate (layer2.json since 09/10/2026; computed from the rules for data published before that)
+  const checks = s.checks ?? evaluated.reduce((a, r) => a + (r.total || 0) - ((r.counts || {}).out_of_scope || 0), 0);
+  const rate = s.l2_rate !== undefined ? s.l2_rate : (checks ? 1 - s.signals / checks : null);
   el("tiles").replaceChildren(
-    tile(t("t_rate"), s.l2_rate == null ? "–" : `${(s.l2_rate * 100).toLocaleString(LANG === "pt" ? "pt-BR" : "en", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`,
-      s.l2_rate == null ? t("t_rate_none") : t("t_rate_note", { s: num(s.signals), c: num(s.checks) }), "", "rules-section"),
+    tile(t("t_rate"), rate === null ? "–" : `${pct(rate)}%`,
+      rate === null ? t("t_rate_none") : t("t_rate_note", { s: num(s.signals), c: num(checks) }), "", "rules-section"),
     tile(t("t_rules"), `${num(s.evaluated)} / ${num(s.rules)}`,
       s.not_evaluated ? t("t_rules_note", { n: s.not_evaluated }) : t("t_rules_all"), s.not_evaluated ? "bad" : "", "rules-section"),
     tile(t("t_signals"), num(s.signals), t("t_signals_note", { n: evaluated.filter((r) => r.signals).length }),
