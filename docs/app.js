@@ -6,7 +6,7 @@
 const I18N = {
   en: {
     back: "← Back to the repository", eyebrow: "5L-TEP · Layer 2 · Semantic Policies", loading: "Loading…",
-    title: "Semantic policies over open data", run: "Run now ↗", rules_btn: "Rule files ↗", manifest_btn: "Manifest ↗",
+    title: "Semantic policies over open data", run: "Run now ↗", rules_btn: "Rule files ↗", manifest_btn: "Manifest ↗", signals_btn: "Latest results (plain text) ↗",
     intro: "Each rule crosses data published on CKAN open data portals. Every week this repository downloads each resource once, records whether each portal answered and what it served, and counts, for every rule, the records that deserve a second look. A signal is something to review, never a verdict on the data; no value from the portals is published here, only counts and record numbers.",
     subtitle: "Last run {at} · {env}", env_actions: "GitHub Actions", env_local: "local test run: not a published result",
     no_data: "No run has been published yet.",
@@ -73,7 +73,7 @@ const I18N = {
   pt: {
     back: "← Voltar ao repositório", eyebrow: "5L-TEP · Camada 2 · Políticas Semânticas", loading: "Carregando…",
     title: "Políticas semânticas sobre dados abertos", run: "Rodar agora ↗", rules_btn: "Arquivos de regras ↗",
-    manifest_btn: "Manifesto ↗",
+    manifest_btn: "Manifesto ↗", signals_btn: "Resultados recentes (texto simples) ↗",
     intro: "Cada regra cruza dados publicados em portais de dados abertos CKAN. Toda semana este repositório baixa cada recurso uma vez, registra se cada portal respondeu e o que entregou, e conta, para cada regra, os registros que merecem um segundo olhar. Um sinal é algo a revisar, nunca um veredito sobre os dados; nenhum valor dos portais é publicado aqui, só contagens e números de registro.",
     subtitle: "Última rodada {at} · {env}", env_actions: "GitHub Actions", env_local: "ensaio local: não é resultado publicado",
     no_data: "Nenhuma rodada foi publicada ainda.",

@@ -5,7 +5,7 @@ is committed, this module checks the artifact: only the expected paths, valid JS
 limits, the earlier history kept as it was, record lists made only of numbers, and no published
 field outside the expected ones. Then it copies the files into the repository: `results/rules/` and
 `docs/data/rules/` are replaced as a whole (a rule removed from rules/ disappears from the page),
-`run_log.jsonl` is appended.
+`run_log.jsonl` is appended, and `signals.md` (plain-text summary) is rebuilt from the copied JSON.
 """
 
 from __future__ import annotations
@@ -16,6 +16,8 @@ import shutil
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+
+from . import summary
 
 ALLOWED = [
     r"results/run_log\.jsonl", r"results/manifest\.json", r"results/sources\.json", r"results/history\.json",
@@ -96,4 +98,5 @@ def apply(artifact: Path, repo: Path) -> list[str]:
     log.append({"run_id": run_id, "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 "accept_s": round(time.monotonic() - t0, 2), "files": len(files)})
     log_file.write_text(json.dumps(log[-200:], ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    summary.write(repo)
     return files

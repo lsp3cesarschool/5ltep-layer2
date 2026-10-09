@@ -90,3 +90,12 @@ def test_rules_folders_are_replaced(artifact, tmp_path):
     stale.write_text("{}", encoding="utf-8")
     accept.apply(artifact, repo)
     assert not stale.exists()
+
+
+def test_signals_md_is_written_with_counts_only(artifact, tmp_path):
+    repo = tmp_path / "repo"
+    accept.apply(artifact, repo)
+    text = (repo / "signals.md").read_text(encoding="utf-8")
+    assert text.startswith("# Signals in ")
+    assert "## Rules (most signals first)" in text and "## Source health" in text
+    assert "not evaluated" in text  # unreachable sources: every rule is not evaluated, with its reason

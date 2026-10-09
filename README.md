@@ -13,6 +13,7 @@ review, never a verdict on the data.
 | Resource | What you find there |
 |---|---|
 | 📊 **Dashboard** | [lsp3cesarschool.github.io/5ltep-layer2](https://lsp3cesarschool.github.io/5ltep-layer2/?lang=en): each rule with its signals, charts and record numbers; source health, download and processing speed, history and provenance |
+| 📄 **Latest results (plain text)** | [`signals.md`](signals.md): every rule with its signal count and the health of each source, rebuilt by each run, readable without JavaScript |
 | 📏 **Rules** | [`rules/`](rules/): one check per file, in plain YAML |
 | 📁 **Results** | [`results/`](results/) and [`docs/data/`](docs/data/): what each run writes (counts, record numbers, hashes) |
 | 🔁 **Control experiments** | [5ltep-layer2-aneel](https://github.com/lsp3cesarschool/5ltep-layer2-aneel) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-aneel/?lang=en)) and [5ltep-layer2-recife](https://github.com/lsp3cesarschool/5ltep-layer2-recife) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-recife/?lang=en)): the same code on the portals of ANEEL and of the City of Recife |
@@ -102,6 +103,7 @@ src/               loader, validator, templates, fetch, engine, outputs, accept
 schema/            JSON Schema of the rule format
 rules/             one file per rule, in subfolders
 portal.json        the portal of this instance
+signals.md         latest results in plain text (written by each run)
 docs/              dashboard (data/ is written by the runs)
 results/           results of the runs
 tests/             automated tests
