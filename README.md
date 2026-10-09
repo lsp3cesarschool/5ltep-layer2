@@ -73,12 +73,13 @@ the download speed of this portal and of the others, and how long each phase too
 
 ## Data handling and privacy
 
-Files are downloaded during the run and deleted when it ends; on GitHub, the runner itself is
-discarded after the job. The engine reads only the columns a rule declares, and publishes only
-counts, record numbers, SHA-256 hashes and metadata that CKAN already publishes, never a value read
-from the portals. Rules on health or education data use `exposure: counts`, so they publish counts
-and charts but no record numbers. The datasets keep their publishers' licences, which the dashboard
-lists with links.
+The rules follow the data minimisation principle of Brazil's General Data Protection Law (LGPD, Law
+13,709/2018), even though the portals already publish these data openly. Files are downloaded during
+the run and deleted when it ends; on GitHub, the runner itself is discarded after the job. The
+engine reads only the columns a rule declares, and publishes only counts, record numbers, SHA-256
+hashes and metadata that CKAN already publishes, never a value read from the portals. Rules on
+health or education data use `exposure: counts`, so they publish counts and charts but no record
+numbers. The datasets keep their publishers' licences, which the dashboard lists with links.
 
 ## Run it locally
 

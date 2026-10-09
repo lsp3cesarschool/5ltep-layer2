@@ -73,12 +73,14 @@ download deste portal e dos demais, e quanto tempo levou cada etapa.
 
 ## Tratamento de dados e privacidade
 
-Os arquivos são baixados durante a rodada e apagados quando ela termina; no GitHub, o próprio runner
-é descartado depois do job. O motor lê só as colunas que a regra declara e publica apenas contagens,
-números de registro, hashes SHA-256 e metadados que o CKAN já publica, nunca um valor lido dos
-portais. Regras sobre dados de saúde ou educação usam `exposure: counts`, e por isso publicam
-contagens e gráficos, mas não números de registro. Os datasets mantêm as licenças de seus
-publicadores, que o dashboard lista com link.
+As regras seguem o princípio da necessidade da Lei Geral de Proteção de Dados (LGPD, Lei
+13.709/2018), mesmo que os portais já publiquem esses dados abertamente. Os arquivos são baixados
+durante a rodada e apagados quando ela termina; no GitHub, o próprio runner é descartado depois do
+job. O motor lê só as colunas que a regra declara e publica apenas contagens, números de registro,
+hashes SHA-256 e metadados que o CKAN já publica, nunca um valor lido dos portais. Regras sobre
+dados de saúde ou educação usam `exposure: counts`, e por isso publicam contagens e gráficos, mas
+não números de registro. Os datasets mantêm as licenças de seus publicadores, que o dashboard lista
+com link.
 
 ## Como rodar localmente
 
