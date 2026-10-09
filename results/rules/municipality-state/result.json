@@ -1,0 +1,280 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "municipality-state",
+ "rule_version": "0.4.0",
+ "origin": "cross_reference",
+ "file": "territory/municipality-state.yaml",
+ "folder": "territory",
+ "language": "pt-BR",
+ "title": "Código do município compatível com a UF do mesmo local",
+ "title_translations": {
+  "en": "Municipality code consistent with the state of the same place"
+ },
+ "text": "Para cada auto de infração, procura o código IBGE do município na tabela oficial de municípios publicada pelo TSE e confere se a UF do auto é a UF desse município.\n",
+ "justification": "Município e UF do mesmo registro precisam descrever o mesmo lugar. Uma divergência pode indicar erro de digitação, de codificação ou campos preenchidos com referências diferentes. É um sinal para revisão, não um veredito sobre o auto.\n",
+ "exceptions": [
+  "Código de município extinto ou criado depois da tabela do TSE aparece como não encontrado, não como divergência.",
+  "Código ou UF vazio fica sem informação e não é contado como conforme."
+ ],
+ "template": "lookup-equals",
+ "evaluated_source": "ibama_autos",
+ "timeline": null,
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_autos",
+   "label": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração"
+  },
+  {
+   "source": "tse_municipios",
+   "label": "dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:24:56+00:00",
+ "total": 711926,
+ "counts": {
+  "match": 711112,
+  "mismatch": 0,
+  "key_not_found": 547,
+  "missing_value": 267,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 0
+ },
+ "signals": 814,
+ "signals_by_outcome": {
+  "mismatch": 0,
+  "key_not_found": 547,
+  "missing_value": 267,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/municipality-state.json",
+ "sources": {
+  "ibama_autos": {
+   "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
+   "fetch_status": "ok",
+   "sha256": "5e65aba9b3b1ba08c3098b59da7031dadb78d876fc4f4d560ddc984eb1f381e0",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
+   "file": "auto_infracao_csv.zip",
+   "files": null,
+   "archive_members": "auto_infracao_*.csv",
+   "records": 711926,
+   "members": [
+    {
+     "name": "auto_infracao_1977.csv",
+     "records": 2
+    },
+    {
+     "name": "auto_infracao_1980.csv",
+     "records": 12
+    },
+    {
+     "name": "auto_infracao_1981.csv",
+     "records": 98
+    },
+    {
+     "name": "auto_infracao_1982.csv",
+     "records": 295
+    },
+    {
+     "name": "auto_infracao_1983.csv",
+     "records": 135
+    },
+    {
+     "name": "auto_infracao_1984.csv",
+     "records": 251
+    },
+    {
+     "name": "auto_infracao_1985.csv",
+     "records": 661
+    },
+    {
+     "name": "auto_infracao_1986.csv",
+     "records": 617
+    },
+    {
+     "name": "auto_infracao_1987.csv",
+     "records": 829
+    },
+    {
+     "name": "auto_infracao_1988.csv",
+     "records": 2611
+    },
+    {
+     "name": "auto_infracao_1989.csv",
+     "records": 1423
+    },
+    {
+     "name": "auto_infracao_1990.csv",
+     "records": 3387
+    },
+    {
+     "name": "auto_infracao_1991.csv",
+     "records": 2121
+    },
+    {
+     "name": "auto_infracao_1992.csv",
+     "records": 1063
+    },
+    {
+     "name": "auto_infracao_1993.csv",
+     "records": 1312
+    },
+    {
+     "name": "auto_infracao_1994.csv",
+     "records": 2099
+    },
+    {
+     "name": "auto_infracao_1995.csv",
+     "records": 3755
+    },
+    {
+     "name": "auto_infracao_1996.csv",
+     "records": 36651
+    },
+    {
+     "name": "auto_infracao_1997.csv",
+     "records": 37761
+    },
+    {
+     "name": "auto_infracao_1998.csv",
+     "records": 33597
+    },
+    {
+     "name": "auto_infracao_1999.csv",
+     "records": 34456
+    },
+    {
+     "name": "auto_infracao_2000.csv",
+     "records": 24898
+    },
+    {
+     "name": "auto_infracao_2001.csv",
+     "records": 26814
+    },
+    {
+     "name": "auto_infracao_2002.csv",
+     "records": 37647
+    },
+    {
+     "name": "auto_infracao_2003.csv",
+     "records": 22056
+    },
+    {
+     "name": "auto_infracao_2004.csv",
+     "records": 27190
+    },
+    {
+     "name": "auto_infracao_2005.csv",
+     "records": 33104
+    },
+    {
+     "name": "auto_infracao_2006.csv",
+     "records": 25983
+    },
+    {
+     "name": "auto_infracao_2007.csv",
+     "records": 28992
+    },
+    {
+     "name": "auto_infracao_2008.csv",
+     "records": 31316
+    },
+    {
+     "name": "auto_infracao_2009.csv",
+     "records": 23285
+    },
+    {
+     "name": "auto_infracao_2010.csv",
+     "records": 21384
+    },
+    {
+     "name": "auto_infracao_2011.csv",
+     "records": 20517
+    },
+    {
+     "name": "auto_infracao_2012.csv",
+     "records": 18979
+    },
+    {
+     "name": "auto_infracao_2013.csv",
+     "records": 16184
+    },
+    {
+     "name": "auto_infracao_2014.csv",
+     "records": 15293
+    },
+    {
+     "name": "auto_infracao_2015.csv",
+     "records": 17326
+    },
+    {
+     "name": "auto_infracao_2016.csv",
+     "records": 17823
+    },
+    {
+     "name": "auto_infracao_2017.csv",
+     "records": 16885
+    },
+    {
+     "name": "auto_infracao_2018.csv",
+     "records": 17884
+    },
+    {
+     "name": "auto_infracao_2019.csv",
+     "records": 14530
+    },
+    {
+     "name": "auto_infracao_2020.csv",
+     "records": 9533
+    },
+    {
+     "name": "auto_infracao_2021.csv",
+     "records": 9662
+    },
+    {
+     "name": "auto_infracao_2022.csv",
+     "records": 12854
+    },
+    {
+     "name": "auto_infracao_2023.csv",
+     "records": 17192
+    },
+    {
+     "name": "auto_infracao_2024.csv",
+     "records": 12308
+    },
+    {
+     "name": "auto_infracao_2025.csv",
+     "records": 16273
+    },
+    {
+     "name": "auto_infracao_2026.csv",
+     "records": 12878
+    }
+   ]
+  },
+  "tse_municipios": {
+   "resource": "dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE",
+   "fetch_status": "ok",
+   "sha256": "f55c9720d221a9956279f6cb225aafcae797e0cf8ac2289040c052ab4ea7c712",
+   "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/municipio_tse_ibge/municipio_tse_ibge.zip",
+   "file": "municipio_tse_ibge.zip",
+   "files": null,
+   "archive_members": "municipio_tse_ibge.csv",
+   "records": 5571,
+   "members": [
+    {
+     "name": "municipio_tse_ibge.csv",
+     "records": 5571
+    }
+   ]
+  }
+ }
+}

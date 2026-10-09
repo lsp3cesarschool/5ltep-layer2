@@ -1,0 +1,92 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "wild-commercial-threatened-species",
+ "rule_version": "0.1.0",
+ "origin": "cross_reference",
+ "file": "cites/wild-commercial-threatened-species.yaml",
+ "folder": "cites",
+ "language": "pt-BR",
+ "title": "Licença CITES comercial de espécime silvestre de espécie da lista de fauna ameaçada",
+ "title_translations": {
+  "en": "Commercial CITES permit for a wild specimen of a threatened Brazilian fauna species"
+ },
+ "text": "Sinaliza licenças não canceladas, de origem silvestre (W) e finalidade comercial, cuja espécie consta da lista de fauna ameaçada do MMA (2021).\n",
+ "justification": "Espécies da fauna ameaçada têm captura e comércio restritos (Portaria MMA 148/2022 e lista de 2021 publicada pelo MMA). Uma licença comercial de espécime retirado da natureza de espécie da lista pede conferência de regime, origem e autorização. Compara gênero e espécie (as duas primeiras palavras), em minúsculas. A lista do MMA inclui espécies que saíram da categoria de ameaça em 2021; o sinal é informativo.\n",
+ "exceptions": [
+  "A lista do MMA traz também espécies que deixaram de ser ameaçadas em 2021 (categoria LC).",
+  "Espécies estrangeiras não constam da lista nacional e nunca são sinalizadas por esta regra."
+ ],
+ "template": "lookup-exists",
+ "evaluated_source": "ibama_siscites",
+ "timeline": "ibama_siscites.DAT_EMISSAO",
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_siscites",
+   "label": "dadosabertos.ibama.gov.br › siscites-licencas-de-fauna-e-flora-emitidas › Siscites"
+  },
+  {
+   "source": "mma_fauna_ameacada",
+   "label": "dados.mma.gov.br › especies-ameacadas › FAUNA - Lista de Espécies Ameaçadas - 2021.csv"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:23:06+00:00",
+ "total": 258580,
+ "counts": {
+  "match": 103594,
+  "mismatch": 1714,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 153272
+ },
+ "signals": 1714,
+ "signals_by_outcome": {
+  "mismatch": 1714,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/wild-commercial-threatened-species.json",
+ "sources": {
+  "ibama_siscites": {
+   "resource": "dadosabertos.ibama.gov.br › siscites-licencas-de-fauna-e-flora-emitidas › Siscites",
+   "fetch_status": "ok",
+   "sha256": "e320a1f12b98e2b86166b559a59ce2ec53417fa6fd0d4fe9b12720b8503f8051",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/CITES/licencas.csv",
+   "file": "licencas.csv",
+   "files": null,
+   "archive_members": null,
+   "records": 258580,
+   "members": [
+    {
+     "name": "licencas.csv",
+     "records": 258580
+    }
+   ]
+  },
+  "mma_fauna_ameacada": {
+   "resource": "dados.mma.gov.br › especies-ameacadas › FAUNA - Lista de Espécies Ameaçadas - 2021.csv",
+   "fetch_status": "ok",
+   "sha256": "d05dda8ece1f7d62aabfa1326c4808d5b1738bf2e7d20e3cdf74b6cab1cd14ad",
+   "url": "https://dados.mma.gov.br/dataset/41a79b71-445f-4a6a-8c70-d46af991292a/resource/544f9312-d4c6-4d12-b6ac-51bf3039bbb7/download/fauna-ameacada-2021.csv",
+   "file": "fauna-ameacada-2021.csv",
+   "files": null,
+   "archive_members": null,
+   "records": 1407,
+   "members": [
+    {
+     "name": "fauna-ameacada-2021.csv",
+     "records": 1407
+    }
+   ]
+  }
+ }
+}

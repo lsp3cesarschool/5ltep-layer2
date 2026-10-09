@@ -1,0 +1,390 @@
+{
+ "rule": "appeal-before-main-judgment",
+ "rule_version": "0.3.0",
+ "evaluated_at": "2026-10-09T10:24:41+00:00",
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
+ "sources": {
+  "ibama_julgamentos": {
+   "label": "dadosabertos.ibama.gov.br › julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama › Volume de Julgamento de Auto de Infração",
+   "file": "volumeJulgamentoAI.csv",
+   "files": null,
+   "url": "https://dadosabertos.ibama.gov.br/dados/SICAFI/AC/Volume/volumeJulgamentoAI.csv",
+   "archive_members": null,
+   "sha256": "7780312127223a853a01ced2be76b9631850ce282fc32af0e72dbf8eae81004d",
+   "records": 2917
+  }
+ },
+ "counts": {
+  "match": 490,
+  "mismatch": 115,
+  "key_not_found": 0,
+  "missing_value": 71,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 2241
+ },
+ "total": 2917,
+ "records": {
+  "mismatch": {
+   "volumeJulgamentoAI.csv": [
+    20,
+    40,
+    74,
+    82,
+    86,
+    91,
+    108,
+    129,
+    131,
+    146,
+    147,
+    196,
+    212,
+    291,
+    293,
+    378,
+    417,
+    448,
+    466,
+    480,
+    517,
+    541,
+    544,
+    546,
+    559,
+    563,
+    604,
+    618,
+    684,
+    748,
+    753,
+    755,
+    757,
+    761,
+    766,
+    767,
+    806,
+    828,
+    867,
+    871,
+    899,
+    913,
+    965,
+    984,
+    987,
+    997,
+    1033,
+    1034,
+    1059,
+    1128,
+    1135,
+    1149,
+    1153,
+    1169,
+    1181,
+    1182,
+    1211,
+    1238,
+    1240,
+    1242,
+    1245,
+    1248,
+    1268,
+    1278,
+    1283,
+    1287,
+    1302,
+    1313,
+    1318,
+    1320,
+    1324,
+    1326,
+    1337,
+    1354,
+    1371,
+    1392,
+    1404,
+    1416,
+    1440,
+    1452,
+    1456,
+    1493,
+    1496,
+    1507,
+    1524,
+    1674,
+    1709,
+    1836,
+    1858,
+    1880,
+    1888,
+    1901,
+    1903,
+    1934,
+    1978,
+    1993,
+    2002,
+    2065,
+    2289,
+    2362,
+    2442,
+    2449,
+    2451,
+    2476,
+    2477,
+    2481,
+    2552,
+    2562,
+    2565,
+    2605,
+    2630,
+    2637,
+    2683,
+    2725,
+    2738
+   ]
+  },
+  "missing_value": {
+   "volumeJulgamentoAI.csv": [
+    1,
+    2,
+    12,
+    31,
+    382,
+    456,
+    457,
+    462,
+    478,
+    542,
+    594,
+    680,
+    745,
+    773,
+    783,
+    861,
+    870,
+    873,
+    923,
+    933,
+    1051,
+    1069,
+    1112,
+    1163,
+    1192,
+    1237,
+    1249,
+    1251,
+    1252,
+    1255,
+    1256,
+    1297,
+    1298,
+    1330,
+    1350,
+    1368,
+    1369,
+    1410,
+    1438,
+    1471,
+    1503,
+    1615,
+    1659,
+    1672,
+    1686,
+    1712,
+    1851,
+    1862,
+    1943,
+    1950,
+    1951,
+    1992,
+    2088,
+    2112,
+    2126,
+    2142,
+    2157,
+    2435,
+    2610,
+    2611,
+    2698,
+    2699,
+    2833,
+    2847,
+    2862,
+    2875,
+    2881,
+    2889,
+    2892,
+    2914,
+    2917
+   ]
+  }
+ },
+ "members": [
+  {
+   "name": "volumeJulgamentoAI.csv",
+   "records": 2917
+  }
+ ],
+ "by_member": {
+  "volumeJulgamentoAI.csv": {
+   "match": 490,
+   "mismatch": 115,
+   "missing_value": 71,
+   "out_of_scope": 2241
+  }
+ },
+ "by_period": {
+  "1992": {
+   "out_of_scope": 1
+  },
+  "1995": {
+   "out_of_scope": 1
+  },
+  "1996": {
+   "mismatch": 1,
+   "out_of_scope": 10
+  },
+  "1997": {
+   "match": 8,
+   "mismatch": 2,
+   "out_of_scope": 97
+  },
+  "1998": {
+   "match": 6,
+   "mismatch": 2,
+   "out_of_scope": 117
+  },
+  "1999": {
+   "match": 9,
+   "mismatch": 8,
+   "out_of_scope": 117
+  },
+  "2000": {
+   "match": 4,
+   "mismatch": 7,
+   "out_of_scope": 70
+  },
+  "2001": {
+   "match": 12,
+   "mismatch": 6,
+   "out_of_scope": 71
+  },
+  "2002": {
+   "match": 5,
+   "mismatch": 3,
+   "out_of_scope": 33
+  },
+  "2003": {
+   "match": 5,
+   "mismatch": 1,
+   "out_of_scope": 26
+  },
+  "2004": {
+   "match": 1,
+   "mismatch": 2,
+   "out_of_scope": 38
+  },
+  "2005": {
+   "match": 7,
+   "mismatch": 8,
+   "out_of_scope": 58
+  },
+  "2006": {
+   "match": 23,
+   "mismatch": 25,
+   "out_of_scope": 71
+  },
+  "2007": {
+   "match": 12,
+   "mismatch": 3,
+   "out_of_scope": 29
+  },
+  "2008": {
+   "match": 11,
+   "mismatch": 8,
+   "out_of_scope": 24
+  },
+  "2009": {
+   "match": 10,
+   "mismatch": 4,
+   "out_of_scope": 14
+  },
+  "2010": {
+   "match": 17,
+   "mismatch": 19,
+   "out_of_scope": 16
+  },
+  "2011": {
+   "match": 12,
+   "mismatch": 2,
+   "out_of_scope": 8
+  },
+  "2012": {
+   "match": 65,
+   "mismatch": 7,
+   "out_of_scope": 18
+  },
+  "2013": {
+   "match": 115,
+   "out_of_scope": 34
+  },
+  "2014": {
+   "match": 47,
+   "out_of_scope": 21
+  },
+  "2015": {
+   "match": 51,
+   "mismatch": 3,
+   "out_of_scope": 21
+  },
+  "2016": {
+   "match": 37,
+   "out_of_scope": 11
+  },
+  "2017": {
+   "match": 18,
+   "mismatch": 1,
+   "out_of_scope": 19
+  },
+  "2018": {
+   "match": 7,
+   "out_of_scope": 16
+  },
+  "2019": {
+   "match": 4,
+   "out_of_scope": 8
+  },
+  "2020": {
+   "mismatch": 2,
+   "out_of_scope": 1
+  },
+  "2021": {
+   "out_of_scope": 1
+  },
+  "2022": {
+   "match": 1,
+   "out_of_scope": 1
+  },
+  "2024": {
+   "match": 1,
+   "out_of_scope": 1
+  },
+  "2025": {
+   "match": 2,
+   "mismatch": 1,
+   "out_of_scope": 20
+  },
+  "2026": {
+   "out_of_scope": 3
+  },
+  "unknown": {
+   "missing_value": 71,
+   "out_of_scope": 1265
+  }
+ },
+ "timeline": "ibama_julgamentos.Data Julgamento Principal"
+}

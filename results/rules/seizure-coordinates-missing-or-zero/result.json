@@ -1,0 +1,71 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "seizure-coordinates-missing-or-zero",
+ "rule_version": "0.2.0",
+ "origin": "expert",
+ "file": "seizure/seizure-coordinates-missing-or-zero.yaml",
+ "folder": "seizure",
+ "language": "pt-BR",
+ "title": "Termo de apreensão sem coordenada ou em (0,0)",
+ "title_translations": {
+  "en": "Seizure term without coordinates or at (0,0)"
+ },
+ "text": "Sinaliza termos de apreensão lavrados a partir de 2013 sem latitude ou longitude, ou com as duas iguais a zero.\n",
+ "justification": "O ponto (0,0) não é um local de apreensão no Brasil, e sim um valor padrão de sistema. A regra começa em 2013, quando o termo passou a ter coordenada em quase todos os registros. Coordenadas usam ponto decimal (diferente do auto de infração). É sinal para revisão.\n",
+ "exceptions": [
+  "Termos anteriores a 2013 ficam fora do escopo (o campo quase não era preenchido)."
+ ],
+ "template": "flag-when",
+ "evaluated_source": "ibama_apreensao",
+ "timeline": "ibama_apreensao.DT_APREENSAO",
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_apreensao",
+   "label": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-apreensao › Termo de apreensão"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:24:55+00:00",
+ "total": 157955,
+ "counts": {
+  "match": 54033,
+  "mismatch": 4103,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 99819
+ },
+ "signals": 4103,
+ "signals_by_outcome": {
+  "mismatch": 4103,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/seizure-coordinates-missing-or-zero.json",
+ "sources": {
+  "ibama_apreensao": {
+   "resource": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-apreensao › Termo de apreensão",
+   "fetch_status": "ok",
+   "sha256": "afd442f6d8af42303c6015154b26bd227eb240a778928e71063dfcf6a86db2dc",
+   "url": "https://dadosabertos.ibama.gov.br/dados/SIFISC/termo_apreensao/apreensao/apreensao_csv.zip",
+   "file": "apreensao_csv.zip",
+   "files": null,
+   "archive_members": "apreensao.csv",
+   "records": 157955,
+   "members": [
+    {
+     "name": "apreensao.csv",
+     "records": 157955
+    }
+   ]
+  }
+ }
+}

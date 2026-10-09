@@ -1,0 +1,107 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "explored-volume-above-authorized",
+ "rule_version": "0.1.0",
+ "origin": "expert",
+ "file": "forest/explored-volume-above-authorized.yaml",
+ "folder": "forest",
+ "language": "pt-BR",
+ "title": "Volume explorado acima do autorizado",
+ "title_translations": {
+  "en": "Harvested volume above the authorised volume"
+ },
+ "text": "Confere, em cada árvore do inventário 100%, se o volume explorado não passa do volume autorizado.\n",
+ "justification": "A exploração se limita ao volume autorizado para a árvore; volume explorado maior indica erro de registro ou exploração acima do autorizado (Resolução CONAMA 406/2009). Neste caso o sinal pode ser a própria situação irregular observada, e não um defeito dos dados: a regra aponta o registro sem decidir entre as duas hipóteses. O volume autorizado é estimado no inventário, então pequenos excessos são comuns. Os volumes usam ponto como separador decimal. É sinal para revisão.\n",
+ "exceptions": [
+  "Produtos diferentes da mesma árvore ou unidades diferentes (m³, st) não são distinguidos aqui."
+ ],
+ "template": "field-comparison",
+ "evaluated_source": "ibama_if100",
+ "timeline": null,
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_if100",
+   "label": "dadosabertos.ibama.gov.br › volumes-explorados-if-100 › Volumes Explorados - IF 100%"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:23:36+00:00",
+ "total": 2386115,
+ "counts": {
+  "match": 1513707,
+  "mismatch": 872408,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 0
+ },
+ "signals": 872408,
+ "signals_by_outcome": {
+  "mismatch": 872408,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/explored-volume-above-authorized.json",
+ "sources": {
+  "ibama_if100": {
+   "resource": "dadosabertos.ibama.gov.br › volumes-explorados-if-100 › Volumes Explorados - IF 100%",
+   "fetch_status": "ok",
+   "sha256": "0f106ef75db9068fcd7f91adaf9d0ae890fb064137aadd1d2d82bd9b0a093ff3",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SINAFLOR/VolumesExploradosIf100/volumes_explorados_if_100_csv.zip",
+   "file": "volumes_explorados_if_100_csv.zip",
+   "files": null,
+   "archive_members": "volumes_explorados_if_100_ano_*.csv",
+   "records": 2386115,
+   "members": [
+    {
+     "name": "volumes_explorados_if_100_ano_2017.csv",
+     "records": 3222
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2018.csv",
+     "records": 74818
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2019.csv",
+     "records": 189569
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2020.csv",
+     "records": 189189
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2021.csv",
+     "records": 447135
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2022.csv",
+     "records": 368339
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2023.csv",
+     "records": 325918
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2024.csv",
+     "records": 404287
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2025.csv",
+     "records": 265976
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2026.csv",
+     "records": 117662
+    }
+   ]
+  }
+ }
+}

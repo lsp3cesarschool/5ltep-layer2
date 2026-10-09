@@ -1,0 +1,199 @@
+{
+ "rule": "pmfs-intensity-mechanized-over-30",
+ "rule_version": "0.1.0",
+ "evaluated_at": "2026-10-09T10:23:36+00:00",
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
+ "sources": {
+  "ibama_pmfs": {
+   "label": "dadosabertos.ibama.gov.br › sinaflor-pmfs-amazonia-legal › PMFS Amazônia Legal",
+   "file": "pmfsAmazoniaLegal.csv",
+   "files": null,
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SINAFLOR/pmfs/AmazoniaLegal/pmfsAmazoniaLegal.csv",
+   "archive_members": null,
+   "sha256": "99943a2b86734b7bbde22854a2731fe422530d34ebdb9fd9e2c7cc02f006caef",
+   "records": 10099
+  }
+ },
+ "counts": {
+  "match": 4808,
+  "mismatch": 87,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 5204
+ },
+ "total": 10099,
+ "records": {
+  "mismatch": {
+   "pmfsAmazoniaLegal.csv": [
+    1792,
+    1883,
+    2038,
+    2039,
+    5899,
+    5900,
+    5901,
+    5902,
+    5903,
+    7538,
+    7539,
+    7540,
+    7541,
+    7542,
+    7670,
+    7671,
+    7672,
+    7673,
+    7713,
+    7745,
+    7746,
+    7747,
+    7748,
+    7749,
+    7750,
+    7751,
+    7752,
+    7753,
+    7787,
+    7788,
+    7789,
+    7790,
+    7910,
+    8006,
+    8238,
+    8239,
+    8240,
+    8241,
+    8242,
+    8243,
+    8244,
+    8245,
+    8246,
+    8247,
+    8253,
+    8254,
+    8255,
+    8256,
+    8257,
+    8312,
+    8313,
+    8314,
+    8315,
+    8316,
+    8339,
+    8340,
+    8341,
+    8342,
+    8343,
+    8566,
+    8666,
+    8667,
+    8668,
+    8669,
+    8670,
+    8793,
+    8858,
+    8892,
+    8893,
+    8894,
+    8895,
+    8896,
+    8923,
+    8924,
+    8984,
+    9165,
+    9166,
+    9167,
+    9168,
+    9274,
+    9275,
+    9414,
+    9526,
+    9552,
+    9599,
+    9804,
+    10099
+   ]
+  }
+ },
+ "members": [
+  {
+   "name": "pmfsAmazoniaLegal.csv",
+   "records": 10099
+  }
+ ],
+ "by_member": {
+  "pmfsAmazoniaLegal.csv": {
+   "match": 4808,
+   "mismatch": 87,
+   "out_of_scope": 5204
+  }
+ },
+ "by_period": {
+  "2013": {
+   "out_of_scope": 2
+  },
+  "2014": {
+   "out_of_scope": 2
+  },
+  "2015": {
+   "out_of_scope": 6
+  },
+  "2016": {
+   "out_of_scope": 203
+  },
+  "2017": {
+   "match": 40,
+   "out_of_scope": 233
+  },
+  "2018": {
+   "match": 99,
+   "mismatch": 5,
+   "out_of_scope": 368
+  },
+  "2019": {
+   "match": 80,
+   "out_of_scope": 406
+  },
+  "2020": {
+   "match": 586,
+   "mismatch": 6,
+   "out_of_scope": 661
+  },
+  "2021": {
+   "match": 570,
+   "mismatch": 17,
+   "out_of_scope": 695
+  },
+  "2022": {
+   "match": 602,
+   "mismatch": 19,
+   "out_of_scope": 828
+  },
+  "2023": {
+   "match": 618,
+   "mismatch": 16,
+   "out_of_scope": 530
+  },
+  "2024": {
+   "match": 947,
+   "mismatch": 4,
+   "out_of_scope": 561
+  },
+  "2025": {
+   "match": 635,
+   "mismatch": 15,
+   "out_of_scope": 450
+  },
+  "2026": {
+   "match": 631,
+   "mismatch": 5,
+   "out_of_scope": 259
+  }
+ },
+ "timeline": "ibama_pmfs.DATA_DE_EMISSAO"
+}

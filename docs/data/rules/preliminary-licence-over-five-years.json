@@ -1,0 +1,217 @@
+{
+ "rule": "preliminary-licence-over-five-years",
+ "rule_version": "0.3.0",
+ "evaluated_at": "2026-10-09T10:24:41+00:00",
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
+ "sources": {
+  "ibama_licencas": {
+   "label": "dadosabertos.ibama.gov.br › licencas-ambientais-de-atividades-e-empreendimentos-licenciados-pelo-ibama › Licenças ambientais de atividades e ...",
+   "file": "sislic-licencas.csv",
+   "files": null,
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SISLIC/sislic-licencas.csv",
+   "archive_members": null,
+   "sha256": "71b00317d5a0d49ab105b4a3321b42b6edc133e44c77e3ab6ef291115adb4357",
+   "records": 14302
+  }
+ },
+ "counts": {
+  "match": 790,
+  "mismatch": 8,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 13504
+ },
+ "total": 14302,
+ "records": {
+  "mismatch": {
+   "sislic-licencas.csv": [
+    8484,
+    8486,
+    8497,
+    8520,
+    8525,
+    8562,
+    8644,
+    8673
+   ]
+  }
+ },
+ "members": [
+  {
+   "name": "sislic-licencas.csv",
+   "records": 14302
+  }
+ ],
+ "by_member": {
+  "sislic-licencas.csv": {
+   "match": 790,
+   "mismatch": 8,
+   "out_of_scope": 13504
+  }
+ },
+ "by_period": {
+  "1956": {
+   "out_of_scope": 1
+  },
+  "1988": {
+   "match": 1
+  },
+  "1989": {
+   "out_of_scope": 1
+  },
+  "1990": {
+   "out_of_scope": 1
+  },
+  "1991": {
+   "out_of_scope": 1
+  },
+  "1993": {
+   "out_of_scope": 2
+  },
+  "1994": {
+   "match": 1,
+   "out_of_scope": 1
+  },
+  "1996": {
+   "match": 3,
+   "out_of_scope": 2
+  },
+  "1997": {
+   "match": 4,
+   "out_of_scope": 2
+  },
+  "1998": {
+   "match": 13,
+   "out_of_scope": 78
+  },
+  "1999": {
+   "match": 8,
+   "out_of_scope": 104
+  },
+  "2000": {
+   "match": 12,
+   "out_of_scope": 136
+  },
+  "2001": {
+   "match": 21,
+   "out_of_scope": 138
+  },
+  "2002": {
+   "match": 25,
+   "out_of_scope": 188
+  },
+  "2003": {
+   "match": 18,
+   "out_of_scope": 122
+  },
+  "2004": {
+   "match": 25,
+   "out_of_scope": 217
+  },
+  "2005": {
+   "match": 26,
+   "out_of_scope": 278
+  },
+  "2006": {
+   "match": 21,
+   "out_of_scope": 293
+  },
+  "2007": {
+   "match": 33,
+   "out_of_scope": 355
+  },
+  "2008": {
+   "match": 65,
+   "out_of_scope": 461
+  },
+  "2009": {
+   "match": 113,
+   "out_of_scope": 433
+  },
+  "2010": {
+   "match": 60,
+   "out_of_scope": 458
+  },
+  "2011": {
+   "match": 44,
+   "out_of_scope": 586
+  },
+  "2012": {
+   "match": 21,
+   "out_of_scope": 689
+  },
+  "2013": {
+   "match": 23,
+   "out_of_scope": 814
+  },
+  "2014": {
+   "match": 23,
+   "out_of_scope": 792
+  },
+  "2015": {
+   "match": 25,
+   "mismatch": 1,
+   "out_of_scope": 667
+  },
+  "2016": {
+   "match": 14,
+   "out_of_scope": 553
+  },
+  "2017": {
+   "match": 16,
+   "mismatch": 1,
+   "out_of_scope": 539
+  },
+  "2018": {
+   "match": 30,
+   "out_of_scope": 590
+  },
+  "2019": {
+   "match": 22,
+   "out_of_scope": 681
+  },
+  "2020": {
+   "match": 19,
+   "out_of_scope": 599
+  },
+  "2021": {
+   "match": 20,
+   "mismatch": 1,
+   "out_of_scope": 531
+  },
+  "2022": {
+   "match": 21,
+   "out_of_scope": 604
+  },
+  "2023": {
+   "match": 11,
+   "mismatch": 2,
+   "out_of_scope": 503
+  },
+  "2024": {
+   "match": 13,
+   "out_of_scope": 558
+  },
+  "2025": {
+   "match": 23,
+   "mismatch": 3,
+   "out_of_scope": 895
+  },
+  "2026": {
+   "match": 16,
+   "out_of_scope": 629
+  },
+  "2027": {
+   "out_of_scope": 1
+  },
+  "unknown": {
+   "out_of_scope": 1
+  }
+ },
+ "timeline": "ibama_licencas.DAT_EMISSAO"
+}

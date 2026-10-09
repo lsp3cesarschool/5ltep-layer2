@@ -1,0 +1,71 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "lifted-before-embargo",
+ "rule_version": "0.3.0",
+ "origin": "expert",
+ "file": "embargo/lifted-before-embargo.yaml",
+ "folder": "embargo",
+ "language": "pt-BR",
+ "title": "Desembargo anterior ao embargo",
+ "title_translations": {
+  "en": "Embargo lifted before it was imposed"
+ },
+ "text": "Confere se a data de desembargo não é anterior à data do embargo, no mesmo termo.\n",
+ "justification": "Um embargo só pode ser levantado depois de imposto; a ordem inversa indica erro de data. É sinal para revisão, não veredito sobre o termo.\n",
+ "exceptions": [
+  "Termos sem desembargo (a maioria, ainda embargados) ficam fora do escopo: é o comportamento esperado."
+ ],
+ "template": "temporal-order",
+ "evaluated_source": "ibama_embargo",
+ "timeline": "ibama_embargo.DAT_EMBARGO",
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_embargo",
+   "label": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-embargo › Termos de embargo"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:23:08+00:00",
+ "total": 116763,
+ "counts": {
+  "match": 19667,
+  "mismatch": 16,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 97080
+ },
+ "signals": 16,
+ "signals_by_outcome": {
+  "mismatch": 16,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/lifted-before-embargo.json",
+ "sources": {
+  "ibama_embargo": {
+   "resource": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-embargo › Termos de embargo",
+   "fetch_status": "ok",
+   "sha256": "92f06836d90106c805c682f32d856bb7df2c995f7a430504364e0e251e2a24a5",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/TERMOS_DE_EMBARGO/TERMO_EMBARGO/termo_de_embargo.csv",
+   "file": "termo_de_embargo.csv",
+   "files": null,
+   "archive_members": null,
+   "records": 116763,
+   "members": [
+    {
+     "name": "termo_de_embargo.csv",
+     "records": 116763
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,93 @@
+{
+ "rule": "stock-balance",
+ "rule_version": "0.2.0",
+ "evaluated_at": "2026-10-09T10:23:10+00:00",
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
+ "sources": {
+  "ibama_plantel": {
+   "label": "dadosabertos.ibama.gov.br › sisfauna-plantel-exato › Sisfauna - Plantel Exato",
+   "file": "relatorio.csv",
+   "files": null,
+   "url": "https://dadosabertos.ibama.gov.br/dados/RAPP/sisfaunaPlantelExato/relatorio.csv",
+   "archive_members": null,
+   "sha256": "26250d38da458413546d7f981ebc115f80c0d278aa5edef3304f372ff075ab8e",
+   "records": 173747
+  }
+ },
+ "counts": {
+  "match": 173747,
+  "mismatch": 0,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 0
+ },
+ "total": 173747,
+ "records": {},
+ "members": [
+  {
+   "name": "relatorio.csv",
+   "records": 173747
+  }
+ ],
+ "by_member": {
+  "relatorio.csv": {
+   "match": 173747
+  }
+ },
+ "by_period": {
+  "2010": {
+   "match": 14615
+  },
+  "2011": {
+   "match": 14513
+  },
+  "2012": {
+   "match": 14240
+  },
+  "2013": {
+   "match": 14042
+  },
+  "2014": {
+   "match": 11455
+  },
+  "2015": {
+   "match": 10774
+  },
+  "2016": {
+   "match": 10906
+  },
+  "2017": {
+   "match": 11171
+  },
+  "2018": {
+   "match": 9920
+  },
+  "2019": {
+   "match": 9638
+  },
+  "2020": {
+   "match": 9750
+  },
+  "2021": {
+   "match": 9189
+  },
+  "2022": {
+   "match": 8629
+  },
+  "2023": {
+   "match": 8456
+  },
+  "2024": {
+   "match": 9078
+  },
+  "2025": {
+   "match": 7371
+  }
+ },
+ "timeline": "ibama_plantel.Período"
+}

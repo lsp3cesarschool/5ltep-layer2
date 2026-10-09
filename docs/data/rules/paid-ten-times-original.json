@@ -1,0 +1,1295 @@
+{
+ "rule": "paid-ten-times-original",
+ "rule_version": "0.2.0",
+ "evaluated_at": "2026-10-09T10:24:52+00:00",
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
+ "sources": {
+  "ibama_arrecadacao": {
+   "label": "dadosabertos.ibama.gov.br › arrecadacao-de-multas-ambientais-bens-tutelados › Arrecadação de Multas por Bens Tutelados",
+   "file": "arrecadacao_de_multas_ambientais_por_bens_tutelados_csv.zip",
+   "files": null,
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/ARRECADACAO_DE_MULTAS_AMBIENTAIS_POR_BENS_TUTELADOS/arrecadacao_de_multas_ambientais_por_bens_tutelados_csv.zip",
+   "archive_members": "arrecadacao_de_multas_ambientais_por_bens_tutelados_*.csv",
+   "sha256": "7530141db46eded6c8795e77652f15cf6a220637816db8624d79997e29ef8dcc",
+   "records": 1588335
+  }
+ },
+ "counts": {
+  "match": 1584026,
+  "mismatch": 780,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 3529
+ },
+ "total": 1588335,
+ "records": {
+  "mismatch": {
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_AL.csv": [
+    2917,
+    2918,
+    2919,
+    2920,
+    2921,
+    2922,
+    2923,
+    2924,
+    2925,
+    2926,
+    2927,
+    2928,
+    2929,
+    2930,
+    2931,
+    2932,
+    2933,
+    2934,
+    2935,
+    2936,
+    2937,
+    2938,
+    2939,
+    2940,
+    2941,
+    2942,
+    2943,
+    2944,
+    2945,
+    2946
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_BA.csv": [
+    7595,
+    22247,
+    22248,
+    52318,
+    52319,
+    52320,
+    52321,
+    52322,
+    52323,
+    52324,
+    52325,
+    52326,
+    52327,
+    52328,
+    52329,
+    52330,
+    52331,
+    52332,
+    52333,
+    52334,
+    52335,
+    52336,
+    52337,
+    52338,
+    52339,
+    52340,
+    52341,
+    52342,
+    52343,
+    52344,
+    52345,
+    52346,
+    52347,
+    52348,
+    52349,
+    52350,
+    52351,
+    52352,
+    52353,
+    52354,
+    52355,
+    52356,
+    52357,
+    52358,
+    52359,
+    52360,
+    52361,
+    52362,
+    52363,
+    52364,
+    52365,
+    52366,
+    52367,
+    52368,
+    52369,
+    52370,
+    52371,
+    52372,
+    52373,
+    52374,
+    52375,
+    52376,
+    52377,
+    54603,
+    68033,
+    71077
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_CE.csv": [
+    23123,
+    39375,
+    45064,
+    50346,
+    55550,
+    66277,
+    67563
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_DF.csv": [
+    260,
+    4870,
+    15635
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_ES.csv": [
+    14827,
+    21692,
+    37123,
+    41267,
+    56768,
+    70752,
+    71305,
+    71306,
+    71317,
+    73685,
+    73686,
+    80489,
+    81746,
+    82973
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_GO.csv": [
+    2353,
+    2448,
+    2913,
+    7098,
+    9181,
+    9182,
+    22266,
+    22503,
+    24641,
+    24781,
+    30114,
+    35515,
+    37238,
+    40918,
+    41827,
+    53417,
+    64233,
+    64236,
+    67282,
+    85424,
+    86127,
+    92758,
+    92830,
+    93365,
+    97287,
+    98958
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_MA.csv": [
+    1941,
+    1942,
+    1943,
+    1944,
+    1945,
+    1946,
+    1947,
+    1948,
+    1949,
+    1950,
+    1951,
+    1952,
+    1953,
+    1954,
+    1955,
+    1956,
+    1957,
+    1958,
+    1959,
+    1960,
+    1961,
+    1962,
+    1963,
+    1964,
+    1965,
+    1966,
+    1967,
+    1968,
+    1969,
+    1970,
+    1971,
+    1972,
+    1973,
+    1974,
+    1975,
+    1976,
+    1977,
+    1978,
+    1979,
+    1980,
+    1981,
+    1982,
+    1983,
+    1984,
+    1985,
+    1986,
+    1987,
+    1988,
+    1989,
+    1990,
+    1991,
+    1992,
+    1993,
+    1994,
+    1995,
+    1996,
+    1997,
+    1998,
+    1999,
+    2000
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_MG.csv": [
+    1164,
+    1825,
+    24854,
+    37613,
+    40561,
+    40562,
+    44201,
+    45927,
+    62640,
+    86540,
+    99022,
+    102149,
+    110705,
+    115480,
+    117601,
+    129539,
+    129878,
+    130820,
+    134365,
+    140342,
+    146629,
+    147880,
+    156672,
+    159852,
+    166645,
+    168353,
+    168594,
+    169029,
+    180835,
+    180836,
+    184305,
+    185047,
+    185324,
+    185707,
+    185709,
+    185719,
+    185927,
+    186989,
+    186998,
+    187072,
+    187814,
+    189391,
+    189726,
+    193713,
+    194016,
+    194510,
+    195711,
+    201214,
+    210122,
+    210427,
+    210444,
+    210448,
+    210544,
+    210552,
+    210816,
+    225206,
+    226080,
+    226093,
+    226687,
+    226951
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_MS.csv": [
+    1473,
+    6016,
+    6446,
+    9971,
+    14844,
+    26840,
+    38910
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_MT.csv": [
+    2559,
+    3089,
+    3090,
+    4538,
+    4833,
+    5018,
+    5019,
+    5020,
+    5194,
+    5552,
+    9390,
+    9391,
+    9392,
+    9393,
+    9394,
+    9395,
+    9396,
+    9397,
+    9398,
+    9399,
+    9485,
+    9486,
+    9487,
+    9488,
+    9489,
+    9490,
+    11325,
+    13876,
+    26240,
+    33906,
+    43722,
+    43960,
+    47369,
+    51114,
+    51929,
+    52756,
+    64951,
+    66445
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_PA.csv": [
+    1782,
+    3171,
+    6334,
+    7395,
+    40969,
+    59494,
+    65294,
+    74018,
+    84543,
+    89332
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_PB.csv": [
+    2973,
+    3778,
+    6379,
+    19092,
+    19093,
+    19094,
+    19095,
+    19096,
+    19097,
+    19098,
+    19099,
+    19100,
+    19101,
+    19102,
+    19103,
+    19104,
+    19105,
+    19106,
+    19107,
+    19108,
+    19109,
+    19110,
+    19111,
+    19112,
+    19113,
+    19114,
+    19115,
+    19116,
+    19117,
+    19118,
+    19119,
+    19120,
+    19121,
+    19122,
+    19123,
+    19124,
+    19125,
+    19126,
+    19127,
+    19128,
+    19129,
+    19130,
+    19131,
+    19132,
+    19133,
+    19134,
+    19135,
+    19136,
+    19137,
+    19138,
+    19139,
+    19140,
+    19141,
+    19142,
+    19143,
+    19144,
+    19145,
+    19146,
+    19147,
+    19148,
+    19149,
+    19150,
+    19151
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_PE.csv": [
+    941,
+    6853,
+    13993,
+    13994
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_PI.csv": [
+    136
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_PR.csv": [
+    4893,
+    5729,
+    9435,
+    9882,
+    26037,
+    26124,
+    26125,
+    26126,
+    26127,
+    26128,
+    26129,
+    26130,
+    26131,
+    26132,
+    26133,
+    26134,
+    26135,
+    26136,
+    26137,
+    26138,
+    26139,
+    26140,
+    26141,
+    26142,
+    26143,
+    26144,
+    26145,
+    26146,
+    26147,
+    26148,
+    26149,
+    26150,
+    26151,
+    26152,
+    26153,
+    26154,
+    26155,
+    26156,
+    26157,
+    26158,
+    26159,
+    26160,
+    26161,
+    26162,
+    26163,
+    26164,
+    26165,
+    26166,
+    26167,
+    26168,
+    26169,
+    26170,
+    26171,
+    26172,
+    26173,
+    26174,
+    26175,
+    26176,
+    26177,
+    26178,
+    26179,
+    26180,
+    26181,
+    26182,
+    26183,
+    26184,
+    26185,
+    26186,
+    26187,
+    26188,
+    26189,
+    26190,
+    26191,
+    26192,
+    26193,
+    26194,
+    26195,
+    26196,
+    26197,
+    26198,
+    26199,
+    26200,
+    26201,
+    26202,
+    26203,
+    26204,
+    26205,
+    26206,
+    26207,
+    26208,
+    26209,
+    26210,
+    26211,
+    26212,
+    26213,
+    26214,
+    26215,
+    26216,
+    26217,
+    26218,
+    26219,
+    26220,
+    26221,
+    26222,
+    26223,
+    26224,
+    26225,
+    26226,
+    26227,
+    26228,
+    26229,
+    26230,
+    26231,
+    26232,
+    26233,
+    26234,
+    26235,
+    26236,
+    26237,
+    26238,
+    26239,
+    26240,
+    26241,
+    26242,
+    26243,
+    45766,
+    48744,
+    48769,
+    49338,
+    51530
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_RJ.csv": [
+    194,
+    9807,
+    9808,
+    16769,
+    17190,
+    19631,
+    24460,
+    25571,
+    27550,
+    27838,
+    28065,
+    29762
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_RN.csv": [
+    23160,
+    37930
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_RO.csv": [
+    373,
+    597,
+    5129,
+    6984,
+    38076,
+    59851
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_RR.csv": [
+    125,
+    9381
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_RS.csv": [
+    987,
+    2801,
+    2809,
+    3670,
+    3801,
+    3802,
+    3803,
+    3804,
+    3805,
+    3806,
+    3807,
+    3808,
+    3809,
+    3810,
+    3811,
+    3812,
+    8638,
+    12835,
+    13309,
+    14632,
+    14936,
+    17333,
+    24888,
+    29196,
+    29221,
+    29385,
+    30214,
+    30414,
+    35509,
+    35562,
+    35623,
+    37463,
+    38186,
+    38435,
+    39493,
+    40226,
+    40927,
+    42632,
+    42954,
+    42959,
+    45246,
+    45628,
+    45630,
+    50293,
+    52713,
+    53300,
+    56645,
+    59207,
+    60189,
+    61191,
+    62582
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_SC.csv": [
+    1870,
+    22813,
+    28060,
+    71742,
+    71980,
+    84539,
+    88831,
+    88832,
+    93172
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_SP.csv": [
+    44,
+    50,
+    162,
+    267,
+    565,
+    727,
+    997,
+    1016,
+    1081,
+    1085,
+    1276,
+    1373,
+    1428,
+    1520,
+    1652,
+    1656,
+    1657,
+    1800,
+    1942,
+    2063,
+    2219,
+    2527,
+    10127,
+    10217,
+    12048,
+    26090,
+    26675,
+    29059,
+    37120,
+    39124,
+    48692,
+    48694,
+    48701,
+    49133,
+    49172,
+    50625,
+    50749,
+    50750,
+    51122,
+    51123,
+    51161,
+    51196,
+    51197,
+    51198,
+    51200,
+    52657,
+    52664,
+    52668,
+    52719,
+    54062,
+    54065,
+    54520,
+    55509,
+    55516,
+    55521,
+    55523,
+    55531,
+    55558,
+    55608,
+    55766,
+    55860,
+    55880,
+    55952,
+    56104,
+    56119,
+    56198,
+    56220,
+    56387,
+    56389,
+    56391,
+    56396,
+    56461,
+    56657,
+    56659,
+    56899,
+    57488,
+    59490,
+    59492,
+    59494,
+    59496,
+    59562,
+    59563,
+    59565,
+    59567,
+    59569,
+    59574,
+    59927,
+    59931,
+    60152,
+    60154,
+    60195,
+    60234,
+    60657,
+    60658,
+    60692,
+    60699,
+    60702,
+    60706,
+    60899,
+    60900,
+    60901,
+    60918,
+    60962,
+    60963,
+    60965,
+    60971
+   ],
+   "arrecadacao_de_multas_ambientais_por_bens_tutelados_TO.csv": [
+    6379,
+    9591,
+    13917,
+    15527,
+    21516,
+    22863,
+    30302,
+    35544,
+    35545,
+    49408,
+    52314,
+    52315,
+    52316,
+    52317,
+    52318,
+    52319,
+    52320,
+    52321,
+    52322,
+    52323,
+    52324,
+    52325,
+    52326,
+    52327,
+    52328,
+    52329,
+    52330,
+    52331,
+    52332,
+    52333,
+    52334,
+    52335,
+    52336,
+    52337,
+    52338,
+    52339,
+    52340,
+    52341,
+    52342,
+    52343,
+    52344,
+    52345,
+    52346,
+    52347,
+    52348,
+    52349,
+    52350,
+    52351,
+    52352,
+    52353,
+    52354,
+    52355,
+    52356,
+    52357,
+    52358,
+    52359,
+    52360,
+    52361,
+    52362,
+    52363,
+    52364,
+    52365,
+    52366,
+    52367,
+    52368,
+    52369,
+    52370,
+    52371,
+    52372,
+    52373,
+    60466,
+    63929,
+    66511
+   ]
+  }
+ },
+ "members": [
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_AC.csv",
+   "records": 18345
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_AL.csv",
+   "records": 20143
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_AM.csv",
+   "records": 31984
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_AP.csv",
+   "records": 10742
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_BA.csv",
+   "records": 71555
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_CE.csv",
+   "records": 83809
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_DF.csv",
+   "records": 15982
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_ES.csv",
+   "records": 86856
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_GO.csv",
+   "records": 108472
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_MA.csv",
+   "records": 36173
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_MG.csv",
+   "records": 237583
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_MS.csv",
+   "records": 47547
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_MT.csv",
+   "records": 71766
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_PA.csv",
+   "records": 90146
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_PB.csv",
+   "records": 64986
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_PE.csv",
+   "records": 33417
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_PI.csv",
+   "records": 27186
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_PR.csv",
+   "records": 54151
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_RJ.csv",
+   "records": 35066
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_RN.csv",
+   "records": 53487
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_RO.csv",
+   "records": 68330
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_RR.csv",
+   "records": 16576
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_RS.csv",
+   "records": 63498
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_SC.csv",
+   "records": 97190
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_SE.csv",
+   "records": 11102
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_SP.csv",
+   "records": 63665
+  },
+  {
+   "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_TO.csv",
+   "records": 68578
+  }
+ ],
+ "by_member": {
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_AC.csv": {
+   "match": 18339,
+   "out_of_scope": 6
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_AL.csv": {
+   "match": 20109,
+   "mismatch": 30,
+   "out_of_scope": 4
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_AM.csv": {
+   "match": 31975,
+   "out_of_scope": 9
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_AP.csv": {
+   "match": 10741,
+   "out_of_scope": 1
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_BA.csv": {
+   "match": 71431,
+   "mismatch": 66,
+   "out_of_scope": 58
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_CE.csv": {
+   "match": 83576,
+   "mismatch": 7,
+   "out_of_scope": 226
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_DF.csv": {
+   "match": 15922,
+   "mismatch": 3,
+   "out_of_scope": 57
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_ES.csv": {
+   "match": 86823,
+   "mismatch": 14,
+   "out_of_scope": 19
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_GO.csv": {
+   "match": 106984,
+   "mismatch": 26,
+   "out_of_scope": 1462
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_MA.csv": {
+   "match": 36093,
+   "mismatch": 60,
+   "out_of_scope": 20
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_MG.csv": {
+   "match": 236737,
+   "mismatch": 60,
+   "out_of_scope": 786
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_MS.csv": {
+   "match": 47516,
+   "mismatch": 7,
+   "out_of_scope": 24
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_MT.csv": {
+   "match": 71683,
+   "mismatch": 38,
+   "out_of_scope": 45
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_PA.csv": {
+   "match": 90077,
+   "mismatch": 10,
+   "out_of_scope": 59
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_PB.csv": {
+   "match": 64851,
+   "mismatch": 63,
+   "out_of_scope": 72
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_PE.csv": {
+   "match": 33394,
+   "mismatch": 4,
+   "out_of_scope": 19
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_PI.csv": {
+   "match": 27183,
+   "mismatch": 1,
+   "out_of_scope": 2
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_PR.csv": {
+   "match": 53943,
+   "mismatch": 130,
+   "out_of_scope": 78
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_RJ.csv": {
+   "match": 35027,
+   "mismatch": 12,
+   "out_of_scope": 27
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_RN.csv": {
+   "match": 53482,
+   "mismatch": 2,
+   "out_of_scope": 3
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_RO.csv": {
+   "match": 68309,
+   "mismatch": 6,
+   "out_of_scope": 15
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_RR.csv": {
+   "match": 16520,
+   "mismatch": 2,
+   "out_of_scope": 54
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_RS.csv": {
+   "match": 63195,
+   "mismatch": 51,
+   "out_of_scope": 252
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_SC.csv": {
+   "match": 97144,
+   "mismatch": 9,
+   "out_of_scope": 37
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_SE.csv": {
+   "match": 11096,
+   "out_of_scope": 6
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_SP.csv": {
+   "match": 63408,
+   "mismatch": 106,
+   "out_of_scope": 151
+  },
+  "arrecadacao_de_multas_ambientais_por_bens_tutelados_TO.csv": {
+   "match": 68468,
+   "mismatch": 73,
+   "out_of_scope": 37
+  }
+ },
+ "by_period": {
+  "1981": {
+   "match": 3,
+   "out_of_scope": 1
+  },
+  "1982": {
+   "out_of_scope": 1
+  },
+  "1983": {
+   "out_of_scope": 6
+  },
+  "1984": {
+   "match": 1,
+   "out_of_scope": 24
+  },
+  "1985": {
+   "match": 12,
+   "out_of_scope": 40
+  },
+  "1986": {
+   "match": 2,
+   "out_of_scope": 56
+  },
+  "1987": {
+   "match": 2,
+   "out_of_scope": 90
+  },
+  "1988": {
+   "match": 30,
+   "out_of_scope": 113
+  },
+  "1989": {
+   "match": 36,
+   "out_of_scope": 270
+  },
+  "1990": {
+   "match": 18,
+   "out_of_scope": 689
+  },
+  "1991": {
+   "match": 17,
+   "out_of_scope": 397
+  },
+  "1992": {
+   "match": 11,
+   "out_of_scope": 362
+  },
+  "1993": {
+   "match": 29,
+   "out_of_scope": 863
+  },
+  "1994": {
+   "match": 1255,
+   "mismatch": 3,
+   "out_of_scope": 444
+  },
+  "1995": {
+   "match": 3982,
+   "mismatch": 5,
+   "out_of_scope": 16
+  },
+  "1996": {
+   "match": 37973,
+   "mismatch": 17,
+   "out_of_scope": 51
+  },
+  "1997": {
+   "match": 44428,
+   "mismatch": 13,
+   "out_of_scope": 50
+  },
+  "1998": {
+   "match": 43752,
+   "mismatch": 26,
+   "out_of_scope": 14
+  },
+  "1999": {
+   "match": 59134,
+   "mismatch": 28,
+   "out_of_scope": 36
+  },
+  "2000": {
+   "match": 59930,
+   "mismatch": 16,
+   "out_of_scope": 2
+  },
+  "2001": {
+   "match": 69603,
+   "mismatch": 6
+  },
+  "2002": {
+   "match": 110393,
+   "mismatch": 66
+  },
+  "2003": {
+   "match": 74218,
+   "mismatch": 12,
+   "out_of_scope": 1
+  },
+  "2004": {
+   "match": 103066,
+   "mismatch": 10
+  },
+  "2005": {
+   "match": 130801,
+   "mismatch": 35,
+   "out_of_scope": 2
+  },
+  "2006": {
+   "match": 100749,
+   "mismatch": 9,
+   "out_of_scope": 1
+  },
+  "2007": {
+   "match": 104189,
+   "mismatch": 13
+  },
+  "2008": {
+   "match": 123984,
+   "mismatch": 172
+  },
+  "2009": {
+   "match": 93916,
+   "mismatch": 19
+  },
+  "2010": {
+   "match": 88467,
+   "mismatch": 70
+  },
+  "2011": {
+   "match": 77321,
+   "mismatch": 65
+  },
+  "2012": {
+   "match": 61973,
+   "mismatch": 6
+  },
+  "2013": {
+   "match": 42042,
+   "mismatch": 68
+  },
+  "2014": {
+   "match": 33454,
+   "mismatch": 1
+  },
+  "2015": {
+   "match": 32583,
+   "mismatch": 18
+  },
+  "2016": {
+   "match": 28460,
+   "mismatch": 22
+  },
+  "2017": {
+   "match": 16023,
+   "mismatch": 11
+  },
+  "2018": {
+   "match": 14320,
+   "mismatch": 31
+  },
+  "2019": {
+   "match": 6157,
+   "mismatch": 13
+  },
+  "2020": {
+   "match": 3485,
+   "mismatch": 7
+  },
+  "2021": {
+   "match": 2756
+  },
+  "2022": {
+   "match": 5084,
+   "mismatch": 10
+  },
+  "2023": {
+   "match": 4279
+  },
+  "2024": {
+   "match": 2826,
+   "mismatch": 3
+  },
+  "2025": {
+   "match": 2706,
+   "mismatch": 5
+  },
+  "2026": {
+   "match": 556
+  }
+ },
+ "timeline": "ibama_arrecadacao.Data Auto"
+}

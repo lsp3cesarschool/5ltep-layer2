@@ -1,0 +1,71 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "stock-balance",
+ "rule_version": "0.2.0",
+ "origin": "expert",
+ "file": "fauna/stock-balance.yaml",
+ "folder": "fauna",
+ "language": "pt-BR",
+ "title": "Balanço do plantel divergente",
+ "title_translations": {
+  "en": "Breeding stock balance does not add up"
+ },
+ "text": "Confere, em cada declaração, se plantel anterior + total de entradas − total de saídas = plantel atual.\n",
+ "justification": "O plantel atual resulta do anterior somado às entradas e diminuído das saídas; diferença indica erro de declaração ou de cálculo. Usa os totais (Total, Total de Entradas, Total de Saídas, Total geral) para não contar nascimentos duas vezes. Valores com vírgula decimal. É sinal para revisão.\n",
+ "exceptions": [
+  "Declarações retificadoras substituem a anterior e podem ter balanço próprio."
+ ],
+ "template": "field-comparison",
+ "evaluated_source": "ibama_plantel",
+ "timeline": "ibama_plantel.Período",
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_plantel",
+   "label": "dadosabertos.ibama.gov.br › sisfauna-plantel-exato › Sisfauna - Plantel Exato"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:23:10+00:00",
+ "total": 173747,
+ "counts": {
+  "match": 173747,
+  "mismatch": 0,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 0
+ },
+ "signals": 0,
+ "signals_by_outcome": {
+  "mismatch": 0,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/stock-balance.json",
+ "sources": {
+  "ibama_plantel": {
+   "resource": "dadosabertos.ibama.gov.br › sisfauna-plantel-exato › Sisfauna - Plantel Exato",
+   "fetch_status": "ok",
+   "sha256": "26250d38da458413546d7f981ebc115f80c0d278aa5edef3304f372ff075ab8e",
+   "url": "https://dadosabertos.ibama.gov.br/dados/RAPP/sisfaunaPlantelExato/relatorio.csv",
+   "file": "relatorio.csv",
+   "files": null,
+   "archive_members": null,
+   "records": 173747,
+   "members": [
+    {
+     "name": "relatorio.csv",
+     "records": 173747
+    }
+   ]
+  }
+ }
+}

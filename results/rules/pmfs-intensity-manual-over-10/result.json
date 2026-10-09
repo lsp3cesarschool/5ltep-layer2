@@ -1,0 +1,72 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "pmfs-intensity-manual-over-10",
+ "rule_version": "0.1.0",
+ "origin": "expert",
+ "file": "forest/pmfs-intensity-manual-over-10.yaml",
+ "folder": "forest",
+ "language": "pt-BR",
+ "title": "Intensidade de corte acima de 10 m³/ha em manejo sem máquinas no arraste",
+ "title_translations": {
+  "en": "Cutting intensity above 10 m³/ha in forest management without machines for skidding"
+ },
+ "text": "Confere se a intensidade de corte dos planos de manejo da Amazônia Legal sem máquinas no arraste não passa de 10 m³/ha.\n",
+ "justification": "A Resolução CONAMA 406/2009, art. 5º, limita a intensidade de corte na Amazônia a 30 m³/ha com máquinas no arraste e a 10 m³/ha sem máquinas, salvo estudos que justifiquem outro valor. Valores acima indicam erro de unidade ou de registro, ou plano que precisa dessa justificativa. Intensidade com ponto decimal. É sinal para revisão.\n",
+ "exceptions": [
+  "A norma admite intensidade diferente com estudos técnicos aprovados.",
+  "Planos sem método de extração informado ficam fora do escopo."
+ ],
+ "template": "field-comparison",
+ "evaluated_source": "ibama_pmfs",
+ "timeline": "ibama_pmfs.DATA_DE_EMISSAO",
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_pmfs",
+   "label": "dadosabertos.ibama.gov.br › sinaflor-pmfs-amazonia-legal › PMFS Amazônia Legal"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:23:36+00:00",
+ "total": 10099,
+ "counts": {
+  "match": 57,
+  "mismatch": 28,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 10014
+ },
+ "signals": 28,
+ "signals_by_outcome": {
+  "mismatch": 28,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/pmfs-intensity-manual-over-10.json",
+ "sources": {
+  "ibama_pmfs": {
+   "resource": "dadosabertos.ibama.gov.br › sinaflor-pmfs-amazonia-legal › PMFS Amazônia Legal",
+   "fetch_status": "ok",
+   "sha256": "99943a2b86734b7bbde22854a2731fe422530d34ebdb9fd9e2c7cc02f006caef",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SINAFLOR/pmfs/AmazoniaLegal/pmfsAmazoniaLegal.csv",
+   "file": "pmfsAmazoniaLegal.csv",
+   "files": null,
+   "archive_members": null,
+   "records": 10099,
+   "members": [
+    {
+     "name": "pmfsAmazoniaLegal.csv",
+     "records": 10099
+    }
+   ]
+  }
+ }
+}

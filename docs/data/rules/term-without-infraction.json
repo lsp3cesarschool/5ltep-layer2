@@ -1,0 +1,263 @@
+{
+ "rule": "term-without-infraction",
+ "rule_version": "0.2.0",
+ "evaluated_at": "2026-10-09T10:24:55+00:00",
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
+ "sources": {
+  "ibama_apreensao": {
+   "label": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-apreensao › Termo de apreensão",
+   "file": "apreensao_csv.zip",
+   "files": null,
+   "url": "https://dadosabertos.ibama.gov.br/dados/SIFISC/termo_apreensao/apreensao/apreensao_csv.zip",
+   "archive_members": "apreensao.csv",
+   "sha256": "afd442f6d8af42303c6015154b26bd227eb240a778928e71063dfcf6a86db2dc",
+   "records": 157955
+  },
+  "ibama_autos": {
+   "label": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
+   "file": "auto_infracao_csv.zip",
+   "files": null,
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
+   "archive_members": "auto_infracao_*.csv",
+   "sha256": "5e65aba9b3b1ba08c3098b59da7031dadb78d876fc4f4d560ddc984eb1f381e0",
+   "records": 711926
+  }
+ },
+ "counts": {
+  "match": 125274,
+  "mismatch": 0,
+  "key_not_found": 29,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 32652
+ },
+ "total": 157955,
+ "records": {
+  "key_not_found": {
+   "apreensao.csv": [
+    14329,
+    15317,
+    15319,
+    15727,
+    19819,
+    20706,
+    23836,
+    32579,
+    36775,
+    39670,
+    41310,
+    44197,
+    50159,
+    56713,
+    57266,
+    59203,
+    66002,
+    66003,
+    73983,
+    79416,
+    79417,
+    99700,
+    107394,
+    111193,
+    113748,
+    125168,
+    132913,
+    150748,
+    152925
+   ]
+  }
+ },
+ "members": [
+  {
+   "name": "apreensao.csv",
+   "records": 157955
+  }
+ ],
+ "by_member": {
+  "apreensao.csv": {
+   "key_not_found": 29,
+   "match": 125274,
+   "out_of_scope": 32652
+  }
+ },
+ "by_period": {
+  "1988": {
+   "match": 1
+  },
+  "1989": {
+   "match": 2,
+   "out_of_scope": 21
+  },
+  "1990": {
+   "match": 6,
+   "out_of_scope": 36
+  },
+  "1991": {
+   "key_not_found": 1,
+   "match": 7,
+   "out_of_scope": 41
+  },
+  "1992": {
+   "key_not_found": 1,
+   "match": 12,
+   "out_of_scope": 32
+  },
+  "1993": {
+   "key_not_found": 1,
+   "match": 10,
+   "out_of_scope": 7
+  },
+  "1994": {
+   "key_not_found": 1,
+   "match": 18,
+   "out_of_scope": 19
+  },
+  "1995": {
+   "key_not_found": 4,
+   "match": 47,
+   "out_of_scope": 26
+  },
+  "1996": {
+   "match": 56,
+   "out_of_scope": 123
+  },
+  "1997": {
+   "key_not_found": 1,
+   "match": 165,
+   "out_of_scope": 264
+  },
+  "1998": {
+   "match": 137,
+   "out_of_scope": 98
+  },
+  "1999": {
+   "key_not_found": 1,
+   "match": 297,
+   "out_of_scope": 181
+  },
+  "2000": {
+   "key_not_found": 2,
+   "match": 368,
+   "out_of_scope": 337
+  },
+  "2001": {
+   "match": 515,
+   "out_of_scope": 58
+  },
+  "2002": {
+   "match": 614,
+   "out_of_scope": 84
+  },
+  "2003": {
+   "match": 633,
+   "out_of_scope": 126
+  },
+  "2004": {
+   "key_not_found": 2,
+   "match": 836,
+   "out_of_scope": 1001
+  },
+  "2005": {
+   "key_not_found": 1,
+   "match": 4098,
+   "out_of_scope": 1126
+  },
+  "2006": {
+   "match": 12229,
+   "out_of_scope": 871
+  },
+  "2007": {
+   "key_not_found": 1,
+   "match": 15481,
+   "out_of_scope": 1358
+  },
+  "2008": {
+   "key_not_found": 2,
+   "match": 16627,
+   "out_of_scope": 1379
+  },
+  "2009": {
+   "key_not_found": 2,
+   "match": 11204,
+   "out_of_scope": 1114
+  },
+  "2010": {
+   "match": 9737,
+   "out_of_scope": 1080
+  },
+  "2011": {
+   "match": 9032,
+   "out_of_scope": 1143
+  },
+  "2012": {
+   "key_not_found": 1,
+   "match": 6213,
+   "out_of_scope": 928
+  },
+  "2013": {
+   "key_not_found": 4,
+   "match": 5054,
+   "out_of_scope": 834
+  },
+  "2014": {
+   "key_not_found": 1,
+   "match": 3697,
+   "out_of_scope": 1118
+  },
+  "2015": {
+   "match": 3694,
+   "out_of_scope": 1125
+  },
+  "2016": {
+   "key_not_found": 2,
+   "match": 3660,
+   "out_of_scope": 986
+  },
+  "2017": {
+   "match": 3399,
+   "out_of_scope": 973
+  },
+  "2018": {
+   "match": 4165,
+   "out_of_scope": 1051
+  },
+  "2019": {
+   "match": 2830,
+   "out_of_scope": 1104
+  },
+  "2020": {
+   "match": 1008,
+   "out_of_scope": 1820
+  },
+  "2021": {
+   "match": 943,
+   "out_of_scope": 1863
+  },
+  "2022": {
+   "match": 2855,
+   "out_of_scope": 880
+  },
+  "2023": {
+   "key_not_found": 1,
+   "match": 3842,
+   "out_of_scope": 1185
+  },
+  "2024": {
+   "match": 1649,
+   "out_of_scope": 1624
+  },
+  "2025": {
+   "match": 119,
+   "out_of_scope": 4766
+  },
+  "2026": {
+   "match": 14,
+   "out_of_scope": 1870
+  }
+ },
+ "timeline": "ibama_apreensao.DT_APREENSAO"
+}

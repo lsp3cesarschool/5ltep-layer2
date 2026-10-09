@@ -1,0 +1,72 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "appendix-i-wild-commercial",
+ "rule_version": "0.1.0",
+ "origin": "expert",
+ "file": "cites/appendix-i-wild-commercial.yaml",
+ "folder": "cites",
+ "language": "pt-BR",
+ "title": "Licença CITES de espécie do Apêndice I, origem silvestre, para fins comerciais",
+ "title_translations": {
+  "en": "CITES permit for an Appendix I species of wild origin for commercial purposes"
+ },
+ "text": "Sinaliza licenças não canceladas em que ANEXO = I, origem W (silvestre) e finalidade comercial aparecem juntos.\n",
+ "justification": "A Convenção CITES, art. III, não admite comércio de espécimes do Apêndice I retirados da natureza para fins primariamente comerciais; a Res. Conf. 12.3 define os códigos de origem (W, silvestre) e de finalidade (T, comercial). A combinação é sinal para conferir regime, finalidade e exceções (reexportação, pré-convenção), não declaração de comércio proibido.\n",
+ "exceptions": [
+  "Certificados pré-convenção e reexportações seguem regras próprias.",
+  "Licenças canceladas ficam fora do escopo."
+ ],
+ "template": "flag-when",
+ "evaluated_source": "ibama_siscites",
+ "timeline": "ibama_siscites.DAT_EMISSAO",
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_siscites",
+   "label": "dadosabertos.ibama.gov.br › siscites-licencas-de-fauna-e-flora-emitidas › Siscites"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:23:05+00:00",
+ "total": 258580,
+ "counts": {
+  "match": 243809,
+  "mismatch": 403,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 14368
+ },
+ "signals": 403,
+ "signals_by_outcome": {
+  "mismatch": 403,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/appendix-i-wild-commercial.json",
+ "sources": {
+  "ibama_siscites": {
+   "resource": "dadosabertos.ibama.gov.br › siscites-licencas-de-fauna-e-flora-emitidas › Siscites",
+   "fetch_status": "ok",
+   "sha256": "e320a1f12b98e2b86166b559a59ce2ec53417fa6fd0d4fe9b12720b8503f8051",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/CITES/licencas.csv",
+   "file": "licencas.csv",
+   "files": null,
+   "archive_members": null,
+   "records": 258580,
+   "members": [
+    {
+     "name": "licencas.csv",
+     "records": 258580
+    }
+   ]
+  }
+ }
+}

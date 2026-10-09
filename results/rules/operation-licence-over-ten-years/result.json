@@ -1,0 +1,73 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "operation-licence-over-ten-years",
+ "rule_version": "0.3.0",
+ "origin": "expert",
+ "file": "licensing/operation-licence-over-ten-years.yaml",
+ "folder": "licensing",
+ "language": "pt-BR",
+ "title": "Licença de Operação com validade acima de dez anos",
+ "title_translations": {
+  "en": "Operating licence valid for more than 10 years"
+ },
+ "text": "Confere se a Licença de Operação vence no máximo 10 anos depois da emissão.\n",
+ "justification": "A Resolução CONAMA 237/1997, art. 18, limita a validade da Licença de Operação a 10 anos. A Lei 15.190/2025 (arts. 6º e 7º) passou a reger licenças emitidas na sua vigência, com faixas próprias; a regra usa o limite da CONAMA 237 e é hipótese de triagem, não conclusão sobre a licença.\n",
+ "exceptions": [
+  "Licenças emitidas sob a Lei 15.190/2025 podem ter limite diferente.",
+  "Renovações, prorrogações e retificações têm tipo próprio e ficam fora do escopo.",
+  "Licença com vencimento anterior à emissão fica fora do escopo: é contada pela regra expiry-before-issue."
+ ],
+ "template": "temporal-order",
+ "evaluated_source": "ibama_licencas",
+ "timeline": "ibama_licencas.DAT_EMISSAO",
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_licencas",
+   "label": "dadosabertos.ibama.gov.br › licencas-ambientais-de-atividades-e-empreendimentos-licenciados-pelo-ibama › Licenças ambientais de atividades e ..."
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:24:41+00:00",
+ "total": 14302,
+ "counts": {
+  "match": 1590,
+  "mismatch": 2,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 12710
+ },
+ "signals": 2,
+ "signals_by_outcome": {
+  "mismatch": 2,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/operation-licence-over-ten-years.json",
+ "sources": {
+  "ibama_licencas": {
+   "resource": "dadosabertos.ibama.gov.br › licencas-ambientais-de-atividades-e-empreendimentos-licenciados-pelo-ibama › Licenças ambientais de atividades e ...",
+   "fetch_status": "ok",
+   "sha256": "71b00317d5a0d49ab105b4a3321b42b6edc133e44c77e3ab6ef291115adb4357",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SISLIC/sislic-licencas.csv",
+   "file": "sislic-licencas.csv",
+   "files": null,
+   "archive_members": null,
+   "records": 14302,
+   "members": [
+    {
+     "name": "sislic-licencas.csv",
+     "records": 14302
+    }
+   ]
+  }
+ }
+}

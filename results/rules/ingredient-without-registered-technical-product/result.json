@@ -1,0 +1,92 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "ingredient-without-registered-technical-product",
+ "rule_version": "0.1.0",
+ "origin": "cross_reference",
+ "file": "pesticides/ingredient-without-registered-technical-product.yaml",
+ "folder": "pesticides",
+ "language": "pt-BR",
+ "title": "Ingrediente ativo vendido sem produto técnico registrado no AGROFIT",
+ "title_translations": {
+  "en": "Active ingredient sold without a registered technical product in AGROFIT"
+ },
+ "text": "Confere, nas vendas de 2024 em diante, se o ingrediente ativo consta como ingrediente de algum produto técnico registrado no AGROFIT (MAPA).\n",
+ "justification": "A venda de agrotóxico pressupõe produto registrado; o AGROFIT lista os produtos técnicos com registro e seus ingredientes ativos. Ingrediente vendido sem produto técnico no registro atual pode indicar proibição, cancelamento, nome grafado de outro modo ou sal/éster registrado com outro nome. Compara o texto antes do primeiro parêntese, em minúsculas. Só vendas recentes, porque o AGROFIT é a foto atual do registro. É sinal para revisão.\n",
+ "exceptions": [
+  "Ingredientes registrados com outra grafia, sal ou éster aparecem como não encontrados.",
+  "Vendas anteriores a 2024 ficam fora do escopo (o registro pode ter mudado desde então)."
+ ],
+ "template": "lookup-exists",
+ "evaluated_source": "ibama_comercializacao",
+ "timeline": null,
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_comercializacao",
+   "label": "dadosabertos.ibama.gov.br › relatorios-de-comercializacao-de-agrotoxicos › Dados - CSV"
+  },
+  {
+   "source": "mapa_agrofit",
+   "label": "dados.agricultura.gov.br › sistema-de-agrotoxicos-fitossanitarios-agrofit › Produto Técnico"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:24:54+00:00",
+ "total": 124299,
+ "counts": {
+  "match": 13218,
+  "mismatch": 0,
+  "key_not_found": 2247,
+  "missing_value": 57,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 108777
+ },
+ "signals": 2304,
+ "signals_by_outcome": {
+  "mismatch": 0,
+  "key_not_found": 2247,
+  "missing_value": 57,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/ingredient-without-registered-technical-product.json",
+ "sources": {
+  "ibama_comercializacao": {
+   "resource": "dadosabertos.ibama.gov.br › relatorios-de-comercializacao-de-agrotoxicos › Dados - CSV",
+   "fetch_status": "ok",
+   "sha256": "66731450daae45cae50ecf8f3a5d8e79e7fd42b670ee137e51eaf2643b357142",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/AGROTOXICOS/RelatoriosdeComercializacaodeAgrotoxicos/relatorios_comercializacao_agrotoxicos.csv",
+   "file": "relatorios_comercializacao_agrotoxicos.csv",
+   "files": null,
+   "archive_members": null,
+   "records": 124299,
+   "members": [
+    {
+     "name": "relatorios_comercializacao_agrotoxicos.csv",
+     "records": 124299
+    }
+   ]
+  },
+  "mapa_agrofit": {
+   "resource": "dados.agricultura.gov.br › sistema-de-agrotoxicos-fitossanitarios-agrofit › Produto Técnico",
+   "fetch_status": "ok",
+   "sha256": "8bc84011ee9ed76bcc9936f44f13b75c4c7b445086609d81ff504f2cbb7b5de5",
+   "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/a200c70b-e025-4a9a-be1b-ec7275d7921f/download/agrofitprodutostecnicos.csv",
+   "file": "agrofitprodutostecnicos.csv",
+   "files": null,
+   "archive_members": null,
+   "records": 2991,
+   "members": [
+    {
+     "name": "agrofitprodutostecnicos.csv",
+     "records": 2991
+    }
+   ]
+  }
+ }
+}

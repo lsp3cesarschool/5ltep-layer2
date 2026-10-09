@@ -1,0 +1,187 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "declared-areas-above-property",
+ "rule_version": "0.1.0",
+ "origin": "expert",
+ "file": "land/declared-areas-above-property.yaml",
+ "folder": "land",
+ "language": "pt-BR",
+ "title": "APP e reserva legal líquida acima da área do imóvel",
+ "title_translations": {
+  "en": "Permanent protection and net legal reserve above the property area"
+ },
+ "text": "Confere se APP + reserva legal líquida (descontada a sobreposição) não passam da área total do imóvel declarada no ADA.\n",
+ "justification": "As áreas declaradas são partes do imóvel; APP somada à reserva legal líquida maior que a área total indica erro de declaração ou de unidade. Usa a reserva legal líquida porque a APP pode ser computada na reserva legal (Lei 12.651/2012, art. 15). Áreas em hectares, com ponto decimal; campo vazio conta como zero. É sinal para revisão.\n",
+ "exceptions": [
+  "Se a reserva legal líquida não descontar toda a sobreposição com APP, a soma pode exceder sem erro."
+ ],
+ "template": "field-comparison",
+ "evaluated_source": "ibama_ada",
+ "timeline": null,
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_ada",
+   "label": "dadosabertos.ibama.gov.br › ato-declaratorio-ambiental-ada › Ato Declaratório Ambiental (ADA)"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:24:41+00:00",
+ "total": 6206666,
+ "counts": {
+  "match": 6160160,
+  "mismatch": 29980,
+  "key_not_found": 0,
+  "missing_value": 16526,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 0
+ },
+ "signals": 46506,
+ "signals_by_outcome": {
+  "mismatch": 29980,
+  "key_not_found": 0,
+  "missing_value": 16526,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/declared-areas-above-property.json",
+ "sources": {
+  "ibama_ada": {
+   "resource": "dadosabertos.ibama.gov.br › ato-declaratorio-ambiental-ada › Ato Declaratório Ambiental (ADA)",
+   "fetch_status": "ok",
+   "sha256": "bce13cf9914a7061427a6aad77150dd08ab56053a6952240b43e1615bce7d909",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/ADA/atoDeclaratorio/ADA_atoDeclaratorio_csv.zip",
+   "file": "ADA_atoDeclaratorio_csv.zip",
+   "files": null,
+   "archive_members": "ADA_atoDeclaratorio_*.csv",
+   "records": 6206666,
+   "members": [
+    {
+     "name": "ADA_atoDeclaratorio_1997.csv",
+     "records": 83293
+    },
+    {
+     "name": "ADA_atoDeclaratorio_1998.csv",
+     "records": 18407
+    },
+    {
+     "name": "ADA_atoDeclaratorio_1999.csv",
+     "records": 2738
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2000.csv",
+     "records": 4640
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2001.csv",
+     "records": 12600
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2002.csv",
+     "records": 4513
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2003.csv",
+     "records": 43609
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2004.csv",
+     "records": 16977
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2005.csv",
+     "records": 12819
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2006.csv",
+     "records": 22189
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2007.csv",
+     "records": 136379
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2008.csv",
+     "records": 195281
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2009.csv",
+     "records": 233448
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2010.csv",
+     "records": 233168
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2011.csv",
+     "records": 252725
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2012.csv",
+     "records": 249511
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2013.csv",
+     "records": 253213
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2014.csv",
+     "records": 247048
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2015.csv",
+     "records": 274689
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2016.csv",
+     "records": 303207
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2017.csv",
+     "records": 318338
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2018.csv",
+     "records": 330971
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2019.csv",
+     "records": 388571
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2020.csv",
+     "records": 390775
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2021.csv",
+     "records": 411568
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2022.csv",
+     "records": 441339
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2023.csv",
+     "records": 484236
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2024.csv",
+     "records": 448277
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2025.csv",
+     "records": 288852
+    },
+    {
+     "name": "ADA_atoDeclaratorio_2026.csv",
+     "records": 103285
+    }
+   ]
+  }
+ }
+}

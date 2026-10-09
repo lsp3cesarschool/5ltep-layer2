@@ -1,0 +1,71 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "main-judgment-before-infraction",
+ "rule_version": "0.3.0",
+ "origin": "expert",
+ "file": "payment/main-judgment-before-infraction.yaml",
+ "folder": "payment",
+ "language": "pt-BR",
+ "title": "Julgamento principal anterior ao auto",
+ "title_translations": {
+  "en": "First-instance judgment dated before the notice"
+ },
+ "text": "Confere se a data do julgamento principal não é anterior à data do auto.\n",
+ "justification": "O julgamento decide sobre um auto já lavrado; a ordem inversa indica erro de data. É sinal para revisão.\n",
+ "exceptions": [
+  "Autos ainda não julgados ficam fora do escopo."
+ ],
+ "template": "temporal-order",
+ "evaluated_source": "ibama_julgamentos",
+ "timeline": "ibama_julgamentos.Data Auto",
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_julgamentos",
+   "label": "dadosabertos.ibama.gov.br › julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama › Volume de Julgamento de Auto de Infração"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:24:41+00:00",
+ "total": 2917,
+ "counts": {
+  "match": 1578,
+  "mismatch": 3,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 1336
+ },
+ "signals": 3,
+ "signals_by_outcome": {
+  "mismatch": 3,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/main-judgment-before-infraction.json",
+ "sources": {
+  "ibama_julgamentos": {
+   "resource": "dadosabertos.ibama.gov.br › julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama › Volume de Julgamento de Auto de Infração",
+   "fetch_status": "ok",
+   "sha256": "7780312127223a853a01ced2be76b9631850ce282fc32af0e72dbf8eae81004d",
+   "url": "https://dadosabertos.ibama.gov.br/dados/SICAFI/AC/Volume/volumeJulgamentoAI.csv",
+   "file": "volumeJulgamentoAI.csv",
+   "files": null,
+   "archive_members": null,
+   "records": 2917,
+   "members": [
+    {
+     "name": "volumeJulgamentoAI.csv",
+     "records": 2917
+    }
+   ]
+  }
+ }
+}

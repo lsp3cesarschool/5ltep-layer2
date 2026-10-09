@@ -1,0 +1,247 @@
+{
+ "rule": "lifted-before-embargo",
+ "rule_version": "0.3.0",
+ "evaluated_at": "2026-10-09T10:23:08+00:00",
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
+ "sources": {
+  "ibama_embargo": {
+   "label": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-embargo › Termos de embargo",
+   "file": "termo_de_embargo.csv",
+   "files": null,
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/TERMOS_DE_EMBARGO/TERMO_EMBARGO/termo_de_embargo.csv",
+   "archive_members": null,
+   "sha256": "92f06836d90106c805c682f32d856bb7df2c995f7a430504364e0e251e2a24a5",
+   "records": 116763
+  }
+ },
+ "counts": {
+  "match": 19667,
+  "mismatch": 16,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 97080
+ },
+ "total": 116763,
+ "records": {
+  "mismatch": {
+   "termo_de_embargo.csv": [
+    2,
+    34163,
+    34704,
+    35195,
+    36853,
+    43719,
+    44850,
+    51226,
+    54377,
+    57212,
+    59292,
+    64849,
+    70067,
+    71852,
+    88058,
+    105100
+   ]
+  }
+ },
+ "members": [
+  {
+   "name": "termo_de_embargo.csv",
+   "records": 116763
+  }
+ ],
+ "by_member": {
+  "termo_de_embargo.csv": {
+   "match": 19667,
+   "mismatch": 16,
+   "out_of_scope": 97080
+  }
+ },
+ "by_period": {
+  "1667": {
+   "out_of_scope": 1
+  },
+  "1987": {
+   "out_of_scope": 1
+  },
+  "1988": {
+   "out_of_scope": 2
+  },
+  "1990": {
+   "match": 3,
+   "out_of_scope": 2
+  },
+  "1991": {
+   "match": 3,
+   "out_of_scope": 2
+  },
+  "1992": {
+   "match": 2,
+   "out_of_scope": 3
+  },
+  "1993": {
+   "match": 3,
+   "out_of_scope": 3
+  },
+  "1994": {
+   "out_of_scope": 10
+  },
+  "1995": {
+   "match": 12,
+   "out_of_scope": 24
+  },
+  "1996": {
+   "match": 42,
+   "out_of_scope": 28
+  },
+  "1997": {
+   "match": 24,
+   "out_of_scope": 32
+  },
+  "1998": {
+   "match": 39,
+   "out_of_scope": 87
+  },
+  "1999": {
+   "match": 85,
+   "out_of_scope": 170
+  },
+  "2000": {
+   "match": 104,
+   "out_of_scope": 237
+  },
+  "2001": {
+   "match": 166,
+   "out_of_scope": 405
+  },
+  "2002": {
+   "match": 222,
+   "out_of_scope": 1132
+  },
+  "2003": {
+   "match": 245,
+   "out_of_scope": 728
+  },
+  "2004": {
+   "match": 528,
+   "out_of_scope": 1044
+  },
+  "2005": {
+   "match": 657,
+   "out_of_scope": 2198
+  },
+  "2006": {
+   "match": 1310,
+   "mismatch": 1,
+   "out_of_scope": 4468
+  },
+  "2007": {
+   "match": 1797,
+   "out_of_scope": 5322
+  },
+  "2008": {
+   "match": 1961,
+   "mismatch": 1,
+   "out_of_scope": 5675
+  },
+  "2009": {
+   "match": 1594,
+   "out_of_scope": 4640
+  },
+  "2010": {
+   "match": 1403,
+   "out_of_scope": 4455
+  },
+  "2011": {
+   "match": 1318,
+   "mismatch": 1,
+   "out_of_scope": 4260
+  },
+  "2012": {
+   "match": 1130,
+   "mismatch": 2,
+   "out_of_scope": 4405
+  },
+  "2013": {
+   "match": 1109,
+   "mismatch": 1,
+   "out_of_scope": 4558
+  },
+  "2014": {
+   "match": 772,
+   "mismatch": 2,
+   "out_of_scope": 4331
+  },
+  "2015": {
+   "match": 733,
+   "mismatch": 1,
+   "out_of_scope": 3670
+  },
+  "2016": {
+   "match": 798,
+   "mismatch": 1,
+   "out_of_scope": 4197
+  },
+  "2017": {
+   "match": 729,
+   "mismatch": 1,
+   "out_of_scope": 3967
+  },
+  "2018": {
+   "match": 752,
+   "mismatch": 1,
+   "out_of_scope": 3826
+  },
+  "2019": {
+   "match": 414,
+   "mismatch": 3,
+   "out_of_scope": 3786
+  },
+  "2020": {
+   "match": 246,
+   "out_of_scope": 2357
+  },
+  "2021": {
+   "match": 329,
+   "out_of_scope": 3143
+  },
+  "2022": {
+   "match": 373,
+   "out_of_scope": 4805
+  },
+  "2023": {
+   "match": 328,
+   "out_of_scope": 5901
+  },
+  "2024": {
+   "match": 284,
+   "out_of_scope": 3809
+  },
+  "2025": {
+   "match": 120,
+   "out_of_scope": 5297
+  },
+  "2026": {
+   "match": 32,
+   "out_of_scope": 4096
+  },
+  "2063": {
+   "out_of_scope": 1
+  },
+  "2080": {
+   "out_of_scope": 1
+  },
+  "2090": {
+   "mismatch": 1
+  },
+  "2925": {
+   "out_of_scope": 1
+  }
+ },
+ "timeline": "ibama_embargo.DAT_EMBARGO"
+}

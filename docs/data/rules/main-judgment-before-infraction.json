@@ -1,0 +1,190 @@
+{
+ "rule": "main-judgment-before-infraction",
+ "rule_version": "0.3.0",
+ "evaluated_at": "2026-10-09T10:24:41+00:00",
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
+ "sources": {
+  "ibama_julgamentos": {
+   "label": "dadosabertos.ibama.gov.br › julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama › Volume de Julgamento de Auto de Infração",
+   "file": "volumeJulgamentoAI.csv",
+   "files": null,
+   "url": "https://dadosabertos.ibama.gov.br/dados/SICAFI/AC/Volume/volumeJulgamentoAI.csv",
+   "archive_members": null,
+   "sha256": "7780312127223a853a01ced2be76b9631850ce282fc32af0e72dbf8eae81004d",
+   "records": 2917
+  }
+ },
+ "counts": {
+  "match": 1578,
+  "mismatch": 3,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 1336
+ },
+ "total": 2917,
+ "records": {
+  "mismatch": {
+   "volumeJulgamentoAI.csv": [
+    166,
+    760,
+    2567
+   ]
+  }
+ },
+ "members": [
+  {
+   "name": "volumeJulgamentoAI.csv",
+   "records": 2917
+  }
+ ],
+ "by_member": {
+  "volumeJulgamentoAI.csv": {
+   "match": 1578,
+   "mismatch": 3,
+   "out_of_scope": 1336
+  }
+ },
+ "by_period": {
+  "1985": {
+   "match": 1
+  },
+  "1991": {
+   "match": 1,
+   "out_of_scope": 1
+  },
+  "1993": {
+   "out_of_scope": 1
+  },
+  "1995": {
+   "out_of_scope": 1
+  },
+  "1996": {
+   "match": 66,
+   "out_of_scope": 57
+  },
+  "1997": {
+   "match": 120,
+   "out_of_scope": 109
+  },
+  "1998": {
+   "match": 117,
+   "out_of_scope": 100
+  },
+  "1999": {
+   "match": 162,
+   "out_of_scope": 110
+  },
+  "2000": {
+   "match": 55,
+   "mismatch": 1,
+   "out_of_scope": 43
+  },
+  "2001": {
+   "match": 117,
+   "out_of_scope": 131
+  },
+  "2002": {
+   "match": 21,
+   "mismatch": 1,
+   "out_of_scope": 87
+  },
+  "2003": {
+   "match": 51,
+   "out_of_scope": 155
+  },
+  "2004": {
+   "match": 81,
+   "out_of_scope": 107
+  },
+  "2005": {
+   "match": 94,
+   "mismatch": 1,
+   "out_of_scope": 136
+  },
+  "2006": {
+   "match": 79,
+   "out_of_scope": 39
+  },
+  "2007": {
+   "match": 205,
+   "out_of_scope": 62
+  },
+  "2008": {
+   "match": 69,
+   "out_of_scope": 33
+  },
+  "2009": {
+   "match": 50,
+   "out_of_scope": 14
+  },
+  "2010": {
+   "match": 92,
+   "out_of_scope": 11
+  },
+  "2011": {
+   "match": 45,
+   "out_of_scope": 17
+  },
+  "2012": {
+   "match": 23,
+   "out_of_scope": 5
+  },
+  "2013": {
+   "match": 37,
+   "out_of_scope": 17
+  },
+  "2014": {
+   "match": 16,
+   "out_of_scope": 8
+  },
+  "2015": {
+   "match": 25,
+   "out_of_scope": 7
+  },
+  "2016": {
+   "match": 22,
+   "out_of_scope": 10
+  },
+  "2017": {
+   "match": 10,
+   "out_of_scope": 7
+  },
+  "2018": {
+   "match": 5,
+   "out_of_scope": 9
+  },
+  "2019": {
+   "match": 8,
+   "out_of_scope": 9
+  },
+  "2020": {
+   "match": 2,
+   "out_of_scope": 2
+  },
+  "2021": {
+   "match": 3
+  },
+  "2022": {
+   "match": 1,
+   "out_of_scope": 5
+  },
+  "2023": {
+   "out_of_scope": 17
+  },
+  "2024": {
+   "out_of_scope": 9
+  },
+  "2025": {
+   "out_of_scope": 13
+  },
+  "2026": {
+   "out_of_scope": 4
+  }
+ },
+ "timeline": "ibama_julgamentos.Data Auto"
+}

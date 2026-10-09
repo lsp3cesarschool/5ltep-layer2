@@ -1,0 +1,128 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "species-not-in-commercial-timber-list",
+ "rule_version": "0.1.0",
+ "origin": "cross_reference",
+ "file": "forest/species-not-in-commercial-timber-list.yaml",
+ "folder": "forest",
+ "language": "pt-BR",
+ "title": "Espécie explorada fora da lista de espécies madeireiras comerciais",
+ "title_translations": {
+  "en": "Harvested species missing from the list of commercial timber species"
+ },
+ "text": "Confere se o nome científico de cada árvore explorada (inventário 100%) consta da lista de espécies florestais madeireiras comerciais do Serviço Florestal Brasileiro.\n",
+ "justification": "A lista do SFB (Laboratório de Produtos Florestais, nomes conferidos na Flora e Funga do Brasil) reúne as espécies madeireiras comerciais. Nome explorado fora dela pode indicar erro de grafia, sinonímia não resolvida ou espécie pouco comercializada. Compara gênero e espécie, em minúsculas. O sinal é informativo: estar fora da lista não torna a exploração irregular.\n",
+ "exceptions": [
+  "Sinônimos e nomes populares registrados como científicos aparecem como não encontrados.",
+  "Espécies legítimas não incluídas na lista comercial também aparecem."
+ ],
+ "template": "lookup-exists",
+ "evaluated_source": "ibama_if100",
+ "timeline": "ibama_if100.DATA_DA_EXPLORACAO",
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_if100",
+   "label": "dadosabertos.ibama.gov.br › volumes-explorados-if-100 › Volumes Explorados - IF 100%"
+  },
+  {
+   "source": "sfb_madeireiras",
+   "label": "dados.florestal.gov.br › especies-florestais-madeireiras-comerciais › Dados_abertos_especies_madeireiras_SNIF_fonte_LPF_SFB"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:23:39+00:00",
+ "total": 2386115,
+ "counts": {
+  "match": 1581314,
+  "mismatch": 0,
+  "key_not_found": 804797,
+  "missing_value": 4,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 0
+ },
+ "signals": 804801,
+ "signals_by_outcome": {
+  "mismatch": 0,
+  "key_not_found": 804797,
+  "missing_value": 4,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/species-not-in-commercial-timber-list.json",
+ "sources": {
+  "ibama_if100": {
+   "resource": "dadosabertos.ibama.gov.br › volumes-explorados-if-100 › Volumes Explorados - IF 100%",
+   "fetch_status": "ok",
+   "sha256": "0f106ef75db9068fcd7f91adaf9d0ae890fb064137aadd1d2d82bd9b0a093ff3",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SINAFLOR/VolumesExploradosIf100/volumes_explorados_if_100_csv.zip",
+   "file": "volumes_explorados_if_100_csv.zip",
+   "files": null,
+   "archive_members": "volumes_explorados_if_100_ano_*.csv",
+   "records": 2386115,
+   "members": [
+    {
+     "name": "volumes_explorados_if_100_ano_2017.csv",
+     "records": 3222
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2018.csv",
+     "records": 74818
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2019.csv",
+     "records": 189569
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2020.csv",
+     "records": 189189
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2021.csv",
+     "records": 447135
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2022.csv",
+     "records": 368339
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2023.csv",
+     "records": 325918
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2024.csv",
+     "records": 404287
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2025.csv",
+     "records": 265976
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2026.csv",
+     "records": 117662
+    }
+   ]
+  },
+  "sfb_madeireiras": {
+   "resource": "dados.florestal.gov.br › especies-florestais-madeireiras-comerciais › Dados_abertos_especies_madeireiras_SNIF_fonte_LPF_SFB",
+   "fetch_status": "ok",
+   "sha256": "5ff3e04290644e5b739a354d1e452ca8c78a9ecb9a6b0e7c10df30f07d36f64d",
+   "url": "https://dados.florestal.gov.br/pt_BR/dataset/3b7340db-6f5e-4de4-8543-f75ee204a5e6/resource/cc51c5d9-852b-4890-ba74-9665a720b246/download/dados_abertos_especies_madeireiras_snif_fonte_lpf_sfb.csv",
+   "file": "dados_abertos_especies_madeireiras_snif_fonte_lpf_sfb.csv",
+   "files": null,
+   "archive_members": null,
+   "records": 275,
+   "members": [
+    {
+     "name": "dados_abertos_especies_madeireiras_snif_fonte_lpf_sfb.csv",
+     "records": 275
+    }
+   ]
+  }
+ }
+}

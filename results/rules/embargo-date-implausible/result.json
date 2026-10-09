@@ -1,0 +1,71 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "embargo-date-implausible",
+ "rule_version": "0.1.0",
+ "origin": "expert",
+ "file": "embargo/embargo-date-implausible.yaml",
+ "folder": "embargo",
+ "language": "pt-BR",
+ "title": "Data do embargo fora de faixa plausível",
+ "title_translations": {
+  "en": "Embargo date outside a plausible range"
+ },
+ "text": "Sinaliza termos de embargo com data anterior à criação do IBAMA (22/02/1989) ou posterior ao dia da rodada.\n",
+ "justification": "O IBAMA foi criado pela Lei 7.735, de 22/02/1989; um embargo do IBAMA não pode ser anterior a essa data nem estar no futuro. Datas assim indicam erro de digitação do ano (os gráficos mostraram embargos em 1667 e 2063). É sinal para revisão.\n",
+ "exceptions": [
+  "Termos herdados de órgãos anteriores ao IBAMA, se existirem, teriam data anterior a 1989."
+ ],
+ "template": "flag-when",
+ "evaluated_source": "ibama_embargo",
+ "timeline": "ibama_embargo.DAT_EMBARGO",
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_embargo",
+   "label": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-embargo › Termos de embargo"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:23:08+00:00",
+ "total": 116763,
+ "counts": {
+  "match": 116755,
+  "mismatch": 8,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 0
+ },
+ "signals": 8,
+ "signals_by_outcome": {
+  "mismatch": 8,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/embargo-date-implausible.json",
+ "sources": {
+  "ibama_embargo": {
+   "resource": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-embargo › Termos de embargo",
+   "fetch_status": "ok",
+   "sha256": "92f06836d90106c805c682f32d856bb7df2c995f7a430504364e0e251e2a24a5",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/TERMOS_DE_EMBARGO/TERMO_EMBARGO/termo_de_embargo.csv",
+   "file": "termo_de_embargo.csv",
+   "files": null,
+   "archive_members": null,
+   "records": 116763,
+   "members": [
+    {
+     "name": "termo_de_embargo.csv",
+     "records": 116763
+    }
+   ]
+  }
+ }
+}

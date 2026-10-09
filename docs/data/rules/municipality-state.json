@@ -1,0 +1,1390 @@
+{
+ "rule": "municipality-state",
+ "rule_version": "0.4.0",
+ "evaluated_at": "2026-10-09T10:24:56+00:00",
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
+ "sources": {
+  "ibama_autos": {
+   "label": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
+   "file": "auto_infracao_csv.zip",
+   "files": null,
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
+   "archive_members": "auto_infracao_*.csv",
+   "sha256": "5e65aba9b3b1ba08c3098b59da7031dadb78d876fc4f4d560ddc984eb1f381e0",
+   "records": 711926
+  },
+  "tse_municipios": {
+   "label": "dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE",
+   "file": "municipio_tse_ibge.zip",
+   "files": null,
+   "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/municipio_tse_ibge/municipio_tse_ibge.zip",
+   "archive_members": "municipio_tse_ibge.csv",
+   "sha256": "f55c9720d221a9956279f6cb225aafcae797e0cf8ac2289040c052ab4ea7c712",
+   "records": 5571
+  }
+ },
+ "counts": {
+  "match": 711112,
+  "mismatch": 0,
+  "key_not_found": 547,
+  "missing_value": 267,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 0
+ },
+ "total": 711926,
+ "records": {
+  "key_not_found": {
+   "auto_infracao_1986.csv": [
+    217,
+    224,
+    225
+   ],
+   "auto_infracao_1987.csv": [
+    321
+   ],
+   "auto_infracao_1988.csv": [
+    285
+   ],
+   "auto_infracao_1989.csv": [
+    598,
+    599
+   ],
+   "auto_infracao_1990.csv": [
+    461,
+    465,
+    473,
+    477,
+    491,
+    495,
+    497,
+    503,
+    504,
+    505,
+    507,
+    509,
+    510,
+    511,
+    514,
+    516,
+    517,
+    518,
+    523,
+    524,
+    525,
+    526,
+    541,
+    543,
+    544,
+    546,
+    547,
+    549,
+    550,
+    552,
+    553,
+    557,
+    558,
+    559,
+    561,
+    562,
+    563,
+    565,
+    566,
+    569,
+    570,
+    571,
+    572,
+    573,
+    574,
+    575,
+    576,
+    577,
+    578,
+    580,
+    592,
+    596,
+    602,
+    865,
+    869,
+    870,
+    880,
+    881,
+    922,
+    954,
+    999,
+    1007,
+    1011,
+    1015,
+    1016,
+    1020,
+    1032,
+    1039,
+    1042
+   ],
+   "auto_infracao_1991.csv": [
+    342,
+    343,
+    345,
+    353,
+    354,
+    363,
+    366,
+    369,
+    404
+   ],
+   "auto_infracao_1992.csv": [
+    315,
+    328,
+    333,
+    336,
+    338
+   ],
+   "auto_infracao_1993.csv": [
+    849
+   ],
+   "auto_infracao_1995.csv": [
+    2477,
+    2567,
+    2571,
+    2605,
+    2612,
+    2640,
+    3489
+   ],
+   "auto_infracao_1996.csv": [
+    2725,
+    12591,
+    12593,
+    13222,
+    13455,
+    18529,
+    34828,
+    34832,
+    34836,
+    34843,
+    34956,
+    34993,
+    34994,
+    35064,
+    35254,
+    35366,
+    35944
+   ],
+   "auto_infracao_1997.csv": [
+    512,
+    4484,
+    4488,
+    4490,
+    4495,
+    4550,
+    4554,
+    4570,
+    8853,
+    11523,
+    19034,
+    19436,
+    19462,
+    19465,
+    19467,
+    19469,
+    24756,
+    27020,
+    27022,
+    35979,
+    35981,
+    36013,
+    36283,
+    36380,
+    36381
+   ],
+   "auto_infracao_1998.csv": [
+    329,
+    723,
+    745,
+    903,
+    1206,
+    3317,
+    3318,
+    9695,
+    14249,
+    15526,
+    15579,
+    15638,
+    15649,
+    15663,
+    15664,
+    15684,
+    15685,
+    16204,
+    16207,
+    16208,
+    16252,
+    16364,
+    16435,
+    22358,
+    22406,
+    22409,
+    22591,
+    22619,
+    31477,
+    31571
+   ],
+   "auto_infracao_1999.csv": [
+    3417,
+    10710,
+    16394,
+    21701,
+    21702,
+    32432
+   ],
+   "auto_infracao_2000.csv": [
+    1777,
+    2374,
+    2376,
+    2429,
+    3063,
+    6212,
+    8870,
+    9059,
+    15414,
+    23411,
+    24169
+   ],
+   "auto_infracao_2001.csv": [
+    3003,
+    3132,
+    10108,
+    10911,
+    10912,
+    14152,
+    16745,
+    26715
+   ],
+   "auto_infracao_2002.csv": [
+    240,
+    242,
+    276,
+    305,
+    317,
+    9135,
+    9505,
+    9506,
+    9507,
+    34903,
+    34904,
+    34914,
+    35446,
+    35778,
+    35802,
+    35851,
+    37400
+   ],
+   "auto_infracao_2003.csv": [
+    420,
+    532,
+    2420,
+    2421,
+    2422,
+    2423,
+    2467,
+    10181,
+    15818,
+    15819,
+    15855,
+    15858,
+    15859,
+    15999,
+    16067,
+    16086,
+    20559
+   ],
+   "auto_infracao_2004.csv": [
+    479,
+    3296,
+    9497,
+    9641,
+    9642,
+    25480,
+    25763,
+    25770,
+    25774,
+    25779,
+    25805
+   ],
+   "auto_infracao_2005.csv": [
+    923,
+    5438,
+    5439,
+    5532,
+    6703,
+    8712,
+    8965,
+    9529,
+    10117,
+    11356,
+    12773,
+    12774,
+    12821,
+    20477,
+    20481,
+    31745,
+    32112,
+    32165,
+    32365,
+    32366,
+    32732,
+    32749
+   ],
+   "auto_infracao_2006.csv": [
+    1077,
+    1078,
+    1079,
+    1087,
+    1088,
+    1090,
+    1091,
+    1153,
+    1154,
+    1155,
+    1156,
+    1191,
+    1203,
+    1204,
+    1205,
+    1209,
+    4268,
+    4508,
+    4509,
+    4513,
+    4525,
+    4535,
+    4565,
+    5398,
+    5989,
+    8939,
+    8940,
+    9420,
+    10095,
+    10813,
+    11713,
+    12219,
+    14905,
+    16672,
+    16848,
+    16849,
+    17403,
+    17404,
+    17457,
+    19194
+   ],
+   "auto_infracao_2007.csv": [
+    1769,
+    2377,
+    2568,
+    2896,
+    4558,
+    5447,
+    9054,
+    9069,
+    9070,
+    10847,
+    10848,
+    10850,
+    10851,
+    14667,
+    15137,
+    15264,
+    16466,
+    19663,
+    24560
+   ],
+   "auto_infracao_2008.csv": [
+    142,
+    143,
+    144,
+    252,
+    736,
+    740,
+    907,
+    933,
+    1000,
+    1001,
+    1002,
+    1400,
+    1479,
+    1719,
+    1720,
+    2620,
+    3159,
+    3160,
+    4168,
+    4545,
+    5418,
+    6627,
+    6629,
+    6778,
+    6779,
+    6785,
+    7258,
+    7259,
+    8506,
+    9113,
+    9145,
+    10148,
+    10149,
+    10611,
+    11763,
+    12266,
+    12267,
+    12467,
+    14147,
+    14467,
+    14468,
+    14469,
+    14509,
+    14514,
+    15780,
+    15781,
+    15959,
+    15960,
+    15961,
+    17160,
+    17980,
+    17981,
+    17982,
+    18526,
+    19624,
+    19712,
+    20612,
+    22334,
+    22762,
+    22955,
+    24149,
+    24198,
+    24461,
+    24747,
+    25238,
+    26210,
+    27267,
+    28800,
+    31101,
+    31102
+   ],
+   "auto_infracao_2009.csv": [
+    736,
+    4107,
+    6332,
+    6334,
+    6661,
+    8279,
+    9528,
+    9529,
+    9536,
+    9537,
+    9917,
+    10281,
+    12347,
+    14991,
+    17533,
+    17534,
+    17536,
+    20185,
+    20186,
+    22226,
+    23063,
+    23065,
+    23086,
+    23087
+   ],
+   "auto_infracao_2010.csv": [
+    118,
+    119,
+    120,
+    121,
+    122,
+    2695,
+    3925,
+    3926,
+    4268,
+    6386,
+    6567,
+    7841,
+    9725,
+    9741,
+    9742,
+    9933,
+    10816,
+    10817,
+    10857,
+    11156,
+    12141,
+    12812,
+    19233,
+    20858
+   ],
+   "auto_infracao_2011.csv": [
+    55,
+    135,
+    2911,
+    3702,
+    6688,
+    6737,
+    7988,
+    7998,
+    7999,
+    11219,
+    11220,
+    15221,
+    15984,
+    15985,
+    15986,
+    15991,
+    18261,
+    18262,
+    18266
+   ],
+   "auto_infracao_2012.csv": [
+    167,
+    861,
+    3377,
+    4119,
+    4217,
+    4406,
+    4792,
+    4793,
+    4804,
+    5763,
+    5764,
+    5766,
+    7908,
+    8285,
+    8286,
+    8288,
+    8928,
+    8929,
+    8930,
+    8931,
+    9568,
+    9569,
+    9895,
+    10274,
+    10275,
+    12351,
+    12352,
+    12353,
+    12354,
+    12643,
+    12644,
+    12663,
+    13396,
+    13404,
+    13518,
+    14571,
+    14572,
+    14656,
+    15077,
+    16013,
+    16237,
+    17735,
+    18734,
+    18970
+   ],
+   "auto_infracao_2013.csv": [
+    13,
+    2629,
+    2878,
+    4571,
+    8236,
+    9670,
+    10893,
+    15395,
+    16173
+   ],
+   "auto_infracao_2017.csv": [
+    11465
+   ],
+   "auto_infracao_2018.csv": [
+    14646
+   ],
+   "auto_infracao_2020.csv": [
+    1258,
+    4195,
+    4432,
+    4461,
+    4549,
+    4550,
+    4551,
+    6056,
+    7267
+   ],
+   "auto_infracao_2021.csv": [
+    237,
+    4606,
+    7640,
+    8629
+   ],
+   "auto_infracao_2022.csv": [
+    502,
+    3691,
+    4500,
+    9331,
+    10247,
+    10858
+   ],
+   "auto_infracao_2023.csv": [
+    623,
+    624,
+    4591,
+    9826,
+    15049,
+    15453,
+    15556,
+    16867
+   ],
+   "auto_infracao_2024.csv": [
+    1926,
+    8313,
+    8352,
+    8853,
+    8995,
+    9772
+   ],
+   "auto_infracao_2025.csv": [
+    12043
+   ]
+  },
+  "missing_value": {
+   "auto_infracao_1980.csv": [
+    10
+   ],
+   "auto_infracao_1981.csv": [
+    76,
+    85
+   ],
+   "auto_infracao_1982.csv": [
+    94,
+    161,
+    186,
+    289
+   ],
+   "auto_infracao_1984.csv": [
+    159,
+    194
+   ],
+   "auto_infracao_1985.csv": [
+    486,
+    645
+   ],
+   "auto_infracao_1986.csv": [
+    327,
+    437,
+    450
+   ],
+   "auto_infracao_1987.csv": [
+    473,
+    576,
+    595,
+    720,
+    828
+   ],
+   "auto_infracao_1988.csv": [
+    358,
+    478,
+    757,
+    838,
+    869,
+    905,
+    1019,
+    1288,
+    1292,
+    1314,
+    1443,
+    1635,
+    2098,
+    2099,
+    2253,
+    2334,
+    2356,
+    2378,
+    2380,
+    2403,
+    2412,
+    2418,
+    2421,
+    2438,
+    2446,
+    2450,
+    2451
+   ],
+   "auto_infracao_1989.csv": [
+    1047,
+    1100
+   ],
+   "auto_infracao_1990.csv": [
+    987,
+    1038,
+    1040,
+    1628,
+    1704,
+    2360,
+    2503,
+    3099,
+    3336,
+    3379
+   ],
+   "auto_infracao_1991.csv": [
+    749,
+    897,
+    933,
+    1080,
+    1110,
+    1119,
+    1155,
+    1200,
+    1237,
+    1239,
+    1283,
+    1290,
+    1328,
+    1356,
+    1691,
+    1702,
+    1825,
+    1834,
+    2062
+   ],
+   "auto_infracao_1992.csv": [
+    595,
+    859,
+    1002
+   ],
+   "auto_infracao_1993.csv": [
+    1045,
+    1068,
+    1114,
+    1272,
+    1304
+   ],
+   "auto_infracao_1994.csv": [
+    1770,
+    1772,
+    1838,
+    2082
+   ],
+   "auto_infracao_1995.csv": [
+    3246,
+    3248
+   ],
+   "auto_infracao_1996.csv": [
+    27807,
+    28070,
+    30495,
+    30541,
+    30684,
+    30696,
+    30698,
+    30714,
+    30716,
+    30722,
+    30750,
+    30755,
+    30765,
+    30767,
+    30768,
+    30770,
+    30772,
+    30774,
+    30778,
+    30780,
+    30783,
+    30791,
+    30796,
+    30910,
+    30917,
+    30928,
+    31081,
+    31151,
+    31152,
+    31279,
+    31697,
+    34067,
+    34068,
+    34386,
+    34481,
+    34487,
+    34488,
+    34498,
+    34502,
+    34505,
+    34508,
+    34509,
+    36156
+   ],
+   "auto_infracao_1997.csv": [
+    28051,
+    28095,
+    28096,
+    28210,
+    28249,
+    28304,
+    28374,
+    28476,
+    28477,
+    28817,
+    28818,
+    28882,
+    28911,
+    28968,
+    28996,
+    29050,
+    29171,
+    29172,
+    29175,
+    29338,
+    30160,
+    30430,
+    31060,
+    31173,
+    31277,
+    31297,
+    31405,
+    31428,
+    31450,
+    31749,
+    31757,
+    31780,
+    31813,
+    31834,
+    32117,
+    32148,
+    32166,
+    32203,
+    32204,
+    32404,
+    32613,
+    32623,
+    32625,
+    32627,
+    32657,
+    32836,
+    32840,
+    32865,
+    32874,
+    32939,
+    32950,
+    32989,
+    33106,
+    33120,
+    33138,
+    33153,
+    33163,
+    33169,
+    33174,
+    33179,
+    33180,
+    33192,
+    33193,
+    34236,
+    34243,
+    34356,
+    34441,
+    34544,
+    34594,
+    34879,
+    34883,
+    35036,
+    35037,
+    35119,
+    35120,
+    35124,
+    35125,
+    35130,
+    35152,
+    35225,
+    35438,
+    35442,
+    35444,
+    35445,
+    35448,
+    35453,
+    35467,
+    35470,
+    35491,
+    35535,
+    35577,
+    35726,
+    35727,
+    35736,
+    35881,
+    36496,
+    36690,
+    37444
+   ],
+   "auto_infracao_1998.csv": [
+    2420,
+    30472
+   ],
+   "auto_infracao_1999.csv": [
+    16594
+   ],
+   "auto_infracao_2000.csv": [
+    12274,
+    15015
+   ],
+   "auto_infracao_2001.csv": [
+    8708
+   ],
+   "auto_infracao_2002.csv": [
+    31664
+   ],
+   "auto_infracao_2003.csv": [
+    11218,
+    14536,
+    15354,
+    15376,
+    15378,
+    15383,
+    15386,
+    18141,
+    21989,
+    22003
+   ],
+   "auto_infracao_2004.csv": [
+    27052,
+    27071,
+    27078,
+    27080,
+    27084,
+    27086,
+    27088,
+    27094
+   ],
+   "auto_infracao_2005.csv": [
+    681,
+    33000,
+    33008
+   ],
+   "auto_infracao_2006.csv": [
+    18391
+   ],
+   "auto_infracao_2019.csv": [
+    14524,
+    14525,
+    14526
+   ],
+   "auto_infracao_2020.csv": [
+    9517,
+    9519,
+    9521
+   ]
+  }
+ },
+ "members": [
+  {
+   "name": "auto_infracao_1977.csv",
+   "records": 2
+  },
+  {
+   "name": "auto_infracao_1980.csv",
+   "records": 12
+  },
+  {
+   "name": "auto_infracao_1981.csv",
+   "records": 98
+  },
+  {
+   "name": "auto_infracao_1982.csv",
+   "records": 295
+  },
+  {
+   "name": "auto_infracao_1983.csv",
+   "records": 135
+  },
+  {
+   "name": "auto_infracao_1984.csv",
+   "records": 251
+  },
+  {
+   "name": "auto_infracao_1985.csv",
+   "records": 661
+  },
+  {
+   "name": "auto_infracao_1986.csv",
+   "records": 617
+  },
+  {
+   "name": "auto_infracao_1987.csv",
+   "records": 829
+  },
+  {
+   "name": "auto_infracao_1988.csv",
+   "records": 2611
+  },
+  {
+   "name": "auto_infracao_1989.csv",
+   "records": 1423
+  },
+  {
+   "name": "auto_infracao_1990.csv",
+   "records": 3387
+  },
+  {
+   "name": "auto_infracao_1991.csv",
+   "records": 2121
+  },
+  {
+   "name": "auto_infracao_1992.csv",
+   "records": 1063
+  },
+  {
+   "name": "auto_infracao_1993.csv",
+   "records": 1312
+  },
+  {
+   "name": "auto_infracao_1994.csv",
+   "records": 2099
+  },
+  {
+   "name": "auto_infracao_1995.csv",
+   "records": 3755
+  },
+  {
+   "name": "auto_infracao_1996.csv",
+   "records": 36651
+  },
+  {
+   "name": "auto_infracao_1997.csv",
+   "records": 37761
+  },
+  {
+   "name": "auto_infracao_1998.csv",
+   "records": 33597
+  },
+  {
+   "name": "auto_infracao_1999.csv",
+   "records": 34456
+  },
+  {
+   "name": "auto_infracao_2000.csv",
+   "records": 24898
+  },
+  {
+   "name": "auto_infracao_2001.csv",
+   "records": 26814
+  },
+  {
+   "name": "auto_infracao_2002.csv",
+   "records": 37647
+  },
+  {
+   "name": "auto_infracao_2003.csv",
+   "records": 22056
+  },
+  {
+   "name": "auto_infracao_2004.csv",
+   "records": 27190
+  },
+  {
+   "name": "auto_infracao_2005.csv",
+   "records": 33104
+  },
+  {
+   "name": "auto_infracao_2006.csv",
+   "records": 25983
+  },
+  {
+   "name": "auto_infracao_2007.csv",
+   "records": 28992
+  },
+  {
+   "name": "auto_infracao_2008.csv",
+   "records": 31316
+  },
+  {
+   "name": "auto_infracao_2009.csv",
+   "records": 23285
+  },
+  {
+   "name": "auto_infracao_2010.csv",
+   "records": 21384
+  },
+  {
+   "name": "auto_infracao_2011.csv",
+   "records": 20517
+  },
+  {
+   "name": "auto_infracao_2012.csv",
+   "records": 18979
+  },
+  {
+   "name": "auto_infracao_2013.csv",
+   "records": 16184
+  },
+  {
+   "name": "auto_infracao_2014.csv",
+   "records": 15293
+  },
+  {
+   "name": "auto_infracao_2015.csv",
+   "records": 17326
+  },
+  {
+   "name": "auto_infracao_2016.csv",
+   "records": 17823
+  },
+  {
+   "name": "auto_infracao_2017.csv",
+   "records": 16885
+  },
+  {
+   "name": "auto_infracao_2018.csv",
+   "records": 17884
+  },
+  {
+   "name": "auto_infracao_2019.csv",
+   "records": 14530
+  },
+  {
+   "name": "auto_infracao_2020.csv",
+   "records": 9533
+  },
+  {
+   "name": "auto_infracao_2021.csv",
+   "records": 9662
+  },
+  {
+   "name": "auto_infracao_2022.csv",
+   "records": 12854
+  },
+  {
+   "name": "auto_infracao_2023.csv",
+   "records": 17192
+  },
+  {
+   "name": "auto_infracao_2024.csv",
+   "records": 12308
+  },
+  {
+   "name": "auto_infracao_2025.csv",
+   "records": 16273
+  },
+  {
+   "name": "auto_infracao_2026.csv",
+   "records": 12878
+  }
+ ],
+ "by_member": {
+  "auto_infracao_1977.csv": {
+   "match": 2
+  },
+  "auto_infracao_1980.csv": {
+   "match": 11,
+   "missing_value": 1
+  },
+  "auto_infracao_1981.csv": {
+   "match": 96,
+   "missing_value": 2
+  },
+  "auto_infracao_1982.csv": {
+   "match": 291,
+   "missing_value": 4
+  },
+  "auto_infracao_1983.csv": {
+   "match": 135
+  },
+  "auto_infracao_1984.csv": {
+   "match": 249,
+   "missing_value": 2
+  },
+  "auto_infracao_1985.csv": {
+   "match": 659,
+   "missing_value": 2
+  },
+  "auto_infracao_1986.csv": {
+   "key_not_found": 3,
+   "match": 611,
+   "missing_value": 3
+  },
+  "auto_infracao_1987.csv": {
+   "key_not_found": 1,
+   "match": 823,
+   "missing_value": 5
+  },
+  "auto_infracao_1988.csv": {
+   "key_not_found": 1,
+   "match": 2583,
+   "missing_value": 27
+  },
+  "auto_infracao_1989.csv": {
+   "key_not_found": 2,
+   "match": 1419,
+   "missing_value": 2
+  },
+  "auto_infracao_1990.csv": {
+   "key_not_found": 69,
+   "match": 3308,
+   "missing_value": 10
+  },
+  "auto_infracao_1991.csv": {
+   "key_not_found": 9,
+   "match": 2093,
+   "missing_value": 19
+  },
+  "auto_infracao_1992.csv": {
+   "key_not_found": 5,
+   "match": 1055,
+   "missing_value": 3
+  },
+  "auto_infracao_1993.csv": {
+   "key_not_found": 1,
+   "match": 1306,
+   "missing_value": 5
+  },
+  "auto_infracao_1994.csv": {
+   "match": 2095,
+   "missing_value": 4
+  },
+  "auto_infracao_1995.csv": {
+   "key_not_found": 7,
+   "match": 3746,
+   "missing_value": 2
+  },
+  "auto_infracao_1996.csv": {
+   "key_not_found": 17,
+   "match": 36591,
+   "missing_value": 43
+  },
+  "auto_infracao_1997.csv": {
+   "key_not_found": 25,
+   "match": 37638,
+   "missing_value": 98
+  },
+  "auto_infracao_1998.csv": {
+   "key_not_found": 30,
+   "match": 33565,
+   "missing_value": 2
+  },
+  "auto_infracao_1999.csv": {
+   "key_not_found": 6,
+   "match": 34449,
+   "missing_value": 1
+  },
+  "auto_infracao_2000.csv": {
+   "key_not_found": 11,
+   "match": 24885,
+   "missing_value": 2
+  },
+  "auto_infracao_2001.csv": {
+   "key_not_found": 8,
+   "match": 26805,
+   "missing_value": 1
+  },
+  "auto_infracao_2002.csv": {
+   "key_not_found": 17,
+   "match": 37629,
+   "missing_value": 1
+  },
+  "auto_infracao_2003.csv": {
+   "key_not_found": 17,
+   "match": 22029,
+   "missing_value": 10
+  },
+  "auto_infracao_2004.csv": {
+   "key_not_found": 11,
+   "match": 27171,
+   "missing_value": 8
+  },
+  "auto_infracao_2005.csv": {
+   "key_not_found": 22,
+   "match": 33079,
+   "missing_value": 3
+  },
+  "auto_infracao_2006.csv": {
+   "key_not_found": 40,
+   "match": 25942,
+   "missing_value": 1
+  },
+  "auto_infracao_2007.csv": {
+   "key_not_found": 19,
+   "match": 28973
+  },
+  "auto_infracao_2008.csv": {
+   "key_not_found": 70,
+   "match": 31246
+  },
+  "auto_infracao_2009.csv": {
+   "key_not_found": 24,
+   "match": 23261
+  },
+  "auto_infracao_2010.csv": {
+   "key_not_found": 24,
+   "match": 21360
+  },
+  "auto_infracao_2011.csv": {
+   "key_not_found": 19,
+   "match": 20498
+  },
+  "auto_infracao_2012.csv": {
+   "key_not_found": 44,
+   "match": 18935
+  },
+  "auto_infracao_2013.csv": {
+   "key_not_found": 9,
+   "match": 16175
+  },
+  "auto_infracao_2014.csv": {
+   "match": 15293
+  },
+  "auto_infracao_2015.csv": {
+   "match": 17326
+  },
+  "auto_infracao_2016.csv": {
+   "match": 17823
+  },
+  "auto_infracao_2017.csv": {
+   "key_not_found": 1,
+   "match": 16884
+  },
+  "auto_infracao_2018.csv": {
+   "key_not_found": 1,
+   "match": 17883
+  },
+  "auto_infracao_2019.csv": {
+   "match": 14527,
+   "missing_value": 3
+  },
+  "auto_infracao_2020.csv": {
+   "key_not_found": 9,
+   "match": 9521,
+   "missing_value": 3
+  },
+  "auto_infracao_2021.csv": {
+   "key_not_found": 4,
+   "match": 9658
+  },
+  "auto_infracao_2022.csv": {
+   "key_not_found": 6,
+   "match": 12848
+  },
+  "auto_infracao_2023.csv": {
+   "key_not_found": 8,
+   "match": 17184
+  },
+  "auto_infracao_2024.csv": {
+   "key_not_found": 6,
+   "match": 12302
+  },
+  "auto_infracao_2025.csv": {
+   "key_not_found": 1,
+   "match": 16272
+  },
+  "auto_infracao_2026.csv": {
+   "match": 12878
+  }
+ },
+ "by_period": {},
+ "timeline": null
+}

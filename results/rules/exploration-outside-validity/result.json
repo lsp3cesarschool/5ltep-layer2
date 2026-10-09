@@ -1,0 +1,107 @@
+{
+ "run_id": "37917100799",
+ "environment": "github-actions",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "id": "exploration-outside-validity",
+ "rule_version": "0.2.0",
+ "origin": "expert",
+ "file": "forest/exploration-outside-validity.yaml",
+ "folder": "forest",
+ "language": "pt-BR",
+ "title": "Exploração fora da validade da autorização",
+ "title_translations": {
+  "en": "Harvest outside the authorisation's validity"
+ },
+ "text": "Confere se a data da exploração está entre a emissão e a validade da autorização (limites inclusivos).\n",
+ "justification": "A exploração só é permitida durante a vigência da autorização; data fora do intervalo indica erro de registro ou exploração sem autorização vigente. As datas usam ano com dois dígitos. É sinal para revisão.\n",
+ "exceptions": [
+  "Prorrogações e renovações não publicadas aqui podem estender a validade."
+ ],
+ "template": "temporal-order",
+ "evaluated_source": "ibama_if100",
+ "timeline": "ibama_if100.DATA_DA_EXPLORACAO",
+ "exposure": "records",
+ "datasets": [
+  {
+   "source": "ibama_if100",
+   "label": "dadosabertos.ibama.gov.br › volumes-explorados-if-100 › Volumes Explorados - IF 100%"
+  }
+ ],
+ "status": "evaluated",
+ "reason_code": null,
+ "reason": null,
+ "evaluated_at": "2026-10-09T10:23:35+00:00",
+ "total": 2386115,
+ "counts": {
+  "match": 2326024,
+  "mismatch": 60091,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0,
+  "out_of_scope": 0
+ },
+ "signals": 60091,
+ "signals_by_outcome": {
+  "mismatch": 60091,
+  "key_not_found": 0,
+  "missing_value": 0,
+  "invalid_value": 0,
+  "ambiguous_key": 0
+ },
+ "list": "rules/exploration-outside-validity.json",
+ "sources": {
+  "ibama_if100": {
+   "resource": "dadosabertos.ibama.gov.br › volumes-explorados-if-100 › Volumes Explorados - IF 100%",
+   "fetch_status": "ok",
+   "sha256": "0f106ef75db9068fcd7f91adaf9d0ae890fb064137aadd1d2d82bd9b0a093ff3",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SINAFLOR/VolumesExploradosIf100/volumes_explorados_if_100_csv.zip",
+   "file": "volumes_explorados_if_100_csv.zip",
+   "files": null,
+   "archive_members": "volumes_explorados_if_100_ano_*.csv",
+   "records": 2386115,
+   "members": [
+    {
+     "name": "volumes_explorados_if_100_ano_2017.csv",
+     "records": 3222
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2018.csv",
+     "records": 74818
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2019.csv",
+     "records": 189569
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2020.csv",
+     "records": 189189
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2021.csv",
+     "records": 447135
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2022.csv",
+     "records": 368339
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2023.csv",
+     "records": 325918
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2024.csv",
+     "records": 404287
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2025.csv",
+     "records": 265976
+    },
+    {
+     "name": "volumes_explorados_if_100_ano_2026.csv",
+     "records": 117662
+    }
+   ]
+  }
+ }
+}
