@@ -186,7 +186,9 @@ def lookup_exists(check: dict, sources: dict):
 
 def temporal_order(check: dict, sources: dict):
     """Dates in `sequence` must not decrease; empty dates are skipped (at least two must be present).
-    A date and a datetime are compared by day. `max_interval` caps first-to-last present dates."""
+    A date and a datetime are compared by day. `max_interval` caps first-to-last present dates.
+    With `check_order: false` only the interval is checked, and records out of order are out of scope
+    (another rule checks the order)."""
     seq = check["sequence"]
     src, _ = split(seq[0])
     cols = Columns(sources, {src: "f"})
@@ -199,8 +201,13 @@ def temporal_order(check: dict, sources: dict):
         limit = check["max_interval"]
         unit, amount = ("YEAR", limit["years"]) if "years" in limit else ("DAY", limit["days"])
         over = f"list_last({present}) > list_first({present}) + INTERVAL {int(amount)} {unit}"
+    unordered = f"{present} <> list_sort({present})"
+    if check.get("check_order", True):
+        verdict = f"WHEN {unordered} OR {over} THEN 'mismatch'"
+    else:
+        verdict = f"WHEN {unordered} THEN 'out_of_scope' WHEN {over} THEN 'mismatch'"
     case = (f"CASE WHEN {invalid} THEN 'invalid_value' WHEN len({present}) < 2 THEN 'missing_value' "
-            f"WHEN {present} <> list_sort({present}) OR {over} THEN 'mismatch' ELSE 'match' END")
+            f"{verdict} ELSE 'match' END")
     return src, f"{ident('src_' + src)} AS f", case, cols
 
 

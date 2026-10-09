@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.2.0"
+rule_version: "0.3.0"
 origin: expert
 
 description:
@@ -8,7 +8,7 @@ description:
   title_translations:
     en: "Preliminary licence valid for more than 5 years"
   text: >
-    Confere se a Licença Prévia vence no máximo 5 anos depois da emissão (e não antes dela).
+    Confere se a Licença Prévia vence no máximo 5 anos depois da emissão.
   justification: >
     A Resolução CONAMA 237/1997, art. 18, limita a validade da Licença Prévia a 5 anos. A Lei
     15.190/2025 (arts. 6º e 7º) passou a reger licenças emitidas na sua vigência, com faixas próprias;
@@ -16,6 +16,7 @@ description:
   exceptions:
     - "Licenças emitidas sob a Lei 15.190/2025 podem ter limite diferente."
     - "Renovações, prorrogações e retificações têm tipo próprio e ficam fora do escopo."
+    - "Licença com vencimento anterior à emissão fica fora do escopo: é contada pela regra expiry-before-issue."
   examples:
     - case: "Licença Prévia emitida em 01/01/2015, vence em 01/01/2020"
       expected: "Conforme"
@@ -38,5 +39,6 @@ check:
   timeline: ibama_licencas.DAT_EMISSAO
   sequence: [ibama_licencas.DAT_EMISSAO, ibama_licencas.DAT_VENCIMENTO]
   max_interval: {years: 5}
+  check_order: false
   where:
     - {column: ibama_licencas.DES_TIPOLICENCA, equals: "Licença Prévia"}

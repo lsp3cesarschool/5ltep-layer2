@@ -169,7 +169,18 @@ function t(key, vars = {}) {
 }
 const fmt = new Intl.NumberFormat(LANG === "pt" ? "pt-BR" : "en");
 const num = (n) => (n === null || n === undefined ? "–" : fmt.format(n));
-const when = (iso) => (iso ? iso.replace("T", " ").replace(/(:\d\d)?\+00:00$|Z$/, "$1").slice(0, 16) : "–");
+// Dates in the format of the page's language, always in UTC: 09/10/2026 00:17 (pt), 9 Oct 2026, 00:17 (en).
+// English uses the month's name, so that day and month are never confused.
+const LOCALE = LANG === "pt" ? "pt-BR" : "en-GB";
+const DATE_TIME = new Intl.DateTimeFormat(LOCALE, LANG === "pt"
+  ? { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "UTC" }
+  : { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "UTC" });
+const DATE_ONLY = new Intl.DateTimeFormat(LOCALE, LANG === "pt"
+  ? { day: "2-digit", month: "2-digit", year: "numeric", timeZone: "UTC" }
+  : { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+const parseIso = (iso) => { const d = iso ? new Date(/[Zz]|[+-]\d\d:\d\d$/.test(iso) ? iso : iso + "Z") : null; return d && !isNaN(d) ? d : null; };
+const when = (iso) => { const d = parseIso(iso); return d ? DATE_TIME.format(d) : "–"; };
+const day = (iso) => { const d = parseIso(iso); return d ? DATE_ONLY.format(d) : "–"; };
 const short = (sha) => (sha ? sha.slice(0, 12) + "…" : "–");
 
 function applyLanguage() {
@@ -580,7 +591,7 @@ function renderSpeed() {
       svg.append(rect);
     });
     if (runs.length <= 8 || i % Math.ceil(runs.length / 8) === 0) {
-      svg.append(s("text", { class: "axis-label", x: L + i * step + step / 2, y: H - 12, "text-anchor": "middle" }, when(r.at).slice(0, 10)));
+      svg.append(s("text", { class: "axis-label", x: L + i * step + step / 2, y: H - 12, "text-anchor": "middle" }, day(r.at)));
     }
   });
   svg.append(s("text", { class: "axis-label", x: L - 6, y: 11, "text-anchor": "end" }, t("sp_mbps")));
@@ -627,7 +638,7 @@ function renderPhases(publish) {
       base += v;
     });
     if (runs.length <= 8 || i % Math.ceil(runs.length / 8) === 0) {
-      svg.append(s("text", { class: "axis-label", x: x + bw / 2, y: H - 12, "text-anchor": "middle" }, when(r.at).slice(0, 10)));
+      svg.append(s("text", { class: "axis-label", x: x + bw / 2, y: H - 12, "text-anchor": "middle" }, day(r.at)));
     }
   });
   svg.append(s("text", { class: "axis-label", x: L - 6, y: 11, "text-anchor": "end" }, t("ph_s")));

@@ -520,7 +520,26 @@
         "timeline": {
           "$ref": "#/$defs/column_ref",
           "description": "Optional: a date column of the evaluated source; the dashboard charts the outcomes per year of it."
+        },
+        "check_order": {
+          "type": "boolean",
+          "description": "false: check only max_interval; records out of order are out of scope (checked by another rule). Default true."
         }
+      },
+      "if": {
+        "properties": {
+          "check_order": {
+            "const": false
+          }
+        },
+        "required": [
+          "check_order"
+        ]
+      },
+      "then": {
+        "required": [
+          "max_interval"
+        ]
       }
     },
     "field_comparison": {

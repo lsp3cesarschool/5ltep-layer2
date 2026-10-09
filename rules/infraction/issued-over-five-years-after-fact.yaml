@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.3.0"
+rule_version: "0.4.0"
 origin: expert
 
 description:
@@ -8,7 +8,7 @@ description:
   title_translations:
     en: "Notice issued more than five years after the offence"
   text: >
-    Sinaliza autos lavrados mais de cinco anos depois do fato infracional (ou com o fato posterior à lavratura).
+    Sinaliza autos lavrados mais de cinco anos depois do fato infracional.
   justification: >
     O Decreto 6.514/2008, art. 21, fixa em cinco anos a prescrição da ação punitiva, contados do fato.
     O lapso é hipótese de triagem para exame jurídico: interrupções, infração permanente e outras
@@ -17,6 +17,7 @@ description:
     - "Infração permanente ou continuada conta o prazo do fim da conduta."
     - "Atos que interrompem a prescrição não aparecem nestes dados."
     - "Autos sem data do fato (anteriores a 2019, quase todos) ficam fora do escopo."
+    - "Autos com o fato posterior à lavratura ficam fora do escopo: são contados pela regra fact-after-issue."
   examples:
     - case: "Fato em 2010-01-01, lavratura em 2014-12-31"
       expected: "Conforme"
@@ -39,5 +40,6 @@ check:
   timeline: ibama_autos.DAT_HORA_AUTO_INFRACAO
   sequence: [ibama_autos.DT_FATO_INFRACIONAL, ibama_autos.DAT_HORA_AUTO_INFRACAO]
   max_interval: {years: 5}
+  check_order: false
   where:
     - {column: ibama_autos.DT_FATO_INFRACIONAL, empty: false}

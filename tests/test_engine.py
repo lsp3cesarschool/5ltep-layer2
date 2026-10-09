@@ -127,3 +127,19 @@ def test_full_run_against_the_portals(tmp_path):
     outputs.write(run, tmp_path / "out", ROOT / "rules")
     for f in (tmp_path / "out").rglob("*.json"):
         assert "NOME_INFRATOR" not in f.read_text(encoding="utf-8")
+
+
+def test_interval_only_rule_leaves_order_to_another_rule(tmp_path):
+    """IB-12c with check_order: false, on the cases documented in the rule (plus the reverse order)."""
+    rule = load_rule(ROOT / "rules" / "infraction" / "issued-over-five-years-after-fact.yaml").data
+    text = ("DT_FATO_INFRACIONAL;DAT_HORA_AUTO_INFRACAO\n"
+            "2010-01-01;2014-12-31 10:00:00\n"      # documented: conforme
+            "2010-01-01;2016-01-02\n"               # documented: sinalizar (more than five years)
+            "2016-01-02;2010-01-01\n"               # fact after the notice: counted by fact-after-issue
+            ";2016-01-02\n")                        # no fact date: out of scope (where)
+    path = zip_file(tmp_path / "a.zip", {"auto_infracao_2010.csv": text.encode()})
+    source = rule["sources"]["ibama_autos"]
+    read = engine.read_source(fetched(path, source), source, tmp_path / "a.csv")
+    result = engine.evaluate(rule, {"ibama_autos": read})
+    assert {k: v for k, v in result["counts"].items() if v} == {"match": 1, "mismatch": 1, "out_of_scope": 2}
+    assert result["records"] == {"mismatch": {"auto_infracao_2010.csv": [2]}}
