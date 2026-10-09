@@ -1,10 +1,10 @@
 {
  "rule": "preliminary-licence-over-five-years",
  "rule_version": "0.3.0",
- "evaluated_at": "2026-10-09T13:25:53+00:00",
- "run_id": "37936431563",
+ "evaluated_at": "2026-10-09T13:35:18+00:00",
+ "run_id": "37937363972",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37936431563",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_licencas": {

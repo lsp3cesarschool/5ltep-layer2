@@ -6,10 +6,11 @@ Generated automatically by the publish job from the checked results; do not edit
 shown here: the record numbers are on the dashboard and in [`docs/data/rules/`](docs/data/rules/),
 and no value read from the portals is published. Times are UTC.
 
-- **Run:** [37936431563](https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37936431563), finished 2026-10-09 13:26 UTC (github-actions)
+- **Run:** [37937363972](https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972), finished 2026-10-09 13:35 UTC (github-actions)
 - **Rules:** 35 (35 evaluated, 0 not evaluated)
 - **Sources:** 20 CKAN resources (20 available)
 - **Records flagged:** 1,923,185
+- **L2 pass rate:** 91.0% (checks without a signal / 21,428,607 checks in scope; one check per record and rule)
 
 Signal types: `mismatch` (the check failed), `key not found` (no matching record in the other
 source), `missing value`, `invalid value` (unreadable as the declared type), `ambiguous key` (more
@@ -59,23 +60,23 @@ than one match). Records outside a rule's scope (`where`) are not signals.
 
 | Resource | Role | Status | Size | Download | Used by |
 |---|---|---|---:|---:|---|
-| dadosabertos.ibama.gov.br › siscites-licencas-de-fauna-e-flora-emitidas › Siscites | primary | available | 106.8 MB | 9.2 s | appendix-i-wild-commercial, wild-commercial-threatened-species |
-| dados.mma.gov.br › especies-ameacadas › FAUNA - Lista de Espécies Ameaçadas - 2021.csv | secondary | available | 0.2 MB | 1.1 s | wild-commercial-threatened-species |
-| dadosabertos.ibama.gov.br › fiscalizacao-termo-de-embargo › Termos de embargo | primary | available | 209.8 MB | 9.2 s | embargo-date-implausible, embargo-link-without-term, lifted-before-embargo |
-| dadosabertos.ibama.gov.br › sisfauna-plantel-exato › Sisfauna - Plantel Exato | primary | available | 73.3 MB | 0.4 s | stock-balance |
-| dadosabertos.ibama.gov.br › sisfogo-roi › ROI formato csv | primary | available | 284.1 MB | 1.4 s | incident-milestones-order |
-| dadosabertos.ibama.gov.br › volumes-explorados-if-100 › Volumes Explorados - IF 100% | primary | available | 51.3 MB | 2.4 s | exploration-outside-validity, explored-volume-above-authorized, species-not-in-commercial-timber-list |
-| dadosabertos.ibama.gov.br › sinaflor-pmfs-amazonia-legal › PMFS Amazônia Legal | primary | available | 5.8 MB | 0.4 s | pmfs-intensity-manual-over-10, pmfs-intensity-mechanized-over-30 |
-| dados.florestal.gov.br › especies-florestais-madeireiras-comerciais › Dados_abertos_especies_madeireiras_SNIF_fonte_LPF_SFB | secondary | available | 0.1 MB | 0.6 s | species-not-in-commercial-timber-list |
-| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração | primary | available | 122.9 MB | 5.4 s | act-end-before-start, biomes-without-infraction, embargo-link-without-term, fact-after-issue, infraction-coordinates-missing-or-zero, issued-over-five-years-after-fact, legal-basis-without-infraction, municipality-state, notice-before-issue, notice-date-implausible, seizure-link-without-term, species-without-infraction, term-without-infraction |
-| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - biomas | primary | available | 14.3 MB | 0.8 s | biomes-without-infraction |
-| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - enquadramento legal | primary | available | 8.2 MB | 0.4 s | legal-basis-without-infraction |
-| dadosabertos.ibama.gov.br › fiscalizacao-termo-de-apreensao › Termo de apreensão | primary | available | 29.8 MB | 0.4 s | seizure-coordinates-missing-or-zero, seizure-link-without-term, term-without-infraction |
-| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - espécimes | primary | available | 5.3 MB | 0.4 s | species-without-infraction |
-| dadosabertos.ibama.gov.br › ato-declaratorio-ambiental-ada › Ato Declaratório Ambiental (ADA) | primary | available | 401.2 MB | 17.8 s | declared-areas-above-property |
-| dadosabertos.ibama.gov.br › licencas-ambientais-de-atividades-e-empreendimentos-licenciados-pelo-ibama › Licenças ambientais de atividades e ... | primary | available | 3.3 MB | 0.2 s | expiry-before-issue, installation-licence-over-six-years, operation-licence-over-ten-years, preliminary-licence-over-five-years |
-| dadosabertos.ibama.gov.br › julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama › Volume de Julgamento de Auto de Infração | primary | available | 0.6 MB | 0.1 s | appeal-before-main-judgment, main-judgment-before-infraction |
-| dadosabertos.ibama.gov.br › arrecadacao-de-multas-ambientais-bens-tutelados › Arrecadação de Multas por Bens Tutelados | primary | available | 27.9 MB | 1.4 s | paid-ten-times-original, payment-before-infraction |
-| dadosabertos.ibama.gov.br › relatorios-de-comercializacao-de-agrotoxicos › Dados - CSV | primary | available | 13.6 MB | 0.8 s | ingredient-without-registered-technical-product |
+| dadosabertos.ibama.gov.br › siscites-licencas-de-fauna-e-flora-emitidas › Siscites | primary | available | 106.8 MB | 18.3 s | appendix-i-wild-commercial, wild-commercial-threatened-species |
+| dados.mma.gov.br › especies-ameacadas › FAUNA - Lista de Espécies Ameaçadas - 2021.csv | secondary | available | 0.2 MB | 0.8 s | wild-commercial-threatened-species |
+| dadosabertos.ibama.gov.br › fiscalizacao-termo-de-embargo › Termos de embargo | primary | available | 209.8 MB | 48.7 s | embargo-date-implausible, embargo-link-without-term, lifted-before-embargo |
+| dadosabertos.ibama.gov.br › sisfauna-plantel-exato › Sisfauna - Plantel Exato | primary | available | 73.3 MB | 1.4 s | stock-balance |
+| dadosabertos.ibama.gov.br › sisfogo-roi › ROI formato csv | primary | available | 284.1 MB | 7.4 s | incident-milestones-order |
+| dadosabertos.ibama.gov.br › volumes-explorados-if-100 › Volumes Explorados - IF 100% | primary | available | 51.3 MB | 7.6 s | exploration-outside-validity, explored-volume-above-authorized, species-not-in-commercial-timber-list |
+| dadosabertos.ibama.gov.br › sinaflor-pmfs-amazonia-legal › PMFS Amazônia Legal | primary | available | 5.8 MB | 0.6 s | pmfs-intensity-manual-over-10, pmfs-intensity-mechanized-over-30 |
+| dados.florestal.gov.br › especies-florestais-madeireiras-comerciais › Dados_abertos_especies_madeireiras_SNIF_fonte_LPF_SFB | secondary | available | 0.1 MB | 0.5 s | species-not-in-commercial-timber-list |
+| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração | primary | available | 122.9 MB | 21.5 s | act-end-before-start, biomes-without-infraction, embargo-link-without-term, fact-after-issue, infraction-coordinates-missing-or-zero, issued-over-five-years-after-fact, legal-basis-without-infraction, municipality-state, notice-before-issue, notice-date-implausible, seizure-link-without-term, species-without-infraction, term-without-infraction |
+| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - biomas | primary | available | 14.3 MB | 2.8 s | biomes-without-infraction |
+| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - enquadramento legal | primary | available | 8.2 MB | 2.0 s | legal-basis-without-infraction |
+| dadosabertos.ibama.gov.br › fiscalizacao-termo-de-apreensao › Termo de apreensão | primary | available | 29.8 MB | 0.5 s | seizure-coordinates-missing-or-zero, seizure-link-without-term, term-without-infraction |
+| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - espécimes | primary | available | 5.3 MB | 1.3 s | species-without-infraction |
+| dadosabertos.ibama.gov.br › ato-declaratorio-ambiental-ada › Ato Declaratório Ambiental (ADA) | primary | available | 401.2 MB | 73.0 s | declared-areas-above-property |
+| dadosabertos.ibama.gov.br › licencas-ambientais-de-atividades-e-empreendimentos-licenciados-pelo-ibama › Licenças ambientais de atividades e ... | primary | available | 3.3 MB | 0.5 s | expiry-before-issue, installation-licence-over-six-years, operation-licence-over-ten-years, preliminary-licence-over-five-years |
+| dadosabertos.ibama.gov.br › julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama › Volume de Julgamento de Auto de Infração | primary | available | 0.6 MB | 0.2 s | appeal-before-main-judgment, main-judgment-before-infraction |
+| dadosabertos.ibama.gov.br › arrecadacao-de-multas-ambientais-bens-tutelados › Arrecadação de Multas por Bens Tutelados | primary | available | 27.9 MB | 3.1 s | paid-ten-times-original, payment-before-infraction |
+| dadosabertos.ibama.gov.br › relatorios-de-comercializacao-de-agrotoxicos › Dados - CSV | primary | available | 13.6 MB | 1.8 s | ingredient-without-registered-technical-product |
 | dados.agricultura.gov.br › sistema-de-agrotoxicos-fitossanitarios-agrofit › Produto Técnico | secondary | available | 0.7 MB | 0.7 s | ingredient-without-registered-technical-product |
-| dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE | secondary | available | 0.1 MB | 0.3 s | municipality-state |
+| dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE | secondary | available | 0.1 MB | 0.5 s | municipality-state |

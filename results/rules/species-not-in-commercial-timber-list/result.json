@@ -1,7 +1,7 @@
 {
- "run_id": "37936431563",
+ "run_id": "37937363972",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37936431563",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972",
  "id": "species-not-in-commercial-timber-list",
  "rule_version": "0.1.0",
  "origin": "cross_reference",
@@ -35,7 +35,7 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-10-09T13:24:50+00:00",
+ "evaluated_at": "2026-10-09T13:34:42+00:00",
  "total": 2386115,
  "counts": {
   "match": 1581314,

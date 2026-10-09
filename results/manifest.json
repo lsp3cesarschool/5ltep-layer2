@@ -1,11 +1,11 @@
 {
- "run_id": "37936431563",
+ "run_id": "37937363972",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37936431563",
- "started_at": "2026-10-09T13:23:12+00:00",
- "finished_at": "2026-10-09T13:26:08+00:00",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972",
+ "started_at": "2026-10-09T13:30:59+00:00",
+ "finished_at": "2026-10-09T13:35:26+00:00",
  "engine": {
-  "commit": "27a45f7ead94de044534d41cead820e450f4decf",
+  "commit": "a0c14300e5b840754c73a2efc335e1675ef42eb2",
   "uncommitted_changes": false,
   "python": "3.12.15",
   "duckdb": "1.5.6"
@@ -15,19 +15,19 @@
   "primary": {
    "resources": 16,
    "bytes": 1358146721,
-   "seconds": 50.57,
-   "mb_per_s": 26.857
+   "seconds": 190.68,
+   "mb_per_s": 7.123
   },
   "secondary": {
    "resources": 4,
    "bytes": 1075377,
-   "seconds": 2.7,
-   "mb_per_s": 0.398
+   "seconds": 2.54,
+   "mb_per_s": 0.423
   },
   "processing": {
    "bytes": 1359222098,
-   "seconds": 113.26,
-   "mb_per_s": 12.001
+   "seconds": 65.01,
+   "mb_per_s": 20.908
   }
  },
  "rules": [
