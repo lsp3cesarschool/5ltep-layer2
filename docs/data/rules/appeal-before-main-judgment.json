@@ -1,10 +1,10 @@
 {
  "rule": "appeal-before-main-judgment",
  "rule_version": "0.3.0",
- "evaluated_at": "2026-10-09T10:24:41+00:00",
- "run_id": "37917100799",
+ "evaluated_at": "2026-10-09T12:06:27+00:00",
+ "run_id": "37927525860",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37927525860",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_julgamentos": {

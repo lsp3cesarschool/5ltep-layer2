@@ -1,10 +1,10 @@
 {
  "rule": "incident-milestones-order",
  "rule_version": "0.2.0",
- "evaluated_at": "2026-10-09T10:23:16+00:00",
- "run_id": "37917100799",
+ "evaluated_at": "2026-10-09T12:05:06+00:00",
+ "run_id": "37927525860",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37917100799",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37927525860",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_roi": {
