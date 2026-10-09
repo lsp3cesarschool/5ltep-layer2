@@ -99,8 +99,8 @@ recurso estava disponível (status HTTP, SHA-256 dos bytes, colunas encontradas)
 DuckDB sem acesso externo e envia as saídas como artefato. O job **publish** confere o artefato
 (`python main.py accept`: só os arquivos esperados, JSON válido, listas só com números de registro,
 histórico anterior preservado) e faz o commit de `results/` e `docs/data/`. O dashboard em `docs/`
-(GitHub Pages a partir de `/docs`) mostra as regras, a saúde de cada fonte, o histórico e a
-proveniência; cada visitante pode ordenar os cartões de regras, e essa ordem fica só no navegador
+(GitHub Pages a partir de `/docs`) mostra as regras (cada uma com gráfico dos sinais ao longo do tempo e na ordem dos registros), a
+saúde de cada fonte, a velocidade de download e de processamento, o histórico e a proveniência; cada visitante pode ordenar os cartões de regras, e essa ordem fica só no navegador
 dele. Só são publicadas contagens e números de registro, nunca valores dos portais.
 
 ## Próximos passos

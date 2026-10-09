@@ -77,21 +77,53 @@ class Columns:
         return f"(NOT {self.empty(ref)} AND {self.typed(ref, as_date)} IS NULL)"
 
 
+COMPARISONS = {"at_least": ">=", "below": "<", "on_or_after": ">=", "before": "<"}
+
+
+def _typed_literal(value, spec: dict) -> str:
+    kind = spec.get("type", "text")
+    if kind in ("date", "datetime"):
+        return f"CAST({_literal(str(value))} AS {'DATE' if kind == 'date' else 'TIMESTAMP'})"
+    if kind == "number":
+        return _literal(float(value))
+    return _literal(str(value))
+
+
+def condition_sql(c: dict, cols: Columns) -> str:
+    """One condition: on a column (equals, not_equals, in, not_in, empty, at_least, below,
+    on_or_after, before) or a group (all / any). Columns declared as numbers or dates are compared
+    as numbers or dates; others as trimmed text. A value that cannot be read never satisfies a
+    comparison."""
+    if "all" in c or "any" in c:
+        parts = [condition_sql(x, cols) for x in c.get("all") or c.get("any")]
+        return "(" + (" AND " if "all" in c else " OR ").join(parts) + ")"
+    ref, spec = c["column"], cols.spec(c["column"])
+    typed = spec.get("type", "text") != "text"
+    value = cols.typed(ref) if typed else f"coalesce({cols.raw(ref)}, '')"
+    lit = (lambda v: _typed_literal(v, spec)) if typed else (lambda v: _literal(str(v)))
+    if "empty" in c:
+        return f"({cols.empty(ref)})" if c["empty"] else f"(NOT {cols.empty(ref)})"
+    if "equals" in c:
+        return f"coalesce({value} = {lit(c['equals'])}, FALSE)"
+    if "not_equals" in c:
+        return f"coalesce({value} <> {lit(c['not_equals'])}, FALSE)"
+    if "in" in c or "not_in" in c:
+        values = ", ".join(lit(v) for v in (c.get("in") or c.get("not_in")))
+        return f"coalesce({value} {'IN' if 'in' in c else 'NOT IN'} ({values}), FALSE)"
+    for op, sql in COMPARISONS.items():
+        if op in c:
+            return f"coalesce({value} {sql} {lit(c[op])}, FALSE)"
+    raise ValueError(f"condição sem operador: {c}")
+
+
+def condition_refs(c: dict) -> list[str]:
+    if "all" in c or "any" in c:
+        return [r for x in (c.get("all") or c.get("any")) for r in condition_refs(x)]
+    return [c["column"]]
+
+
 def where_sql(conditions: list[dict], cols: Columns) -> str:
-    parts = []
-    for c in conditions:
-        raw = f"coalesce({cols.raw(c['column'])}, '')"
-        if "equals" in c:
-            parts.append(f"{raw} = {_literal(str(c['equals']))}")
-        elif "not_equals" in c:
-            parts.append(f"{raw} <> {_literal(str(c['not_equals']))}")
-        elif "in" in c:
-            parts.append(f"{raw} IN ({', '.join(_literal(str(v)) for v in c['in'])})")
-        elif "not_in" in c:
-            parts.append(f"{raw} NOT IN ({', '.join(_literal(str(v)) for v in c['not_in'])})")
-        elif "empty" in c:
-            parts.append(f"{raw} {'=' if c['empty'] else '<>'} ''")
-    return " AND ".join(parts) if parts else "TRUE"
+    return " AND ".join(condition_sql(c, cols) for c in conditions) if conditions else "TRUE"
 
 
 # --- templates: each returns (evaluated source, FROM clause, CASE expression) ----------------------
@@ -216,8 +248,21 @@ def field_comparison(check: dict, sources: dict):
     return src, f"{ident('src_' + src)} AS f", case, cols
 
 
+def flag_when(check: dict, sources: dict):
+    """A record is a signal (`mismatch`) when any of the `any` conditions holds; else `match`.
+    A typed value present but unreadable is `invalid_value`."""
+    refs = [r for c in check["any"] for r in condition_refs(c)]
+    src = split(refs[0])[0]
+    cols = Columns(sources, {src: "f"})
+    typed = [r for r in dict.fromkeys(refs) if cols.spec(r).get("type", "text") != "text"]
+    invalid = " OR ".join(cols.invalid(r) for r in typed) or "FALSE"
+    flagged = " OR ".join(condition_sql(c, cols) for c in check["any"])
+    case = f"CASE WHEN {invalid} THEN 'invalid_value' WHEN {flagged} THEN 'mismatch' ELSE 'match' END"
+    return src, f"{ident('src_' + src)} AS f", case, cols
+
+
 TEMPLATES = {"lookup-equals": lookup_equals, "lookup-exists": lookup_exists,
-             "temporal-order": temporal_order, "field-comparison": field_comparison}
+             "temporal-order": temporal_order, "field-comparison": field_comparison, "flag-when": flag_when}
 
 
 def evaluated_source(check: dict) -> str:
@@ -226,6 +271,8 @@ def evaluated_source(check: dict) -> str:
         return split(check["key"]["from"])[0]
     if template == "temporal-order":
         return split(check["sequence"][0])[0]
+    if template == "flag-when":
+        return split(condition_refs(check["any"][0])[0])[0]
     left = check["left"]
     return split(left if isinstance(left, str) else (left.get("sum") or left.get("minus"))[0])[0]
 
@@ -250,7 +297,11 @@ def used_refs(check: dict) -> list[tuple[str, list]]:
             elif isinstance(v, dict):
                 for k in ("sum", "minus"):
                     out += [(r, ["check", side, k, i]) for i, r in enumerate(v.get(k, []))]
-    out += [(c["column"], ["check", "where", i, "column"]) for i, c in enumerate(check.get("where", []))]
+    if t == "flag-when":
+        out += [(r, ["check", "any", i]) for i, c in enumerate(check["any"]) for r in condition_refs(c)]
+    out += [(r, ["check", "where", i]) for i, c in enumerate(check.get("where", [])) for r in condition_refs(c)]
+    if "timeline" in check:
+        out.append((check["timeline"], ["check", "timeline"]))
     return out
 
 
@@ -258,6 +309,7 @@ def statement(check: dict, sources: dict) -> tuple[str, str]:
     """(evaluated source, SQL creating table `outcome(__member, __record, outcome)`)."""
     src, frm, case, cols = TEMPLATES[check["template"]](check, sources)
     scope = where_sql(check.get("where", []), cols)
-    sql = (f"CREATE TABLE outcome AS SELECT f.__member, f.__record, "
+    period = (f"CAST(year({cols.typed(check['timeline'], True)}) AS VARCHAR)" if "timeline" in check else "NULL")
+    sql = (f"CREATE TABLE outcome AS SELECT f.__member, f.__record, {period} AS __period, "
            f"CASE WHEN NOT ({scope}) THEN 'out_of_scope' ELSE {case} END AS outcome FROM {frm}")
     return src, sql

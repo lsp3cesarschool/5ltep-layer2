@@ -20,6 +20,12 @@ const I18N = {
     up: "Move up", down: "Move down", root_folder: "(rules/)",
     datasets: "Datasets", justification: "Justification", exceptions: "Exceptions", examples: "Examples", history: "History",
     no_exceptions: "None recorded.", expected: "Expected",
+    chart_btn: "▸ Chart", chart_hide: "▾ Chart", ch_time_h: "Over time", ch_order_h: "In the order of the records",
+    ch_time_note: "Signals per year of {col}; the tooltip gives the share of the records in scope.",
+    ch_member_note: "Signals per file of the resource (each file is a year or a part of the publication).",
+    ch_no_time: "This rule has no date to chart over time (no timeline, and the resource is a single file).",
+    ch_order_note: "Signals along the {n} records read, in file order (dashed lines: start of each file). Clusters show where in the publication the signals are.",
+    ch_count: "count", ch_share: "share of the records in scope", ch_mode: "Show", ch_unknown: "{n} record(s) without a readable date",
     signals_at: "{n} signal(s) on {d}", of_records: "of {n} records", not_evaluated: "✕ Not evaluated in this run",
     no_signal: "✓ no signal on {d}",
     see_list: "see list", hide_list: "hide list", show_all: "show all {n}", download: "Download JSON of this list",
@@ -43,6 +49,9 @@ const I18N = {
     speed_note: "Megabytes per second in each run: total bytes over total download time, for the resources of this instance's portal and, separately, of the other portals the rules cross. It follows how fast the portals deliver their files over time; a slow run delays results but changes nothing in them.",
     sp_primary: "{name} (this instance's portal)", sp_secondary: "other portals", sp_run: "Run (UTC)", sp_mbps: "MB/s",
     sp_resources: "resources", sp_bytes: "MB", sp_none: "No download speed recorded yet.",
+    sp_processing: "processing (MB/s of the downloaded data)",
+    phases_h: "Time of each phase", phases_note: "Seconds per run: download, processing (reading the declared columns and evaluating the rules), writing the outputs, and the publish job's check and copy.",
+    ph_download: "download", ph_processing: "processing", ph_outputs: "writing the outputs", ph_publish: "publication", ph_s: "s",
     prov_h: "Provenance of this result",
     prov_note: "What this run evaluated: the engine version, each rule file and the bytes of each source, identified by SHA-256. Record numbers are valid only for those bytes.",
     engine_h: "Run", hashes_h: "Rules and sources",
@@ -70,6 +79,12 @@ const I18N = {
     up: "Subir", down: "Descer", root_folder: "(rules/)",
     datasets: "Datasets", justification: "Justificativa", exceptions: "Exceções", examples: "Exemplos", history: "Histórico",
     no_exceptions: "Nenhuma registrada.", expected: "Esperado",
+    chart_btn: "▸ Gráfico", chart_hide: "▾ Gráfico", ch_time_h: "Ao longo do tempo", ch_order_h: "Na ordem dos registros",
+    ch_time_note: "Sinais por ano de {col}; ao passar o mouse, a parcela dos registros no escopo.",
+    ch_member_note: "Sinais por arquivo do recurso (cada arquivo é um ano ou uma parte da publicação).",
+    ch_no_time: "Esta regra não tem data para o gráfico no tempo (sem timeline, e o recurso é um arquivo só).",
+    ch_order_note: "Sinais ao longo dos {n} registros lidos, na ordem dos arquivos (tracejado: início de cada arquivo). Agrupamentos mostram onde, na publicação, estão os sinais.",
+    ch_count: "contagem", ch_share: "parcela dos registros no escopo", ch_mode: "Mostrar", ch_unknown: "{n} registro(s) sem data legível",
     signals_at: "{n} sinal(is) em {d}", of_records: "de {n} registros", not_evaluated: "✕ Não avaliada nesta rodada",
     no_signal: "✓ nenhum sinal em {d}",
     see_list: "ver lista", hide_list: "ocultar lista", show_all: "mostrar todos os {n}", download: "Baixar JSON desta lista",
@@ -93,6 +108,9 @@ const I18N = {
     speed_note: "Megabytes por segundo em cada rodada: total de bytes dividido pelo tempo total de download, para os recursos do portal desta instância e, separadamente, dos demais portais que as regras cruzam. Mostra a velocidade com que os portais entregam os arquivos ao longo do tempo; uma rodada lenta atrasa os resultados, mas não muda nada neles.",
     sp_primary: "{name} (portal desta instância)", sp_secondary: "demais portais", sp_run: "Rodada (UTC)", sp_mbps: "MB/s",
     sp_resources: "recursos", sp_bytes: "MB", sp_none: "Nenhuma velocidade de download registrada ainda.",
+    sp_processing: "processamento (MB/s dos dados baixados)",
+    phases_h: "Tempo de cada etapa", phases_note: "Segundos por rodada: download, processamento (leitura das colunas declaradas e avaliação das regras), gravação das saídas, e a conferência e cópia feitas pelo job de publicação.",
+    ph_download: "download", ph_processing: "processamento", ph_outputs: "gravação das saídas", ph_publish: "publicação", ph_s: "s",
     prov_h: "Proveniência deste resultado",
     prov_note: "O que esta rodada avaliou: versão do motor, cada arquivo de regra e os bytes de cada fonte, identificados por SHA-256. Os números de registro valem só para esses bytes.",
     engine_h: "Rodada", hashes_h: "Regras e fontes",
@@ -252,9 +270,8 @@ async function showList(rule, outcome, panel, button) {
   panel.dataset.outcome = outcome;
   button.textContent = t("hide_list");
   panel.replaceChildren(h("p", { class: "muted" }, t("loading_list")));
-  LISTS[rule.id] ??= fetch(`data/rules/${encodeURIComponent(rule.id)}.json`, { cache: "no-cache" }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
   let data;
-  try { data = await LISTS[rule.id]; } catch (e) { delete LISTS[rule.id]; panel.replaceChildren(h("p", { class: "crit" }, t("list_error"))); return; }
+  try { data = await loadList(rule); } catch (e) { panel.replaceChildren(h("p", { class: "crit" }, t("list_error"))); return; }
   const byFile = data.records?.[outcome] || {};
   const sha = data.sources[rule.evaluated_source]?.sha256;
   const subset = { rule: data.rule, rule_version: data.rule_version, evaluated_at: data.evaluated_at, outcome,
@@ -274,6 +291,142 @@ async function showList(rule, outcome, panel, button) {
       h("a", { href: `data/rules/${encodeURIComponent(rule.id)}.json`, target: "_blank", rel: "noopener" }, t("download_all"))),
     h("p", { class: "muted small" }, t("numbering", { sha: short(sha) })),
     files);
+}
+
+function loadList(rule) {
+  LISTS[rule.id] ??= fetch(`data/rules/${encodeURIComponent(rule.id)}.json`, { cache: "no-cache" })
+    .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
+  return LISTS[rule.id].catch((e) => { delete LISTS[rule.id]; throw e; });
+}
+
+// Stacked bars of signal outcomes per category (year or file); mode "count" or "share".
+function stackedBars(categories, mode, label) {
+  const W = 860, H = 220, L = 52, B = 40, T = 22;
+  const value = (c, o) => (mode === "share" ? (c.inScope ? (100 * (c.counts[o] || 0)) / c.inScope : 0) : c.counts[o] || 0);
+  const max = Math.max(mode === "share" ? 1 : 1, ...categories.map((c) => SIGNAL_OUTCOMES.reduce((a, o) => a + value(c, o), 0)));
+  const step = (W - L - 10) / Math.max(1, categories.length), bw = Math.max(2, Math.min(26, step * 0.7));
+  const y = (v) => T + (H - T - B) * (1 - v / max);
+  const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": label });
+  for (let i = 0; i <= 4; i++) {
+    const v = (max * i) / 4;
+    svg.append(s("line", { class: "grid", x1: L, x2: W - 10, y1: y(v), y2: y(v) }),
+      s("text", { class: "axis-label", x: L - 6, y: y(v) + 4, "text-anchor": "end" },
+        mode === "share" ? `${v.toFixed(v < 10 ? 1 : 0)}%` : num(Math.round(v))));
+  }
+  const every = Math.ceil(categories.length / 12);
+  categories.forEach((c, i) => {
+    let base = 0;
+    const x = L + i * step + (step - bw) / 2;
+    const signals = SIGNAL_OUTCOMES.reduce((a, o) => a + (c.counts[o] || 0), 0);
+    SIGNAL_OUTCOMES.forEach((o) => {
+      const v = value(c, o);
+      if (!v) return;
+      const rect = s("rect", { x, y: y(base + v), width: bw, height: Math.max(1, y(base) - y(base + v)),
+        style: `fill:var(--out-${o})` });
+      rect.append(s("title", {}, `${c.label} · ${outcomeLabel(o)}: ${num(c.counts[o] || 0)}` +
+        (c.inScope ? ` (${((100 * (c.counts[o] || 0)) / c.inScope).toFixed(2)}%)` : "") +
+        ` · ${num(signals)} / ${num(c.inScope)}`));
+      svg.append(rect);
+      base += v;
+    });
+    if (i % every === 0) svg.append(s("text", { class: "axis-label", x: x + bw / 2, y: H - 22, "text-anchor": "middle" }, c.label));
+  });
+  return svg;
+}
+
+// Histogram of signal positions along the records read (files concatenated in order).
+function orderHistogram(data, label) {
+  const members = data.members || [];
+  const total = members.reduce((a, m) => a + m.records, 0);
+  const offset = {};
+  members.reduce((a, m) => { offset[m.name] = a; return a + m.records; }, 0);
+  const BINS = 60, size = Math.max(1, Math.ceil(total / BINS));
+  const bins = Array.from({ length: BINS }, () => ({}));
+  for (const o of SIGNAL_OUTCOMES) {
+    for (const [file, nums] of Object.entries(data.records?.[o] || {})) {
+      for (const n of nums) {
+        const b = Math.min(BINS - 1, Math.floor((offset[file] + n - 1) / size));
+        bins[b][o] = (bins[b][o] || 0) + 1;
+      }
+    }
+  }
+  const W = 860, H = 200, L = 52, B = 30, T = 18;
+  const max = Math.max(1, ...bins.map((b) => SIGNAL_OUTCOMES.reduce((a, o) => a + (b[o] || 0), 0)));
+  const step = (W - L - 10) / BINS;
+  const y = (v) => T + (H - T - B) * (1 - v / max);
+  const x = (pos) => L + ((W - L - 10) * pos) / Math.max(1, total);
+  const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": label });
+  for (let i = 0; i <= 4; i++) {
+    const v = (max * i) / 4;
+    svg.append(s("line", { class: "grid", x1: L, x2: W - 10, y1: y(v), y2: y(v) }),
+      s("text", { class: "axis-label", x: L - 6, y: y(v) + 4, "text-anchor": "end" }, num(Math.round(v))));
+  }
+  if (members.length > 1) {
+    // a line where each file starts, and its label, only where there is room (old files can be tiny)
+    let lastLine = -Infinity, lastLabel = -Infinity;
+    members.forEach((m) => {
+      const px = x(offset[m.name]);
+      if (px - lastLine >= 4) {
+        svg.append(s("line", { class: "boundary", x1: px, x2: px, y1: T, y2: H - B }));
+        lastLine = px;
+      }
+      if (px - lastLabel >= 44 && px <= W - 40) {
+        svg.append(s("text", { class: "axis-label", x: px + 2, y: H - 12 }, (m.name.match(/\d{4}/g) || [m.name]).pop()));
+        lastLabel = px;
+      }
+    });
+  }
+  bins.forEach((b, i) => {
+    let base = 0;
+    SIGNAL_OUTCOMES.forEach((o) => {
+      const v = b[o] || 0;
+      if (!v) return;
+      const rect = s("rect", { x: L + i * step + 0.5, y: y(base + v), width: Math.max(1, step - 1),
+        height: Math.max(1, y(base) - y(base + v)), style: `fill:var(--out-${o})` });
+      rect.append(s("title", {}, `${num(i * size + 1)}–${num(Math.min(total, (i + 1) * size))} · ${outcomeLabel(o)}: ${num(v)}`));
+      svg.append(rect);
+      base += v;
+    });
+  });
+  return svg;
+}
+
+async function showChart(rule, panel, button) {
+  if (!panel.hidden) { panel.hidden = true; button.textContent = t("chart_btn"); return; }
+  panel.hidden = false;
+  button.textContent = t("chart_hide");
+  panel.replaceChildren(h("p", { class: "muted" }, t("loading_list")));
+  let data;
+  try { data = await loadList(rule); } catch (e) { panel.replaceChildren(h("p", { class: "crit" }, t("list_error"))); return; }
+  const legend = h("ul", { class: "legend" }, SIGNAL_OUTCOMES.filter((o) => rule.counts[o] > 0).map((o) =>
+    h("li", {}, h("span", { class: "swatch", style: `background:var(--out-${o})` }), outcomeLabel(o))));
+  // over time: per year of the timeline column, else per file of the resource
+  let cats = [], note = "", unknown = 0;
+  if (Object.keys(data.by_period || {}).length) {
+    unknown = Object.values(data.by_period.unknown || {}).reduce((a, n) => a + n, 0);
+    cats = Object.entries(data.by_period).filter(([k]) => k !== "unknown").sort(([a], [b]) => a.localeCompare(b));
+    note = t("ch_time_note", { col: (data.timeline || "").split(".").slice(1).join(".") });
+  } else if (Object.keys(data.by_member || {}).length > 1) {
+    cats = Object.entries(data.by_member).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }));
+    cats = cats.map(([k, v]) => [(k.match(/\d{4}/g) || [k]).pop(), v]);
+    note = t("ch_member_note");
+  }
+  const categories = cats.map(([label, counts]) => ({ label, counts,
+    inScope: Object.entries(counts).reduce((a, [o, n]) => a + (o === "out_of_scope" ? 0 : n), 0) }));
+  const timeBox = h("div", { class: "chart" });
+  const mode = h("select", { "aria-label": t("ch_mode") }, h("option", { value: "count" }, t("ch_count")), h("option", { value: "share" }, t("ch_share")));
+  const drawTime = () => timeBox.replaceChildren(stackedBars(categories, mode.value, t("ch_time_h")));
+  mode.addEventListener("change", drawTime);
+  const total = (data.members || []).reduce((a, m) => a + m.records, 0);
+  panel.replaceChildren(legend,
+    h("h4", {}, t("ch_time_h")),
+    ...(categories.length
+      ? [h("p", { class: "note" }, note, unknown ? ` ${t("ch_unknown", { n: num(unknown) })}.` : "", " ", t("ch_mode"), ": ", mode), timeBox]
+      : [h("p", { class: "note" }, t("ch_no_time"))]),
+    h("h4", {}, t("ch_order_h")),
+    h("p", { class: "note" }, t("ch_order_note", { n: num(total) })),
+    h("div", { class: "chart" }, orderHistogram(data, t("ch_order_h"))));
+  if (categories.length) drawTime();
 }
 
 function card(rule, index, count) {
@@ -302,6 +455,10 @@ function card(rule, index, count) {
       h("div", { style: "flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 18px" }, parts));
   }
   const details = (key, body) => h("details", {}, h("summary", {}, t(key)), h("div", {}, body));
+  const chartPanel = h("div", { class: "chart-panel", hidden: true });
+  const chartButton = rule.status === "evaluated" && rule.signals
+    ? h("button", { class: "chart-btn", type: "button", "data-chart": rule.id, onclick: (ev) => showChart(rule, chartPanel, ev.currentTarget) }, t("chart_btn"))
+    : null;
   return h("article", { class: "card", lang: rule.language || null },
     head,
     rule.text ? h("p", { style: "margin:4px 0" }, rule.text) : null,
@@ -309,8 +466,8 @@ function card(rule, index, count) {
     details("justification", h("p", {}, rule.justification || "–")),
     details("exceptions", rule.exceptions?.length ? h("ul", {}, rule.exceptions.map((e) => h("li", {}, e))) : h("p", {}, t("no_exceptions"))),
     rule.examples?.length ? details("examples", h("ul", {}, rule.examples.map((e) => h("li", {}, e.case, " → ", h("em", {}, e.expected))))) : null,
-    details("history", ruleHistory(rule)),
-    result, panel);
+    details("history", ruleHistory(rule)), chartButton,
+    result, chartPanel, panel);
 }
 
 function renderRules() {
@@ -378,11 +535,13 @@ function renderSpeed() {
   const name = (() => { try { return new URL(PAGE.primary_portal).hostname; } catch (e) { return "portal"; } })();
   el("speed-legend").replaceChildren(
     h("li", {}, h("span", { class: "swatch", style: "background:var(--series-1)" }), t("sp_primary", { name })),
-    h("li", {}, h("span", { class: "swatch", style: "background:var(--series-2)" }), t("sp_secondary")));
+    h("li", {}, h("span", { class: "swatch", style: "background:var(--series-2)" }), t("sp_secondary")),
+    h("li", {}, h("span", { class: "swatch", style: "background:var(--series-3)" }), t("sp_processing")));
   if (!runs.length) { el("speed-chart").replaceChildren(h("p", { class: "muted" }, t("sp_none"))); return; }
   const W = 860, H = 230, L = 44, B = 34, T = 26;
-  const max = Math.max(1, ...runs.flatMap((r) => ["primary", "secondary"].map((k) => r.download_speed[k]?.mb_per_s || 0)));
-  const step = (W - L - 10) / runs.length, bw = Math.max(3, Math.min(18, step / 2.6));
+  const SERIES = ["primary", "secondary", "processing"];
+  const max = Math.max(1, ...runs.flatMap((r) => SERIES.map((k) => r.download_speed[k]?.mb_per_s || 0)));
+  const step = (W - L - 10) / runs.length, bw = Math.max(3, Math.min(18, step / 3.6));
   const y = (v) => T + (H - T - B) * (1 - v / max);
   const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": t("speed_h") });
   for (let i = 0; i <= 4; i++) {
@@ -391,12 +550,13 @@ function renderSpeed() {
       s("text", { class: "axis-label", x: L - 6, y: y(v) + 4, "text-anchor": "end" }, v.toFixed(v < 10 ? 1 : 0)));
   }
   runs.forEach((r, i) => {
-    const x0 = L + i * step + step / 2 - bw;
-    ["primary", "secondary"].forEach((k, j) => {
+    const x0 = L + i * step + step / 2 - 1.5 * bw;
+    SERIES.forEach((k, j) => {
       const v = r.download_speed[k]?.mb_per_s;
       if (v === null || v === undefined) return;
       const rect = s("rect", { class: `bar-${k}`, x: x0 + j * bw, y: y(v), width: bw - 1, height: Math.max(1, y(0) - y(v)), rx: 2 });
-      rect.append(s("title", {}, `${when(r.at)} · ${k === "primary" ? t("sp_primary", { name }) : t("sp_secondary")}: ${v} MB/s`));
+      const label = k === "primary" ? t("sp_primary", { name }) : k === "secondary" ? t("sp_secondary") : t("sp_processing");
+      rect.append(s("title", {}, `${when(r.at)} · ${label}: ${v} MB/s`));
       svg.append(rect);
     });
     if (runs.length <= 8 || i % Math.ceil(runs.length / 8) === 0) {
@@ -413,6 +573,45 @@ function renderSpeed() {
         const d = r.download_speed[k] || {};
         return [h("td", {}, d.mb_per_s ?? "–"), h("td", {}, num(d.resources)), h("td", {}, d.bytes ? (d.bytes / 1e6).toFixed(1) : "–")];
       }))));
+}
+
+// Stacked bars: seconds of download, processing, outputs and publication per run (last 26 runs).
+function renderPhases(publish) {
+  const byRun = Object.fromEntries((publish || []).map((p) => [p.run_id, p.accept_s]));
+  const runs = PAGE.history.filter((r) => r.timings).slice(-26);
+  const PH = [["download", (r) => r.timings.download_s], ["processing", (r) => r.timings.processing_s],
+    ["outputs", (r) => r.timings.outputs_s], ["publish", (r) => (r.run_id ? byRun[r.run_id] : undefined)]];
+  el("phases-legend").replaceChildren(...PH.map(([k], i) => h("li", {},
+    h("span", { class: "swatch", style: `background:var(--series-${[1, 3, 4, 5][i]})` }), t("ph_" + k))));
+  if (!runs.length) { el("phases-chart").replaceChildren(h("p", { class: "muted" }, t("sp_none"))); return; }
+  const W = 860, H = 230, L = 44, B = 34, T = 26;
+  const total = (r) => PH.reduce((a, [, f]) => a + (f(r) || 0), 0);
+  const max = Math.max(1, ...runs.map(total));
+  const step = (W - L - 10) / runs.length, bw = Math.max(4, Math.min(28, step * 0.6));
+  const y = (v) => T + (H - T - B) * (1 - v / max);
+  const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": t("phases_h") });
+  for (let i = 0; i <= 4; i++) {
+    const v = (max * i) / 4;
+    svg.append(s("line", { class: "grid", x1: L, x2: W - 10, y1: y(v), y2: y(v) }),
+      s("text", { class: "axis-label", x: L - 6, y: y(v) + 4, "text-anchor": "end" }, v.toFixed(0)));
+  }
+  runs.forEach((r, i) => {
+    let base = 0;
+    const x = L + i * step + (step - bw) / 2;
+    PH.forEach(([k, f]) => {
+      const v = f(r);
+      if (!v) return;
+      const rect = s("rect", { class: `bar-${k}`, x, y: y(base + v), width: bw, height: Math.max(1, y(base) - y(base + v)) });
+      rect.append(s("title", {}, `${when(r.at)} · ${t("ph_" + k)}: ${v} ${t("ph_s")}`));
+      svg.append(rect);
+      base += v;
+    });
+    if (runs.length <= 8 || i % Math.ceil(runs.length / 8) === 0) {
+      svg.append(s("text", { class: "axis-label", x: x + bw / 2, y: H - 12, "text-anchor": "middle" }, when(r.at).slice(0, 10)));
+    }
+  });
+  svg.append(s("text", { class: "axis-label", x: L - 6, y: 11, "text-anchor": "end" }, t("ph_s")));
+  el("phases-chart").replaceChildren(svg);
 }
 
 function renderProvenance() {
@@ -462,6 +661,13 @@ async function main() {
   el("group").addEventListener("change", () => { store("l2-group", el("group").checked); renderRules(); });
   el("rule-search").addEventListener("input", renderRules);
   renderTiles(); renderRules(); renderSources(); renderSpeed(); renderHistory(); renderProvenance(); renderDatasets();
+  // a link to a chart: #grafico=<rule id> (or #chart=<rule id>) opens it and scrolls to its card
+  const wanted = decodeURIComponent((location.hash.match(/^#(?:grafico|chart)=(.+)$/) || [])[1] || "");
+  if (wanted) {
+    const btn = document.querySelector(`[data-chart="${CSS.escape(wanted)}"]`);
+    if (btn) { btn.click(); btn.closest(".card").scrollIntoView(); }
+  }
+  fetch("data/publish.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : [])).catch(() => []).then(renderPhases);
   el("footer").replaceChildren(t("footer"), " ",
     h("a", { href: "data/layer2.json" }, "layer2.json"), " · ", h("a", { href: "data/status.json" }, "status.json"));
 }

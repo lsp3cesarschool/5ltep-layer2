@@ -1,0 +1,50 @@
+schema_version: "1.0"
+rule_version: "0.2.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Auto de infração sem coordenada ou em (0,0)"
+  title_translations:
+    en: "Infraction notice without coordinates or at (0,0)"
+  text: >
+    Sinaliza autos lavrados a partir de 2011 sem latitude ou longitude, ou com as duas iguais a zero.
+  justification: >
+    O ponto (0,0) fica no Atlântico, no golfo da Guiné: não é um local de autuação no Brasil, e sim um
+    valor padrão de sistema. A regra começa em 2011, quando o auto passou a ter coordenada em quase
+    todos os registros; antes disso a ausência é a regra, não exceção. Coordenadas usam vírgula
+    decimal. É sinal para revisão: o auto pode ter localização em outro campo ou documento.
+  exceptions:
+    - "Autos anteriores a 2011 ficam fora do escopo (o campo quase não era preenchido)."
+    - "A localização pode estar no recurso de coordenadas ou na geometria, e não nestes campos."
+  examples:
+    - case: "Auto de 2015 em (-3,1; -60,0)"
+      expected: "Conforme"
+    - case: "Auto de 2012 em (0; 0)"
+      expected: "Sinal"
+    - case: "Auto de 2020 sem latitude"
+      expected: "Sinal"
+
+sources:
+  ibama_autos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-auto-de-infracao
+    resource: {name: "Autos de infração", format: CSV}
+    archive: {type: zip, members: "auto_infracao_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      DAT_HORA_AUTO_INFRACAO: {meaning: "Data e hora de lavratura do auto", type: date, format: ["%Y-%m-%d %H:%M:%S", "%Y-%m-%d"]}
+      NUM_LATITUDE_AUTO: {meaning: "Latitude do auto, em graus decimais", type: number, decimal: ","}
+      NUM_LONGITUDE_AUTO: {meaning: "Longitude do auto, em graus decimais", type: number, decimal: ","}
+
+check:
+  template: flag-when
+  timeline: ibama_autos.DAT_HORA_AUTO_INFRACAO
+  any:
+    - {column: ibama_autos.NUM_LATITUDE_AUTO, empty: true}
+    - {column: ibama_autos.NUM_LONGITUDE_AUTO, empty: true}
+    - all:
+        - {column: ibama_autos.NUM_LATITUDE_AUTO, equals: 0}
+        - {column: ibama_autos.NUM_LONGITUDE_AUTO, equals: 0}
+  where:
+    - {column: ibama_autos.DAT_HORA_AUTO_INFRACAO, on_or_after: "2011-01-01"}

@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.2.0"
 origin: expert
 
 description:
@@ -31,4 +31,5 @@ sources:
 
 check:
   template: temporal-order
+  timeline: ibama_licencas.DAT_EMISSAO
   sequence: [ibama_licencas.DAT_EMISSAO, ibama_licencas.DAT_VENCIMENTO]

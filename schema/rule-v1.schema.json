@@ -117,7 +117,8 @@
             "lookup-equals",
             "lookup-exists",
             "temporal-order",
-            "field-comparison"
+            "field-comparison",
+            "flag-when"
           ]
         }
       },
@@ -168,6 +169,18 @@
           },
           "then": {
             "$ref": "#/$defs/field_comparison"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "template": {
+                "const": "flag-when"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/flag_when"
           }
         }
       ]
@@ -329,6 +342,10 @@
         },
         "where": {
           "$ref": "#/$defs/where"
+        },
+        "timeline": {
+          "$ref": "#/$defs/column_ref",
+          "description": "Optional: a date column of the evaluated source; the dashboard charts the outcomes per year of it."
         }
       },
       "additionalProperties": false
@@ -434,55 +451,9 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "column"
-        ],
-        "minProperties": 2,
-        "maxProperties": 2,
-        "properties": {
-          "column": {
-            "$ref": "#/$defs/column_ref"
-          },
-          "equals": {
-            "type": [
-              "string",
-              "number"
-            ]
-          },
-          "not_equals": {
-            "type": [
-              "string",
-              "number"
-            ]
-          },
-          "in": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "type": [
-                "string",
-                "number"
-              ]
-            }
-          },
-          "not_in": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "type": [
-                "string",
-                "number"
-              ]
-            }
-          },
-          "empty": {
-            "type": "boolean"
-          }
-        }
+        "$ref": "#/$defs/condition"
       },
-      "description": "Conditions on columns of the evaluated source (trimmed text). Records outside them are out_of_scope."
+      "description": "Conditions on columns of the evaluated source, all required. Records outside them are out_of_scope."
     },
     "lookup_exists": {
       "description": "For each record of the `from` source, the key must exist in the `to` source.",
@@ -500,6 +471,10 @@
         },
         "where": {
           "$ref": "#/$defs/where"
+        },
+        "timeline": {
+          "$ref": "#/$defs/column_ref",
+          "description": "Optional: a date column of the evaluated source; the dashboard charts the outcomes per year of it."
         }
       }
     },
@@ -541,6 +516,10 @@
         },
         "where": {
           "$ref": "#/$defs/where"
+        },
+        "timeline": {
+          "$ref": "#/$defs/column_ref",
+          "description": "Optional: a date column of the evaluated source; the dashboard charts the outcomes per year of it."
         }
       }
     },
@@ -652,6 +631,10 @@
         },
         "where": {
           "$ref": "#/$defs/where"
+        },
+        "timeline": {
+          "$ref": "#/$defs/column_ref",
+          "description": "Optional: a date column of the evaluated source; the dashboard charts the outcomes per year of it."
         }
       }
     },
@@ -691,6 +674,137 @@
           "minLength": 1,
           "maxLength": 5,
           "description": "lookup-exists: the `from` field holds several keys separated by this text; every one must exist."
+        }
+      }
+    },
+    "condition": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "column"
+          ],
+          "minProperties": 2,
+          "maxProperties": 2,
+          "properties": {
+            "column": {
+              "$ref": "#/$defs/column_ref"
+            },
+            "equals": {
+              "type": [
+                "string",
+                "number"
+              ]
+            },
+            "not_equals": {
+              "type": [
+                "string",
+                "number"
+              ]
+            },
+            "in": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": [
+                  "string",
+                  "number"
+                ]
+              }
+            },
+            "not_in": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": [
+                  "string",
+                  "number"
+                ]
+              }
+            },
+            "empty": {
+              "type": "boolean"
+            },
+            "at_least": {
+              "type": [
+                "string",
+                "number"
+              ]
+            },
+            "below": {
+              "type": [
+                "string",
+                "number"
+              ]
+            },
+            "on_or_after": {
+              "type": "string"
+            },
+            "before": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "all"
+          ],
+          "properties": {
+            "all": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/condition"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "any"
+          ],
+          "properties": {
+            "any": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/condition"
+              }
+            }
+          }
+        }
+      ],
+      "description": "A condition on one column (text, or number/date when the column is typed), or a group: all / any."
+    },
+    "flag_when": {
+      "description": "A record is a signal when any of the conditions holds.",
+      "required": [
+        "template",
+        "any"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "template": {
+          "const": "flag-when"
+        },
+        "any": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/condition"
+          }
+        },
+        "where": {
+          "$ref": "#/$defs/where"
+        },
+        "timeline": {
+          "$ref": "#/$defs/column_ref",
+          "description": "Optional: a date column of the evaluated source; the dashboard charts the outcomes per year of it."
         }
       }
     }

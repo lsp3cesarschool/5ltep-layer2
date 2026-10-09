@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.2.0"
 origin: expert
 
 description:
@@ -35,4 +35,5 @@ sources:
 
 check:
   template: temporal-order
+  timeline: ibama_if100.DATA_DA_EXPLORACAO
   sequence: [ibama_if100.DATA_DE_EMISSAO, ibama_if100.DATA_DA_EXPLORACAO, ibama_if100.DATA_DE_VALIDADE]

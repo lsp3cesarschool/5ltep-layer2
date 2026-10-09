@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.2.0"
 origin: expert
 
 description:
@@ -32,12 +32,14 @@ sources:
     archive: {type: zip, members: "arrecadacao_de_multas_ambientais_por_bens_tutelados_*.csv"}
     file: {format: csv, encoding: utf-8, delimiter: ";"}
     columns:
+      "Data Auto": {meaning: "Data do auto de infração", type: date, format: "%d/%m/%Y"}
       "Valor do Auto": {meaning: "Valor original do auto", type: number, decimal: ","}
       "Valor Pago": {meaning: "Valor pago na parcela", type: number, decimal: ","}
       Moeda: "Moeda do valor do auto"
 
 check:
   template: field-comparison
+  timeline: "ibama_arrecadacao.Data Auto"
   left: "ibama_arrecadacao.Valor Pago"
   op: "<="
   right: {sum: ["ibama_arrecadacao.Valor do Auto"], times: 10}

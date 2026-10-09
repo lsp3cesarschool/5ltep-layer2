@@ -99,7 +99,7 @@ was available (HTTP status, SHA-256 of the bytes, columns found), crosses the da
 without external access and uploads its outputs as an artifact. The **publish** job checks the
 artifact (`python main.py accept`: expected files only, valid JSON, record lists made of numbers,
 earlier history kept) and commits `results/` and `docs/data/`. The dashboard in `docs/` (GitHub
-Pages from `/docs`) shows the rules, the health of each source, the history and the provenance; each
+Pages from `/docs`) shows the rules (each with a chart of its signals over time and in the order of the records), the health of each source, download and processing speed, the history and the provenance; each
 visitor can order the rule cards, and that order is kept in their browser only. Only counts and
 record numbers are published, never values from the portals.
 

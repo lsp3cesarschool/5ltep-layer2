@@ -19,6 +19,7 @@ import hashlib
 import json
 import os
 import platform
+import time
 import subprocess
 from pathlib import Path
 
@@ -76,6 +77,7 @@ def _card(entry: dict, rules_root: Path, run: dict) -> dict:
         "justification": desc.get("justification"), "exceptions": desc.get("exceptions", []),
         "examples": desc.get("examples", []), "template": (data.get("check") or {}).get("template"),
         "evaluated_source": evaluated_source(data["check"]) if data.get("check") else None,
+        "timeline": (data.get("check") or {}).get("timeline"),
         "datasets": [{"source": sid, "label": s.get("resource")} for sid, s in entry.get("sources", {}).items()],
         "status": entry["status"], "reason_code": entry.get("reason_code"), "reason": entry.get("reason"),
     }
@@ -86,7 +88,7 @@ def _card(entry: dict, rules_root: Path, run: dict) -> dict:
     return card
 
 
-def download_speed(sources: list[dict]) -> dict:
+def download_speed(sources: list[dict], timings: dict | None = None) -> dict:
     """Download speed of this run, separately for the primary portal and the secondary ones:
     total bytes over total download time of the resources that downloaded."""
     speed = {}
@@ -96,15 +98,20 @@ def download_speed(sources: list[dict]) -> dict:
         size, secs = sum(d["bytes"] for d in done), sum(d["seconds"] for d in done)
         speed[role] = {"resources": len(done), "bytes": size, "seconds": round(secs, 2),
                        "mb_per_s": round(size / 1e6 / secs, 3) if secs else None}
+    if timings and timings.get("processing_s"):
+        size, secs = timings["bytes_processed"], timings["processing_s"]
+        speed["processing"] = {"bytes": size, "seconds": secs, "mb_per_s": round(size / 1e6 / secs, 3) if secs else None}
     return speed
 
 
 def write(run: dict, out: Path, rules_root: Path) -> dict:
+    t_outputs = time.monotonic()
     ident = run_identity()
     results, data = out / "results", out / "docs" / "data"
     sources = [f.record() for f in run["fetched"]]
     cards = [_card(e, rules_root, run) for e in run["rules"]]
-    speed = download_speed(sources)
+    speed = download_speed(sources, run.get("timings"))
+    timings = dict(run.get("timings") or {})
 
     # results/ -----------------------------------------------------------------------------------
     manifest = {**ident, "started_at": run["started_at"], "finished_at": run["finished_at"],
@@ -128,7 +135,8 @@ def write(run: dict, out: Path, rules_root: Path) -> dict:
     history.append({"run_id": ident["run_id"], "environment": ident["environment"], "at": run["finished_at"],
                     "rules": {c["id"]: {"status": c["status"], "reason_code": c["reason_code"],
                                         "total": c.get("total"), "counts": c.get("counts")} for c in cards},
-                    "sources": {s["label"]: s["status"] for s in sources}, "download_speed": speed})
+                    "sources": {s["label"]: s["status"] for s in sources}, "download_speed": speed,
+                    "timings": timings})
     _write(history_file, history)
 
     log = results / "run_log.jsonl"
@@ -154,10 +162,15 @@ def write(run: dict, out: Path, rules_root: Path) -> dict:
                             **ident, "numbering": "registro por arquivo do recurso; 1 = primeira linha após o cabeçalho",
                             "sources": {sid: {"label": s["resource"], "sha256": s["sha256"], "records": s.get("records")}
                                         for sid, s in entry["sources"].items()},
-                            "counts": entry["counts"], "total": entry["total"], "records": entry["records"]})
+                            "counts": entry["counts"], "total": entry["total"], "records": entry["records"],
+                            "members": entry["members"], "by_member": entry["by_member"], "by_period": entry["by_period"],
+                            "timeline": card.get("timeline")})
         else:
             target.unlink(missing_ok=True)
 
+    timings["outputs_s"] = round(time.monotonic() - t_outputs, 2)
+    history[-1]["timings"] = timings
+    _write(history_file, history)
     evaluated = [c for c in cards if c["status"] == EVALUATED]
     totals = {"rules": len(cards), "evaluated": len(evaluated), "not_evaluated": len(cards) - len(evaluated),
               "sources": len(sources), "sources_ok": sum(s["status"] == OK for s in sources),
@@ -165,7 +178,7 @@ def write(run: dict, out: Path, rules_root: Path) -> dict:
     _write(data / "layer2.json", {"layer": 2, **ident, "generated_at": run["finished_at"],
                                   "started_at": run["started_at"], "totals": totals, "rules": cards,
                                   "sources": sources, "engine": manifest["engine"], "rule_files": manifest["rules"],
-                                  "primary_portal": run.get("primary_portal"), "download_speed": speed,
+                                  "primary_portal": run.get("primary_portal"), "download_speed": speed, "timings": timings,
                                   "history": history[-HISTORY_KEPT_ON_PAGE:]})
 
     if not cards:

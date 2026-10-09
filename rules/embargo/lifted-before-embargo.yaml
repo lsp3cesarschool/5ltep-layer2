@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.3.0"
 origin: expert
 
 description:
@@ -12,7 +12,7 @@ description:
   justification: >
     Um embargo só pode ser levantado depois de imposto; a ordem inversa indica erro de data. É sinal para revisão, não veredito sobre o termo.
   exceptions:
-    - "Termos sem desembargo (a maioria) ficam sem informação."
+    - "Termos sem desembargo (a maioria, ainda embargados) ficam fora do escopo: é o comportamento esperado."
   examples:
     - case: "Embargo em 2018-05-01, desembargo em 2019-02-01"
       expected: "Conforme"
@@ -31,4 +31,7 @@ sources:
 
 check:
   template: temporal-order
+  timeline: ibama_embargo.DAT_EMBARGO
   sequence: [ibama_embargo.DAT_EMBARGO, ibama_embargo.DAT_DESEMBARGO]
+  where:
+    - {column: ibama_embargo.DAT_DESEMBARGO, empty: false}

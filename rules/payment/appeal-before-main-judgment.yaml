@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.3.0"
 origin: expert
 
 description:
@@ -12,6 +12,7 @@ description:
   justification: >
     O recurso é julgado depois da decisão recorrida; a ordem inversa indica erro de data ou de encadeamento. É sinal para revisão.
   exceptions:
+    - "Autos sem recurso julgado ficam fora do escopo."
     - "Contexto processual documentado pode alterar a ordem esperada (por exemplo, anulação e novo julgamento)."
   examples:
     - case: "Principal em 01/06/2017, recurso em 01/03/2018"
@@ -31,4 +32,7 @@ sources:
 
 check:
   template: temporal-order
+  timeline: "ibama_julgamentos.Data Julgamento Principal"
   sequence: ["ibama_julgamentos.Data Julgamento Principal", "ibama_julgamentos.Data Julgamento Recurso"]
+  where:
+    - {column: "ibama_julgamentos.Data Julgamento Recurso", empty: false}

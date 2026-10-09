@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.2.0"
 origin: expert
 
 description:
@@ -37,6 +37,7 @@ sources:
 
 check:
   template: temporal-order
+  timeline: "ibama_roi.DATA/HORA DETECCAO"
   sequence:
     - "ibama_roi.DATA/HORA INICIO FOGO"
     - "ibama_roi.DATA/HORA DETECCAO"

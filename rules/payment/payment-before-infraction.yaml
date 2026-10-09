@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.2.0"
 origin: expert
 
 description:
@@ -32,4 +32,5 @@ sources:
 
 check:
   template: temporal-order
+  timeline: "ibama_arrecadacao.Data Auto"
   sequence: ["ibama_arrecadacao.Data Auto", "ibama_arrecadacao.Data Pagamento"]

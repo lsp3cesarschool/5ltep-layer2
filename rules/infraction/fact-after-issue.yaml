@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.3.0"
 origin: expert
 
 description:
@@ -13,7 +13,7 @@ description:
     O auto registra um fato já ocorrido; fato datado depois da lavratura indica erro de data ou de
     registro. As duas datas são comparadas por dia, porque parte dos autos traz só a data. É sinal para revisão, não veredito sobre o auto.
   exceptions:
-    - "Autos sem data do fato (a maioria dos registros antigos) ficam sem informação."
+    - "A data do fato só passou a ser preenchida em 2019 (era do AI-e); autos sem ela ficam fora do escopo."
     - "Autos migrados ou corrigidos podem ter datas reescritas; a regra não distingue esses casos."
   examples:
     - case: "Fato em 2020-03-01 e lavratura em 2020-03-05"
@@ -34,4 +34,7 @@ sources:
 
 check:
   template: temporal-order
+  timeline: ibama_autos.DAT_HORA_AUTO_INFRACAO
   sequence: [ibama_autos.DT_FATO_INFRACIONAL, ibama_autos.DAT_HORA_AUTO_INFRACAO]
+  where:
+    - {column: ibama_autos.DT_FATO_INFRACIONAL, empty: false}

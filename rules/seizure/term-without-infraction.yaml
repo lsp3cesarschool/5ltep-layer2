@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.2.0"
 origin: cross_reference
 
 description:
@@ -30,6 +30,7 @@ sources:
     file: {format: csv, encoding: utf-8, delimiter: ";"}
     columns:
       SEQ_AUTO_INFRACAO: "Identificador sequencial do auto de infração"
+      DT_APREENSAO: {meaning: "Data da apreensão", type: date, format: "%Y-%m-%d"}
   ibama_autos:
     portal: https://dadosabertos.ibama.gov.br
     dataset: fiscalizacao-auto-de-infracao
@@ -41,6 +42,7 @@ sources:
 
 check:
   template: lookup-exists
+  timeline: ibama_apreensao.DT_APREENSAO
   key: {from: ibama_apreensao.SEQ_AUTO_INFRACAO, to: ibama_autos.SEQ_AUTO_INFRACAO}
   where:
     - {column: ibama_apreensao.SEQ_AUTO_INFRACAO, empty: false}

@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.3.0"
 origin: expert
 
 description:
@@ -12,7 +12,7 @@ description:
   justification: >
     O julgamento decide sobre um auto já lavrado; a ordem inversa indica erro de data. É sinal para revisão.
   exceptions:
-    - "Autos ainda não julgados ficam sem informação."
+    - "Autos ainda não julgados ficam fora do escopo."
   examples:
     - case: "Auto em 01/02/2016, julgamento em 01/06/2017"
       expected: "Conforme"
@@ -31,4 +31,7 @@ sources:
 
 check:
   template: temporal-order
+  timeline: "ibama_julgamentos.Data Auto"
   sequence: ["ibama_julgamentos.Data Auto", "ibama_julgamentos.Data Julgamento Principal"]
+  where:
+    - {column: "ibama_julgamentos.Data Julgamento Principal", empty: false}

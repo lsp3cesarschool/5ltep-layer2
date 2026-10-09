@@ -11,8 +11,10 @@ description:
     Confere, em cada árvore do inventário 100%, se o volume explorado não passa do volume autorizado.
   justification: >
     A exploração se limita ao volume autorizado para a árvore; volume explorado maior indica erro de
-    registro ou exploração acima do autorizado (Resolução CONAMA 406/2009). Os volumes usam ponto
-    como separador decimal. É sinal para revisão.
+    registro ou exploração acima do autorizado (Resolução CONAMA 406/2009). Neste caso o sinal pode
+    ser a própria situação irregular observada, e não um defeito dos dados: a regra aponta o registro
+    sem decidir entre as duas hipóteses. O volume autorizado é estimado no inventário, então pequenos
+    excessos são comuns. Os volumes usam ponto como separador decimal. É sinal para revisão.
   exceptions:
     - "Produtos diferentes da mesma árvore ou unidades diferentes (m³, st) não são distinguidos aqui."
   examples:

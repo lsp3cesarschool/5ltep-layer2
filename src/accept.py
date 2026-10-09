@@ -13,6 +13,8 @@ from __future__ import annotations
 import json
 import re
 import shutil
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 ALLOWED = [
@@ -23,7 +25,7 @@ ALLOWED = [
 ]
 MAX_FILE_BYTES = 50 * 1024 * 1024
 LIST_KEYS = {"rule", "rule_version", "evaluated_at", "run_id", "environment", "run_url", "note", "numbering",
-             "sources", "counts", "total", "records"}
+             "sources", "counts", "total", "records", "members", "by_member", "by_period", "timeline"}
 
 
 class Refused(Exception):
@@ -75,6 +77,7 @@ def check(artifact: Path, repo: Path) -> list[str]:
 
 
 def apply(artifact: Path, repo: Path) -> list[str]:
+    t0 = time.monotonic()
     files = check(artifact, repo)
     for folder in ("results/rules", "docs/data/rules"):
         shutil.rmtree(repo / folder, ignore_errors=True)
@@ -86,4 +89,11 @@ def apply(artifact: Path, repo: Path) -> list[str]:
                 fh.write(src.read_text(encoding="utf-8"))
         else:
             shutil.copyfile(src, dest)
+    # the publish job's own time, per run (the dashboard plots it after download and processing)
+    run_id = json.loads((artifact / "docs" / "data" / "layer2.json").read_text(encoding="utf-8")).get("run_id")
+    log_file = repo / "docs" / "data" / "publish.json"
+    log = json.loads(log_file.read_text(encoding="utf-8")) if log_file.exists() else []
+    log.append({"run_id": run_id, "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                "accept_s": round(time.monotonic() - t0, 2), "files": len(files)})
+    log_file.write_text(json.dumps(log[-200:], ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     return files

@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.3.0"
 origin: expert
 
 description:
@@ -13,7 +13,7 @@ description:
     Um intervalo termina depois de começar; fim antes do início indica datas trocadas ou erro de
     digitação. É sinal para revisão, não veredito sobre o auto.
   exceptions:
-    - "Autos sem início ou sem fim do ato ficam sem informação."
+    - "Autos sem início ou sem fim do ato ficam fora do escopo; os campos só são preenchidos a partir de 2019."
   examples:
     - case: "Início 2019-01-01, fim 2019-02-01"
       expected: "Conforme"
@@ -33,4 +33,8 @@ sources:
 
 check:
   template: temporal-order
+  timeline: ibama_autos.DT_INICIO_ATO_INEQUIVOCO
   sequence: [ibama_autos.DT_INICIO_ATO_INEQUIVOCO, ibama_autos.DT_FIM_ATO_INEQUIVOCO]
+  where:
+    - {column: ibama_autos.DT_INICIO_ATO_INEQUIVOCO, empty: false}
+    - {column: ibama_autos.DT_FIM_ATO_INEQUIVOCO, empty: false}

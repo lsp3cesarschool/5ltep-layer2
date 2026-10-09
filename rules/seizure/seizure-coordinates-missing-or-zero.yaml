@@ -1,0 +1,46 @@
+schema_version: "1.0"
+rule_version: "0.2.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Termo de apreensão sem coordenada ou em (0,0)"
+  title_translations:
+    en: "Seizure term without coordinates or at (0,0)"
+  text: >
+    Sinaliza termos de apreensão lavrados a partir de 2013 sem latitude ou longitude, ou com as duas iguais a zero.
+  justification: >
+    O ponto (0,0) não é um local de apreensão no Brasil, e sim um valor padrão de sistema. A regra
+    começa em 2013, quando o termo passou a ter coordenada em quase todos os registros. Coordenadas
+    usam ponto decimal (diferente do auto de infração). É sinal para revisão.
+  exceptions:
+    - "Termos anteriores a 2013 ficam fora do escopo (o campo quase não era preenchido)."
+  examples:
+    - case: "Termo de 2016 em (-8.05; -34.9)"
+      expected: "Conforme"
+    - case: "Termo de 2013 em (0.0; 0.0)"
+      expected: "Sinal"
+
+sources:
+  ibama_apreensao:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-termo-de-apreensao
+    resource: {name: "Termo de apreensão", format: CSV}
+    archive: {type: zip, members: "apreensao.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      DT_APREENSAO: {meaning: "Data da apreensão", type: date, format: "%Y-%m-%d"}
+      NU_LATITUDE_TAD: {meaning: "Latitude da apreensão, em graus decimais", type: number, decimal: "."}
+      NU_LONGITUDE_TAD: {meaning: "Longitude da apreensão, em graus decimais", type: number, decimal: "."}
+
+check:
+  template: flag-when
+  timeline: ibama_apreensao.DT_APREENSAO
+  any:
+    - {column: ibama_apreensao.NU_LATITUDE_TAD, empty: true}
+    - {column: ibama_apreensao.NU_LONGITUDE_TAD, empty: true}
+    - all:
+        - {column: ibama_apreensao.NU_LATITUDE_TAD, equals: 0}
+        - {column: ibama_apreensao.NU_LONGITUDE_TAD, equals: 0}
+  where:
+    - {column: ibama_apreensao.DT_APREENSAO, on_or_after: "2013-01-01"}

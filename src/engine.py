@@ -18,6 +18,7 @@ import csv
 import json
 import fnmatch
 import io
+import time
 import zipfile
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -50,6 +51,15 @@ class Read:
     path: Path
     columns: list[str]
     members: list[dict] = field(default_factory=list)   # name, records
+    missing: dict[str, list[str]] = field(default_factory=dict)   # member -> declared columns it lacks
+
+    def view(self, columns: list[str]) -> "Read":
+        """The same work file seen by one rule: only its columns; ReadError if a member lacks one."""
+        for member, absent in self.missing.items():
+            lacking = [c for c in columns if c in absent]
+            if lacking:
+                raise ReadError("column_missing", f"{member}: colunas ausentes {lacking}")
+        return Read(self.path, list(columns), self.members, {})
 
     @property
     def records(self) -> int:
@@ -80,8 +90,11 @@ def _members(fetched: Fetched, source: dict):
                 yield name, fh
 
 
-def read_source(fetched: Fetched, source: dict, out: Path) -> Read:
-    spec, wanted = source["file"], list(source["columns"])
+def read_source(fetched: Fetched, source: dict, out: Path, columns: list[str] | None = None) -> Read:
+    """Reads the declared columns (or `columns`, the union several rules need) of every member into
+    one UTF-8 work file. A column a member lacks is written empty and recorded in `missing`; each rule
+    then refuses only the columns it declared (`Read.view`)."""
+    spec, wanted = source["file"], list(columns or source["columns"])
     result = Read(out, wanted)
     with open(out, "w", encoding="utf-8", newline="") as dest:
         writer = csv.writer(dest)
@@ -100,14 +113,16 @@ def read_source(fetched: Fetched, source: dict, out: Path) -> Read:
                 header = [h.lstrip("﻿") for h in header]
                 missing = [c for c in wanted if c not in header]
                 if missing:
-                    raise ReadError("column_missing", f"{name}: colunas ausentes {missing}; cabeçalho: {header[:40]}")
-                index = [header.index(c) for c in wanted]
+                    result.missing[name] = missing
+                    if columns is None:
+                        raise ReadError("column_missing", f"{name}: colunas ausentes {missing}; cabeçalho: {header[:40]}")
+                index = [header.index(c) if c in header else None for c in wanted]
                 width = len(header)
                 for row in reader:
                     record += 1
                     if len(row) < width:
                         row = row + [""] * (width - len(row))
-                    writer.writerow([name, record, *(row[i] for i in index)])
+                    writer.writerow([name, record, *("" if i is None else row[i] for i in index)])
             except UnicodeDecodeError as exc:
                 raise ReadError("decode_error", f"{name}: bytes inválidos para {spec['encoding']} "
                                                 f"perto do registro {record + 1} ({exc.reason})")
@@ -130,8 +145,9 @@ def evaluate(rule: dict, reads: dict[str, Read]) -> dict:
     con = duckdb.connect(":memory:")
     try:
         for source_id, read in reads.items():
-            con.execute(f"CREATE TABLE {_ident('src_' + source_id)} AS "
-                        f"SELECT * FROM read_csv(?, header = true, all_varchar = true, delim = ',', quote = '\"')",
+            cols = ", ".join(_ident(c) for c in ["__member", "__record", *read.columns])
+            con.execute(f"CREATE TABLE {_ident('src_' + source_id)} AS SELECT {cols} "
+                        f"FROM read_csv(?, header = true, all_varchar = true, delim = ',', quote = '\"')",
                         [str(read.path)])
         con.execute("SET enable_external_access = false")
         con.execute("SET lock_configuration = true")
@@ -144,12 +160,22 @@ def evaluate(rule: dict, reads: dict[str, Read]) -> dict:
                 "SELECT outcome, __member, list(CAST(__record AS BIGINT) ORDER BY CAST(__record AS BIGINT)) "
                 "FROM outcome WHERE outcome NOT IN ('match', 'out_of_scope') GROUP BY 1, 2 ORDER BY 1, 2").fetchall():
             records.setdefault(outcome, {})[member] = numbers
+        by_member: dict[str, dict[str, int]] = {}
+        for member, outcome, n in con.execute(
+                "SELECT __member, outcome, count(*) FROM outcome GROUP BY 1, 2 ORDER BY 1, 2").fetchall():
+            by_member.setdefault(member, {})[outcome] = n
+        by_period: dict[str, dict[str, int]] = {}
+        if "timeline" in rule["check"]:
+            for period, outcome, n in con.execute(
+                    "SELECT coalesce(__period, 'unknown'), outcome, count(*) FROM outcome GROUP BY 1, 2 ORDER BY 1, 2").fetchall():
+                by_period.setdefault(period, {})[outcome] = n
     finally:
         con.close()
     total = reads[evaluated_source(rule["check"])].records
     if sum(counts.values()) != total:
         raise ReadError("count_mismatch", f"resultados somam {sum(counts.values())}, registros lidos {total}")
-    return {"counts": counts, "total": total, "records": records}
+    return {"counts": counts, "total": total, "records": records, "by_member": by_member, "by_period": by_period,
+            "members": reads[evaluated_source(rule["check"])].members}
 
 
 # --- a run -------------------------------------------------------------------------------------
@@ -194,6 +220,7 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
     log(f"{len(rules)} regra(s); {sum('status' not in r for r in rules)} válida(s)")
 
     # fetch every resource once
+    t_download = time.monotonic()
     fetched: dict[ResourceKey, Fetched] = {}
     for entry in rules:
         if "status" in entry:
@@ -209,7 +236,35 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
                                        f" — {f.download['bytes'] / 1e6:.1f} MB, sha256 {f.download['sha256'][:12]}…"))
             fetched[key].used_by.append(entry["id"])
 
-    # read and evaluate each rule
+    download_s = time.monotonic() - t_download
+
+    # read each resource once (union of the columns its rules declare), then evaluate each rule
+    t_processing = time.monotonic()
+    shared: dict[tuple, dict] = {}
+    for entry in rules:
+        if "status" in entry:
+            continue
+        for source in entry["data"]["sources"].values():
+            key = (ResourceKey.of(source), json.dumps(source.get("archive"), sort_keys=True),
+                   json.dumps(source["file"], sort_keys=True))
+            item = shared.setdefault(key, {"columns": [], "source": source, "read": None, "error": None})
+            item["columns"] += [c for c in source["columns"] if c not in item["columns"]]
+
+    def shared_read(source: dict) -> Read:
+        key = (ResourceKey.of(source), json.dumps(source.get("archive"), sort_keys=True),
+               json.dumps(source["file"], sort_keys=True))
+        item = shared[key]
+        if item["read"] is None and item["error"] is None:
+            try:
+                item["read"] = read_source(fetched[key[0]], item["source"],
+                                           reads_dir / f"shared-{list(shared).index(key)}.csv",
+                                           columns=item["columns"])
+            except ReadError as exc:
+                item["error"] = exc
+        if item["error"]:
+            raise item["error"]
+        return item["read"].view(list(source["columns"]))
+
     for entry in rules:
         if "status" in entry:
             continue
@@ -229,8 +284,7 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
         reads: dict[str, Read] = {}
         try:
             for source_id, source in rule["sources"].items():
-                f = fetched[ResourceKey.of(source)]
-                read = read_source(f, source, reads_dir / f"{entry['id']}.{source_id}.csv")
+                read = shared_read(source)
                 reads[source_id] = read
                 entry["sources"][source_id].update(records=read.records, members=read.members)
             result = evaluate(rule, reads)
@@ -238,16 +292,19 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
             entry.update(status=NOT_EVALUATED, reason_code=exc.code, reason=exc.message)
             log(f"{entry['id']}: não avaliada — {exc.message}")
             continue
-        finally:
-            for read in reads.values():
-                read.path.unlink(missing_ok=True)
         entry.update(status=EVALUATED, evaluated_at=now(), **result)
         log(f"{entry['id']}: {result['total']} registros; " +
             ", ".join(f"{k} {v}" for k, v in result["counts"].items()))
 
+    processing_s = time.monotonic() - t_processing
+    for item in shared.values():
+        if item["read"]:
+            item["read"].path.unlink(missing_ok=True)
     if not keep_downloads:
         for f in fetched.values():
             if f.path:
                 f.path.unlink(missing_ok=True)
-    return {"started_at": started, "finished_at": now(), "rules": rules, "primary_portal": primary,
+    timings = {"download_s": round(download_s, 2), "processing_s": round(processing_s, 2),
+               "bytes_processed": sum(f.download.get("bytes") or 0 for f in fetched.values() if f.status == OK)}
+    return {"started_at": started, "finished_at": now(), "rules": rules, "primary_portal": primary, "timings": timings,
             "fetched": list(fetched.values()), "problems": problems}

@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.3.0"
 origin: expert
 
 description:
@@ -16,6 +16,7 @@ description:
   exceptions:
     - "Infração permanente ou continuada conta o prazo do fim da conduta."
     - "Atos que interrompem a prescrição não aparecem nestes dados."
+    - "Autos sem data do fato (anteriores a 2019, quase todos) ficam fora do escopo."
   examples:
     - case: "Fato em 2010-01-01, lavratura em 2014-12-31"
       expected: "Conforme"
@@ -35,5 +36,8 @@ sources:
 
 check:
   template: temporal-order
+  timeline: ibama_autos.DAT_HORA_AUTO_INFRACAO
   sequence: [ibama_autos.DT_FATO_INFRACIONAL, ibama_autos.DAT_HORA_AUTO_INFRACAO]
   max_interval: {years: 5}
+  where:
+    - {column: ibama_autos.DT_FATO_INFRACIONAL, empty: false}

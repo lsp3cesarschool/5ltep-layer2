@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.2.0"
 origin: expert
 
 description:
@@ -31,10 +31,12 @@ sources:
       Total: {meaning: "Plantel anterior (total)", type: number, decimal: ","}
       "Total de Entradas": {meaning: "Total de entradas no período", type: number, decimal: ","}
       "Total de Saídas": {meaning: "Total de saídas no período", type: number, decimal: ","}
+      "Período": {meaning: "Início do período declarado", type: date, format: "%d/%m/%Y"}
       "Total geral": {meaning: "Plantel atual (total)", type: number, decimal: ","}
 
 check:
   template: field-comparison
+  timeline: "ibama_plantel.Período"
   left: {sum: ["ibama_plantel.Total", "ibama_plantel.Total de Entradas"], minus: ["ibama_plantel.Total de Saídas"]}
   op: "="
   right: "ibama_plantel.Total geral"

@@ -155,6 +155,16 @@ section.tiles { align-items: start; }
 .list-panel .nums { font-variant-numeric: tabular-nums; color: var(--text-2); overflow-wrap: anywhere; line-height: 1.6; }
 .list-panel .tools { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
 .hist { font-size: .84rem; }
+/* rule charts: one colour per signal outcome, always with its name in the legend and tooltip */
+:root { --out-mismatch: #d03b3b; --out-key_not_found: #eda100; --out-missing_value: #898781;
+  --out-invalid_value: #7b52c6; --out-ambiguous_key: #2a78d6; }
+.chart-panel { margin-top: 10px; border-top: 1px solid var(--grid); padding-top: 8px; }
+.chart-panel h4 { font-size: .88rem; margin: 10px 0 2px; }
+.chart-panel .note { font-size: .8rem; color: var(--text-2); margin: 0 0 4px; }
+.chart-panel .chart svg { max-width: 860px; }
+.chart .boundary { stroke: var(--axis); stroke-width: 1; stroke-dasharray: 3 3; }
+.card .chart-btn { font: inherit; font-size: .88rem; font-weight: 600; border: 0; background: none; color: var(--accent);
+  cursor: pointer; padding: 0; margin: 6px 12px 0 0; }
 /* download speed: two series, primary portal and secondary portals */
 .legend { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: .85rem; color: var(--text-2); }
 .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; }
@@ -164,3 +174,8 @@ section.tiles { align-items: start; }
 .chart .axis-label { fill: var(--muted); font-size: 11px; }
 .chart .bar-primary { fill: var(--series-1); }
 .chart .bar-secondary { fill: var(--series-2); }
+:root { --series-3: #7b52c6; --series-4: #898781; --series-5: #0ca30c; }
+.chart .bar-processing { fill: var(--series-3); }
+.chart .bar-outputs { fill: var(--series-4); }
+.chart .bar-publish { fill: var(--series-5); }
+.chart .bar-download { fill: var(--series-1); }

@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.3.0"
 origin: expert
 
 description:
@@ -13,7 +13,7 @@ description:
     A ciência pressupõe um auto já lavrado; ciência datada antes da lavratura indica erro de data ou
     de encadeamento do processo. É sinal para revisão, não veredito sobre o auto.
   exceptions:
-    - "Autos sem data de ciência ficam sem informação."
+    - "Autos sem data de ciência (ainda não notificados, ou antigos) ficam fora do escopo."
   examples:
     - case: "Lavratura em 2021-06-10 e ciência em 2021-06-10"
       expected: "Conforme"
@@ -33,4 +33,7 @@ sources:
 
 check:
   template: temporal-order
+  timeline: ibama_autos.DAT_HORA_AUTO_INFRACAO
   sequence: [ibama_autos.DAT_HORA_AUTO_INFRACAO, ibama_autos.DAT_CIENCIA_AUTUACAO]
+  where:
+    - {column: ibama_autos.DAT_CIENCIA_AUTUACAO, empty: false}

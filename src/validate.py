@@ -192,15 +192,19 @@ def cross_findings(rule: LoadedRule) -> list[Finding]:
                 add(ERROR, path, "check.mixed_sources", f'todas as colunas de {template} precisam ser da mesma fonte')
         wanted = ("date", "datetime") if template == "temporal-order" else ("number",)
         for ref, path in templates.used_refs(check):
-            if path[1] == "where" or templates.split(ref)[0] != evaluated:
+            if template == "flag-when" or path[1] in ("where", "timeline") or templates.split(ref)[0] != evaluated:
                 continue
             if spec(*templates.split(ref)).get("type") not in wanted:
                 add(ERROR, path, "check.column_type",
                     f'{template} precisa de coluna declarada com type {" ou ".join(wanted)}: "{ref}"')
-    for i, cond in enumerate(check.get("where", [])):
-        if not found and templates.split(cond["column"])[0] != evaluated:
-            add(ERROR, ["check", "where", i, "column"], "check.where_source",
-                f'where só usa colunas da fonte avaliada ("{evaluated}")')
+    if not found and "timeline" in check:
+        source, column = templates.split(check["timeline"])
+        if source != evaluated or spec(source, column).get("type") not in ("date", "datetime"):
+            add(ERROR, ["check", "timeline"], "check.timeline",
+                f'timeline precisa ser coluna de data da fonte avaliada ("{evaluated}")')
+    for ref, path in templates.used_refs(check):
+        if not found and path[1] == "where" and templates.split(ref)[0] != evaluated:
+            add(ERROR, path, "check.where_source", f'where só usa colunas da fonte avaliada ("{evaluated}")')
 
     for source_id, source in sources.items():
         if not any(s == source_id for s, _ in used):
