@@ -188,7 +188,9 @@ section.tiles { align-items: start; }
 .chart-panel select { font: inherit; font-size: .85rem; }
 
 /* key numbers lead to their section */
-/* top tiles: one height across the row */
+/* top tiles: one height across the row; the rate's formula sits a little larger than the notes */
+.tile .note math { font-size: .9rem; font-family: inherit; margin-top: 4px; }
+.tile .note math mtext, .tile .note math mn { font-family: inherit; }
 #tiles { align-items: stretch; }
 .tile.go { cursor: pointer; }
 .tile.go:hover, .tile.go:focus-visible { border-color: var(--accent); outline: none; }

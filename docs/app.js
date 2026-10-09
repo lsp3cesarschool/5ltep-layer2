@@ -12,7 +12,7 @@ const I18N = {
     no_data: "No run has been published yet.",
     t_rules: "Rules evaluated", t_rules_note: "{n} not evaluated in this run", t_rules_all: "all rules evaluated",
     t_signals: "Signals to review", t_signals_note: "in {n} of {t} rules; {z} without signals", t_signals_all: "in all {t} rules",
-    t_rate: "L2 pass rate", t_rate_note: "((checks − signals) / checks) × 100", t_rate_none: "no check in scope",
+    t_rate: "L2 pass rate", t_rate_note: "((checks − signals) / checks) × 100", f_checks: "checks", f_signals: "signals", t_rate_none: "no check in scope",
     t_sources: "Sources available", t_sources_note: "{n} failed", t_sources_all: "every portal answered",
     t_checks: "Checks in scope", t_checks_note: "one per record and rule; {o} records out of scope",
     rules_h: "Rules", order: "Order", o_custom: "Custom", o_signals: "Most signals first", o_title: "Title",
@@ -80,7 +80,7 @@ const I18N = {
     no_data: "Nenhuma rodada foi publicada ainda.",
     t_rules: "Regras avaliadas", t_rules_note: "{n} não avaliada(s) nesta rodada", t_rules_all: "todas as regras avaliadas",
     t_signals: "Sinais a revisar", t_signals_note: "em {n} de {t} regras; {z} sem sinal", t_signals_all: "em todas as {t} regras",
-    t_rate: "Taxa de aprovação L2", t_rate_note: "((verificações − sinais) / verificações) × 100", t_rate_none: "nenhuma verificação no escopo",
+    t_rate: "Taxa de aprovação L2", t_rate_note: "((verificações − sinais) / verificações) × 100", f_checks: "verificações", f_signals: "sinais", t_rate_none: "nenhuma verificação no escopo",
     t_sources: "Fontes disponíveis", t_sources_note: "{n} com falha", t_sources_all: "todos os portais responderam",
     t_checks: "Verificações no escopo", t_checks_note: "uma por registro e regra; {o} registros fora do escopo",
     rules_h: "Regras", order: "Ordem", o_custom: "Personalizada", o_signals: "Mais sinais primeiro", o_title: "Título",
@@ -216,6 +216,22 @@ function applyLanguage() {
 let PAGE = null;
 const LISTS = {};          // rule id -> promise of data/rules/<id>.json
 
+// the L2 pass rate as a fraction with a horizontal bar (MathML, drawn by the browser; t_rate_note is the text form)
+function rateFormula() {
+  const m = (tag, ...kids) => {
+    const node = document.createElementNS("http://www.w3.org/1998/Math/MathML", tag);
+    for (const k of kids) node.append(typeof k === "string" ? document.createTextNode(k) : k);
+    return node;
+  };
+  const word = (s) => m("mtext", s);
+  const math = m("math", m("mrow",
+    m("mfrac", m("mrow", word(t("f_checks")), m("mo", "−"), word(t("f_signals"))), word(t("f_checks"))),
+    m("mo", "×"), m("mn", "100")));
+  math.setAttribute("displaystyle", "true");  // numerator and denominator at full size
+  math.setAttribute("aria-label", t("t_rate_note"));
+  return math;
+}
+
 function tile(label, value, note, cls, target) {
   const go = () => el(target)?.scrollIntoView({ behavior: "smooth", block: "start" });
   return h("div", { class: "tile" + (target ? " go" : ""), role: target ? "link" : null, tabindex: target ? "0" : null,
@@ -244,7 +260,7 @@ function renderTiles() {
       s.signals ? "warn" : "", "rules-section"),
     tile(t("t_checks"), num(checks), t("t_checks_note", { o: num(outOfScope) }), "", "rules-section"),
     tile(t("t_rate"), rate === null ? "–" : `${pct(rate)}%`,
-      rate === null ? t("t_rate_none") : t("t_rate_note"), "", "rules-section"),
+      rate === null ? t("t_rate_none") : rateFormula(), "", "rules-section"),
   );
 }
 
