@@ -75,7 +75,7 @@ the download speed of this portal and of the others, and how long each phase too
 ## Data handling and privacy
 
 This repository is designed to comply with Brazil's General Data Protection Law (LGPD, Law
-13,709/2018), including for data the portals already publish openly. In practice: Files are
+13,709/2018), including for data the portals already publish openly. In practice, files are
 downloaded during the run and deleted when it ends; on GitHub, the runner itself is discarded after
 the job. The engine reads only the columns a rule declares, and publishes only counts, record
 numbers, SHA-256 hashes and metadata that CKAN already publishes, never a value read from the

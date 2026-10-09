@@ -74,7 +74,7 @@ download deste portal e dos demais, e quanto tempo levou cada etapa.
 ## Tratamento de dados e privacidade
 
 Este repositório foi desenhado para respeitar a Lei Geral de Proteção de Dados (LGPD, Lei
-13.709/2018), inclusive sobre dados que os portais já publicam abertamente. Na prática: Os arquivos
+13.709/2018), inclusive sobre dados que os portais já publicam abertamente. Na prática, os arquivos
 são baixados durante a rodada e apagados quando ela termina; no GitHub, o próprio runner é
 descartado depois do job. O motor lê só as colunas que a regra declara e publica apenas contagens,
 números de registro, hashes SHA-256 e metadados que o CKAN já publica, nunca um valor lido dos
