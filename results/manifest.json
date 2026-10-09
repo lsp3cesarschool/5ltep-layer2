@@ -1,11 +1,11 @@
 {
- "run_id": "37927525860",
+ "run_id": "37936431563",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37927525860",
- "started_at": "2026-10-09T12:03:16+00:00",
- "finished_at": "2026-10-09T12:06:40+00:00",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37936431563",
+ "started_at": "2026-10-09T13:23:12+00:00",
+ "finished_at": "2026-10-09T13:26:08+00:00",
  "engine": {
-  "commit": "5cfd129ee2338159324d35982529fac3be32b5d0",
+  "commit": "27a45f7ead94de044534d41cead820e450f4decf",
   "uncommitted_changes": false,
   "python": "3.12.15",
   "duckdb": "1.5.6"
@@ -15,19 +15,19 @@
   "primary": {
    "resources": 16,
    "bytes": 1358146721,
-   "seconds": 87.68,
-   "mb_per_s": 15.49
+   "seconds": 50.57,
+   "mb_per_s": 26.857
   },
   "secondary": {
    "resources": 4,
-   "bytes": 1075441,
-   "seconds": 2.22,
-   "mb_per_s": 0.484
+   "bytes": 1075377,
+   "seconds": 2.7,
+   "mb_per_s": 0.398
   },
   "processing": {
-   "bytes": 1359222162,
-   "seconds": 104.96,
-   "mb_per_s": 12.95
+   "bytes": 1359222098,
+   "seconds": 113.26,
+   "mb_per_s": 12.001
   }
  },
  "rules": [
@@ -392,8 +392,8 @@
    "status": "ok",
    "resource_id": "a200c70b-e025-4a9a-be1b-ec7275d7921f",
    "metadata_modified": null,
-   "bytes": 711779,
-   "sha256": "8bc84011ee9ed76bcc9936f44f13b75c4c7b445086609d81ff504f2cbb7b5de5"
+   "bytes": 711715,
+   "sha256": "aa9fa90d6e7546067e343ec1649d46e55cef62497593ca22d41e42a0998835d6"
   },
   {
    "label": "dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE",

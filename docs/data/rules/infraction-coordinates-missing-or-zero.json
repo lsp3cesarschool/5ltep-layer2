@@ -1,10 +1,10 @@
 {
  "rule": "infraction-coordinates-missing-or-zero",
  "rule_version": "0.2.0",
- "evaluated_at": "2026-10-09T12:05:43+00:00",
- "run_id": "37927525860",
+ "evaluated_at": "2026-10-09T13:25:06+00:00",
+ "run_id": "37936431563",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37927525860",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37936431563",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_autos": {

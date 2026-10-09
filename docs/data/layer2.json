@@ -1,10 +1,10 @@
 {
  "layer": 2,
- "run_id": "37927525860",
+ "run_id": "37936431563",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37927525860",
- "generated_at": "2026-10-09T12:06:40+00:00",
- "started_at": "2026-10-09T12:03:16+00:00",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37936431563",
+ "generated_at": "2026-10-09T13:26:08+00:00",
+ "started_at": "2026-10-09T13:23:12+00:00",
  "totals": {
   "rules": 35,
   "evaluated": 35,
@@ -58,7 +58,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:04:57+00:00",
+   "evaluated_at": "2026-10-09T13:24:17+00:00",
    "total": 258580,
    "counts": {
     "match": 243809,
@@ -123,7 +123,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:04:58+00:00",
+   "evaluated_at": "2026-10-09T13:24:17+00:00",
    "total": 258580,
    "counts": {
     "match": 103594,
@@ -187,7 +187,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:04:59+00:00",
+   "evaluated_at": "2026-10-09T13:24:19+00:00",
    "total": 116763,
    "counts": {
     "match": 116755,
@@ -247,7 +247,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:00+00:00",
+   "evaluated_at": "2026-10-09T13:24:20+00:00",
    "total": 116763,
    "counts": {
     "match": 19667,
@@ -307,7 +307,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:01+00:00",
+   "evaluated_at": "2026-10-09T13:24:21+00:00",
    "total": 173747,
    "counts": {
     "match": 173747,
@@ -368,7 +368,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:06+00:00",
+   "evaluated_at": "2026-10-09T13:24:27+00:00",
    "total": 418525,
    "counts": {
     "match": 417807,
@@ -428,7 +428,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:24+00:00",
+   "evaluated_at": "2026-10-09T13:24:46+00:00",
    "total": 2386115,
    "counts": {
     "match": 2326024,
@@ -488,7 +488,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:26+00:00",
+   "evaluated_at": "2026-10-09T13:24:47+00:00",
    "total": 2386115,
    "counts": {
     "match": 1513707,
@@ -549,7 +549,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:26+00:00",
+   "evaluated_at": "2026-10-09T13:24:48+00:00",
    "total": 10099,
    "counts": {
     "match": 57,
@@ -610,7 +610,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:26+00:00",
+   "evaluated_at": "2026-10-09T13:24:48+00:00",
    "total": 10099,
    "counts": {
     "match": 4808,
@@ -675,7 +675,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:29+00:00",
+   "evaluated_at": "2026-10-09T13:24:50+00:00",
    "total": 2386115,
    "counts": {
     "match": 1581314,
@@ -735,7 +735,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:40+00:00",
+   "evaluated_at": "2026-10-09T13:25:03+00:00",
    "total": 711926,
    "counts": {
     "match": 85661,
@@ -800,7 +800,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:41+00:00",
+   "evaluated_at": "2026-10-09T13:25:04+00:00",
    "total": 294563,
    "counts": {
     "match": 271330,
@@ -864,7 +864,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:42+00:00",
+   "evaluated_at": "2026-10-09T13:25:05+00:00",
    "total": 711926,
    "counts": {
     "match": 75223,
@@ -925,7 +925,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:42+00:00",
+   "evaluated_at": "2026-10-09T13:25:06+00:00",
    "total": 711926,
    "counts": {
     "match": 84192,
@@ -990,7 +990,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:43+00:00",
+   "evaluated_at": "2026-10-09T13:25:06+00:00",
    "total": 711926,
    "counts": {
     "match": 217776,
@@ -1053,7 +1053,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:44+00:00",
+   "evaluated_at": "2026-10-09T13:25:07+00:00",
    "total": 711926,
    "counts": {
     "match": 82596,
@@ -1118,7 +1118,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:47+00:00",
+   "evaluated_at": "2026-10-09T13:25:10+00:00",
    "total": 689929,
    "counts": {
     "match": 655178,
@@ -1178,7 +1178,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:48+00:00",
+   "evaluated_at": "2026-10-09T13:25:11+00:00",
    "total": 711926,
    "counts": {
     "match": 431173,
@@ -1238,7 +1238,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:48+00:00",
+   "evaluated_at": "2026-10-09T13:25:11+00:00",
    "total": 711926,
    "counts": {
     "match": 711926,
@@ -1303,7 +1303,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:51+00:00",
+   "evaluated_at": "2026-10-09T13:25:14+00:00",
    "total": 711926,
    "counts": {
     "match": 98925,
@@ -1368,7 +1368,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:05:51+00:00",
+   "evaluated_at": "2026-10-09T13:25:15+00:00",
    "total": 38056,
    "counts": {
     "match": 34661,
@@ -1428,7 +1428,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:06:26+00:00",
+   "evaluated_at": "2026-10-09T13:25:53+00:00",
    "total": 6206666,
    "counts": {
     "match": 6160160,
@@ -1488,7 +1488,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:06:26+00:00",
+   "evaluated_at": "2026-10-09T13:25:53+00:00",
    "total": 14302,
    "counts": {
     "match": 14242,
@@ -1550,7 +1550,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:06:26+00:00",
+   "evaluated_at": "2026-10-09T13:25:53+00:00",
    "total": 14302,
    "counts": {
     "match": 1429,
@@ -1612,7 +1612,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:06:26+00:00",
+   "evaluated_at": "2026-10-09T13:25:53+00:00",
    "total": 14302,
    "counts": {
     "match": 1590,
@@ -1674,7 +1674,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:06:26+00:00",
+   "evaluated_at": "2026-10-09T13:25:53+00:00",
    "total": 14302,
    "counts": {
     "match": 790,
@@ -1735,7 +1735,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:06:27+00:00",
+   "evaluated_at": "2026-10-09T13:25:53+00:00",
    "total": 2917,
    "counts": {
     "match": 490,
@@ -1795,7 +1795,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:06:27+00:00",
+   "evaluated_at": "2026-10-09T13:25:53+00:00",
    "total": 2917,
    "counts": {
     "match": 1578,
@@ -1856,7 +1856,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:06:37+00:00",
+   "evaluated_at": "2026-10-09T13:26:04+00:00",
    "total": 1588335,
    "counts": {
     "match": 1584026,
@@ -1916,7 +1916,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:06:38+00:00",
+   "evaluated_at": "2026-10-09T13:26:06+00:00",
    "total": 1588335,
    "counts": {
     "match": 1587550,
@@ -1981,7 +1981,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:06:39+00:00",
+   "evaluated_at": "2026-10-09T13:26:06+00:00",
    "total": 124299,
    "counts": {
     "match": 13218,
@@ -2041,7 +2041,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:06:39+00:00",
+   "evaluated_at": "2026-10-09T13:26:07+00:00",
    "total": 157955,
    "counts": {
     "match": 54033,
@@ -2105,7 +2105,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:06:40+00:00",
+   "evaluated_at": "2026-10-09T13:26:07+00:00",
    "total": 157955,
    "counts": {
     "match": 125274,
@@ -2170,7 +2170,7 @@
    "status": "evaluated",
    "reason_code": null,
    "reason": null,
-   "evaluated_at": "2026-10-09T12:06:40+00:00",
+   "evaluated_at": "2026-10-09T13:26:08+00:00",
    "total": 711926,
    "counts": {
     "match": 711112,
@@ -2208,7 +2208,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.91
+    "seconds": 0.49
    },
    "dataset": {
     "title": "Siscites - licenças de fauna e flora emitidas",
@@ -2234,8 +2234,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 106792303,
     "sha256": "e320a1f12b98e2b86166b559a59ce2ec53417fa6fd0d4fe9b12720b8503f8051",
-    "seconds": 11.84,
-    "mb_per_s": 9.023
+    "seconds": 9.18,
+    "mb_per_s": 11.635
    },
    "files": [
     {
@@ -2261,7 +2261,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.9
+    "seconds": 1.32
    },
    "dataset": {
     "title": "Espécies Ameaçadas",
@@ -2287,8 +2287,8 @@
     "served_by": "dados.mma.gov.br",
     "bytes": 172311,
     "sha256": "d05dda8ece1f7d62aabfa1326c4808d5b1738bf2e7d20e3cdf74b6cab1cd14ad",
-    "seconds": 0.72,
-    "mb_per_s": 0.239
+    "seconds": 1.06,
+    "mb_per_s": 0.162
    },
    "files": [
     {
@@ -2316,7 +2316,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.27
+    "seconds": 0.29
    },
    "dataset": {
     "title": "Fiscalização - termo de embargo",
@@ -2342,8 +2342,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 209767829,
     "sha256": "92f06836d90106c805c682f32d856bb7df2c995f7a430504364e0e251e2a24a5",
-    "seconds": 11.38,
-    "mb_per_s": 18.434
+    "seconds": 9.2,
+    "mb_per_s": 22.802
    },
    "files": [
     {
@@ -2395,8 +2395,8 @@
     "served_by": "dadosabertos.ibama.gov.br",
     "bytes": 73251517,
     "sha256": "26250d38da458413546d7f981ebc115f80c0d278aa5edef3304f372ff075ab8e",
-    "seconds": 0.54,
-    "mb_per_s": 135.551
+    "seconds": 0.44,
+    "mb_per_s": 165.778
    },
    "files": [
     {
@@ -2422,7 +2422,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.23
+    "seconds": 0.2
    },
    "dataset": {
     "title": "Sisfogo - ROI",
@@ -2448,8 +2448,8 @@
     "served_by": "dadosabertos.ibama.gov.br",
     "bytes": 284126826,
     "sha256": "252aa380626d9377c0e24b9fbcc8a0c7572e5e7ee8acab0c152b1888ad0ebc91",
-    "seconds": 2.01,
-    "mb_per_s": 141.332
+    "seconds": 1.36,
+    "mb_per_s": 209.263
    },
    "files": [
     {
@@ -2477,7 +2477,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.36
+    "seconds": 0.22
    },
    "dataset": {
     "title": "Volumes Explorados - IF 100%",
@@ -2503,8 +2503,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 51275494,
     "sha256": "0f106ef75db9068fcd7f91adaf9d0ae890fb064137aadd1d2d82bd9b0a093ff3",
-    "seconds": 2.23,
-    "mb_per_s": 22.98
+    "seconds": 2.42,
+    "mb_per_s": 21.201
    },
    "files": [
     {
@@ -2557,8 +2557,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 5790256,
     "sha256": "99943a2b86734b7bbde22854a2731fe422530d34ebdb9fd9e2c7cc02f006caef",
-    "seconds": 0.37,
-    "mb_per_s": 15.531
+    "seconds": 0.4,
+    "mb_per_s": 14.478
    },
    "files": [
     {
@@ -2584,7 +2584,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.78
+    "seconds": 1.0
    },
    "dataset": {
     "title": "Espécies florestais madeireiras comerciais",
@@ -2610,8 +2610,8 @@
     "served_by": "dados.florestal.gov.br",
     "bytes": 52331,
     "sha256": "5ff3e04290644e5b739a354d1e452ca8c78a9ecb9a6b0e7c10df30f07d36f64d",
-    "seconds": 0.52,
-    "mb_per_s": 0.1
+    "seconds": 0.57,
+    "mb_per_s": 0.092
    },
    "files": [
     {
@@ -2649,7 +2649,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.28
+    "seconds": 0.3
    },
    "dataset": {
     "title": "Fiscalização - auto de infração",
@@ -2675,8 +2675,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 122900569,
     "sha256": "5e65aba9b3b1ba08c3098b59da7031dadb78d876fc4f4d560ddc984eb1f381e0",
-    "seconds": 11.51,
-    "mb_per_s": 10.681
+    "seconds": 5.41,
+    "mb_per_s": 22.703
    },
    "files": [
     {
@@ -2702,7 +2702,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.28
+    "seconds": 1.4
    },
    "dataset": {
     "title": "Fiscalização - auto de infração",
@@ -2728,8 +2728,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 14276757,
     "sha256": "00f3ab5fa1a009297c9f49e33f4c897a4ad8162f4d2295ac55d96c26f39aa572",
-    "seconds": 1.14,
-    "mb_per_s": 12.567
+    "seconds": 0.75,
+    "mb_per_s": 19.062
    },
    "files": [
     {
@@ -2755,7 +2755,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.72
+    "seconds": 0.24
    },
    "dataset": {
     "title": "Fiscalização - auto de infração",
@@ -2781,8 +2781,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 8155680,
     "sha256": "eebaca0eedfdd13836c9149283646c13ff1822da0e4e9f7b58b065c97e752878",
-    "seconds": 0.69,
-    "mb_per_s": 11.863
+    "seconds": 0.41,
+    "mb_per_s": 19.972
    },
    "files": [
     {
@@ -2810,7 +2810,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.34
+    "seconds": 0.25
    },
    "dataset": {
     "title": "Fiscalização - termo de apreensão",
@@ -2836,8 +2836,8 @@
     "served_by": "dadosabertos.ibama.gov.br",
     "bytes": 29845259,
     "sha256": "afd442f6d8af42303c6015154b26bd227eb240a778928e71063dfcf6a86db2dc",
-    "seconds": 0.29,
-    "mb_per_s": 102.427
+    "seconds": 0.42,
+    "mb_per_s": 71.532
    },
    "files": [
     {
@@ -2863,7 +2863,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.29
+    "seconds": 0.3
    },
    "dataset": {
     "title": "Fiscalização - auto de infração",
@@ -2889,8 +2889,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 5291150,
     "sha256": "04bd4e533ec1168115aa93631e487f5a7cc7e55eced65c9a40854209636b10ff",
-    "seconds": 0.52,
-    "mb_per_s": 10.123
+    "seconds": 0.38,
+    "mb_per_s": 14.023
    },
    "files": [
     {
@@ -2916,7 +2916,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.25
+    "seconds": 0.2
    },
    "dataset": {
     "title": "Ato Declaratório Ambiental (ADA)",
@@ -2942,8 +2942,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 401190660,
     "sha256": "bce13cf9914a7061427a6aad77150dd08ab56053a6952240b43e1615bce7d909",
-    "seconds": 39.63,
-    "mb_per_s": 10.122
+    "seconds": 17.75,
+    "mb_per_s": 22.599
    },
    "files": [
     {
@@ -2972,7 +2972,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.21
+    "seconds": 0.26
    },
    "dataset": {
     "title": "Licenças ambientais de atividades e empreendimentos licenciados pelo Ibama",
@@ -2998,8 +2998,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 3330364,
     "sha256": "71b00317d5a0d49ab105b4a3321b42b6edc133e44c77e3ab6ef291115adb4357",
-    "seconds": 0.5,
-    "mb_per_s": 6.697
+    "seconds": 0.21,
+    "mb_per_s": 16.229
    },
    "files": [
     {
@@ -3026,7 +3026,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.24
+    "seconds": 0.21
    },
    "dataset": {
     "title": "Julgamentos de Auto de Infração - Realizado no âmbito do IBAMA",
@@ -3052,8 +3052,8 @@
     "served_by": "dadosabertos.ibama.gov.br",
     "bytes": 636595,
     "sha256": "7780312127223a853a01ced2be76b9631850ce282fc32af0e72dbf8eae81004d",
-    "seconds": 0.24,
-    "mb_per_s": 2.613
+    "seconds": 0.12,
+    "mb_per_s": 5.123
    },
    "files": [
     {
@@ -3080,7 +3080,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.2
+    "seconds": 0.21
    },
    "dataset": {
     "title": "Arrecadação de Multas Ambientais Bens tutelados",
@@ -3106,8 +3106,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 27939697,
     "sha256": "7530141db46eded6c8795e77652f15cf6a220637816db8624d79997e29ef8dcc",
-    "seconds": 3.19,
-    "mb_per_s": 8.751
+    "seconds": 1.35,
+    "mb_per_s": 20.631
    },
    "files": [
     {
@@ -3133,7 +3133,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.2
+    "seconds": 0.22
    },
    "dataset": {
     "title": "Relatórios de Comercialização de Agrotóxicos",
@@ -3159,8 +3159,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 13575765,
     "sha256": "66731450daae45cae50ecf8f3a5d8e79e7fd42b670ee137e51eaf2643b357142",
-    "seconds": 1.6,
-    "mb_per_s": 8.462
+    "seconds": 0.77,
+    "mb_per_s": 17.607
    },
    "files": [
     {
@@ -3186,42 +3186,42 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.86
+    "seconds": 0.91
    },
    "dataset": {
     "title": "Sistema de Agrotóxicos Fitossanitários - Agrofit",
     "organization": "Ministério da Agricultura e Pecuária",
-    "license": "Creative Commons Atribuição",
+    "license": "Creative Commons Attribution",
     "license_id": "cc-by",
     "license_url": "http://www.opendefinition.org/licenses/cc-by",
-    "metadata_modified": "2026-10-09T07:04:50.811278"
+    "metadata_modified": "2026-10-09T12:30:14.162677"
    },
    "resource": {
     "id": "a200c70b-e025-4a9a-be1b-ec7275d7921f",
     "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/a200c70b-e025-4a9a-be1b-ec7275d7921f/download/agrofitprodutostecnicos.csv",
     "name": "Produto Técnico",
     "metadata_modified": null,
-    "last_modified": "2026-10-08T12:30:16.432547",
+    "last_modified": "2026-10-09T12:30:14.150372",
     "size_declared": null
    },
    "download": {
     "http_status": 200,
-    "etag": "\"1791462616.75-711779\"",
-    "last_modified": "Thu, 08 Oct 2026 12:30:16 GMT",
+    "etag": "\"1791549014.23-711715\"",
+    "last_modified": "Fri, 09 Oct 2026 12:30:14 GMT",
     "content_type": "text/csv",
     "served_by": "dados.agricultura.gov.br",
-    "bytes": 711779,
-    "sha256": "8bc84011ee9ed76bcc9936f44f13b75c4c7b445086609d81ff504f2cbb7b5de5",
+    "bytes": 711715,
+    "sha256": "aa9fa90d6e7546067e343ec1649d46e55cef62497593ca22d41e42a0998835d6",
     "seconds": 0.74,
-    "mb_per_s": 0.965
+    "mb_per_s": 0.961
    },
    "files": [
     {
      "file": "agrofitprodutostecnicos.csv",
      "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/a200c70b-e025-4a9a-be1b-ec7275d7921f/download/agrofitprodutostecnicos.csv",
      "resource_id": "a200c70b-e025-4a9a-be1b-ec7275d7921f",
-     "bytes": 711779,
-     "sha256": "8bc84011ee9ed76bcc9936f44f13b75c4c7b445086609d81ff504f2cbb7b5de5"
+     "bytes": 711715,
+     "sha256": "aa9fa90d6e7546067e343ec1649d46e55cef62497593ca22d41e42a0998835d6"
     }
    ]
   },
@@ -3239,7 +3239,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 1.07
+    "seconds": 0.44
    },
    "dataset": {
     "title": "Códigos oficiais de UF e municípios segundo o TSE e o IBGE",
@@ -3265,8 +3265,8 @@
     "served_by": "cdn.tse.jus.br",
     "bytes": 139020,
     "sha256": "f55c9720d221a9956279f6cb225aafcae797e0cf8ac2289040c052ab4ea7c712",
-    "seconds": 0.24,
-    "mb_per_s": 0.591
+    "seconds": 0.33,
+    "mb_per_s": 0.421
    },
    "files": [
     {
@@ -3280,7 +3280,7 @@
   }
  ],
  "engine": {
-  "commit": "5cfd129ee2338159324d35982529fac3be32b5d0",
+  "commit": "27a45f7ead94de044534d41cead820e450f4decf",
   "uncommitted_changes": false,
   "python": "3.12.15",
   "duckdb": "1.5.6"
@@ -3502,26 +3502,26 @@
   "primary": {
    "resources": 16,
    "bytes": 1358146721,
-   "seconds": 87.68,
-   "mb_per_s": 15.49
+   "seconds": 50.57,
+   "mb_per_s": 26.857
   },
   "secondary": {
    "resources": 4,
-   "bytes": 1075441,
-   "seconds": 2.22,
-   "mb_per_s": 0.484
+   "bytes": 1075377,
+   "seconds": 2.7,
+   "mb_per_s": 0.398
   },
   "processing": {
-   "bytes": 1359222162,
-   "seconds": 104.96,
-   "mb_per_s": 12.95
+   "bytes": 1359222098,
+   "seconds": 113.26,
+   "mb_per_s": 12.001
   }
  },
  "timings": {
-  "download_s": 98.7,
-  "processing_s": 104.96,
-  "bytes_processed": 1359222162,
-  "outputs_s": 0.9
+  "download_s": 62.16,
+  "processing_s": 113.26,
+  "bytes_processed": 1359222098,
+  "outputs_s": 0.89
  },
  "portal": {
   "portal_url": "https://dadosabertos.ibama.gov.br",
@@ -4616,6 +4616,550 @@
     "processing_s": 104.96,
     "bytes_processed": 1359222162,
     "outputs_s": 0.9
+   }
+  },
+  {
+   "run_id": "37936431563",
+   "environment": "github-actions",
+   "at": "2026-10-09T13:26:08+00:00",
+   "rules": {
+    "appendix-i-wild-commercial": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 258580,
+     "counts": {
+      "match": 243809,
+      "mismatch": 403,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 14368
+     }
+    },
+    "wild-commercial-threatened-species": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 258580,
+     "counts": {
+      "match": 103594,
+      "mismatch": 1714,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 153272
+     }
+    },
+    "embargo-date-implausible": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 116763,
+     "counts": {
+      "match": 116755,
+      "mismatch": 8,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    },
+    "lifted-before-embargo": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 116763,
+     "counts": {
+      "match": 19667,
+      "mismatch": 16,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 97080
+     }
+    },
+    "stock-balance": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 173747,
+     "counts": {
+      "match": 173747,
+      "mismatch": 0,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    },
+    "incident-milestones-order": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 418525,
+     "counts": {
+      "match": 417807,
+      "mismatch": 359,
+      "key_not_found": 0,
+      "missing_value": 359,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    },
+    "exploration-outside-validity": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 2386115,
+     "counts": {
+      "match": 2326024,
+      "mismatch": 60091,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    },
+    "explored-volume-above-authorized": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 2386115,
+     "counts": {
+      "match": 1513707,
+      "mismatch": 872408,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    },
+    "pmfs-intensity-manual-over-10": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 10099,
+     "counts": {
+      "match": 57,
+      "mismatch": 28,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 10014
+     }
+    },
+    "pmfs-intensity-mechanized-over-30": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 10099,
+     "counts": {
+      "match": 4808,
+      "mismatch": 87,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 5204
+     }
+    },
+    "species-not-in-commercial-timber-list": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 2386115,
+     "counts": {
+      "match": 1581314,
+      "mismatch": 0,
+      "key_not_found": 804797,
+      "missing_value": 4,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    },
+    "act-end-before-start": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 711926,
+     "counts": {
+      "match": 85661,
+      "mismatch": 634,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 625631
+     }
+    },
+    "biomes-without-infraction": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 294563,
+     "counts": {
+      "match": 271330,
+      "mismatch": 0,
+      "key_not_found": 14462,
+      "missing_value": 8771,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    },
+    "embargo-link-without-term": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 711926,
+     "counts": {
+      "match": 75223,
+      "mismatch": 0,
+      "key_not_found": 21538,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 615165
+     }
+    },
+    "fact-after-issue": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 711926,
+     "counts": {
+      "match": 84192,
+      "mismatch": 2108,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 625626
+     }
+    },
+    "infraction-coordinates-missing-or-zero": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 711926,
+     "counts": {
+      "match": 217776,
+      "mismatch": 28345,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 465805
+     }
+    },
+    "issued-over-five-years-after-fact": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 711926,
+     "counts": {
+      "match": 82596,
+      "mismatch": 1596,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 627734
+     }
+    },
+    "legal-basis-without-infraction": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 689929,
+     "counts": {
+      "match": 655178,
+      "mismatch": 0,
+      "key_not_found": 24148,
+      "missing_value": 10603,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    },
+    "notice-before-issue": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 711926,
+     "counts": {
+      "match": 431173,
+      "mismatch": 1093,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 279660
+     }
+    },
+    "notice-date-implausible": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 711926,
+     "counts": {
+      "match": 711926,
+      "mismatch": 0,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    },
+    "seizure-link-without-term": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 711926,
+     "counts": {
+      "match": 98925,
+      "mismatch": 0,
+      "key_not_found": 10633,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 602368
+     }
+    },
+    "species-without-infraction": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 38056,
+     "counts": {
+      "match": 34661,
+      "mismatch": 0,
+      "key_not_found": 7,
+      "missing_value": 3388,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    },
+    "declared-areas-above-property": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 6206666,
+     "counts": {
+      "match": 6160160,
+      "mismatch": 29980,
+      "key_not_found": 0,
+      "missing_value": 16526,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    },
+    "expiry-before-issue": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 14302,
+     "counts": {
+      "match": 14242,
+      "mismatch": 52,
+      "key_not_found": 0,
+      "missing_value": 8,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    },
+    "installation-licence-over-six-years": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 14302,
+     "counts": {
+      "match": 1429,
+      "mismatch": 5,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 12868
+     }
+    },
+    "operation-licence-over-ten-years": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 14302,
+     "counts": {
+      "match": 1590,
+      "mismatch": 2,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 12710
+     }
+    },
+    "preliminary-licence-over-five-years": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 14302,
+     "counts": {
+      "match": 790,
+      "mismatch": 8,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 13504
+     }
+    },
+    "appeal-before-main-judgment": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 2917,
+     "counts": {
+      "match": 490,
+      "mismatch": 115,
+      "key_not_found": 0,
+      "missing_value": 71,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 2241
+     }
+    },
+    "main-judgment-before-infraction": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 2917,
+     "counts": {
+      "match": 1578,
+      "mismatch": 3,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 1336
+     }
+    },
+    "paid-ten-times-original": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 1588335,
+     "counts": {
+      "match": 1584026,
+      "mismatch": 780,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 3529
+     }
+    },
+    "payment-before-infraction": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 1588335,
+     "counts": {
+      "match": 1587550,
+      "mismatch": 785,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    },
+    "ingredient-without-registered-technical-product": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 124299,
+     "counts": {
+      "match": 13218,
+      "mismatch": 0,
+      "key_not_found": 2247,
+      "missing_value": 57,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 108777
+     }
+    },
+    "seizure-coordinates-missing-or-zero": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 157955,
+     "counts": {
+      "match": 54033,
+      "mismatch": 4103,
+      "key_not_found": 0,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 99819
+     }
+    },
+    "term-without-infraction": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 157955,
+     "counts": {
+      "match": 125274,
+      "mismatch": 0,
+      "key_not_found": 29,
+      "missing_value": 0,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 32652
+     }
+    },
+    "municipality-state": {
+     "status": "evaluated",
+     "reason_code": null,
+     "total": 711926,
+     "counts": {
+      "match": 711112,
+      "mismatch": 0,
+      "key_not_found": 547,
+      "missing_value": 267,
+      "invalid_value": 0,
+      "ambiguous_key": 0,
+      "out_of_scope": 0
+     }
+    }
+   },
+   "sources": {
+    "dadosabertos.ibama.gov.br › siscites-licencas-de-fauna-e-flora-emitidas › Siscites": "ok",
+    "dados.mma.gov.br › especies-ameacadas › FAUNA - Lista de Espécies Ameaçadas - 2021.csv": "ok",
+    "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-embargo › Termos de embargo": "ok",
+    "dadosabertos.ibama.gov.br › sisfauna-plantel-exato › Sisfauna - Plantel Exato": "ok",
+    "dadosabertos.ibama.gov.br › sisfogo-roi › ROI formato csv": "ok",
+    "dadosabertos.ibama.gov.br › volumes-explorados-if-100 › Volumes Explorados - IF 100%": "ok",
+    "dadosabertos.ibama.gov.br › sinaflor-pmfs-amazonia-legal › PMFS Amazônia Legal": "ok",
+    "dados.florestal.gov.br › especies-florestais-madeireiras-comerciais › Dados_abertos_especies_madeireiras_SNIF_fonte_LPF_SFB": "ok",
+    "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração": "ok",
+    "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - biomas": "ok",
+    "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - enquadramento legal": "ok",
+    "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-apreensao › Termo de apreensão": "ok",
+    "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - espécimes": "ok",
+    "dadosabertos.ibama.gov.br › ato-declaratorio-ambiental-ada › Ato Declaratório Ambiental (ADA)": "ok",
+    "dadosabertos.ibama.gov.br › licencas-ambientais-de-atividades-e-empreendimentos-licenciados-pelo-ibama › Licenças ambientais de atividades e ...": "ok",
+    "dadosabertos.ibama.gov.br › julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama › Volume de Julgamento de Auto de Infração": "ok",
+    "dadosabertos.ibama.gov.br › arrecadacao-de-multas-ambientais-bens-tutelados › Arrecadação de Multas por Bens Tutelados": "ok",
+    "dadosabertos.ibama.gov.br › relatorios-de-comercializacao-de-agrotoxicos › Dados - CSV": "ok",
+    "dados.agricultura.gov.br › sistema-de-agrotoxicos-fitossanitarios-agrofit › Produto Técnico": "ok",
+    "dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE": "ok"
+   },
+   "download_speed": {
+    "primary": {
+     "resources": 16,
+     "bytes": 1358146721,
+     "seconds": 50.57,
+     "mb_per_s": 26.857
+    },
+    "secondary": {
+     "resources": 4,
+     "bytes": 1075377,
+     "seconds": 2.7,
+     "mb_per_s": 0.398
+    },
+    "processing": {
+     "bytes": 1359222098,
+     "seconds": 113.26,
+     "mb_per_s": 12.001
+    }
+   },
+   "timings": {
+    "download_s": 62.16,
+    "processing_s": 113.26,
+    "bytes_processed": 1359222098,
+    "outputs_s": 0.89
    }
   }
  ]

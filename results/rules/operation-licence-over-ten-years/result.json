@@ -1,7 +1,7 @@
 {
- "run_id": "37927525860",
+ "run_id": "37936431563",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37927525860",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37936431563",
  "id": "operation-licence-over-ten-years",
  "rule_version": "0.3.0",
  "origin": "expert",
@@ -32,7 +32,7 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-10-09T12:06:26+00:00",
+ "evaluated_at": "2026-10-09T13:25:53+00:00",
  "total": 14302,
  "counts": {
   "match": 1590,
