@@ -1,112 +1,104 @@
 # 5LTEP-L2: Kit de Políticas Semânticas da Camada 2 do 5L-TEP
 
-[![Licença: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Testes](https://github.com/lsp3cesarschool/5ltep-layer2/actions/workflows/tests.yml/badge.svg)](https://github.com/lsp3cesarschool/5ltep-layer2/actions/workflows/tests.yml) [![Camada 2](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Flsp3cesarschool%2F5ltep-layer2%2Fmain%2Fdocs%2Fdata%2Fstatus.pt.json)](https://github.com/lsp3cesarschool/5ltep-layer2/actions/workflows/layer2.yml) [![Licença: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 [English](README.md) · **Português**
 
-**Regras de domínio, escritas por pessoas depois que os dados existem, conferidas em portais de dados abertos.**
-A Camada 2 da Pirâmide de Engenharia da Confiança em Cinco Camadas (5L-TEP, SOFTENG 2026) transforma
-conhecimento que um esquema não comporta (o código de um município precisa pertencer à UF com que
-está pareado; uma licença não pode vencer antes de ser emitida) em arquivos de regra que qualquer
-pessoa pode ler, revisar e adaptar a outro portal CKAN.
+**Regras de domínio, escritas por pessoas depois que os dados existem, que cruzam portais de dados
+abertos CKAN: 35 regras sobre o portal do IBAMA, órgão ambiental federal.** Toda semana cada regra lê os
+arquivos publicados, conta os registros que merecem um segundo olhar e os mostra num dashboard. Um
+sinal é algo a revisar, nunca um veredito sobre os dados.
 
-> **Estado: protótipo inicial de pesquisa.** Este repositório contém, por enquanto, o formato de
-> regras 1.0, seu JSON Schema e um validador. O motor que baixa os recursos CKAN e avalia as regras
-> já roda localmente; **ainda não há resultados publicados** aqui. As regras são exemplos
-> com fundamentos e pendências registrados; não são regras oficiais de nenhum órgão, e um sinal
-> futuro será algo a revisar, nunca um veredito sobre os dados.
+| Recurso | O que há lá |
+|---|---|
+| 📊 **Dashboard** | [lsp3cesarschool.github.io/5ltep-layer2](https://lsp3cesarschool.github.io/5ltep-layer2/?lang=pt): cada regra com seus sinais, gráficos e números de registro, saúde das fontes, velocidade de download e de processamento, histórico, proveniência |
+| 📏 **Regras** | [`rules/`](rules/): um arquivo por verificação, em YAML legível |
+| 📁 **Resultados** | [`results/`](results/) e [`docs/data/`](docs/data/): gravados a cada rodada (contagens, números de registro, hashes) |
+| 🔁 **Experimentos de controle** | [5ltep-layer2-aneel](https://github.com/lsp3cesarschool/5ltep-layer2-aneel) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-aneel/?lang=pt)) e [5ltep-layer2-recife](https://github.com/lsp3cesarschool/5ltep-layer2-recife) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-recife/?lang=pt)): o mesmo código nos portais da ANEEL e Recife |
+
+> **Estado: demonstração de pesquisa.** Este repositório faz parte de um projeto de mestrado e é
+> mantido pelo autor. Não é operado, afiliado nem endossado pelo IBAMA nem por outro publicador; só lê
+> dados abertos de portais CKAN. As regras são exemplos escritos pelo autor.
+
+## Caso de uso em um parágrafo
+
+Uma pesquisadora mapeia infrações ambientais por município a partir dos autos de infração do
+IBAMA. Cada auto traz um código de município e uma UF, e o mapa confia que os dois concordam. Uma regra
+deste repositório procura cada código na tabela de municípios que o TSE publica no próprio portal
+CKAN e compara a UF; outras conferem a ordem das datas do auto, se a coordenada está ausente ou em
+(0,0), se os registros vinculados existem nos outros extratos, ou se uma licença CITES combina Apêndice
+I, origem silvestre e finalidade comercial. Antes de desenhar o mapa, a pesquisadora vê no dashboard quais registros merecem um segundo olhar, em
+que arquivo e linha, sem que este repositório publique nenhum valor desses registros.
+
+## Termos-chave
+
+| Termo | Significado aqui |
+|---|---|
+| **Regra** | Um arquivo YAML em `rules/`: uma descrição para pessoas e uma verificação para o motor. Arquivo em `rules/` está ativo; subpastas só organizam. |
+| **Fonte** | Um recurso CKAN (portal, dataset, nome e formato exatos do recurso), ou vários recursos de um dataset por padrão de nome, com o modo de abrir o arquivo e as colunas a ler. |
+| **Modelo** | A verificação fixa que a regra preenche: `lookup-equals`, `lookup-exists`, `temporal-order`, `field-comparison`, `flag-when`. Regras nunca trazem SQL nem código. |
+| **Sinal** | Registro que não passou na verificação, ou que não pôde ser verificado (valor ausente ou ilegível, chave não encontrada). Algo a revisar, não um veredito. |
+| **Número de registro** | A linha do registro no arquivo publicado (1 = primeira linha após o cabeçalho), válida para os bytes cujo SHA-256 a rodada registra. |
+| **Saúde das fontes** | Se cada portal respondeu e cada recurso foi baixado numa rodada; regra com fonte em falha fica "não avaliada", nunca avaliada pela metade. |
 
 ## Como é uma regra
 
-Cada arquivo em `rules/` contém uma verificação que cruza dados de um ou mais portais **CKAN**.
-Arquivo em `rules/` está ativo; as subpastas são livres e só organizam as regras.
+```
+schema_version: "1.0"
+rule_version: "0.3.0"
+origin: cross_reference
+description:  {language, title, text, justification, exceptions, examples}
+sources:      {name: {portal, dataset, resource, archive, file, columns}}
+check:        {template, parameters, where, timeline}
+```
 
-| Parte | Para quem | Conteúdo |
-|---|---|---|
-| `schema_version`, `version`, `origin` | todos | versão do formato, versão da regra, quem a propôs; o nome do arquivo é o identificador da regra |
-| `description` | pessoas (dashboard) | título (com tradução opcional em `title_translations`), o que é verificado, justificativa, exceções e exemplos, numa língua declarada por etiqueta BCP 47 |
-| `sources` | o motor | para cada recurso CKAN: portal, dataset, nome e formato exatos do recurso, como desempacotar (`archive`), como ler (`file`) e as colunas lidas, cada uma com seu significado |
-| `check` | o motor | um modelo permitido e seus parâmetros, escritos como `fonte.coluna` |
+O nome do arquivo é o identificador da regra. [`schema/rule-v1.schema.json`](schema/rule-v1.schema.json)
+é o contrato do formato, um arquivo para todas as regras; `python main.py validate` confere o esquema
+e se toda coluna usada pela verificação está declarada. O manual de regras do repositório principal
+explica cada campo.
 
-Só `sources` e `check` definem o que é calculado. SQL, código ou expressões livres nunca são
-aceitos. O exemplo [`rules/territory/municipality-state.yaml`](rules/territory/municipality-state.yaml)
-procura o código do município de cada auto de infração (portal do IBAMA) na tabela de municípios
-publicada pelo TSE (portal do TSE) e compara a UF.
+## Como funciona uma rodada
 
-## Validar regras
+[`.github/workflows/layer2.yml`](.github/workflows/layer2.yml) roda toda quarta-feira às 04:30 UTC (ou
+manualmente). O job **evaluate**, com token só de leitura, baixa cada recurso CKAN uma vez (não importa
+quantas regras o usem), registra se cada portal e recurso estava disponível, lê só as colunas
+declaradas, avalia cada regra com DuckDB sem acesso externo e envia as saídas como artefato. O job
+**publish** confere o artefato (`python main.py accept`: só os arquivos esperados, JSON válido, listas
+só com números de registro, histórico anterior preservado) e faz o commit de `results/` e `docs/data/`.
+Cada rodada registra também a velocidade de download deste portal e dos demais, e o tempo de cada etapa.
+
+## Tratamento de dados e privacidade
+
+Os arquivos são baixados durante a rodada e apagados ao final; no GitHub, o próprio runner é
+descartado depois do job. O motor lê só as colunas que a regra declara. O que se publica são
+contagens, números de registro, hashes SHA-256 e metadados publicados pelo CKAN, nunca um valor lido
+dos portais. Regras sobre dados de saúde ou educação usam `exposure: counts`: publicam só contagens e
+gráficos, nunca números de registro. Os datasets mantêm as licenças de seus publicadores, indicadas
+com link no dashboard.
+
+## Como rodar localmente
 
 ```
-python -m venv .venv
-.venv/Scripts/python -m pip install -r requirements.txt   # Linux/macOS: .venv/bin/python
-python main.py validate                                   # todos os rules/**/*.yaml
-python main.py validate rules/territory --format json
+python -m pip install -r requirements.txt
+python main.py validate
 python -m pytest
-python main.py run                                        # ensaio local: baixa as fontes, saídas em work/out
+python main.py run        # ensaio local: baixa as fontes, saídas em work/out
 ```
 
-O validador informa arquivo, linha, caminho e um código estável para cada problema (mensagens em
-português, idioma inicial da interface). Ele confere:
-
-- **YAML 1.2 seguro:** um documento; sem chaves repetidas, âncoras, aliases, chaves de mesclagem ou
-  tags explícitas; UTF-8;
-- **o esquema** [`schema/rule-v1.schema.json`](schema/rule-v1.schema.json), um arquivo para todas as
-  regras: campos obrigatórios, conjuntos fechados de campos e valores, parâmetros de cada modelo;
-- **referências cruzadas:** toda `fonte.coluna` usada em `check` está declarada em `sources`; fonte
-  ou coluna declarada e não usada gera aviso;
-- **nomes de arquivo:** o nome do arquivo é o identificador da regra e pode estar em qualquer língua:
-  letras minúsculas de qualquer alfabeto, dígitos e hífen simples, sem espaços, em Unicode NFC
-  (`municipality-state.yaml`, `município-uf.yaml`, `市町村-州.yaml`). Precisa ser único em `rules/`, em
-  qualquer profundidade de subpasta, também depois de normalizar e ignorar maiúsculas (senão Windows e
-  macOS confundiriam dois nomes). As regras deste repositório usam nomes em inglês, como as pastas.
-
-## Escrever uma regra
-
-Copie o exemplo, dê a ele um novo nome de arquivo (que é o identificador) e edite. As primeiras regras
-estão em português; `description.title_translations` pode trazer o título em outras línguas
-(`en: "..."`), e o dashboard em inglês mostra essa versão quando existe, senão o título original. Os nomes exatos do dataset e do
-recurso estão em `<portal>/api/3/action/package_show?id=<dataset>`; baixe o arquivo uma vez para
-conferir o conteúdo do zip, a codificação, o separador e os cabeçalhos. Ponha versões e códigos
-entre aspas. A versão 1.0 especifica um modelo, `lookup-equals`; outros modelos entram no mesmo
-esquema conforme ganharem contrato de parâmetros.
-
-Opcional, por editor: o VS Code com a extensão YAML lê [`.vscode/settings.json`](.vscode/settings.json),
-que liga o esquema a todo `rules/**/*.yaml` e oferece autocompletar e conferência imediata. Em outros
-editores, ligue o mesmo esquema ao mesmo padrão (JetBrains: *JSON Schema Mappings*; Neovim, Helix,
-Zed: configuração do `yaml-language-server`). Nada nos arquivos de regra depende do editor.
+Rodada local é ensaio: resultados publicados vêm só do GitHub Actions.
 
 ## Organização do repositório
 
 ```
-main.py            linha de comando (validate, run)
-src/loader.py      leitura segura do YAML, com números de linha
-src/validate.py    esquema e referências cruzadas
-src/fetch.py       resolução e download no CKAN, com integridade de cada fonte
-src/engine.py      leitura das colunas declaradas, DuckDB, modelos
-src/outputs.py     results/ e docs/data/ (só contagens e números de registro)
-src/accept.py      conferência do artefato da rodada pelo job de publicação
-docs/              dashboard (index.html, app.js, style.css; data/ é gravado pelas rodadas)
-.github/workflows/ layer2.yml (rodada semanal), tests.yml
-schema/            JSON Schema do formato de autoria
-rules/             um arquivo por regra, agrupado por espaço de nomes
+main.py            linha de comando (validate, run, accept)
+src/               leitor, validador, modelos, download, motor, saídas, aceite
+schema/            JSON Schema do formato de regra
+rules/             um arquivo por regra, em subpastas
+portal.json        o portal desta instância
+docs/              dashboard (data/ é gravado pelas rodadas)
+results/           resultados das rodadas
 tests/             testes automáticos
 ```
-
-## Como funciona uma rodada
-
-`.github/workflows/layer2.yml` roda toda quarta-feira às 04:30 UTC (ou manualmente). O job
-**evaluate**, com token só de leitura, baixa cada recurso CKAN uma vez, registra se cada portal e
-recurso estava disponível (status HTTP, SHA-256 dos bytes, colunas encontradas), cruza os dados com
-DuckDB sem acesso externo e envia as saídas como artefato. O job **publish** confere o artefato
-(`python main.py accept`: só os arquivos esperados, JSON válido, listas só com números de registro,
-histórico anterior preservado) e faz o commit de `results/` e `docs/data/`. O dashboard em `docs/`
-(GitHub Pages a partir de `/docs`) mostra as regras (cada uma com gráfico dos sinais ao longo do tempo e na ordem dos registros), a
-saúde de cada fonte, a velocidade de download e de processamento, o histórico e a proveniência; cada visitante pode ordenar os cartões de regras, e essa ordem fica só no navegador
-dele. Só são publicadas contagens e números de registro, nunca valores dos portais.
-
-## Próximos passos
-
-Formulários de issue para quem não escreve YAML, mais modelos e as instâncias de controle da ANEEL e
-da Prefeitura do Recife.
 
 ## Licença e citação
 

@@ -48,8 +48,8 @@
       <div class="rules-tools">
         <label class="muted" for="order" data-i18n="order">Order</label>
         <select id="order">
-          <option value="custom" data-i18n="o_custom">My order</option>
           <option value="signals" data-i18n="o_signals">Most signals first</option>
+          <option value="custom" data-i18n="o_custom">Custom</option>
           <option value="title" data-i18n="o_title">Title</option>
           <option value="file" data-i18n="o_file">Folder and file</option>
         </select>
@@ -75,12 +75,14 @@
       portals deliver their files over time; a slow run delays results but changes nothing in them.</p>
     <ul class="legend" id="speed-legend"></ul>
     <div class="chart" id="speed-chart"></div>
-    <details class="more"><summary data-i18n="table_view">Table view</summary>
-      <div class="table-wrap"><table class="mini" id="speed-table"></table></div></details>
+    <h3 class="sub" data-i18n="sp_table_h">Speed per run</h3>
+    <div class="table-wrap"><table class="mini" id="speed-table"></table></div>
     <h3 class="sub" data-i18n="phases_h">Time of each phase</h3>
     <p class="muted small" data-i18n="phases_note">Seconds per run: download, processing (reading the declared columns and evaluating the rules), writing the outputs, and the publish job's check and copy.</p>
     <ul class="legend" id="phases-legend"></ul>
     <div class="chart" id="phases-chart"></div>
+    <h3 class="sub" data-i18n="ph_table_h">Seconds per phase</h3>
+    <div class="table-wrap"><table class="mini" id="phases-table"></table></div>
   </section>
 
   <section id="history-section">
@@ -103,6 +105,7 @@
   <section id="datasets-section">
     <div class="section-head"><h2 data-i18n="datasets_h">Datasets crossed</h2></div>
     <div class="table-wrap"><table class="files" id="datasets"></table></div>
+    <p class="muted small" data-i18n="lic_note">Data of the publishers above, under the licences shown.</p>
   </section>
 </main>
 <footer class="muted small" id="footer"></footer>

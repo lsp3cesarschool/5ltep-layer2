@@ -186,3 +186,13 @@ section.tiles { align-items: start; }
 .list-panel h4 { font-size: .88rem; margin: 10px 0 2px; }
 .list-panel h4 a { font-weight: 400; margin-left: 8px; }
 .chart-panel select { font: inherit; font-size: .85rem; }
+
+/* key numbers lead to their section */
+.tile.go { cursor: pointer; }
+.tile.go:hover, .tile.go:focus-visible { border-color: var(--accent); outline: none; }
+#rules-section, #sources-section, #datasets-section { scroll-margin-top: 16px; }
+/* source health: rows of even height, cells aligned at the top */
+#sources td { vertical-align: top; line-height: 1.35; padding: 6px; }
+#sources td:nth-child(n+3):nth-child(-n+6) { white-space: nowrap; }
+#sources td:last-child { font-size: .82rem; color: var(--text-2); }
+.card details.chart-records[open] { display: block; }

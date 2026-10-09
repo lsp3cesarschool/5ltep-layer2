@@ -1,112 +1,106 @@
 # 5LTEP-L2: 5L-TEP Layer 2 Semantic Policies Toolkit
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Tests](https://github.com/lsp3cesarschool/5ltep-layer2/actions/workflows/tests.yml/badge.svg)](https://github.com/lsp3cesarschool/5ltep-layer2/actions/workflows/tests.yml) [![Layer 2](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Flsp3cesarschool%2F5ltep-layer2%2Fmain%2Fdocs%2Fdata%2Fstatus.json)](https://github.com/lsp3cesarschool/5ltep-layer2/actions/workflows/layer2.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 **English** · [Português](LEIAME.md)
 
-**Domain rules, written by people after the data exists, checked against open data portals.**
-Layer 2 of the Five-Layer Trust Engineering Pyramid (5L-TEP, SOFTENG 2026) turns knowledge that a
-schema cannot hold (a municipality code must belong to the state it is paired with; a licence cannot
-expire before it is issued) into rule files that anyone can read, review and adapt to another
-CKAN portal.
+**Domain rules, written by people after the data exists, that cross CKAN open data portals: 35
+rules on the portal of IBAMA, Brazil's federal environmental agency.** Every week each rule reads the published files, counts the records
+that deserve a second look and shows them on a dashboard. A signal is something to review, never a
+verdict on the data.
 
-> **Status: early research prototype.** This repository currently contains the rule format 1.0,
-> its JSON Schema and a validator. The engine that downloads the CKAN resources and evaluates the
-> rules runs locally; there are **no published results** here yet. The rules are examples with
-> their foundations and open questions recorded; they are not official rules of any agency, and a
-> future signal will be something to review, never a verdict on the data.
+| Resource | What you find there |
+|---|---|
+| 📊 **Dashboard** | [lsp3cesarschool.github.io/5ltep-layer2](https://lsp3cesarschool.github.io/5ltep-layer2/?lang=en): every rule with its signals, charts and record numbers, source health, download and processing speed, history, provenance |
+| 📏 **Rules** | [`rules/`](rules/): one file per check, in plain YAML |
+| 📁 **Results** | [`results/`](results/) and [`docs/data/`](docs/data/): written by each run (counts, record numbers, hashes) |
+| 🔁 **Control experiments** | [5ltep-layer2-aneel](https://github.com/lsp3cesarschool/5ltep-layer2-aneel) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-aneel/?lang=en)) and [5ltep-layer2-recife](https://github.com/lsp3cesarschool/5ltep-layer2-recife) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-recife/?lang=en)): the same code on the portals of ANEEL and Recife |
 
-## What a rule looks like
+> **Status: research demonstration.** This repository is part of a master's research project and is
+> maintained by its author. It is not operated by, affiliated with or endorsed by IBAMA or any other
+> publisher; it only reads open data from CKAN portals. The rules are examples written by the author.
 
-Each file in `rules/` holds one check that crosses data from one or more **CKAN** portals. A file in
-`rules/` is active; subfolders are free and only organise the rules.
+## Use case in one paragraph
 
-| Part | For whom | Content |
-|---|---|---|
-| `schema_version`, `version`, `origin` | everyone | format version, rule version, who proposed it; the file name is the rule's identifier |
-| `description` | people (dashboard) | title (optionally translated in `title_translations`), what is checked, justification, exceptions and examples, in a language declared by a BCP 47 tag |
-| `sources` | the engine | for each CKAN resource: portal, dataset, exact resource name and format, how to unpack it (`archive`), how to read it (`file`) and the columns read, each with its meaning |
-| `check` | the engine | an allowed template and its parameters, written as `source.column` |
+A researcher maps environmental infractions by municipality from IBAMA's infraction notices.
+Each notice carries a municipality code and a state, and the map trusts that they agree. One rule of
+this repository looks every municipality code up in the table of municipalities that Brazil's
+electoral court (TSE) publishes on its own CKAN portal and compares the state; others check the order
+of the dates of a notice, whether coordinates are missing or at (0,0), whether linked records exist in
+the other extracts, or whether a CITES permit combines Appendix I, wild origin and commercial purpose.
+Before drawing the map, the researcher sees on the dashboard which records deserve a second look, in
+which file and line, without this repository publishing any value of those records.
 
-Only `sources` and `check` define what is computed. Free SQL, code or expressions are never
-accepted. The example [`rules/territory/municipality-state.yaml`](rules/territory/municipality-state.yaml)
-looks up each infraction notice's municipality code (IBAMA portal) in the table of municipalities
-published by the Brazilian electoral court (TSE portal) and compares the state.
+## Key terms
 
-## Validate rules
+| Term | Meaning here |
+|---|---|
+| **Rule** | One YAML file in `rules/`: a description for people and a check for the engine. A file in `rules/` is active; subfolders only organise. |
+| **Source** | A CKAN resource (portal, dataset, exact resource name and format), or several resources of one dataset matched by a name pattern, with how to open the file and which columns to read. |
+| **Template** | The fixed check a rule fills in: `lookup-equals`, `lookup-exists`, `temporal-order`, `field-comparison`, `flag-when`. Rules never carry SQL or code. |
+| **Signal** | A record that failed the check, or could not be checked (value missing or unreadable, key not found). Something to review, not a verdict. |
+| **Record number** | The line of the record in the published file (1 = first line after the header), valid for the bytes whose SHA-256 the run records. |
+| **Source health** | Whether each portal answered and each resource downloaded in a run; a rule whose source failed is "not evaluated", never partially evaluated. |
+
+## How a rule looks
 
 ```
-python -m venv .venv
-.venv/Scripts/python -m pip install -r requirements.txt   # Linux/macOS: .venv/bin/python
-python main.py validate                                   # every rules/**/*.yaml
-python main.py validate rules/territory --format json
+schema_version: "1.0"
+rule_version: "0.3.0"
+origin: cross_reference
+description:  {language, title, text, justification, exceptions, examples}
+sources:      {name: {portal, dataset, resource, archive, file, columns}}
+check:        {template, parameters, where, timeline}
+```
+
+The file name is the rule's identifier. [`schema/rule-v1.schema.json`](schema/rule-v1.schema.json)
+is the contract of the format, one file for every rule; `python main.py validate` checks the schema
+and that every column a check uses is declared. The rule manual of the main repository explains
+each field.
+
+## How a run works
+
+[`.github/workflows/layer2.yml`](.github/workflows/layer2.yml) runs every Wednesday at 04:30 UTC (or
+by hand). The **evaluate** job, with a read-only token, downloads each CKAN resource once (however
+many rules use it), records whether each portal and resource was available, reads only the declared
+columns, evaluates every rule with DuckDB without external access and uploads its outputs as an
+artifact. The **publish** job checks the artifact (`python main.py accept`: expected files only,
+valid JSON, record lists made of numbers, earlier history kept) and commits `results/` and
+`docs/data/`. Each run also records the download speed of this portal and of the others, and the
+time of each phase.
+
+## Data handling and privacy
+
+The files are downloaded during the run and deleted at its end; on GitHub the runner itself is
+discarded after the job. The engine reads only the columns a rule declares. What is published are
+counts, record numbers, SHA-256 hashes and metadata published by CKAN, never a value read from the
+portals. Rules on health or education data use `exposure: counts`: they publish counts and charts
+only, never record numbers. The datasets keep the licences of their publishers, shown with links on
+the dashboard.
+
+## Run it locally
+
+```
+python -m pip install -r requirements.txt
+python main.py validate
 python -m pytest
-python main.py run                                        # local test run: downloads the sources, outputs in work/out
+python main.py run        # local test run: downloads the sources, outputs in work/out
 ```
 
-The validator reports file, line, path and a stable code for each problem (messages are in
-Portuguese, the initial interface language). It checks:
-
-- **safe YAML 1.2:** one document; no duplicate keys, anchors, aliases, merge keys or explicit tags;
-  UTF-8;
-- **the schema** [`schema/rule-v1.schema.json`](schema/rule-v1.schema.json), one file for every rule:
-  required fields, closed sets of fields and tokens, parameters of each template;
-- **cross references:** every `source.column` used by `check` is declared in `sources`; declared but
-  unused sources or columns are warnings;
-- **file names:** the file name is the rule's identifier and may be in any language: lowercase letters
-  of any script, digits and single hyphens, no spaces, in Unicode NFC (`municipality-state.yaml`,
-  `município-uf.yaml`, `市町村-州.yaml`). It must be unique across `rules/`, at any subfolder depth,
-  also after normalisation and case folding (Windows and macOS would otherwise mix two names up).
-  This repository's own rules use English names, like its folders.
-
-## Write a rule
-
-Copy the example, give it a new file name (its identifier), and edit it. The first rules are written in
-Portuguese; `description.title_translations` can carry the title in other languages (`en: "..."`), and
-the English dashboard shows it when present, otherwise the original title. Find the exact dataset and resource
-names in `<portal>/api/3/action/package_show?id=<dataset>`, and download the file once to check what
-is inside the archive, its encoding, delimiter and headers. Quote versions and codes. Version 1.0
-specifies one template, `lookup-equals`; other templates are added to the same schema as they get a
-parameter contract.
-
-Optional, per editor: VS Code with the YAML extension reads [`.vscode/settings.json`](.vscode/settings.json),
-which maps the schema to every `rules/**/*.yaml` and gives completion and inline checks. In other
-editors, map the same schema to the same pattern (JetBrains: *JSON Schema Mappings*; Neovim, Helix,
-Zed: the `yaml-language-server` settings). Nothing in the rule files depends on the editor.
+A local run is a test: published results come only from GitHub Actions.
 
 ## Repository layout
 
 ```
-main.py            command line (validate, run)
-src/loader.py      safe YAML reading with line numbers
-src/validate.py    schema and cross references
-src/fetch.py       CKAN resolution and download, with integrity of each source
-src/engine.py      reading of the declared columns, DuckDB, templates
-src/outputs.py     results/ and docs/data/ (counts and record numbers only)
-src/accept.py      the publish job's check of a run's artifact
-docs/              dashboard (index.html, app.js, style.css; data/ is written by the runs)
-.github/workflows/ layer2.yml (weekly run), tests.yml
-schema/            JSON Schema of the authoring format
-rules/             one file per rule, grouped by namespace
+main.py            command line (validate, run, accept)
+src/               loader, validator, templates, fetch, engine, outputs, accept
+schema/            JSON Schema of the rule format
+rules/             one file per rule, in subfolders
+portal.json        the portal of this instance
+docs/              dashboard (data/ is written by the runs)
+results/           results of the runs
 tests/             automated tests
 ```
-
-## How a run works
-
-`.github/workflows/layer2.yml` runs every Wednesday at 04:30 UTC (or by hand). The **evaluate** job,
-with a read-only token, downloads each CKAN resource once, records whether each portal and resource
-was available (HTTP status, SHA-256 of the bytes, columns found), crosses the data with DuckDB
-without external access and uploads its outputs as an artifact. The **publish** job checks the
-artifact (`python main.py accept`: expected files only, valid JSON, record lists made of numbers,
-earlier history kept) and commits `results/` and `docs/data/`. The dashboard in `docs/` (GitHub
-Pages from `/docs`) shows the rules (each with a chart of its signals over time and in the order of the records), the health of each source, download and processing speed, the history and the provenance; each
-visitor can order the rule cards, and that order is kept in their browser only. Only counts and
-record numbers are published, never values from the portals.
-
-## Next steps
-
-Issue forms for authors who do not write YAML, more templates, and the control instances for ANEEL
-and the city of Recife.
 
 ## License and citation
 

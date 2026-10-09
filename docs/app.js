@@ -14,9 +14,13 @@ const I18N = {
     t_signals: "Signals to review", t_signals_note: "in {n} rule(s)",
     t_sources: "Sources available", t_sources_note: "{n} failed", t_sources_all: "every portal answered",
     t_records: "Records checked", t_records_note: "across {n} source file(s)",
-    rules_h: "Rules", order: "Order", o_custom: "My order", o_signals: "Most signals first", o_title: "Title",
+    rules_h: "Rules", order: "Order", o_custom: "Custom", o_signals: "Most signals first", o_title: "Title",
     o_file: "Folder and file", group: "group by folder", search_rules: "Search rules",
-    order_note: "Use ↑ ↓ to arrange the cards; your order is kept in this browser only and changes nothing in the evaluation.",
+    order_note: "Use ↑ ↓ to arrange the cards: the order becomes Custom, kept in this browser only; it changes nothing in the evaluation.",
+    chart_records: "Chart and records", out_invalid_value: "unreadable value",
+    tip_invalid_value: "A value is present but cannot be read as the declared date or number.",
+    lic_note: "Data of the publishers above, under the licences shown (link to each licence). This page publishes only results derived from the data (counts, record numbers and charts); the data themselves are not redistributed.",
+    ph_table_h: "Seconds per phase", sp_table_h: "Speed per run",
     up: "Move up", down: "Move down", root_folder: "(rules/)",
     datasets: "Datasets", justification: "Justification", exceptions: "Exceptions", examples: "Examples", history: "History",
     no_exceptions: "None recorded.", expected: "Expected",
@@ -30,7 +34,7 @@ const I18N = {
     ch_unknown: "{n} record(s) without a readable date",
     signals_at: "{n} flagged on {d}", signals_one: "1 flagged on {d}", of_records: "of {n} records",
     not_evaluated: "✕ Not evaluated in this run", no_signal: "✓ None flagged on {d}",
-    list_btn: "▸ Record list", list_hide: "▾ Record list",
+    list_btn: "▸ Record list", list_hide: "▾ Record list", go_section: "Go to the section",
     list_note: "Record numbers per file (1 = first line after the header), valid for the bytes with SHA-256 {sha}. Published file: {file}.",
     see_list: "see list", hide_list: "hide list", show_all: "show all {n}", download: "Download JSON of this list",
     download_all: "Full JSON of the rule", numbering: "Record numbers per file of the resource (1 = first line after the header), valid for the bytes with SHA-256 {sha}.",
@@ -77,9 +81,13 @@ const I18N = {
     t_signals: "Sinais a revisar", t_signals_note: "em {n} regra(s)",
     t_sources: "Fontes disponíveis", t_sources_note: "{n} com falha", t_sources_all: "todos os portais responderam",
     t_records: "Registros conferidos", t_records_note: "em {n} arquivo(s) das fontes",
-    rules_h: "Regras", order: "Ordem", o_custom: "Minha ordem", o_signals: "Mais sinais primeiro", o_title: "Título",
+    rules_h: "Regras", order: "Ordem", o_custom: "Personalizada", o_signals: "Mais sinais primeiro", o_title: "Título",
     o_file: "Pasta e arquivo", group: "agrupar por pasta", search_rules: "Buscar regras",
-    order_note: "Use ↑ ↓ para arrumar os cartões; a ordem fica só neste navegador e não muda nada na avaliação.",
+    order_note: "Use ↑ ↓ para arrumar os cartões: a ordem vira Personalizada e fica só neste navegador; não muda nada na avaliação.",
+    chart_records: "Gráfico e registros", out_invalid_value: "valor ilegível",
+    tip_invalid_value: "O valor está presente, mas não se lê como a data ou o número declarado.",
+    lic_note: "Dados dos publicadores acima, sob as licenças indicadas (link para cada licença). Esta página publica só resultados derivados dos dados (contagens, números de registro e gráficos); os dados em si não são redistribuídos.",
+    ph_table_h: "Segundos por etapa", sp_table_h: "Velocidade por rodada",
     up: "Subir", down: "Descer", root_folder: "(rules/)",
     datasets: "Datasets", justification: "Justificativa", exceptions: "Exceções", examples: "Exemplos", history: "Histórico",
     no_exceptions: "Nenhuma registrada.", expected: "Esperado",
@@ -93,7 +101,7 @@ const I18N = {
     ch_unknown: "{n} registro(s) sem data legível",
     signals_at: "{n} sinalizados em {d}", signals_one: "1 sinalizado em {d}", of_records: "de {n} registros",
     not_evaluated: "✕ Não avaliada nesta rodada", no_signal: "✓ Nenhum sinalizado em {d}",
-    list_btn: "▸ Lista de registros", list_hide: "▾ Lista de registros",
+    list_btn: "▸ Lista de registros", list_hide: "▾ Lista de registros", go_section: "Ir para a seção",
     list_note: "Números de registro por arquivo (1 = primeira linha após o cabeçalho), válidos para os bytes com SHA-256 {sha}. Arquivo publicado: {file}.",
     see_list: "ver lista", hide_list: "ocultar lista", show_all: "mostrar todos os {n}", download: "Baixar JSON desta lista",
     download_all: "JSON completo da regra", numbering: "Números de registro por arquivo do recurso (1 = primeira linha após o cabeçalho), válidos para os bytes com SHA-256 {sha}.",
@@ -131,7 +139,7 @@ const I18N = {
   },
 };
 
-const SIGNAL_OUTCOMES = ["mismatch", "key_not_found", "missing_value", "ambiguous_key"];
+const SIGNAL_OUTCOMES = ["mismatch", "key_not_found", "missing_value", "invalid_value", "ambiguous_key"];
 const LIST_PREVIEW = 300;
 
 // --- small helpers ---------------------------------------------------------------------------
@@ -169,6 +177,9 @@ function t(key, vars = {}) {
 }
 const fmt = new Intl.NumberFormat(LANG === "pt" ? "pt-BR" : "en");
 const num = (n) => (n === null || n === undefined ? "–" : fmt.format(n));
+// a number with up to `digits` decimals, in the page's language (0,58 in Portuguese, 0.58 in English)
+const dec = (n, digits = 1) => (n === null || n === undefined || Number.isNaN(Number(n)) ? "–"
+  : Number(n).toLocaleString(LANG === "pt" ? "pt-BR" : "en", { maximumFractionDigits: digits }));
 // Dates in the format of the page's language, always in UTC: 09/10/2026 00:17 (pt), 9 Oct 2026, 00:17 (en).
 // English uses the month's name, so that day and month are never confused.
 const LOCALE = LANG === "pt" ? "pt-BR" : "en-GB";
@@ -200,8 +211,12 @@ function applyLanguage() {
 let PAGE = null;
 const LISTS = {};          // rule id -> promise of data/rules/<id>.json
 
-function tile(label, value, note, cls) {
-  return h("div", { class: "tile" }, h("div", { class: "label" }, label),
+function tile(label, value, note, cls, target) {
+  const go = () => el(target)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  return h("div", { class: "tile" + (target ? " go" : ""), role: target ? "link" : null, tabindex: target ? "0" : null,
+    title: target ? t("go_section") : null, onclick: target ? go : null,
+    onkeydown: target ? (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); go(); } } : null },
+    h("div", { class: "label" }, label),
     h("div", { class: "value" + (cls ? " status " + cls : "") }, value), h("div", { class: "note" }, note));
 }
 
@@ -213,17 +228,18 @@ function renderTiles() {
   for (const r of evaluated) for (const d of r.datasets) files.add(d.label);
   el("tiles").replaceChildren(
     tile(t("t_rules"), `${num(s.evaluated)} / ${num(s.rules)}`,
-      s.not_evaluated ? t("t_rules_note", { n: s.not_evaluated }) : t("t_rules_all"), s.not_evaluated ? "bad" : ""),
+      s.not_evaluated ? t("t_rules_note", { n: s.not_evaluated }) : t("t_rules_all"), s.not_evaluated ? "bad" : "", "rules-section"),
     tile(t("t_signals"), num(s.signals), t("t_signals_note", { n: evaluated.filter((r) => r.signals).length }),
-      s.signals ? "warn" : ""),
+      s.signals ? "warn" : "", "rules-section"),
     tile(t("t_sources"), `${num(s.sources_ok)} / ${num(s.sources)}`,
       s.sources_ok < s.sources ? t("t_sources_note", { n: s.sources - s.sources_ok }) : t("t_sources_all"),
-      s.sources_ok < s.sources ? "bad" : "good"),
-    tile(t("t_records"), num(records), t("t_records_note", { n: files.size })),
+      s.sources_ok < s.sources ? "bad" : "good", "sources-section"),
+    tile(t("t_records"), num(records), t("t_records_note", { n: files.size }), "", "datasets-section"),
   );
 }
 
-// rule order: "custom" uses the ids saved by the visitor; new rules go to the end in file order
+// rule order: "signals" by default; "custom" uses the ids saved by the visitor (a move under any other
+// order starts the custom order from the order on screen); new rules go to the end in file order
 function orderedRules() {
   const mode = el("order").value;
   const rules = [...PAGE.rules];
@@ -280,10 +296,7 @@ function ruleHistory(rule) {
     }));
 }
 
-async function showList(rule, panel, button) {
-  if (!panel.hidden) { panel.hidden = true; button.textContent = t("list_btn"); return; }
-  panel.hidden = false;
-  button.textContent = t("list_hide");
+async function showList(rule, panel) {
   panel.replaceChildren(h("p", { class: "muted" }, t("loading_list")));
   let data;
   try { data = await loadList(rule); } catch (e) { panel.replaceChildren(h("p", { class: "crit" }, t("list_error"))); return; }
@@ -336,7 +349,7 @@ function stackedBars(categories, mode, label) {
   for (const v of ticks(max, mode !== "share")) {
     svg.append(s("line", { class: "grid", x1: L, x2: W - 10, y1: y(v), y2: y(v) }),
       s("text", { class: "axis-label", x: L - 6, y: y(v) + 4, "text-anchor": "end" },
-        mode === "share" ? `${v.toFixed(v < 10 ? 1 : 0)}%` : num(Math.round(v))));
+        mode === "share" ? `${dec(v, v < 10 ? 1 : 0)}%` : num(Math.round(v))));
   }
   const every = Math.ceil(categories.length / 12);
   categories.forEach((c, i) => {
@@ -349,7 +362,7 @@ function stackedBars(categories, mode, label) {
       const rect = s("rect", { x, y: y(base + v), width: bw, height: Math.max(1, y(base) - y(base + v)),
         style: `fill:var(--out-${o})` });
       rect.append(s("title", {}, `${c.label} · ${outcomeLabel(o)}: ${num(c.counts[o] || 0)}` +
-        (c.inScope ? ` (${((100 * (c.counts[o] || 0)) / c.inScope).toFixed(2)}%)` : "") +
+        (c.inScope ? ` (${dec((100 * (c.counts[o] || 0)) / c.inScope, 2)}%)` : "") +
         ` · ${num(signals)} / ${num(c.inScope)} ${LANG === "pt" ? "avaliados" : "evaluated"}`));
       svg.append(rect);
       base += v;
@@ -416,10 +429,7 @@ function orderHistogram(data, label) {
   return svg;
 }
 
-async function showChart(rule, panel, button) {
-  if (!panel.hidden) { panel.hidden = true; button.textContent = t("chart_btn"); return; }
-  panel.hidden = false;
-  button.textContent = t("chart_hide");
+async function showChart(rule, panel) {
   panel.replaceChildren(h("p", { class: "muted" }, t("loading_list")));
   let data;
   try { data = await loadList(rule); } catch (e) { panel.replaceChildren(h("p", { class: "crit" }, t("list_error"))); return; }
@@ -479,15 +489,21 @@ function card(rule, index, count) {
       parts.length ? h("div", { class: "breakdown" }, parts) : null);
   }
   const details = (key, body) => h("details", {}, h("summary", {}, t(key)), h("div", {}, body));
-  const chartPanel = h("div", { class: "chart-panel", hidden: true });
-  const listPanel = h("div", { class: "list-panel", hidden: true });
-  const flagged = rule.status === "evaluated" && rule.signals;
-  const chartButton = flagged
-    ? h("button", { class: "chart-btn", type: "button", "data-chart": rule.id, onclick: (ev) => showChart(rule, chartPanel, ev.currentTarget) }, t("chart_btn"))
-    : null;
-  const listButton = flagged && rule.exposure !== "counts"
-    ? h("button", { class: "chart-btn", type: "button", "data-list": rule.id, onclick: (ev) => showList(rule, listPanel, ev.currentTarget) }, t("list_btn"))
-    : null;
+  // chart and record list in one accordion, filled the first time it opens (the list only when exposure allows)
+  let chartRecords = null;
+  if (rule.status === "evaluated" && rule.signals) {
+    const chartPanel = h("div", { class: "chart-panel" });
+    const listPanel = rule.exposure !== "counts" ? h("div", { class: "list-panel" }) : null;
+    chartRecords = h("details", { class: "chart-records", "data-chart": rule.id },
+      h("summary", {}, t("chart_records")), h("div", {}, chartPanel, listPanel));
+    let filled = false;
+    chartRecords.addEventListener("toggle", () => {
+      if (!chartRecords.open || filled) return;
+      filled = true;
+      showChart(rule, chartPanel);
+      if (listPanel) showList(rule, listPanel);
+    });
+  }
   return h("article", { class: "card", lang: rule.language || null },
     head,
     rule.text ? h("p", { style: "margin:4px 0" }, rule.text) : null,
@@ -497,8 +513,7 @@ function card(rule, index, count) {
       details("justification", h("p", {}, rule.justification || "–")),
       details("exceptions", rule.exceptions?.length ? h("ul", {}, rule.exceptions.map((e) => h("li", {}, e))) : h("p", {}, t("no_exceptions"))),
       rule.examples?.length ? details("examples", h("ul", {}, rule.examples.map((e) => h("li", {}, e.case, " → ", h("em", {}, e.expected))))) : null,
-      details("history", ruleHistory(rule)), chartButton, listButton),
-    chartPanel, listPanel);
+      details("history", ruleHistory(rule)), chartRecords));
 }
 
 function renderRules() {
@@ -519,8 +534,8 @@ function renderSources() {
     h("tr", {}, ["s_resource", "s_status", "s_portal", "s_download", "s_modified", "s_sha", "s_used"].map((k) => h("th", {}, t(k)))),
     ...PAGE.sources.map((s) => {
       const ok = s.status === "ok";
-      const portal = s.package_show?.http_status ? `HTTP ${s.package_show.http_status} · ${s.package_show.seconds} s` : (s.package_show?.error || "–");
-      const dl = s.download?.bytes !== undefined ? `${(s.download.bytes / 1e6).toFixed(1)} MB · ${s.download.seconds} s` : (s.download?.error || "–");
+      const portal = s.package_show?.http_status ? `HTTP ${s.package_show.http_status} · ${dec(s.package_show.seconds, 2)} s` : (s.package_show?.error || "–");
+      const dl = s.download?.bytes !== undefined ? `${dec(s.download.bytes / 1e6, 1)} MB · ${dec(s.download.seconds, 1)} s` : (s.download?.error || "–");
       return h("tr", {},
         h("td", {}, h("a", { href: `${s.portal}/dataset/${s.dataset_name}`, target: "_blank", rel: "noopener" }, s.label)),
         h("td", {}, h("span", { class: "status " + (ok ? "good" : "bad") }, t("st_" + s.status)), ok ? null : h("div", { class: "muted small" }, s.reason)),
@@ -578,7 +593,7 @@ function renderSpeed() {
   for (let i = 0; i <= 4; i++) {
     const v = (max * i) / 4;
     svg.append(s("line", { class: "grid", x1: L, x2: W - 10, y1: y(v), y2: y(v) }),
-      s("text", { class: "axis-label", x: L - 6, y: y(v) + 4, "text-anchor": "end" }, v.toFixed(v < 10 ? 1 : 0)));
+      s("text", { class: "axis-label", x: L - 6, y: y(v) + 4, "text-anchor": "end" }, dec(v, v < 10 ? 1 : 0)));
   }
   runs.forEach((r, i) => {
     const x0 = L + i * step + step / 2 - 1.5 * bw;
@@ -587,7 +602,7 @@ function renderSpeed() {
       if (v === null || v === undefined) return;
       const rect = s("rect", { class: `bar-${k}`, x: x0 + j * bw, y: y(v), width: bw - 1, height: Math.max(1, y(0) - y(v)), rx: 2 });
       const label = k === "primary" ? t("sp_primary", { name }) : k === "secondary" ? t("sp_secondary") : t("sp_processing");
-      rect.append(s("title", {}, `${when(r.at)} · ${label}: ${v} MB/s`));
+      rect.append(s("title", {}, `${when(r.at)} · ${label}: ${dec(v, 2)} MB/s`));
       svg.append(rect);
     });
     if (runs.length <= 8 || i % Math.ceil(runs.length / 8) === 0) {
@@ -598,12 +613,13 @@ function renderSpeed() {
   el("speed-chart").replaceChildren(svg);
   el("speed-table").replaceChildren(
     h("tr", {}, h("th", {}, t("sp_run")), h("th", {}, `${name} ${t("sp_mbps")}`), h("th", {}, t("sp_resources")), h("th", {}, t("sp_bytes")),
-      h("th", {}, `${t("sp_secondary")} ${t("sp_mbps")}`), h("th", {}, t("sp_resources")), h("th", {}, t("sp_bytes"))),
+      h("th", {}, `${t("sp_secondary")} ${t("sp_mbps")}`), h("th", {}, t("sp_resources")), h("th", {}, t("sp_bytes")),
+      h("th", {}, `${t("ph_processing")} ${t("sp_mbps")}`)),
     ...[...runs].reverse().map((r) => h("tr", {}, h("td", {}, when(r.at)),
       ...["primary", "secondary"].flatMap((k) => {
         const d = r.download_speed[k] || {};
-        return [h("td", {}, d.mb_per_s ?? "–"), h("td", {}, num(d.resources)), h("td", {}, d.bytes ? (d.bytes / 1e6).toFixed(1) : "–")];
-      }))));
+        return [h("td", {}, dec(d.mb_per_s, 2)), h("td", {}, num(d.resources)), h("td", {}, d.bytes ? dec(d.bytes / 1e6, 1) : "–")];
+      }), h("td", {}, dec(r.download_speed.processing?.mb_per_s, 2)))));
 }
 
 // Stacked bars: seconds of download, processing, outputs and publication per run (last 26 runs).
@@ -624,7 +640,7 @@ function renderPhases(publish) {
   for (let i = 0; i <= 4; i++) {
     const v = (max * i) / 4;
     svg.append(s("line", { class: "grid", x1: L, x2: W - 10, y1: y(v), y2: y(v) }),
-      s("text", { class: "axis-label", x: L - 6, y: y(v) + 4, "text-anchor": "end" }, v.toFixed(0)));
+      s("text", { class: "axis-label", x: L - 6, y: y(v) + 4, "text-anchor": "end" }, dec(v, 0)));
   }
   runs.forEach((r, i) => {
     let base = 0;
@@ -633,7 +649,7 @@ function renderPhases(publish) {
       const v = f(r);
       if (!v) return;
       const rect = s("rect", { class: `bar-${k}`, x, y: y(base + v), width: bw, height: Math.max(1, y(base) - y(base + v)) });
-      rect.append(s("title", {}, `${when(r.at)} · ${t("ph_" + k)}: ${v} ${t("ph_s")}`));
+      rect.append(s("title", {}, `${when(r.at)} · ${t("ph_" + k)}: ${dec(v, 1)} ${t("ph_s")}`));
       svg.append(rect);
       base += v;
     });
@@ -643,6 +659,10 @@ function renderPhases(publish) {
   });
   svg.append(s("text", { class: "axis-label", x: L - 6, y: 11, "text-anchor": "end" }, t("ph_s")));
   el("phases-chart").replaceChildren(svg);
+  el("phases-table").replaceChildren(
+    h("tr", {}, h("th", {}, t("sp_run")), ...PH.map(([k]) => h("th", {}, `${t("ph_" + k)} (${t("ph_s")})`)), h("th", {}, "total")),
+    ...[...runs].reverse().map((r) => h("tr", {}, h("td", {}, when(r.at)),
+      ...PH.map(([, f]) => h("td", {}, dec(f(r), 1))), h("td", {}, dec(total(r), 1)))));
 }
 
 function renderProvenance() {
@@ -668,9 +688,23 @@ function renderDatasets() {
     ...PAGE.sources.map((s) => h("tr", {},
       h("td", {}, h("a", { href: `${s.portal}/dataset/${s.dataset_name}`, target: "_blank", rel: "noopener" },
         s.dataset?.title || s.dataset_name), h("div", { class: "muted small" }, new URL(s.portal).hostname)),
-      h("td", {}, s.dataset?.organization || "–"), h("td", {}, s.dataset?.license || "–"),
+      h("td", {}, s.dataset?.organization || "–"),
+      h("td", {}, (() => {
+        const name = s.dataset?.license, id = s.dataset?.license_id;
+        const text = id && name && id !== name ? `${id} (${name})` : (name || id || "–");
+        return s.dataset?.license_url ? h("a", { href: s.dataset.license_url, target: "_blank", rel: "noopener" }, text) : text;
+      })()),
       h("td", {}, (s.used_by || []).join(", ")))));
 }
+
+// accordions: opening one in a card closes the ones open in the other cards
+document.addEventListener("toggle", (ev) => {
+  const opened = ev.target;
+  if (!(opened instanceof HTMLDetailsElement) || !opened.open) return;
+  const card = opened.closest(".card");
+  if (!card) return;
+  document.querySelectorAll(".card details[open]").forEach((d) => { if (d.closest(".card") !== card) d.open = false; });
+}, true);
 
 async function main() {
   applyLanguage();
@@ -697,7 +731,7 @@ async function main() {
   }
   el("subtitle").textContent = t("subtitle", { at: when(PAGE.generated_at) + " UTC",
     env: PAGE.environment === "local" ? t("env_local") : t("env_actions") });
-  el("order").value = store("l2-sort") || "custom";
+  el("order").value = store("l2-sort") || "signals";
   el("group").checked = !!store("l2-group");
   el("order").addEventListener("change", () => { store("l2-sort", el("order").value); renderRules(); });
   el("group").addEventListener("change", () => { store("l2-group", el("group").checked); renderRules(); });
@@ -706,8 +740,8 @@ async function main() {
   // a link to a chart: #grafico=<rule id> (or #chart=<rule id>) opens it and scrolls to its card
   const wanted = decodeURIComponent((location.hash.match(/^#(?:grafico|chart)=(.+)$/) || [])[1] || "");
   if (wanted) {
-    const btn = document.querySelector(`[data-chart="${CSS.escape(wanted)}"]`);
-    if (btn) { btn.click(); btn.closest(".card").scrollIntoView(); }
+    const acc = document.querySelector(`details[data-chart="${CSS.escape(wanted)}"]`);
+    if (acc) { acc.open = true; acc.closest(".card").scrollIntoView(); }
   }
   fetch("data/publish.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : [])).catch(() => []).then(renderPhases);
   el("footer").replaceChildren(t("footer"), " ",

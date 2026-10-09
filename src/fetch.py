@@ -125,7 +125,8 @@ def fetch(key: ResourceKey, folder: Path) -> Fetched:
         out.status, out.reason = PORTAL_UNREACHABLE, f"portal não respondeu: {_error(exc)}"
         return out
     out.dataset = {"title": package.get("title"), "organization": (package.get("organization") or {}).get("title"),
-                   "license": package.get("license_title"), "metadata_modified": package.get("metadata_modified")}
+                   "license": package.get("license_title"), "license_id": package.get("license_id"),
+                   "license_url": package.get("license_url"), "metadata_modified": package.get("metadata_modified")}
 
     # 2. the resource with that name and format; with * ? or [...] in the name, every resource that matches
     #    (for example one resource per year), downloaded one after the other and read in name order
