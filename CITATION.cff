@@ -2,14 +2,15 @@ cff-version: 1.2.0
 message: "If you use this toolkit or its results, please cite the master's thesis it is part of (preferred citation below)."
 title: "5LTEP-L2: 5L-TEP Layer 2 Semantic Policies Toolkit"
 abstract: >-
-  Reference implementation, in progress, of Layer 2 (Semantic Policies) of the
-  Five-Layer Trust Engineering Pyramid (5L-TEP, SOFTENG 2026) for open government
-  data: domain rules defined after the data exists, one file per atomic check,
-  with a human description (intention, justification, sources) and an explicit
-  execution block (allowed template, exact portal, dataset, resource and
-  columns), validated by a JSON Schema and cross-reference checks. The
-  evaluation engine is not implemented yet. Part of the master's thesis cited
-  below.
+  Reference implementation of Layer 2 (Semantic Policies) of the Five-Layer
+  Trust Engineering Pyramid (5L-TEP, SOFTENG 2026) for open government data:
+  domain rules written after the data exists, one file per atomic check, that
+  cross CKAN resources of one or more portals. Each rule has a description for
+  people and a check made of an allowed template with parameters (no free SQL).
+  Every run downloads each resource once, records whether each portal and
+  resource was available, evaluates the rules with DuckDB without external
+  access, and publishes counts and record numbers only, with a dashboard. Part
+  of the master's thesis cited below.
 type: software
 authors:
   - family-names: Pinheiro
