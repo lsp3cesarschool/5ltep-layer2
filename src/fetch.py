@@ -127,9 +127,9 @@ def fetch(key: ResourceKey, folder: Path) -> Fetched:
     out.dataset = {"title": package.get("title"), "organization": (package.get("organization") or {}).get("title"),
                    "license": package.get("license_title"), "metadata_modified": package.get("metadata_modified")}
 
-    # 2. the resource with that name and format; with * or ? in the name, every resource that matches
+    # 2. the resource with that name and format; with * ? or [...] in the name, every resource that matches
     #    (for example one resource per year), downloaded one after the other and read in name order
-    pattern = any(ch in key.name for ch in "*?")
+    pattern = any(ch in key.name for ch in "*?[")
 
     def name_matches(r):
         name = (r.get("name") or "").strip()
