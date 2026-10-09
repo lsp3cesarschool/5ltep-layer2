@@ -78,6 +78,7 @@ def _card(entry: dict, rules_root: Path, run: dict) -> dict:
         "examples": desc.get("examples", []), "template": (data.get("check") or {}).get("template"),
         "evaluated_source": evaluated_source(data["check"]) if data.get("check") else None,
         "timeline": (data.get("check") or {}).get("timeline"),
+        "exposure": data.get("exposure", "records"),
         "datasets": [{"source": sid, "label": s.get("resource")} for sid, s in entry.get("sources", {}).items()],
         "status": entry["status"], "reason_code": entry.get("reason_code"), "reason": entry.get("reason"),
     }
@@ -160,11 +161,14 @@ def write(run: dict, out: Path, rules_root: Path) -> dict:
         if entry["status"] == EVALUATED:
             _write(target, {"rule": card["id"], "rule_version": card["rule_version"], "evaluated_at": entry["evaluated_at"],
                             **ident, "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
-                            "sources": {sid: {"label": s["resource"], "file": s.get("file"), "url": s.get("url"),
+                            "sources": {sid: {"label": s["resource"], "file": s.get("file"), "files": s.get("files"),
+                                              "url": s.get("url"),
                                               "archive_members": s.get("archive_members"), "sha256": s["sha256"],
                                               "records": s.get("records")}
                                         for sid, s in entry["sources"].items()},
-                            "counts": entry["counts"], "total": entry["total"], "records": entry["records"],
+                            "counts": entry["counts"], "total": entry["total"],
+                            # exposure "counts" (health, education...): never the record numbers
+                            "records": {} if card["exposure"] == "counts" else entry["records"],
                             "members": entry["members"], "by_member": entry["by_member"], "by_period": entry["by_period"],
                             "timeline": card.get("timeline")})
         else:

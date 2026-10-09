@@ -143,3 +143,21 @@ def test_interval_only_rule_leaves_order_to_another_rule(tmp_path):
     result = engine.evaluate(rule, {"ibama_autos": read})
     assert {k: v for k, v in result["counts"].items() if v} == {"match": 1, "mismatch": 1, "out_of_scope": 2}
     assert result["records"] == {"mismatch": {"auto_infracao_2010.csv": [2]}}
+
+
+def test_counts_only_exposure_publishes_no_record_numbers(tmp_path, monkeypatch):
+    """A rule with exposure: counts publishes counts and charts, never record numbers."""
+    rules = tmp_path / "rules"
+    rules.mkdir()
+    text = (ROOT / "rules" / "territory" / "municipality-state.yaml").read_text(encoding="utf-8")
+    (rules / "municipality-state.yaml").write_text(text.replace('origin: cross_reference\n',
+                                                               'origin: cross_reference\nexposure: counts\n'), encoding="utf-8")
+    run = {"started_at": "x", "finished_at": "y", "fetched": [], "problems": [], "timings": {},
+           "rules": [{"id": "municipality-state", "file": rules / "municipality-state.yaml", "rule_text": b"",
+                      "data": load_rule(rules / "municipality-state.yaml").data, "status": "evaluated",
+                      "evaluated_at": "y", "counts": {**dict.fromkeys(engine.OUTCOMES, 0), "match": 1, "mismatch": 1}, "total": 2,
+                      "records": {"mismatch": {"a.csv": [2]}}, "members": [], "by_member": {}, "by_period": {},
+                      "sources": {}}]}
+    outputs.write(run, tmp_path / "out", rules)
+    data = json.loads((tmp_path / "out" / "docs" / "data" / "rules" / "municipality-state.json").read_text(encoding="utf-8"))
+    assert data["records"] == {} and data["counts"]["mismatch"] == 1

@@ -13,11 +13,13 @@ needed for the resources used so far.
 
 from __future__ import annotations
 
+import fnmatch
 import hashlib
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from urllib.parse import urlparse
+from pathlib import PurePosixPath
+from urllib.parse import unquote, urlparse
 
 import requests
 
@@ -66,13 +68,16 @@ class Fetched:
     resource: dict = field(default_factory=dict)    # id, url, metadata of the matched resource
     download: dict = field(default_factory=dict)    # http status, bytes, sha256, etag, last_modified, seconds
     path: Path | None = None                        # local file, never published
+    parts: list[dict] = field(default_factory=list)  # one per published file: name, path, resource, download
 
     def record(self) -> dict:
         return {"portal": self.key.portal, "dataset_name": self.key.dataset,
                 "resource_name": self.key.name, "resource_format": self.key.format,
                 "label": self.key.label, "role": self.role, "status": self.status, "reason": self.reason,
                 "used_by": sorted(self.used_by), "package_show": self.portal, "dataset": self.dataset,
-                "resource": self.resource, "download": self.download}
+                "resource": self.resource, "download": self.download,
+                "files": [{"file": p["name"], "url": p["resource"].get("url"), "resource_id": p["resource"].get("id"),
+                           "bytes": p["download"].get("bytes"), "sha256": p["download"].get("sha256")} for p in self.parts]}
 
 
 def _get(url: str, **kwargs) -> requests.Response:
@@ -122,43 +127,69 @@ def fetch(key: ResourceKey, folder: Path) -> Fetched:
     out.dataset = {"title": package.get("title"), "organization": (package.get("organization") or {}).get("title"),
                    "license": package.get("license_title"), "metadata_modified": package.get("metadata_modified")}
 
-    # 2. exactly one resource with that name and format
+    # 2. the resource with that name and format; with * or ? in the name, every resource that matches
+    #    (for example one resource per year), downloaded one after the other and read in name order
+    pattern = any(ch in key.name for ch in "*?")
+
+    def name_matches(r):
+        name = (r.get("name") or "").strip()
+        return fnmatch.fnmatchcase(name, key.name.strip()) if pattern else name == key.name.strip()
+
     matches = [r for r in package.get("resources", [])
-               if (r.get("name") or "").strip() == key.name.strip()
-               and (r.get("format") or "").strip().upper() == key.format.strip().upper()]
-    if len(matches) != 1:
+               if name_matches(r) and (r.get("format") or "").strip().upper() == key.format.strip().upper()]
+    if not matches or (len(matches) > 1 and not pattern):
         available = [f"{r.get('name')} ({r.get('format')})" for r in package.get("resources", [])]
         out.status = RESOURCE_NOT_FOUND if not matches else RESOURCE_AMBIGUOUS
         out.reason = (f"{len(matches)} recursos com nome {key.name!r} e formato {key.format}; "
                       f"disponíveis: {available}")[:600]
         return out
-    res = matches[0]
-    out.resource = {"id": res.get("id"), "url": res.get("url"), "metadata_modified": res.get("metadata_modified"),
-                    "last_modified": res.get("last_modified"), "size_declared": res.get("size")}
+    matches.sort(key=lambda r: (r.get("name") or ""))
 
-    # 3. the bytes, streamed to disk with their SHA-256
-    path = folder / f"{hashlib.sha256(repr(key).encode()).hexdigest()[:16]}.bin"
-    sha, size, t0 = hashlib.sha256(), 0, time.monotonic()
-    try:
-        resp = _get(res["url"], stream=True)
-        out.download = {"http_status": resp.status_code, "etag": resp.headers.get("ETag"),
+    # 3. the bytes of each resource, streamed to disk with their SHA-256
+    t_all = time.monotonic()
+    for n, res in enumerate(matches):
+        meta = {"id": res.get("id"), "url": res.get("url"), "name": res.get("name"),
+                "metadata_modified": res.get("metadata_modified"), "last_modified": res.get("last_modified"),
+                "size_declared": res.get("size")}
+        path = folder / f"{hashlib.sha256(repr(key).encode()).hexdigest()[:16]}-{n}.bin"
+        sha, size, t0 = hashlib.sha256(), 0, time.monotonic()
+        download: dict = {}
+        try:
+            resp = _get(res["url"], stream=True)
+            download = {"http_status": resp.status_code, "etag": resp.headers.get("ETag"),
                         "last_modified": resp.headers.get("Last-Modified"),
-                        "content_type": resp.headers.get("Content-Type"),
-                        "served_by": urlparse(resp.url).hostname}
-        resp.raise_for_status()
-        with open(path, "wb") as fh:
-            for chunk in resp.iter_content(chunk_size=1 << 20):
-                fh.write(chunk)
-                sha.update(chunk)
-                size += len(chunk)
-        resp.close()
-    except (requests.RequestException, OSError) as exc:
-        path.unlink(missing_ok=True)
-        out.download["error"] = _error(exc)
-        out.status, out.reason = DOWNLOAD_FAILED, f"download falhou: {_error(exc)}"
-        return out
-    seconds = time.monotonic() - t0
-    out.download.update(bytes=size, sha256=sha.hexdigest(), seconds=round(seconds, 2),
+                        "content_type": resp.headers.get("Content-Type"), "served_by": urlparse(resp.url).hostname}
+            resp.raise_for_status()
+            with open(path, "wb") as fh:
+                for chunk in resp.iter_content(chunk_size=1 << 20):
+                    fh.write(chunk)
+                    sha.update(chunk)
+                    size += len(chunk)
+            resp.close()
+        except (requests.RequestException, OSError) as exc:
+            path.unlink(missing_ok=True)
+            for p in out.parts:
+                p["path"].unlink(missing_ok=True)
+            download["error"] = _error(exc)
+            out.download = download
+            out.status, out.reason = DOWNLOAD_FAILED, f"download de {res.get('name')!r} falhou: {_error(exc)}"
+            return out
+        seconds = time.monotonic() - t0
+        download.update(bytes=size, sha256=sha.hexdigest(), seconds=round(seconds, 2),
                         mb_per_s=round(size / 1e6 / seconds, 3) if seconds > 0 else None)
-    out.path = path
+        name = PurePosixPath(unquote(urlparse(res.get("url") or "").path)).name or (res.get("name") or "")
+        out.parts.append({"name": name, "path": path, "resource": meta, "download": download})
+
+    # one resource: its own metadata; several: the list, total bytes and a SHA-256 over the parts' hashes
+    if len(out.parts) == 1:
+        out.resource, out.download, out.path = out.parts[0]["resource"], out.parts[0]["download"], out.parts[0]["path"]
+    else:
+        seconds = time.monotonic() - t_all
+        size = sum(p["download"]["bytes"] for p in out.parts)
+        out.resource = {"count": len(out.parts), "names": [p["resource"]["name"] for p in out.parts],
+                        "metadata_modified": max((p["resource"].get("metadata_modified") or "") for p in out.parts) or None}
+        out.download = {"http_status": 200, "bytes": size, "seconds": round(seconds, 2),
+                        "mb_per_s": round(size / 1e6 / seconds, 3) if seconds > 0 else None,
+                        "sha256": hashlib.sha256("".join(p["download"]["sha256"] for p in out.parts).encode()).hexdigest(),
+                        "sha256_note": "SHA-256 dos SHA-256 de cada arquivo, na ordem dos nomes"}
     return out

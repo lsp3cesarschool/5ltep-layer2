@@ -485,7 +485,7 @@ function card(rule, index, count) {
   const chartButton = flagged
     ? h("button", { class: "chart-btn", type: "button", "data-chart": rule.id, onclick: (ev) => showChart(rule, chartPanel, ev.currentTarget) }, t("chart_btn"))
     : null;
-  const listButton = flagged
+  const listButton = flagged && rule.exposure !== "counts"
     ? h("button", { class: "chart-btn", type: "button", "data-list": rule.id, onclick: (ev) => showList(rule, listPanel, ev.currentTarget) }, t("list_btn"))
     : null;
   return h("article", { class: "card", lang: rule.language || null },

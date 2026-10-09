@@ -76,21 +76,28 @@ def published_file(fetched: Fetched) -> str:
 
 
 def _members(fetched: Fetched, source: dict):
-    """(member name, binary stream) for every file to read, in name order."""
+    """(file name, binary stream) for every file to read: each published file of the source (one, or
+    one per resource matching a name pattern), and inside a zip each member matching the pattern."""
+    parts = fetched.parts or [{"name": published_file(fetched), "path": fetched.path}]
+    for part in parts:
+        yield from _part_members(part, source)
+
+
+def _part_members(part: dict, source: dict):
     archive = source.get("archive")
     if archive is None:
-        with open(fetched.path, "rb") as fh:
-            yield published_file(fetched), fh
+        with open(part["path"], "rb") as fh:
+            yield part["name"], fh
         return
     try:
-        zf = zipfile.ZipFile(fetched.path)
+        zf = zipfile.ZipFile(part["path"])
     except zipfile.BadZipFile:
-        raise ReadError("archive_invalid", "o recurso não é um zip válido")
+        raise ReadError("archive_invalid", f"{part['name']}: o recurso não é um zip válido")
     with zf:
         names = sorted(n for n in zf.namelist() if not n.endswith("/")
                        and fnmatch.fnmatchcase(n.rsplit("/", 1)[-1], archive["members"]))
         if not names:
-            raise ReadError("member_missing", f'nenhum arquivo do zip casa com "{archive["members"]}"; '
+            raise ReadError("member_missing", f'{part["name"]}: nenhum arquivo do zip casa com "{archive["members"]}"; '
                                               f"conteúdo: {sorted(zf.namelist())[:20]}")
         for name in names:
             with zf.open(name) as fh:
@@ -283,7 +290,9 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
             f = fetched[ResourceKey.of(source)]
             entry["sources"][source_id] = {"resource": f.key.label, "fetch_status": f.status,
                                            "sha256": f.download.get("sha256"), "url": f.resource.get("url"),
-                                           "file": published_file(f) if f.resource else None,
+                                           "file": (published_file(f) if len(f.parts) <= 1 and f.resource.get("url")
+                                                    else None),
+                                           "files": [p["name"] for p in f.parts] if len(f.parts) > 1 else None,
                                            "archive_members": (source.get("archive") or {}).get("members")}
             if f.status != OK and failed is None:
                 failed = (f"source_{f.status}", f'fonte "{source_id}" ({f.key.label}): {f.reason}')
@@ -312,6 +321,8 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
             item["read"].path.unlink(missing_ok=True)
     if not keep_downloads:
         for f in fetched.values():
+            for p in f.parts:
+                p["path"].unlink(missing_ok=True)
             if f.path:
                 f.path.unlink(missing_ok=True)
     timings = {"download_s": round(download_s, 2), "processing_s": round(processing_s, 2),

@@ -184,6 +184,13 @@
           }
         }
       ]
+    },
+    "exposure": {
+      "enum": [
+        "records",
+        "counts"
+      ],
+      "description": "records (default): signals are published as counts and record numbers; counts: only counts and charts, never record numbers (health, education and other sensitive data)."
     }
   },
   "$defs": {
