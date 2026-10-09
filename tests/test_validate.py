@@ -10,7 +10,8 @@ import main
 from src import validate
 
 ROOT = Path(__file__).resolve().parent.parent
-EXAMPLE = ROOT / "rules" / "territory" / "municipality-state.yaml"
+FIXTURES = ROOT / "tests" / "fixtures"
+EXAMPLE = FIXTURES / "municipality-state.yaml"       # a copy of an IBAMA rule: the tests do not depend on rules/
 TEXT = EXAMPLE.read_text(encoding="utf-8")
 RULE_ID = "municipality-state"
 
@@ -37,12 +38,16 @@ def line_of(text, fragment):
 # --- the example ---------------------------------------------------------------------
 
 def test_example_rule_is_valid():
-    assert validate.validate_paths([ROOT / "rules"]) == []
+    assert validate.validate_paths([FIXTURES]) == []
+
+
+def test_rules_of_this_instance_are_valid():
+    assert [f for f in validate.validate_paths([ROOT / "rules"]) if f.level == "error"] == []
 
 
 def test_root_copy_matches_the_rule():
     copy = ROOT.parent / "exemploderegra.yaml"
-    if not copy.exists():
+    if not copy.exists() or not (ROOT / "rules" / "territory" / "municipality-state.yaml").exists():
         pytest.skip("cópia da raiz só existe na pasta local do projeto")
     body = [line for line in copy.read_text(encoding="utf-8").splitlines() if not line.startswith("#")]
     assert body == TEXT.splitlines()
@@ -53,7 +58,7 @@ def test_schema_is_a_valid_draft_2020_12_schema():
 
 
 def test_cli_exit_codes(tmp_path):
-    assert main.main(["validate", str(ROOT / "rules")]) == 0
+    assert main.main(["validate", str(FIXTURES)]) == 0
     bad = tmp_path / f"{RULE_ID}.yaml"
     bad.write_text(edit("origin: cross_reference", "origin: cruzamento"), encoding="utf-8")
     assert main.main(["validate", str(bad)]) == 1

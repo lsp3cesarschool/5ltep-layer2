@@ -684,6 +684,17 @@ async function main() {
     document.querySelectorAll("main > section:not(.tiles)").forEach((s) => { s.hidden = true; });
     return;
   }
+  // this instance's repository (portal.json) in every link to the default repository, and its portal's name
+  const repo = PAGE.portal?.repository;
+  if (repo && repo !== "lsp3cesarschool/5ltep-layer2") {
+    document.querySelectorAll('a[href*="lsp3cesarschool/5ltep-layer2"]').forEach((a) => {
+      a.href = a.href.replace("lsp3cesarschool/5ltep-layer2", repo);
+    });
+  }
+  if (PAGE.portal?.name) {
+    document.querySelector(".eyebrow").textContent = `${t("eyebrow")} · ${PAGE.portal.name}`;
+    document.title = `5L-TEP L2 · ${PAGE.portal.name}`;
+  }
   el("subtitle").textContent = t("subtitle", { at: when(PAGE.generated_at) + " UTC",
     env: PAGE.environment === "local" ? t("env_local") : t("env_actions") });
   el("order").value = store("l2-sort") || "custom";

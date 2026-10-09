@@ -185,6 +185,7 @@ def write(run: dict, out: Path, rules_root: Path) -> dict:
                                   "started_at": run["started_at"], "totals": totals, "rules": cards,
                                   "sources": sources, "engine": manifest["engine"], "rule_files": manifest["rules"],
                                   "primary_portal": run.get("primary_portal"), "download_speed": speed, "timings": timings,
+                                  "portal": run.get("portal", {}),
                                   "history": history[-HISTORY_KEPT_ON_PAGE:]})
 
     if not cards:

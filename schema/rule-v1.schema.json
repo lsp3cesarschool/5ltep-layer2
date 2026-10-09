@@ -790,6 +790,18 @@
             },
             "on_or_before": {
               "type": "string"
+            },
+            "above": {
+              "type": [
+                "string",
+                "number"
+              ]
+            },
+            "at_most": {
+              "type": [
+                "string",
+                "number"
+              ]
             }
           }
         },

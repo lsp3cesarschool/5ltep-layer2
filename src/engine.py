@@ -198,12 +198,18 @@ def evaluate(rule: dict, reads: dict[str, Read]) -> dict:
 PORTAL_FILE = Path(__file__).resolve().parent.parent / "portal.json"
 
 
-def primary_portal() -> str | None:
-    """The portal of this instance (portal.json); resources of other portals are secondary."""
+def portal_config() -> dict:
+    """portal.json: the portal of this instance (url, name, title) and its repository."""
     try:
-        return json.loads(PORTAL_FILE.read_text(encoding="utf-8"))["portal_url"].rstrip("/")
-    except (OSError, ValueError, KeyError):
-        return None
+        return json.loads(PORTAL_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def primary_portal() -> str | None:
+    """The portal of this instance; resources of other portals are secondary."""
+    url = portal_config().get("portal_url")
+    return url.rstrip("/") if url else None
 
 
 def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
@@ -328,4 +334,5 @@ def run(paths, work: Path, keep_downloads: bool = False, log=print) -> dict:
     timings = {"download_s": round(download_s, 2), "processing_s": round(processing_s, 2),
                "bytes_processed": sum(f.download.get("bytes") or 0 for f in fetched.values() if f.status == OK)}
     return {"started_at": started, "finished_at": now(), "rules": rules, "primary_portal": primary, "timings": timings,
+            "portal": portal_config(),
             "fetched": list(fetched.values()), "problems": problems}

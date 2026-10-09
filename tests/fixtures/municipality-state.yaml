@@ -1,0 +1,51 @@
+schema_version: "1.0"
+rule_version: "0.4.0"
+origin: cross_reference
+
+description:
+  language: pt-BR
+  title: "Código do município compatível com a UF do mesmo local"
+  title_translations:
+    en: "Municipality code consistent with the state of the same place"
+  text: >
+    Para cada auto de infração, procura o código IBGE do município na tabela
+    oficial de municípios publicada pelo TSE e confere se a UF do auto é a UF
+    desse município.
+  justification: >
+    Município e UF do mesmo registro precisam descrever o mesmo lugar. Uma
+    divergência pode indicar erro de digitação, de codificação ou campos
+    preenchidos com referências diferentes. É um sinal para revisão, não um
+    veredito sobre o auto.
+  exceptions:
+    - "Código de município extinto ou criado depois da tabela do TSE aparece como não encontrado, não como divergência."
+    - "Código ou UF vazio fica sem informação e não é contado como conforme."
+  examples:
+    - case: "COD_MUNICIPIO 2611606 (Recife) com UF PE"
+      expected: "Conforme"
+    - case: "COD_MUNICIPIO 2611606 (Recife) com UF AL"
+      expected: "Sinalizar: a tabela do TSE indica PE"
+
+sources:
+  ibama_autos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-auto-de-infracao
+    resource: {name: "Autos de infração", format: CSV}
+    archive: {type: zip, members: "auto_infracao_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      COD_MUNICIPIO: "Código IBGE do município do auto (7 dígitos)"
+      UF: "Sigla da UF do auto"
+  tse_municipios:
+    portal: https://dadosabertos.tse.jus.br
+    dataset: codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge
+    resource: {name: "Códigos oficiais de UF e municípios segundo o TSE e o IBGE", format: CSV}
+    archive: {type: zip, members: "municipio_tse_ibge.csv"}
+    file: {format: csv, encoding: latin-1, delimiter: ";"}
+    columns:
+      CD_MUNICIPIO_IBGE: "Código IBGE do município (7 dígitos)"
+      SG_UF: "Sigla da UF do município"
+
+check:
+  template: lookup-equals
+  key:     {from: ibama_autos.COD_MUNICIPIO, to: tse_municipios.CD_MUNICIPIO_IBGE}
+  compare: {from: ibama_autos.UF,            to: tse_municipios.SG_UF}

@@ -23,7 +23,8 @@ from src.fetch import Fetched, ResourceKey
 from src.loader import load_rule
 
 ROOT = Path(__file__).resolve().parent.parent
-RULE = load_rule(ROOT / "rules" / "territory" / "municipality-state.yaml").data
+FIXTURES = ROOT / "tests" / "fixtures"
+RULE = load_rule(FIXTURES / "municipality-state.yaml").data
 
 TSE = (
     '"DT_GERACAO";"HH_GERACAO";"CD_UF_TSE";"CD_UF_IBGE";"SG_UF";"NM_UF";"CD_MUNICIPIO_TSE";'
@@ -131,7 +132,7 @@ def test_full_run_against_the_portals(tmp_path):
 
 def test_interval_only_rule_leaves_order_to_another_rule(tmp_path):
     """IB-12c with check_order: false, on the cases documented in the rule (plus the reverse order)."""
-    rule = load_rule(ROOT / "rules" / "infraction" / "issued-over-five-years-after-fact.yaml").data
+    rule = load_rule(FIXTURES / "issued-over-five-years-after-fact.yaml").data
     text = ("DT_FATO_INFRACIONAL;DAT_HORA_AUTO_INFRACAO\n"
             "2010-01-01;2014-12-31 10:00:00\n"      # documented: conforme
             "2010-01-01;2016-01-02\n"               # documented: sinalizar (more than five years)
@@ -149,7 +150,7 @@ def test_counts_only_exposure_publishes_no_record_numbers(tmp_path, monkeypatch)
     """A rule with exposure: counts publishes counts and charts, never record numbers."""
     rules = tmp_path / "rules"
     rules.mkdir()
-    text = (ROOT / "rules" / "territory" / "municipality-state.yaml").read_text(encoding="utf-8")
+    text = (FIXTURES / "municipality-state.yaml").read_text(encoding="utf-8")
     (rules / "municipality-state.yaml").write_text(text.replace('origin: cross_reference\n',
                                                                'origin: cross_reference\nexposure: counts\n'), encoding="utf-8")
     run = {"started_at": "x", "finished_at": "y", "fetched": [], "problems": [], "timings": {},

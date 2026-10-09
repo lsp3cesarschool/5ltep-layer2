@@ -77,7 +77,8 @@ class Columns:
         return f"(NOT {self.empty(ref)} AND {self.typed(ref, as_date)} IS NULL)"
 
 
-COMPARISONS = {"at_least": ">=", "below": "<", "on_or_after": ">=", "before": "<", "after": ">", "on_or_before": "<="}
+COMPARISONS = {"at_least": ">=", "below": "<", "above": ">", "at_most": "<=",
+               "on_or_after": ">=", "before": "<", "after": ">", "on_or_before": "<="}
 
 
 def _typed_literal(value, spec: dict) -> str:
