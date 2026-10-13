@@ -16,7 +16,7 @@ um convite à revisão, nunca um veredito sobre os dados.
 | 📄 **Resultados recentes (texto simples)** | [`signals.md`](signals.md): cada regra com sua contagem de sinais e a saúde de cada fonte, refeito a cada rodada, legível sem JavaScript |
 | 📏 **Regras** | [`rules/`](rules/): uma verificação por arquivo, em YAML legível |
 | 📁 **Resultados** | [`results/`](results/) e [`docs/data/`](docs/data/): o que cada rodada grava (contagens, números de registro, hashes) |
-| 🔁 **Experimentos de controle** | [5ltep-layer2-aneel](https://github.com/lsp3cesarschool/5ltep-layer2-aneel) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-aneel/?lang=pt)) e [5ltep-layer2-recife](https://github.com/lsp3cesarschool/5ltep-layer2-recife) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-recife/?lang=pt)): o mesmo código nos portais da ANEEL e da Prefeitura do Recife |
+| 🔁 **Aplicações em outros contextos** | [5ltep-layer2-aneel](https://github.com/lsp3cesarschool/5ltep-layer2-aneel) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-aneel/?lang=pt)) e [5ltep-layer2-recife](https://github.com/lsp3cesarschool/5ltep-layer2-recife) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-recife/?lang=pt)): o mesmo código nos portais da ANEEL e da Prefeitura do Recife |
 
 > **Estado: demonstração de pesquisa.** Este repositório faz parte de um projeto de mestrado e é
 > mantido pelo autor. Não é operado, afiliado nem endossado pelo IBAMA nem por outro publicador;

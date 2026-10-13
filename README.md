@@ -16,7 +16,7 @@ review, never a verdict on the data.
 | 📄 **Latest results (plain text)** | [`signals.md`](signals.md): every rule with its signal count and the health of each source, rebuilt by each run, readable without JavaScript |
 | 📏 **Rules** | [`rules/`](rules/): one check per file, in plain YAML |
 | 📁 **Results** | [`results/`](results/) and [`docs/data/`](docs/data/): what each run writes (counts, record numbers, hashes) |
-| 🔁 **Control experiments** | [5ltep-layer2-aneel](https://github.com/lsp3cesarschool/5ltep-layer2-aneel) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-aneel/?lang=en)) and [5ltep-layer2-recife](https://github.com/lsp3cesarschool/5ltep-layer2-recife) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-recife/?lang=en)): the same code on the portals of ANEEL and of the City of Recife |
+| 🔁 **Applications in other contexts** | [5ltep-layer2-aneel](https://github.com/lsp3cesarschool/5ltep-layer2-aneel) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-aneel/?lang=en)) and [5ltep-layer2-recife](https://github.com/lsp3cesarschool/5ltep-layer2-recife) ([dashboard](https://lsp3cesarschool.github.io/5ltep-layer2-recife/?lang=en)): the same code on the portals of ANEEL and of the City of Recife |
 
 > **Status: research demonstration.** This repository is part of a master's research project and
 > is maintained by its author. It is not operated by, affiliated with or endorsed by IBAMA or any
