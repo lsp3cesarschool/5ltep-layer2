@@ -1,10 +1,10 @@
 {
  "rule": "term-without-infraction",
  "rule_version": "0.2.0",
- "evaluated_at": "2026-10-09T13:35:26+00:00",
- "run_id": "37937363972",
+ "evaluated_at": "2026-10-14T09:42:42+00:00",
+ "run_id": "38543868902",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_apreensao": {
@@ -22,8 +22,8 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "archive_members": "auto_infracao_*.csv",
-   "sha256": "5e65aba9b3b1ba08c3098b59da7031dadb78d876fc4f4d560ddc984eb1f381e0",
-   "records": 711926
+   "sha256": "ee25928af17d836a4d3dc6ab4cb7fbb3ee0a29e944ad1ef42daebd932bdb03a4",
+   "records": 712000
   }
  },
  "counts": {

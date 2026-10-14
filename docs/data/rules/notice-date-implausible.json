@@ -1,10 +1,10 @@
 {
  "rule": "notice-date-implausible",
  "rule_version": "0.1.0",
- "evaluated_at": "2026-10-09T13:34:54+00:00",
- "run_id": "37937363972",
+ "evaluated_at": "2026-10-14T09:41:46+00:00",
+ "run_id": "38543868902",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_autos": {
@@ -13,12 +13,12 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "archive_members": "auto_infracao_*.csv",
-   "sha256": "5e65aba9b3b1ba08c3098b59da7031dadb78d876fc4f4d560ddc984eb1f381e0",
-   "records": 711926
+   "sha256": "ee25928af17d836a4d3dc6ab4cb7fbb3ee0a29e944ad1ef42daebd932bdb03a4",
+   "records": 712000
   }
  },
  "counts": {
-  "match": 711926,
+  "match": 712000,
   "mismatch": 0,
   "key_not_found": 0,
   "missing_value": 0,
@@ -26,7 +26,7 @@
   "ambiguous_key": 0,
   "out_of_scope": 0
  },
- "total": 711926,
+ "total": 712000,
  "records": {},
  "members": [
   {
@@ -179,7 +179,7 @@
   },
   {
    "name": "auto_infracao_2016.csv",
-   "records": 17823
+   "records": 17824
   },
   {
    "name": "auto_infracao_2017.csv",
@@ -219,7 +219,7 @@
   },
   {
    "name": "auto_infracao_2026.csv",
-   "records": 12878
+   "records": 12951
   }
  ],
  "by_member": {
@@ -335,7 +335,7 @@
    "match": 17326
   },
   "auto_infracao_2016.csv": {
-   "match": 17823
+   "match": 17824
   },
   "auto_infracao_2017.csv": {
    "match": 16885
@@ -365,7 +365,7 @@
    "match": 16273
   },
   "auto_infracao_2026.csv": {
-   "match": 12878
+   "match": 12951
   }
  },
  "by_period": {
@@ -481,7 +481,7 @@
    "match": 17326
   },
   "2016": {
-   "match": 17823
+   "match": 17824
   },
   "2017": {
    "match": 16885
@@ -511,7 +511,7 @@
    "match": 16273
   },
   "2026": {
-   "match": 12878
+   "match": 12951
   }
  },
  "timeline": "ibama_autos.DAT_HORA_AUTO_INFRACAO"

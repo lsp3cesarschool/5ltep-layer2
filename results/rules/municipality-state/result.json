@@ -1,7 +1,7 @@
 {
- "run_id": "37937363972",
+ "run_id": "38543868902",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
  "id": "municipality-state",
  "rule_version": "0.4.0",
  "origin": "cross_reference",
@@ -35,10 +35,10 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-10-09T13:35:26+00:00",
- "total": 711926,
+ "evaluated_at": "2026-10-14T09:42:42+00:00",
+ "total": 712000,
  "counts": {
-  "match": 711112,
+  "match": 711186,
   "mismatch": 0,
   "key_not_found": 547,
   "missing_value": 267,
@@ -59,12 +59,12 @@
   "ibama_autos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
    "fetch_status": "ok",
-   "sha256": "5e65aba9b3b1ba08c3098b59da7031dadb78d876fc4f4d560ddc984eb1f381e0",
+   "sha256": "ee25928af17d836a4d3dc6ab4cb7fbb3ee0a29e944ad1ef42daebd932bdb03a4",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "file": "auto_infracao_csv.zip",
    "files": null,
    "archive_members": "auto_infracao_*.csv",
-   "records": 711926,
+   "records": 712000,
    "members": [
     {
      "name": "auto_infracao_1977.csv",
@@ -216,7 +216,7 @@
     },
     {
      "name": "auto_infracao_2016.csv",
-     "records": 17823
+     "records": 17824
     },
     {
      "name": "auto_infracao_2017.csv",
@@ -256,14 +256,14 @@
     },
     {
      "name": "auto_infracao_2026.csv",
-     "records": 12878
+     "records": 12951
     }
    ]
   },
   "tse_municipios": {
    "resource": "dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE",
    "fetch_status": "ok",
-   "sha256": "f55c9720d221a9956279f6cb225aafcae797e0cf8ac2289040c052ab4ea7c712",
+   "sha256": "68328ddc166806594a2aab5809ac9aa602153535d6b8a71e886c337f9f3631ca",
    "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/municipio_tse_ibge/municipio_tse_ibge.zip",
    "file": "municipio_tse_ibge.zip",
    "files": null,

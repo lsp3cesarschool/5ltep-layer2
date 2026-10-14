@@ -1,10 +1,10 @@
 {
  "rule": "species-without-infraction",
  "rule_version": "0.1.0",
- "evaluated_at": "2026-10-09T13:34:56+00:00",
- "run_id": "37937363972",
+ "evaluated_at": "2026-10-14T09:41:50+00:00",
+ "run_id": "38543868902",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_filhos": {
@@ -13,8 +13,8 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/especime/especime.csv",
    "archive_members": null,
-   "sha256": "04bd4e533ec1168115aa93631e487f5a7cc7e55eced65c9a40854209636b10ff",
-   "records": 38056
+   "sha256": "1b68102dc1589448e72137257912629211113067f522af58204284024843571e",
+   "records": 38098
   },
   "ibama_autos": {
    "label": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
@@ -22,20 +22,20 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "archive_members": "auto_infracao_*.csv",
-   "sha256": "5e65aba9b3b1ba08c3098b59da7031dadb78d876fc4f4d560ddc984eb1f381e0",
-   "records": 711926
+   "sha256": "ee25928af17d836a4d3dc6ab4cb7fbb3ee0a29e944ad1ef42daebd932bdb03a4",
+   "records": 712000
   }
  },
  "counts": {
   "match": 34661,
   "mismatch": 0,
   "key_not_found": 7,
-  "missing_value": 3388,
+  "missing_value": 3430,
   "invalid_value": 0,
   "ambiguous_key": 0,
   "out_of_scope": 0
  },
- "total": 38056,
+ "total": 38098,
  "records": {
   "key_not_found": {
    "especime.csv": [
@@ -3437,21 +3437,63 @@
     38053,
     38054,
     38055,
-    38056
+    38056,
+    38057,
+    38058,
+    38059,
+    38060,
+    38061,
+    38062,
+    38063,
+    38064,
+    38065,
+    38066,
+    38067,
+    38068,
+    38069,
+    38070,
+    38071,
+    38072,
+    38073,
+    38074,
+    38075,
+    38076,
+    38077,
+    38078,
+    38079,
+    38080,
+    38081,
+    38082,
+    38083,
+    38084,
+    38085,
+    38086,
+    38087,
+    38088,
+    38089,
+    38090,
+    38091,
+    38092,
+    38093,
+    38094,
+    38095,
+    38096,
+    38097,
+    38098
    ]
   }
  },
  "members": [
   {
    "name": "especime.csv",
-   "records": 38056
+   "records": 38098
   }
  ],
  "by_member": {
   "especime.csv": {
    "key_not_found": 7,
    "match": 34661,
-   "missing_value": 3388
+   "missing_value": 3430
   }
  },
  "by_period": {},

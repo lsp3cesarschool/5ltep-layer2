@@ -1,7 +1,7 @@
 {
- "run_id": "37937363972",
+ "run_id": "38543868902",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
  "id": "exploration-outside-validity",
  "rule_version": "0.2.0",
  "origin": "expert",
@@ -30,10 +30,10 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-10-09T13:34:39+00:00",
- "total": 2386115,
+ "evaluated_at": "2026-10-14T09:41:21+00:00",
+ "total": 2393554,
  "counts": {
-  "match": 2326024,
+  "match": 2333463,
   "mismatch": 60091,
   "key_not_found": 0,
   "missing_value": 0,
@@ -54,12 +54,12 @@
   "ibama_if100": {
    "resource": "dadosabertos.ibama.gov.br › volumes-explorados-if-100 › Volumes Explorados - IF 100%",
    "fetch_status": "ok",
-   "sha256": "0f106ef75db9068fcd7f91adaf9d0ae890fb064137aadd1d2d82bd9b0a093ff3",
+   "sha256": "b85ff64c82eadd689663e8c48999eb4ccc239713f89d30276da4bc00f460de1a",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SINAFLOR/VolumesExploradosIf100/volumes_explorados_if_100_csv.zip",
    "file": "volumes_explorados_if_100_csv.zip",
    "files": null,
    "archive_members": "volumes_explorados_if_100_ano_*.csv",
-   "records": 2386115,
+   "records": 2393554,
    "members": [
     {
      "name": "volumes_explorados_if_100_ano_2017.csv",
@@ -87,19 +87,19 @@
     },
     {
      "name": "volumes_explorados_if_100_ano_2023.csv",
-     "records": 325918
+     "records": 326068
     },
     {
      "name": "volumes_explorados_if_100_ano_2024.csv",
-     "records": 404287
+     "records": 404498
     },
     {
      "name": "volumes_explorados_if_100_ano_2025.csv",
-     "records": 265976
+     "records": 267679
     },
     {
      "name": "volumes_explorados_if_100_ano_2026.csv",
-     "records": 117662
+     "records": 123037
     }
    ]
   }

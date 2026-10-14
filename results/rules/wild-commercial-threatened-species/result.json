@@ -1,7 +1,7 @@
 {
- "run_id": "37937363972",
+ "run_id": "38543868902",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
  "id": "wild-commercial-threatened-species",
  "rule_version": "0.1.0",
  "origin": "cross_reference",
@@ -35,16 +35,16 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-10-09T13:34:23+00:00",
- "total": 258580,
+ "evaluated_at": "2026-10-14T09:40:52+00:00",
+ "total": 258717,
  "counts": {
-  "match": 103594,
+  "match": 103526,
   "mismatch": 1714,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 153272
+  "out_of_scope": 153477
  },
  "signals": 1714,
  "signals_by_outcome": {
@@ -59,16 +59,16 @@
   "ibama_siscites": {
    "resource": "dadosabertos.ibama.gov.br › siscites-licencas-de-fauna-e-flora-emitidas › Siscites",
    "fetch_status": "ok",
-   "sha256": "e320a1f12b98e2b86166b559a59ce2ec53417fa6fd0d4fe9b12720b8503f8051",
+   "sha256": "827ff2ff7070d3f39219c29f624ad8448c870cde90f1d20b1cf3053d81f7ade7",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/CITES/licencas.csv",
    "file": "licencas.csv",
    "files": null,
    "archive_members": null,
-   "records": 258580,
+   "records": 258717,
    "members": [
     {
      "name": "licencas.csv",
-     "records": 258580
+     "records": 258717
     }
    ]
   },

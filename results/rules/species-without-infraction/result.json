@@ -1,7 +1,7 @@
 {
- "run_id": "37937363972",
+ "run_id": "38543868902",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
  "id": "species-without-infraction",
  "rule_version": "0.1.0",
  "origin": "cross_reference",
@@ -35,22 +35,22 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-10-09T13:34:56+00:00",
- "total": 38056,
+ "evaluated_at": "2026-10-14T09:41:50+00:00",
+ "total": 38098,
  "counts": {
   "match": 34661,
   "mismatch": 0,
   "key_not_found": 7,
-  "missing_value": 3388,
+  "missing_value": 3430,
   "invalid_value": 0,
   "ambiguous_key": 0,
   "out_of_scope": 0
  },
- "signals": 3395,
+ "signals": 3437,
  "signals_by_outcome": {
   "mismatch": 0,
   "key_not_found": 7,
-  "missing_value": 3388,
+  "missing_value": 3430,
   "invalid_value": 0,
   "ambiguous_key": 0
  },
@@ -59,28 +59,28 @@
   "ibama_filhos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - espécimes",
    "fetch_status": "ok",
-   "sha256": "04bd4e533ec1168115aa93631e487f5a7cc7e55eced65c9a40854209636b10ff",
+   "sha256": "1b68102dc1589448e72137257912629211113067f522af58204284024843571e",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/especime/especime.csv",
    "file": "especime.csv",
    "files": null,
    "archive_members": null,
-   "records": 38056,
+   "records": 38098,
    "members": [
     {
      "name": "especime.csv",
-     "records": 38056
+     "records": 38098
     }
    ]
   },
   "ibama_autos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
    "fetch_status": "ok",
-   "sha256": "5e65aba9b3b1ba08c3098b59da7031dadb78d876fc4f4d560ddc984eb1f381e0",
+   "sha256": "ee25928af17d836a4d3dc6ab4cb7fbb3ee0a29e944ad1ef42daebd932bdb03a4",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "file": "auto_infracao_csv.zip",
    "files": null,
    "archive_members": "auto_infracao_*.csv",
-   "records": 711926,
+   "records": 712000,
    "members": [
     {
      "name": "auto_infracao_1977.csv",
@@ -232,7 +232,7 @@
     },
     {
      "name": "auto_infracao_2016.csv",
-     "records": 17823
+     "records": 17824
     },
     {
      "name": "auto_infracao_2017.csv",
@@ -272,7 +272,7 @@
     },
     {
      "name": "auto_infracao_2026.csv",
-     "records": 12878
+     "records": 12951
     }
    ]
   }

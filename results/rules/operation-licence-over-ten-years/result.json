@@ -1,7 +1,7 @@
 {
- "run_id": "37937363972",
+ "run_id": "38543868902",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
  "id": "operation-licence-over-ten-years",
  "rule_version": "0.3.0",
  "origin": "expert",
@@ -32,8 +32,8 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-10-09T13:35:18+00:00",
- "total": 14302,
+ "evaluated_at": "2026-10-14T09:42:28+00:00",
+ "total": 14311,
  "counts": {
   "match": 1590,
   "mismatch": 2,
@@ -41,7 +41,7 @@
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 12710
+  "out_of_scope": 12719
  },
  "signals": 2,
  "signals_by_outcome": {
@@ -56,16 +56,16 @@
   "ibama_licencas": {
    "resource": "dadosabertos.ibama.gov.br › licencas-ambientais-de-atividades-e-empreendimentos-licenciados-pelo-ibama › Licenças ambientais de atividades e ...",
    "fetch_status": "ok",
-   "sha256": "71b00317d5a0d49ab105b4a3321b42b6edc133e44c77e3ab6ef291115adb4357",
+   "sha256": "ebf01b1b1aa8d56787309c9ad68d59eacf1c587893f7c730b0165b3f4591bc2d",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SISLIC/sislic-licencas.csv",
    "file": "sislic-licencas.csv",
    "files": null,
    "archive_members": null,
-   "records": 14302,
+   "records": 14311,
    "members": [
     {
      "name": "sislic-licencas.csv",
-     "records": 14302
+     "records": 14311
     }
    ]
   }

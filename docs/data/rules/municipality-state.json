@@ -1,10 +1,10 @@
 {
  "rule": "municipality-state",
  "rule_version": "0.4.0",
- "evaluated_at": "2026-10-09T13:35:26+00:00",
- "run_id": "37937363972",
+ "evaluated_at": "2026-10-14T09:42:42+00:00",
+ "run_id": "38543868902",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_autos": {
@@ -13,8 +13,8 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "archive_members": "auto_infracao_*.csv",
-   "sha256": "5e65aba9b3b1ba08c3098b59da7031dadb78d876fc4f4d560ddc984eb1f381e0",
-   "records": 711926
+   "sha256": "ee25928af17d836a4d3dc6ab4cb7fbb3ee0a29e944ad1ef42daebd932bdb03a4",
+   "records": 712000
   },
   "tse_municipios": {
    "label": "dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE",
@@ -22,12 +22,12 @@
    "files": null,
    "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/municipio_tse_ibge/municipio_tse_ibge.zip",
    "archive_members": "municipio_tse_ibge.csv",
-   "sha256": "f55c9720d221a9956279f6cb225aafcae797e0cf8ac2289040c052ab4ea7c712",
+   "sha256": "68328ddc166806594a2aab5809ac9aa602153535d6b8a71e886c337f9f3631ca",
    "records": 5571
   }
  },
  "counts": {
-  "match": 711112,
+  "match": 711186,
   "mismatch": 0,
   "key_not_found": 547,
   "missing_value": 267,
@@ -35,7 +35,7 @@
   "ambiguous_key": 0,
   "out_of_scope": 0
  },
- "total": 711926,
+ "total": 712000,
  "records": {
   "key_not_found": {
    "auto_infracao_1986.csv": [
@@ -1133,7 +1133,7 @@
   },
   {
    "name": "auto_infracao_2016.csv",
-   "records": 17823
+   "records": 17824
   },
   {
    "name": "auto_infracao_2017.csv",
@@ -1173,7 +1173,7 @@
   },
   {
    "name": "auto_infracao_2026.csv",
-   "records": 12878
+   "records": 12951
   }
  ],
  "by_member": {
@@ -1342,7 +1342,7 @@
    "match": 17326
   },
   "auto_infracao_2016.csv": {
-   "match": 17823
+   "match": 17824
   },
   "auto_infracao_2017.csv": {
    "key_not_found": 1,
@@ -1382,7 +1382,7 @@
    "match": 16272
   },
   "auto_infracao_2026.csv": {
-   "match": 12878
+   "match": 12951
   }
  },
  "by_period": {},

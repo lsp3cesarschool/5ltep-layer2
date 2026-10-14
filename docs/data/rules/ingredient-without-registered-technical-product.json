@@ -1,10 +1,10 @@
 {
  "rule": "ingredient-without-registered-technical-product",
  "rule_version": "0.1.0",
- "evaluated_at": "2026-10-09T13:35:25+00:00",
- "run_id": "37937363972",
+ "evaluated_at": "2026-10-14T09:42:41+00:00",
+ "run_id": "38543868902",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/37937363972",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_comercializacao": {
@@ -22,8 +22,8 @@
    "files": null,
    "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/a200c70b-e025-4a9a-be1b-ec7275d7921f/download/agrofitprodutostecnicos.csv",
    "archive_members": null,
-   "sha256": "aa9fa90d6e7546067e343ec1649d46e55cef62497593ca22d41e42a0998835d6",
-   "records": 2991
+   "sha256": "269c700dd492f4b29eb9af33685e4d65369e8758f72c99b2e0e95ee57d030812",
+   "records": 2990
   }
  },
  "counts": {
