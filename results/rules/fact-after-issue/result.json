@@ -1,7 +1,7 @@
 {
- "run_id": "38543868902",
+ "run_id": "39577312135",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/39577312135",
  "id": "fact-after-issue",
  "rule_version": "0.3.0",
  "origin": "expert",
@@ -31,20 +31,20 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-10-14T09:41:41+00:00",
- "total": 712000,
+ "evaluated_at": "2026-10-21T09:31:09+00:00",
+ "total": 712362,
  "counts": {
-  "match": 84281,
-  "mismatch": 2112,
+  "match": 84534,
+  "mismatch": 2120,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 625607
+  "out_of_scope": 625708
  },
- "signals": 2112,
+ "signals": 2120,
  "signals_by_outcome": {
-  "mismatch": 2112,
+  "mismatch": 2120,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
@@ -55,12 +55,12 @@
   "ibama_autos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
    "fetch_status": "ok",
-   "sha256": "ee25928af17d836a4d3dc6ab4cb7fbb3ee0a29e944ad1ef42daebd932bdb03a4",
+   "sha256": "9d333264124b83a34bb2e18484fce6ea042912c475766a883ce2b3db203803db",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "file": "auto_infracao_csv.zip",
    "files": null,
    "archive_members": "auto_infracao_*.csv",
-   "records": 712000,
+   "records": 712362,
    "members": [
     {
      "name": "auto_infracao_1977.csv",
@@ -252,7 +252,7 @@
     },
     {
      "name": "auto_infracao_2026.csv",
-     "records": 12951
+     "records": 13313
     }
    ]
   }

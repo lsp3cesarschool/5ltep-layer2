@@ -1,10 +1,10 @@
 {
  "rule": "embargo-date-implausible",
  "rule_version": "0.1.0",
- "evaluated_at": "2026-10-14T09:40:54+00:00",
- "run_id": "38543868902",
+ "evaluated_at": "2026-10-21T09:30:33+00:00",
+ "run_id": "39577312135",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/39577312135",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_embargo": {
@@ -13,12 +13,12 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/TERMOS_DE_EMBARGO/TERMO_EMBARGO/termo_de_embargo.csv",
    "archive_members": null,
-   "sha256": "359556bbaa1191b712dbbf15b5f370216dae477c6e8427fb03ee7a0896a70c3c",
-   "records": 116789
+   "sha256": "114d4c3174cbcedcf0a855631fa2f8743123938c468046c7098b1cd4022a47df",
+   "records": 116877
   }
  },
  "counts": {
-  "match": 116781,
+  "match": 116869,
   "mismatch": 8,
   "key_not_found": 0,
   "missing_value": 0,
@@ -26,7 +26,7 @@
   "ambiguous_key": 0,
   "out_of_scope": 0
  },
- "total": 116789,
+ "total": 116877,
  "records": {
   "mismatch": {
    "termo_de_embargo.csv": [
@@ -34,22 +34,22 @@
     2,
     3,
     4,
-    116786,
-    116787,
-    116788,
-    116789
+    116874,
+    116875,
+    116876,
+    116877
    ]
   }
  },
  "members": [
   {
    "name": "termo_de_embargo.csv",
-   "records": 116789
+   "records": 116877
   }
  ],
  "by_member": {
   "termo_de_embargo.csv": {
-   "match": 116781,
+   "match": 116869,
    "mismatch": 8
   }
  },
@@ -109,7 +109,7 @@
    "match": 1572
   },
   "2005": {
-   "match": 2856
+   "match": 2859
   },
   "2006": {
    "match": 5779
@@ -172,7 +172,7 @@
    "match": 5417
   },
   "2026": {
-   "match": 4149
+   "match": 4234
   },
   "2063": {
    "mismatch": 1

@@ -1,7 +1,7 @@
 {
- "run_id": "38543868902",
+ "run_id": "39577312135",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/39577312135",
  "id": "incident-milestones-order",
  "rule_version": "0.2.0",
  "origin": "expert",
@@ -31,7 +31,7 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-10-14T09:41:02+00:00",
+ "evaluated_at": "2026-10-21T09:30:39+00:00",
  "total": 418525,
  "counts": {
   "match": 417807,

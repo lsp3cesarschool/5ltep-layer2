@@ -1,10 +1,10 @@
 {
  "rule": "municipality-state",
  "rule_version": "0.4.0",
- "evaluated_at": "2026-10-14T09:42:42+00:00",
- "run_id": "38543868902",
+ "evaluated_at": "2026-10-21T09:31:58+00:00",
+ "run_id": "39577312135",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/39577312135",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_autos": {
@@ -13,8 +13,8 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "archive_members": "auto_infracao_*.csv",
-   "sha256": "ee25928af17d836a4d3dc6ab4cb7fbb3ee0a29e944ad1ef42daebd932bdb03a4",
-   "records": 712000
+   "sha256": "9d333264124b83a34bb2e18484fce6ea042912c475766a883ce2b3db203803db",
+   "records": 712362
   },
   "tse_municipios": {
    "label": "dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE",
@@ -22,12 +22,12 @@
    "files": null,
    "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/municipio_tse_ibge/municipio_tse_ibge.zip",
    "archive_members": "municipio_tse_ibge.csv",
-   "sha256": "68328ddc166806594a2aab5809ac9aa602153535d6b8a71e886c337f9f3631ca",
+   "sha256": "6a5372b143f1ad74c99000f1023918f673df55dadd37c9f0ac8c15dcca57a15f",
    "records": 5571
   }
  },
  "counts": {
-  "match": 711186,
+  "match": 711548,
   "mismatch": 0,
   "key_not_found": 547,
   "missing_value": 267,
@@ -35,7 +35,7 @@
   "ambiguous_key": 0,
   "out_of_scope": 0
  },
- "total": 712000,
+ "total": 712362,
  "records": {
   "key_not_found": {
    "auto_infracao_1986.csv": [
@@ -1173,7 +1173,7 @@
   },
   {
    "name": "auto_infracao_2026.csv",
-   "records": 12951
+   "records": 13313
   }
  ],
  "by_member": {
@@ -1382,7 +1382,7 @@
    "match": 16272
   },
   "auto_infracao_2026.csv": {
-   "match": 12951
+   "match": 13313
   }
  },
  "by_period": {},

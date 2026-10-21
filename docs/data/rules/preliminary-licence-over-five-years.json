@@ -1,10 +1,10 @@
 {
  "rule": "preliminary-licence-over-five-years",
  "rule_version": "0.3.0",
- "evaluated_at": "2026-10-14T09:42:28+00:00",
- "run_id": "38543868902",
+ "evaluated_at": "2026-10-21T09:31:47+00:00",
+ "run_id": "39577312135",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/39577312135",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_licencas": {
@@ -13,8 +13,8 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SISLIC/sislic-licencas.csv",
    "archive_members": null,
-   "sha256": "ebf01b1b1aa8d56787309c9ad68d59eacf1c587893f7c730b0165b3f4591bc2d",
-   "records": 14311
+   "sha256": "3d92925a0bfdaea998e5b5ff1f751e68ab139cec25ac77df33fd14f7730f0c28",
+   "records": 14352
   }
  },
  "counts": {
@@ -24,34 +24,34 @@
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 13513
+  "out_of_scope": 13554
  },
- "total": 14311,
+ "total": 14352,
  "records": {
   "mismatch": {
    "sislic-licencas.csv": [
-    8493,
-    8495,
-    8506,
-    8529,
-    8534,
-    8571,
-    8653,
-    8682
+    8531,
+    8533,
+    8544,
+    8567,
+    8572,
+    8609,
+    8691,
+    8720
    ]
   }
  },
  "members": [
   {
    "name": "sislic-licencas.csv",
-   "records": 14311
+   "records": 14352
   }
  ],
  "by_member": {
   "sislic-licencas.csv": {
    "match": 790,
    "mismatch": 8,
-   "out_of_scope": 13513
+   "out_of_scope": 13554
   }
  },
  "by_period": {
@@ -200,11 +200,11 @@
   "2025": {
    "match": 23,
    "mismatch": 3,
-   "out_of_scope": 895
+   "out_of_scope": 910
   },
   "2026": {
    "match": 16,
-   "out_of_scope": 638
+   "out_of_scope": 664
   },
   "2027": {
    "out_of_scope": 1

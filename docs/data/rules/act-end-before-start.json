@@ -1,10 +1,10 @@
 {
  "rule": "act-end-before-start",
  "rule_version": "0.3.0",
- "evaluated_at": "2026-10-14T09:41:38+00:00",
- "run_id": "38543868902",
+ "evaluated_at": "2026-10-21T09:31:08+00:00",
+ "run_id": "39577312135",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/39577312135",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_autos": {
@@ -13,20 +13,20 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "archive_members": "auto_infracao_*.csv",
-   "sha256": "ee25928af17d836a4d3dc6ab4cb7fbb3ee0a29e944ad1ef42daebd932bdb03a4",
-   "records": 712000
+   "sha256": "9d333264124b83a34bb2e18484fce6ea042912c475766a883ce2b3db203803db",
+   "records": 712362
   }
  },
  "counts": {
-  "match": 85755,
+  "match": 86015,
   "mismatch": 634,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 625611
+  "out_of_scope": 625713
  },
- "total": 712000,
+ "total": 712362,
  "records": {
   "mismatch": {
    "auto_infracao_2019.csv": [
@@ -633,7 +633,7 @@
     14675,
     14727,
     14866,
-    15353
+    15354
    ],
    "auto_infracao_2026.csv": [
     68,
@@ -670,14 +670,14 @@
     7837,
     8610,
     8741,
-    10310,
-    10470,
-    10663,
-    11216,
-    11623,
-    12046,
-    12665,
-    12740
+    10193,
+    10503,
+    10674,
+    10874,
+    11915,
+    12366,
+    12996,
+    13083
    ]
   }
  },
@@ -872,7 +872,7 @@
   },
   {
    "name": "auto_infracao_2026.csv",
-   "records": 12951
+   "records": 13313
   }
  ],
  "by_member": {
@@ -1030,14 +1030,14 @@
    "out_of_scope": 621
   },
   "auto_infracao_2025.csv": {
-   "match": 15209,
+   "match": 15211,
    "mismatch": 87,
-   "out_of_scope": 977
+   "out_of_scope": 975
   },
   "auto_infracao_2026.csv": {
-   "match": 11746,
+   "match": 12004,
    "mismatch": 42,
-   "out_of_scope": 1163
+   "out_of_scope": 1267
   }
  },
  "by_period": {
@@ -1129,32 +1129,32 @@
    "mismatch": 85
   },
   "2022": {
-   "match": 12095,
+   "match": 12097,
    "mismatch": 102
   },
   "2023": {
-   "match": 15413,
+   "match": 15415,
    "mismatch": 125
   },
   "2024": {
-   "match": 11117,
+   "match": 11125,
    "mismatch": 64,
    "out_of_scope": 1
   },
   "2025": {
-   "match": 13778,
-   "mismatch": 75,
+   "match": 13795,
+   "mismatch": 76,
    "out_of_scope": 1
   },
   "2026": {
-   "match": 10031,
-   "mismatch": 44
+   "match": 10262,
+   "mismatch": 43
   },
   "2027": {
    "mismatch": 1
   },
   "unknown": {
-   "out_of_scope": 625609
+   "out_of_scope": 625711
   }
  },
  "timeline": "ibama_autos.DT_INICIO_ATO_INEQUIVOCO"

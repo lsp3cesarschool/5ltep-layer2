@@ -1,7 +1,7 @@
 {
- "run_id": "38543868902",
+ "run_id": "39577312135",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/38543868902",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/39577312135",
  "id": "ingredient-without-registered-technical-product",
  "rule_version": "0.1.0",
  "origin": "cross_reference",
@@ -35,10 +35,10 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-10-14T09:42:41+00:00",
- "total": 124299,
+ "evaluated_at": "2026-10-21T09:31:57+00:00",
+ "total": 124301,
  "counts": {
-  "match": 13218,
+  "match": 13220,
   "mismatch": 0,
   "key_not_found": 2247,
   "missing_value": 57,
@@ -59,23 +59,23 @@
   "ibama_comercializacao": {
    "resource": "dadosabertos.ibama.gov.br › relatorios-de-comercializacao-de-agrotoxicos › Dados - CSV",
    "fetch_status": "ok",
-   "sha256": "66731450daae45cae50ecf8f3a5d8e79e7fd42b670ee137e51eaf2643b357142",
+   "sha256": "b2ddca26905c9318f8bf77b9f43d70b238e587efdf8b6a4112bc46a795ca30a5",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/AGROTOXICOS/RelatoriosdeComercializacaodeAgrotoxicos/relatorios_comercializacao_agrotoxicos.csv",
    "file": "relatorios_comercializacao_agrotoxicos.csv",
    "files": null,
    "archive_members": null,
-   "records": 124299,
+   "records": 124301,
    "members": [
     {
      "name": "relatorios_comercializacao_agrotoxicos.csv",
-     "records": 124299
+     "records": 124301
     }
    ]
   },
   "mapa_agrofit": {
    "resource": "dados.agricultura.gov.br › sistema-de-agrotoxicos-fitossanitarios-agrofit › Produto Técnico",
    "fetch_status": "ok",
-   "sha256": "269c700dd492f4b29eb9af33685e4d65369e8758f72c99b2e0e95ee57d030812",
+   "sha256": "aea98422f5f16a56e6983aca0dfcd6ae5e3a59f188704bc98d6a4c69783072fd",
    "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/a200c70b-e025-4a9a-be1b-ec7275d7921f/download/agrofitprodutostecnicos.csv",
    "file": "agrofitprodutostecnicos.csv",
    "files": null,
