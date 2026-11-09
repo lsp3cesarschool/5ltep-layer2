@@ -5,6 +5,7 @@
 
 const I18N = {
   en: {
+    cupim: "← CUPIM platform",
     back: "← Back to the repository", eyebrow: "5L-TEP · Layer 2 · Semantic Policies", loading: "Loading…",
     title: "Semantic policies over open data", run: "Run now ↗", rules_btn: "Rule files ↗", manifest_btn: "Manifest ↗", signals_btn: "Latest results (plain text) ↗",
     intro: "Each rule crosses data published on CKAN open data portals. Every week this repository downloads each resource once, records whether each portal answered and what it served, and counts, for every rule, the records that deserve a second look. A signal is something to review, never a verdict on the data; no value from the portals is published here, only counts and record numbers.",
@@ -72,6 +73,7 @@ const I18N = {
     footer: "Layer 2 of 5L-TEP (Layers 1, 3 and 4 are separate repositories). Data:",
   },
   pt: {
+    cupim: "← Plataforma CUPIM",
     back: "← Voltar ao repositório", eyebrow: "5L-TEP · Camada 2 · Políticas Semânticas", loading: "Carregando…",
     title: "Políticas semânticas sobre dados abertos", run: "Rodar agora ↗", rules_btn: "Arquivos de regras ↗",
     manifest_btn: "Manifesto ↗", signals_btn: "Resultados recentes (texto simples) ↗",
@@ -200,6 +202,7 @@ const day = (iso) => { const d = parseIso(iso); return d ? DATE_ONLY.format(d) :
 const short = (sha) => (sha ? sha.slice(0, 12) + "…" : "–");
 
 function applyLanguage() {
+  document.getElementById("cupim-link").href = `https://5ltep-cupim.github.io/?lang=${LANG}`;
   document.documentElement.lang = LANG === "pt" ? "pt-BR" : "en";
   document.querySelectorAll("[data-i18n]").forEach((n) => { n.textContent = t(n.dataset.i18n); });
   document.querySelectorAll("[data-i18n-placeholder]").forEach((n) => { n.placeholder = t(n.dataset.i18nPlaceholder); });

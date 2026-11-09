@@ -2,7 +2,7 @@
 
 [![Tests](https://github.com/lsp3cesarschool/5ltep-layer2/actions/workflows/tests.yml/badge.svg)](https://github.com/lsp3cesarschool/5ltep-layer2/actions/workflows/tests.yml) [![Layer 2](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Flsp3cesarschool%2F5ltep-layer2%2Fmain%2Fdocs%2Fdata%2Fstatus.json)](https://github.com/lsp3cesarschool/5ltep-layer2/actions/workflows/layer2.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-**English** · [Português](LEIAME.md)
+[← CUPIM platform](https://5ltep-cupim.github.io/?lang=en) · **English** · [Português](LEIAME.md)
 
 **35 domain rules that cross CKAN open data portals, applied to the portal of IBAMA, Brazil's
 federal environmental agency.** People write the rules after the data is published, one check per
