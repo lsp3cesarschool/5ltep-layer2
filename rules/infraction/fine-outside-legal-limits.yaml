@@ -1,5 +1,5 @@
 schema_version: "1.0"
-rule_version: "0.1.0"
+rule_version: "0.1.1"
 origin: expert
 
 description:
@@ -19,7 +19,7 @@ description:
   exceptions:
     - "A reincidência pode multiplicar a multa (Decreto 6.514/2008, art. 11), e um auto pode reunir mais de uma infração; nesses casos o valor pode legitimamente passar do máximo."
     - "Multa diária e advertência ficam fora do escopo."
-    - "Valor vazio aparece como valor ausente, não como divergência."
+    - "Autos sem valor informado ficam fora do escopo."
   examples:
     - case: "Multa simples de R$ 1.500,00 lavrada em 2010"
       expected: "Conforme"
@@ -47,3 +47,4 @@ check:
   where:
     - {column: ibama_autos.TIPO_AUTO, equals: "Multa simples"}
     - {column: ibama_autos.DAT_HORA_AUTO_INFRACAO, on_or_after: "1999-09-22"}
+    - {column: ibama_autos.VAL_AUTO_INFRACAO, empty: false}
