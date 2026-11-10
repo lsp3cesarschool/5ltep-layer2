@@ -1,7 +1,7 @@
 {
- "run_id": "42811839057",
+ "run_id": "42812758765",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42811839057",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42812758765",
  "id": "appendix-i-wild-commercial",
  "rule_version": "0.1.0",
  "origin": "expert",
@@ -31,7 +31,7 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-10T11:59:51+00:00",
+ "evaluated_at": "2026-11-10T12:06:36+00:00",
  "total": 259503,
  "counts": {
   "match": 244606,

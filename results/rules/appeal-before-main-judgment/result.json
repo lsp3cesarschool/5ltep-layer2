@@ -1,7 +1,7 @@
 {
- "run_id": "42811839057",
+ "run_id": "42812758765",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42811839057",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42812758765",
  "id": "appeal-before-main-judgment",
  "rule_version": "0.3.0",
  "origin": "expert",
@@ -31,7 +31,7 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-10T12:01:04+00:00",
+ "evaluated_at": "2026-11-10T12:07:49+00:00",
  "total": 2917,
  "counts": {
   "match": 490,

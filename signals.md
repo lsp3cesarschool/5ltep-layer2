@@ -6,11 +6,11 @@ Generated automatically by the publish job from the checked results; do not edit
 shown here: the record numbers are on the dashboard and in [`docs/data/rules/`](docs/data/rules/),
 and no value read from the portals is published. Times are UTC.
 
-- **Run:** [42811839057](https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42811839057), finished 2026-11-10 12:01 UTC (github-actions)
+- **Run:** [42812758765](https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42812758765), finished 2026-11-10 12:08 UTC (github-actions)
 - **Rules:** 35 (35 evaluated, 0 not evaluated)
 - **Sources:** 20 CKAN resources (20 available)
 - **Records flagged:** 1,077,903
-- **L2 pass rate:** 94.52% (checks without a signal / 19,704,197 checks in scope; one check per record and rule)
+- **L2 pass rate:** 94.52% (checks without a signal / 19,702,529 checks in scope; one check per record and rule)
 
 Signal types: `mismatch` (the check failed), `key not found` (no matching record in the other
 source), `missing value`, `invalid value` (unreadable as the declared type), `ambiguous key` (more
@@ -20,27 +20,27 @@ than one match). Records outside a rule's scope (`where`) are not signals.
 
 | Rule | Records read | Signals | Previous run | Signal types |
 |---|---:|---:|---:|---|
-| [Harvested species missing from the list of commercial timber species](rules/forest/species-not-in-commercial-timber-list.yaml) | 2,434,420 | 819,079 | 811,274 | key not found 819,075; missing value 4 |
-| [Harvest outside the authorisation's validity](rules/forest/exploration-outside-validity.yaml) | 2,434,420 | 69,106 | 66,414 | mismatch 69,106 |
+| [Harvested species missing from the list of commercial timber species](rules/forest/species-not-in-commercial-timber-list.yaml) | 2,434,420 | 819,079 | 819,079 | key not found 819,075; missing value 4 |
+| [Harvest outside the authorisation's validity](rules/forest/exploration-outside-validity.yaml) | 2,434,420 | 69,106 | 69,106 | mismatch 69,106 |
 | [Permanent protection and net legal reserve above the property area](rules/land/declared-areas-above-property.yaml) | 6,206,859 | 46,506 | 46,506 | mismatch 29,980; missing value 16,526 |
-| [Legal basis record without a matching infraction notice](rules/infraction/legal-basis-without-infraction.yaml) | 691,786 | 35,604 | 35,134 | key not found 24,324; missing value 11,280 |
-| [Infraction notice without coordinates or at (0,0)](rules/infraction/infraction-coordinates-missing-or-zero.yaml) | 713,194 | 28,357 | 28,345 | mismatch 28,357 |
-| [Biome record without a matching infraction notice](rules/infraction/biomes-without-infraction.yaml) | 296,073 | 23,890 | 23,523 | key not found 14,572; missing value 9,318 |
-| [Embargo term cited by the notice but not published](rules/infraction/embargo-link-without-term.yaml) | 713,194 | 21,765 | 21,606 | key not found 21,765 |
-| [Seizure term cited by the notice but not published](rules/infraction/seizure-link-without-term.yaml) | 713,194 | 10,761 | 10,691 | key not found 10,761 |
+| [Legal basis record without a matching infraction notice](rules/infraction/legal-basis-without-infraction.yaml) | 691,786 | 35,604 | 35,604 | key not found 24,324; missing value 11,280 |
+| [Infraction notice without coordinates or at (0,0)](rules/infraction/infraction-coordinates-missing-or-zero.yaml) | 713,194 | 28,357 | 28,357 | mismatch 28,357 |
+| [Biome record without a matching infraction notice](rules/infraction/biomes-without-infraction.yaml) | 296,073 | 23,890 | 23,890 | key not found 14,572; missing value 9,318 |
+| [Embargo term cited by the notice but not published](rules/infraction/embargo-link-without-term.yaml) | 713,194 | 21,765 | 21,765 | key not found 21,765 |
+| [Seizure term cited by the notice but not published](rules/infraction/seizure-link-without-term.yaml) | 713,194 | 10,761 | 10,761 | key not found 10,761 |
 | [Seizure term without coordinates or at (0,0)](rules/seizure/seizure-coordinates-missing-or-zero.yaml) | 157,955 | 4,103 | 4,103 | mismatch 4,103 |
-| [Specimen record without a matching infraction notice](rules/infraction/species-without-infraction.yaml) | 38,445 | 3,784 | 3,506 | key not found 7; missing value 3,777 |
-| [Active ingredient sold without a registered technical product in AGROFIT](rules/pesticides/ingredient-without-registered-technical-product.yaml) | 124,311 | 2,307 | 2,304 | key not found 2,250; missing value 57 |
-| [Offence dated after the infraction notice was issued](rules/infraction/fact-after-issue.yaml) | 713,194 | 2,135 | 2,120 | mismatch 2,135 |
+| [Specimen record without a matching infraction notice](rules/infraction/species-without-infraction.yaml) | 38,445 | 3,784 | 3,784 | key not found 7; missing value 3,777 |
+| [Active ingredient sold without a registered technical product in AGROFIT](rules/pesticides/ingredient-without-registered-technical-product.yaml) | 124,311 | 2,307 | 2,307 | key not found 2,250; missing value 57 |
+| [Offence dated after the infraction notice was issued](rules/infraction/fact-after-issue.yaml) | 713,194 | 2,135 | 2,135 | mismatch 2,135 |
 | [Commercial CITES permit for a wild specimen of a threatened Brazilian fauna species](rules/cites/wild-commercial-threatened-species.yaml) | 259,503 | 1,714 | 1,714 | mismatch 1,714 |
-| [Notice issued more than five years after the offence](rules/infraction/issued-over-five-years-after-fact.yaml) | 713,194 | 1,633 | 1,611 | mismatch 1,633 |
-| [Simple fine outside the legal limits (BRL 50.00 to BRL 50,000,000.00)](rules/infraction/fine-outside-legal-limits.yaml) | 713,194 | 1,489 | – | mismatch 1,489 |
-| [Offender notified before the notice was issued](rules/infraction/notice-before-issue.yaml) | 713,194 | 1,100 | 1,096 | mismatch 1,100 |
+| [Notice issued more than five years after the offence](rules/infraction/issued-over-five-years-after-fact.yaml) | 713,194 | 1,633 | 1,633 | mismatch 1,633 |
+| [Simple fine outside the legal limits (BRL 50.00 to BRL 50,000,000.00)](rules/infraction/fine-outside-legal-limits.yaml) | 713,194 | 1,489 | 1,489 | mismatch 1,489 |
+| [Offender notified before the notice was issued](rules/infraction/notice-before-issue.yaml) | 713,194 | 1,100 | 1,100 | mismatch 1,100 |
 | [Municipality code consistent with the state of the same place](rules/territory/municipality-state.yaml) | 713,194 | 814 | 814 | key not found 547; missing value 267 |
 | [Payment dated before the infraction notice](rules/payment/payment-before-infraction.yaml) | 1,591,289 | 785 | 785 | mismatch 785 |
-| [Amount paid more than 10 times the original fine](rules/payment/paid-ten-times-original.yaml) | 1,591,289 | 781 | 780 | mismatch 781 |
+| [Amount paid more than 10 times the original fine](rules/payment/paid-ten-times-original.yaml) | 1,591,289 | 781 | 781 | mismatch 781 |
 | [Fire incident milestones out of order](rules/fire/incident-milestones-order.yaml) | 418,525 | 718 | 718 | mismatch 359; missing value 359 |
-| [Unequivocal act ending before it starts](rules/infraction/act-end-before-start.yaml) | 713,194 | 636 | 634 | mismatch 636 |
+| [Unequivocal act ending before it starts](rules/infraction/act-end-before-start.yaml) | 713,194 | 636 | 636 | mismatch 636 |
 | [CITES permit for an Appendix I species of wild origin for commercial purposes](rules/cites/appendix-i-wild-commercial.yaml) | 259,503 | 403 | 403 | mismatch 403 |
 | [Appeal judgment dated before the first-instance judgment](rules/payment/appeal-before-main-judgment.yaml) | 2,917 | 186 | 186 | mismatch 115; missing value 71 |
 | [Cutting intensity above 30 m³/ha in forest management with mechanized skidding](rules/forest/pmfs-intensity-mechanized-over-30.yaml) | 10,246 | 87 | 87 | mismatch 87 |
@@ -60,23 +60,23 @@ than one match). Records outside a rule's scope (`where`) are not signals.
 
 | Resource | Role | Status | Size | Download | Used by |
 |---|---|---|---:|---:|---|
-| dadosabertos.ibama.gov.br › siscites-licencas-de-fauna-e-flora-emitidas › Siscites | primary | available | 107.2 MB | 6.7 s | appendix-i-wild-commercial, wild-commercial-threatened-species |
-| dados.mma.gov.br › especies-ameacadas › FAUNA - Lista de Espécies Ameaçadas - 2021.csv | secondary | available | 0.2 MB | 0.7 s | wild-commercial-threatened-species |
-| dadosabertos.ibama.gov.br › fiscalizacao-termo-de-embargo › Termos de embargo | primary | available | 213.0 MB | 7.9 s | embargo-date-implausible, embargo-link-without-term, lifted-before-embargo |
-| dadosabertos.ibama.gov.br › sisfauna-plantel-exato › Sisfauna - Plantel Exato | primary | available | 73.3 MB | 1.6 s | stock-balance |
-| dadosabertos.ibama.gov.br › sisfogo-roi › ROI formato csv | primary | available | 284.1 MB | 5.3 s | incident-milestones-order |
-| dadosabertos.ibama.gov.br › volumes-explorados-if-100 › Volumes Explorados - IF 100% | primary | available | 52.3 MB | 2.0 s | exploration-outside-validity, species-not-in-commercial-timber-list |
-| dadosabertos.ibama.gov.br › sinaflor-pmfs-amazonia-legal › PMFS Amazônia Legal | primary | available | 5.9 MB | 0.3 s | pmfs-intensity-manual-over-10, pmfs-intensity-mechanized-over-30 |
-| dados.florestal.gov.br › especies-florestais-madeireiras-comerciais › Dados_abertos_especies_madeireiras_SNIF_fonte_LPF_SFB | secondary | available | 0.1 MB | 0.3 s | species-not-in-commercial-timber-list |
-| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração | primary | available | 123.5 MB | 4.7 s | act-end-before-start, biomes-without-infraction, embargo-link-without-term, fact-after-issue, fine-outside-legal-limits, infraction-coordinates-missing-or-zero, issued-over-five-years-after-fact, legal-basis-without-infraction, municipality-state, notice-before-issue, notice-date-implausible, seizure-link-without-term, species-without-infraction, term-without-infraction |
-| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - biomas | primary | available | 14.3 MB | 0.6 s | biomes-without-infraction |
-| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - enquadramento legal | primary | available | 8.2 MB | 0.3 s | legal-basis-without-infraction |
-| dadosabertos.ibama.gov.br › fiscalizacao-termo-de-apreensao › Termo de apreensão | primary | available | 29.8 MB | 0.4 s | seizure-coordinates-missing-or-zero, seizure-link-without-term, term-without-infraction |
-| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - espécimes | primary | available | 5.4 MB | 0.3 s | species-without-infraction |
-| dadosabertos.ibama.gov.br › ato-declaratorio-ambiental-ada › Ato Declaratório Ambiental (ADA) | primary | available | 401.2 MB | 14.8 s | declared-areas-above-property |
+| dadosabertos.ibama.gov.br › siscites-licencas-de-fauna-e-flora-emitidas › Siscites | primary | available | 107.2 MB | 8.2 s | appendix-i-wild-commercial, wild-commercial-threatened-species |
+| dados.mma.gov.br › especies-ameacadas › FAUNA - Lista de Espécies Ameaçadas - 2021.csv | secondary | available | 0.2 MB | 0.8 s | wild-commercial-threatened-species |
+| dadosabertos.ibama.gov.br › fiscalizacao-termo-de-embargo › Termos de embargo | primary | available | 213.0 MB | 10.0 s | embargo-date-implausible, embargo-link-without-term, lifted-before-embargo |
+| dadosabertos.ibama.gov.br › sisfauna-plantel-exato › Sisfauna - Plantel Exato | primary | available | 73.3 MB | 0.3 s | stock-balance |
+| dadosabertos.ibama.gov.br › sisfogo-roi › ROI formato csv | primary | available | 284.1 MB | 1.0 s | incident-milestones-order |
+| dadosabertos.ibama.gov.br › volumes-explorados-if-100 › Volumes Explorados - IF 100% | primary | available | 52.3 MB | 2.5 s | exploration-outside-validity, species-not-in-commercial-timber-list |
+| dadosabertos.ibama.gov.br › sinaflor-pmfs-amazonia-legal › PMFS Amazônia Legal | primary | available | 5.9 MB | 0.4 s | pmfs-intensity-manual-over-10, pmfs-intensity-mechanized-over-30 |
+| dados.florestal.gov.br › especies-florestais-madeireiras-comerciais › Dados_abertos_especies_madeireiras_SNIF_fonte_LPF_SFB | secondary | available | 0.1 MB | 0.6 s | species-not-in-commercial-timber-list |
+| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração | primary | available | 123.5 MB | 5.8 s | act-end-before-start, biomes-without-infraction, embargo-link-without-term, fact-after-issue, fine-outside-legal-limits, infraction-coordinates-missing-or-zero, issued-over-five-years-after-fact, legal-basis-without-infraction, municipality-state, notice-before-issue, notice-date-implausible, seizure-link-without-term, species-without-infraction, term-without-infraction |
+| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - biomas | primary | available | 14.3 MB | 0.8 s | biomes-without-infraction |
+| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - enquadramento legal | primary | available | 8.2 MB | 0.4 s | legal-basis-without-infraction |
+| dadosabertos.ibama.gov.br › fiscalizacao-termo-de-apreensao › Termo de apreensão | primary | available | 29.8 MB | 0.1 s | seizure-coordinates-missing-or-zero, seizure-link-without-term, term-without-infraction |
+| dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - espécimes | primary | available | 5.4 MB | 0.4 s | species-without-infraction |
+| dadosabertos.ibama.gov.br › ato-declaratorio-ambiental-ada › Ato Declaratório Ambiental (ADA) | primary | available | 401.2 MB | 18.5 s | declared-areas-above-property |
 | dadosabertos.ibama.gov.br › licencas-ambientais-de-atividades-e-empreendimentos-licenciados-pelo-ibama › Licenças ambientais de atividades e ... | primary | available | 3.3 MB | 0.2 s | expiry-before-issue, installation-licence-over-six-years, operation-licence-over-ten-years, preliminary-licence-over-five-years |
-| dadosabertos.ibama.gov.br › julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama › Volume de Julgamento de Auto de Infração | primary | available | 0.6 MB | 0.2 s | appeal-before-main-judgment, main-judgment-before-infraction |
-| dadosabertos.ibama.gov.br › arrecadacao-de-multas-ambientais-bens-tutelados › Arrecadação de Multas por Bens Tutelados | primary | available | 28.0 MB | 1.1 s | paid-ten-times-original, payment-before-infraction |
-| dadosabertos.ibama.gov.br › relatorios-de-comercializacao-de-agrotoxicos › Dados - CSV | primary | available | 13.6 MB | 0.6 s | ingredient-without-registered-technical-product |
-| dados.agricultura.gov.br › sistema-de-agrotoxicos-fitossanitarios-agrofit › Produto Técnico | secondary | available | 0.7 MB | 0.7 s | ingredient-without-registered-technical-product |
-| dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE | secondary | available | 0.1 MB | 1.1 s | municipality-state |
+| dadosabertos.ibama.gov.br › julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama › Volume de Julgamento de Auto de Infração | primary | available | 0.6 MB | 0.1 s | appeal-before-main-judgment, main-judgment-before-infraction |
+| dadosabertos.ibama.gov.br › arrecadacao-de-multas-ambientais-bens-tutelados › Arrecadação de Multas por Bens Tutelados | primary | available | 28.0 MB | 1.4 s | paid-ten-times-original, payment-before-infraction |
+| dadosabertos.ibama.gov.br › relatorios-de-comercializacao-de-agrotoxicos › Dados - CSV | primary | available | 13.6 MB | 0.8 s | ingredient-without-registered-technical-product |
+| dados.agricultura.gov.br › sistema-de-agrotoxicos-fitossanitarios-agrofit › Produto Técnico | secondary | available | 0.7 MB | 0.8 s | ingredient-without-registered-technical-product |
+| dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE | secondary | available | 0.1 MB | 0.3 s | municipality-state |

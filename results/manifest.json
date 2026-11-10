@@ -1,11 +1,11 @@
 {
- "run_id": "42811839057",
+ "run_id": "42812758765",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42811839057",
- "started_at": "2026-11-10T11:58:51+00:00",
- "finished_at": "2026-11-10T12:01:15+00:00",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42812758765",
+ "started_at": "2026-11-10T12:05:32+00:00",
+ "finished_at": "2026-11-10T12:08:00+00:00",
  "engine": {
-  "commit": "178b9f98300965b824abfbc4bbbbf79fae7f8240",
+  "commit": "2daa49039ea2805ad9231eb491addae7446c8339",
   "uncommitted_changes": false,
   "python": "3.12.16",
   "duckdb": "2.0.0"
@@ -15,19 +15,19 @@
   "primary": {
    "resources": 16,
    "bytes": 1363692128,
-   "seconds": 47.1,
-   "mb_per_s": 28.953
+   "seconds": 51.04,
+   "mb_per_s": 26.718
   },
   "secondary": {
    "resources": 4,
    "bytes": 1081112,
-   "seconds": 2.8,
-   "mb_per_s": 0.386
+   "seconds": 2.58,
+   "mb_per_s": 0.419
   },
   "processing": {
    "bytes": 1364773240,
-   "seconds": 85.23,
-   "mb_per_s": 16.013
+   "seconds": 85.69,
+   "mb_per_s": 15.927
   }
  },
  "rules": [
@@ -117,9 +117,9 @@
   },
   {
    "id": "fine-outside-legal-limits",
-   "rule_version": "0.1.0",
+   "rule_version": "0.1.1",
    "file": "infraction/fine-outside-legal-limits.yaml",
-   "sha256": "741eb078c8e50ce6ffca9beace4ed1c008756b9a837ae3d5617fd628a74c264e"
+   "sha256": "1ca6920cbc60e20e426b8dfca09be108c4076779ef03ed466e49d7373d920154"
   },
   {
    "id": "infraction-coordinates-missing-or-zero",

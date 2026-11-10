@@ -1,8 +1,8 @@
 {
- "run_id": "42811839057",
+ "run_id": "42812758765",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42811839057",
- "checked_at": "2026-11-10T12:01:15+00:00",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42812758765",
+ "checked_at": "2026-11-10T12:08:00+00:00",
  "sources": [
   {
    "portal": "https://dadosabertos.ibama.gov.br",
@@ -19,7 +19,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.42
+    "seconds": 1.33
    },
    "dataset": {
     "title": "Siscites - licenças de fauna e flora emitidas",
@@ -45,8 +45,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 107186392,
     "sha256": "fa7a18b252725313bacf04782072f334a7015df731b7e02d59222a5c5dcf10fc",
-    "seconds": 6.67,
-    "mb_per_s": 16.062
+    "seconds": 8.25,
+    "mb_per_s": 13.0
    },
    "files": [
     {
@@ -72,7 +72,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.84
+    "seconds": 0.99
    },
    "dataset": {
     "title": "Espécies Ameaçadas",
@@ -98,8 +98,8 @@
     "served_by": "dados.mma.gov.br",
     "bytes": 172311,
     "sha256": "d05dda8ece1f7d62aabfa1326c4808d5b1738bf2e7d20e3cdf74b6cab1cd14ad",
-    "seconds": 0.67,
-    "mb_per_s": 0.259
+    "seconds": 0.84,
+    "mb_per_s": 0.204
    },
    "files": [
     {
@@ -127,7 +127,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.34
+    "seconds": 0.3
    },
    "dataset": {
     "title": "Fiscalização - termo de embargo",
@@ -153,8 +153,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 212959325,
     "sha256": "b2bacdc571dcbf299cbaecfb335e811537462010acf558ff1040dcea75df6456",
-    "seconds": 7.88,
-    "mb_per_s": 27.021
+    "seconds": 10.02,
+    "mb_per_s": 21.243
    },
    "files": [
     {
@@ -180,7 +180,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.18
+    "seconds": 0.25
    },
    "dataset": {
     "title": "Sisfauna - Plantel Exato",
@@ -206,8 +206,8 @@
     "served_by": "dadosabertos.ibama.gov.br",
     "bytes": 73251517,
     "sha256": "26250d38da458413546d7f981ebc115f80c0d278aa5edef3304f372ff075ab8e",
-    "seconds": 1.56,
-    "mb_per_s": 47.052
+    "seconds": 0.27,
+    "mb_per_s": 275.857
    },
    "files": [
     {
@@ -233,7 +233,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.18
+    "seconds": 0.2
    },
    "dataset": {
     "title": "Sisfogo - ROI",
@@ -259,8 +259,8 @@
     "served_by": "dadosabertos.ibama.gov.br",
     "bytes": 284126826,
     "sha256": "252aa380626d9377c0e24b9fbcc8a0c7572e5e7ee8acab0c152b1888ad0ebc91",
-    "seconds": 5.27,
-    "mb_per_s": 53.883
+    "seconds": 1.04,
+    "mb_per_s": 272.352
    },
    "files": [
     {
@@ -287,7 +287,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.19
+    "seconds": 0.21
    },
    "dataset": {
     "title": "Volumes Explorados - IF 100%",
@@ -313,8 +313,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 52283284,
     "sha256": "0e16447b5f30a57dac45a1f59bc232d9e4da1c960d3d1bfccd4bdf5eb320e153",
-    "seconds": 2.02,
-    "mb_per_s": 25.944
+    "seconds": 2.52,
+    "mb_per_s": 20.763
    },
    "files": [
     {
@@ -341,7 +341,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.23
+    "seconds": 0.21
    },
    "dataset": {
     "title": "Sinaflor - PMFS Amazônia Legal",
@@ -367,8 +367,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 5893673,
     "sha256": "b29ab11822225795885f2d49098adbf87f0cf8d5b64a4136960814539981a117",
-    "seconds": 0.33,
-    "mb_per_s": 18.06
+    "seconds": 0.4,
+    "mb_per_s": 14.769
    },
    "files": [
     {
@@ -394,7 +394,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.69
+    "seconds": 0.82
    },
    "dataset": {
     "title": "Espécies florestais madeireiras comerciais",
@@ -420,8 +420,8 @@
     "served_by": "dados.florestal.gov.br",
     "bytes": 52331,
     "sha256": "5ff3e04290644e5b739a354d1e452ca8c78a9ecb9a6b0e7c10df30f07d36f64d",
-    "seconds": 0.34,
-    "mb_per_s": 0.156
+    "seconds": 0.59,
+    "mb_per_s": 0.089
    },
    "files": [
     {
@@ -460,7 +460,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.36
+    "seconds": 0.57
    },
    "dataset": {
     "title": "Fiscalização - auto de infração",
@@ -486,8 +486,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 123477954,
     "sha256": "5f0aec889f87765d808dcfca6bf7003c9daa03e941874359fb753fb5be840d4a",
-    "seconds": 4.72,
-    "mb_per_s": 26.172
+    "seconds": 5.81,
+    "mb_per_s": 21.253
    },
    "files": [
     {
@@ -513,7 +513,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.26
+    "seconds": 0.33
    },
    "dataset": {
     "title": "Fiscalização - auto de infração",
@@ -539,8 +539,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 14347666,
     "sha256": "aa6bcbd6ff4c1972fe0c7199c568d5d8d923d1a94432a7c784d72f28fad3ec56",
-    "seconds": 0.63,
-    "mb_per_s": 22.871
+    "seconds": 0.79,
+    "mb_per_s": 18.121
    },
    "files": [
     {
@@ -566,7 +566,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.26
+    "seconds": 0.29
    },
    "dataset": {
     "title": "Fiscalização - auto de infração",
@@ -592,8 +592,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 8192931,
     "sha256": "a23dcde565aea75628b39ef110f4316013407b0a2d096ada2e301b3b5c0dca57",
-    "seconds": 0.35,
-    "mb_per_s": 23.649
+    "seconds": 0.42,
+    "mb_per_s": 19.293
    },
    "files": [
     {
@@ -621,7 +621,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.32
+    "seconds": 0.29
    },
    "dataset": {
     "title": "Fiscalização - termo de apreensão",
@@ -647,8 +647,8 @@
     "served_by": "dadosabertos.ibama.gov.br",
     "bytes": 29845259,
     "sha256": "afd442f6d8af42303c6015154b26bd227eb240a778928e71063dfcf6a86db2dc",
-    "seconds": 0.38,
-    "mb_per_s": 78.363
+    "seconds": 0.1,
+    "mb_per_s": 296.181
    },
    "files": [
     {
@@ -674,7 +674,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 1.09
+    "seconds": 0.26
    },
    "dataset": {
     "title": "Fiscalização - auto de infração",
@@ -700,8 +700,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 5363381,
     "sha256": "b7f7dc7504cbec81a851d54acc2104fcc183af1c4161de2819d39aef2db3f83e",
-    "seconds": 0.33,
-    "mb_per_s": 16.062
+    "seconds": 0.41,
+    "mb_per_s": 13.195
    },
    "files": [
     {
@@ -727,7 +727,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.23
+    "seconds": 0.22
    },
    "dataset": {
     "title": "Ato Declaratório Ambiental (ADA)",
@@ -753,8 +753,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 401210421,
     "sha256": "ee444cea19f7f0645608aeebf4c5b8d7e18a94f92af86ca4bcbcbbbc7e9cc817",
-    "seconds": 14.83,
-    "mb_per_s": 27.05
+    "seconds": 18.5,
+    "mb_per_s": 21.693
    },
    "files": [
     {
@@ -783,7 +783,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.2
+    "seconds": 0.23
    },
    "dataset": {
     "title": "Licenças ambientais de atividades e empreendimentos licenciados pelo Ibama",
@@ -809,8 +809,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 3347972,
     "sha256": "a60bad61027ec36cfa76d9ec9efa46714e430a70296036caf74193a136c73b2b",
-    "seconds": 0.18,
-    "mb_per_s": 18.571
+    "seconds": 0.22,
+    "mb_per_s": 15.236
    },
    "files": [
     {
@@ -837,7 +837,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.17
+    "seconds": 0.21
    },
    "dataset": {
     "title": "Julgamentos de Auto de Infração - Realizado no âmbito do IBAMA",
@@ -863,8 +863,8 @@
     "served_by": "dadosabertos.ibama.gov.br",
     "bytes": 636595,
     "sha256": "7780312127223a853a01ced2be76b9631850ce282fc32af0e72dbf8eae81004d",
-    "seconds": 0.19,
-    "mb_per_s": 3.321
+    "seconds": 0.08,
+    "mb_per_s": 7.511
    },
    "files": [
     {
@@ -891,7 +891,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.19
+    "seconds": 0.22
    },
    "dataset": {
     "title": "Arrecadação de Multas Ambientais Bens tutelados",
@@ -917,8 +917,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 27992135,
     "sha256": "dae1b391caaf228a4bcc95c1d80e664985667881818a549c1a2bba3a6b4c5fae",
-    "seconds": 1.12,
-    "mb_per_s": 24.936
+    "seconds": 1.41,
+    "mb_per_s": 19.813
    },
    "files": [
     {
@@ -944,7 +944,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.17
+    "seconds": 0.2
    },
    "dataset": {
     "title": "Relatórios de Comercialização de Agrotóxicos",
@@ -970,8 +970,8 @@
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 13576797,
     "sha256": "12fa08c61fb8102a7c1d03729f4d90af46697cbbd937553dd95243a9010ff849",
-    "seconds": 0.64,
-    "mb_per_s": 21.255
+    "seconds": 0.8,
+    "mb_per_s": 16.927
    },
    "files": [
     {
@@ -997,7 +997,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.84
+    "seconds": 0.89
    },
    "dataset": {
     "title": "Sistema de Agrotóxicos Fitossanitários - Agrofit",
@@ -1023,8 +1023,8 @@
     "served_by": "dados.agricultura.gov.br",
     "bytes": 717404,
     "sha256": "5b802a37b67578f7879fd97ec62d41eca54fa8c48f9097107ae1be77985085bc",
-    "seconds": 0.67,
-    "mb_per_s": 1.07
+    "seconds": 0.84,
+    "mb_per_s": 0.856
    },
    "files": [
     {
@@ -1050,7 +1050,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.63
+    "seconds": 0.24
    },
    "dataset": {
     "title": "Códigos oficiais de UF e municípios segundo o TSE e o IBGE",
@@ -1076,8 +1076,8 @@
     "served_by": "cdn.tse.jus.br",
     "bytes": 139066,
     "sha256": "40d0a698d3d56c299e8afdbaa846453c230c8042c1b0b878010cc0e19f80c544",
-    "seconds": 1.12,
-    "mb_per_s": 0.124
+    "seconds": 0.31,
+    "mb_per_s": 0.454
    },
    "files": [
     {
