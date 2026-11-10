@@ -211,7 +211,7 @@ def temporal_order(check: dict, sources: dict):
     cols = Columns(sources, {src: "f"})
     by_day = any(cols.spec(r).get("type") == "date" for r in seq)
     values = ", ".join(cols.typed(r, by_day) for r in seq)
-    present = f"list_filter([{values}], x -> x IS NOT NULL)"
+    present = f"list_filter([{values}], lambda x: x IS NOT NULL)"
     invalid = " OR ".join(cols.invalid(r, by_day) for r in seq)
     over = "FALSE"
     if "max_interval" in check:
