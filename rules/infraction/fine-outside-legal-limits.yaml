@@ -1,0 +1,49 @@
+schema_version: "1.0"
+rule_version: "0.1.0"
+origin: expert
+
+description:
+  language: pt-BR
+  title: "Multa simples fora dos limites legais (R$ 50,00 a R$ 50.000.000,00)"
+  title_translations:
+    en: "Simple fine outside the legal limits (BRL 50.00 to BRL 50,000,000.00)"
+  text: >
+    Confere se o valor dos autos de multa simples lavrados a partir de 22/09/1999 está entre R$ 50,00 e R$ 50.000.000,00.
+  justification: >
+    A Lei 9.605/1998, art. 75, fixa a multa por infração administrativa ambiental entre R$ 50,00 e
+    R$ 50.000.000,00, limites repetidos nos regulamentos (Decreto 3.179/1999, publicado em 22/09/1999,
+    e Decreto 6.514/2008, art. 9º). Valor fora da faixa indica erro de registro (unidade, casas
+    decimais, moeda) ou caso que pede conferência no processo. O recorte começa na regulamentação de
+    1999, porque autos anteriores podem estar em outras moedas ou regras. Valores com vírgula decimal.
+    É sinal para revisão, não veredito sobre o auto.
+  exceptions:
+    - "A reincidência pode multiplicar a multa (Decreto 6.514/2008, art. 11), e um auto pode reunir mais de uma infração; nesses casos o valor pode legitimamente passar do máximo."
+    - "Multa diária e advertência ficam fora do escopo."
+    - "Valor vazio aparece como valor ausente, não como divergência."
+  examples:
+    - case: "Multa simples de R$ 1.500,00 lavrada em 2010"
+      expected: "Conforme"
+    - case: "Multa simples de R$ 5,00 lavrada em 2010"
+      expected: "Sinalizar"
+
+sources:
+  ibama_autos:
+    portal: https://dadosabertos.ibama.gov.br
+    dataset: fiscalizacao-auto-de-infracao
+    resource: {name: "Autos de infração", format: CSV}
+    archive: {type: zip, members: "auto_infracao_*.csv"}
+    file: {format: csv, encoding: utf-8, delimiter: ";"}
+    columns:
+      VAL_AUTO_INFRACAO: {meaning: "Valor do auto de infração, em reais", type: number, decimal: ","}
+      TIPO_AUTO: "Tipo de sanção do auto (multa simples, multa diária, advertência)"
+      DAT_HORA_AUTO_INFRACAO: {meaning: "Data e hora de lavratura do auto", type: date, format: ["%Y-%m-%d %H:%M:%S", "%Y-%m-%d"]}
+
+check:
+  template: flag-when
+  timeline: ibama_autos.DAT_HORA_AUTO_INFRACAO
+  any:
+    - {column: ibama_autos.VAL_AUTO_INFRACAO, below: 50}
+    - {column: ibama_autos.VAL_AUTO_INFRACAO, above: 50000000}
+  where:
+    - {column: ibama_autos.TIPO_AUTO, equals: "Multa simples"}
+    - {column: ibama_autos.DAT_HORA_AUTO_INFRACAO, on_or_after: "1999-09-22"}
