@@ -1,7 +1,7 @@
 {
- "run_id": "39577312135",
+ "run_id": "42811839057",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/39577312135",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42811839057",
  "id": "infraction-coordinates-missing-or-zero",
  "rule_version": "0.2.0",
  "origin": "expert",
@@ -31,20 +31,20 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-10-21T09:31:10+00:00",
- "total": 712362,
+ "evaluated_at": "2026-11-10T12:00:28+00:00",
+ "total": 713194,
  "counts": {
-  "match": 218212,
-  "mismatch": 28345,
+  "match": 219032,
+  "mismatch": 28357,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
   "out_of_scope": 465805
  },
- "signals": 28345,
+ "signals": 28357,
  "signals_by_outcome": {
-  "mismatch": 28345,
+  "mismatch": 28357,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
@@ -55,12 +55,12 @@
   "ibama_autos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
    "fetch_status": "ok",
-   "sha256": "9d333264124b83a34bb2e18484fce6ea042912c475766a883ce2b3db203803db",
+   "sha256": "5f0aec889f87765d808dcfca6bf7003c9daa03e941874359fb753fb5be840d4a",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "file": "auto_infracao_csv.zip",
    "files": null,
    "archive_members": "auto_infracao_*.csv",
-   "records": 712362,
+   "records": 713194,
    "members": [
     {
      "name": "auto_infracao_1977.csv",
@@ -228,15 +228,15 @@
     },
     {
      "name": "auto_infracao_2020.csv",
-     "records": 9533
+     "records": 9534
     },
     {
      "name": "auto_infracao_2021.csv",
-     "records": 9662
+     "records": 9663
     },
     {
      "name": "auto_infracao_2022.csv",
-     "records": 12854
+     "records": 12855
     },
     {
      "name": "auto_infracao_2023.csv",
@@ -252,7 +252,7 @@
     },
     {
      "name": "auto_infracao_2026.csv",
-     "records": 13313
+     "records": 14142
     }
    ]
   }

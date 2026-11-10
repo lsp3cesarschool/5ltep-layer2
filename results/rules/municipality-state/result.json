@@ -1,7 +1,7 @@
 {
- "run_id": "39577312135",
+ "run_id": "42811839057",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/39577312135",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42811839057",
  "id": "municipality-state",
  "rule_version": "0.4.0",
  "origin": "cross_reference",
@@ -35,10 +35,10 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-10-21T09:31:58+00:00",
- "total": 712362,
+ "evaluated_at": "2026-11-10T12:01:15+00:00",
+ "total": 713194,
  "counts": {
-  "match": 711548,
+  "match": 712380,
   "mismatch": 0,
   "key_not_found": 547,
   "missing_value": 267,
@@ -59,12 +59,12 @@
   "ibama_autos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
    "fetch_status": "ok",
-   "sha256": "9d333264124b83a34bb2e18484fce6ea042912c475766a883ce2b3db203803db",
+   "sha256": "5f0aec889f87765d808dcfca6bf7003c9daa03e941874359fb753fb5be840d4a",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "file": "auto_infracao_csv.zip",
    "files": null,
    "archive_members": "auto_infracao_*.csv",
-   "records": 712362,
+   "records": 713194,
    "members": [
     {
      "name": "auto_infracao_1977.csv",
@@ -232,15 +232,15 @@
     },
     {
      "name": "auto_infracao_2020.csv",
-     "records": 9533
+     "records": 9534
     },
     {
      "name": "auto_infracao_2021.csv",
-     "records": 9662
+     "records": 9663
     },
     {
      "name": "auto_infracao_2022.csv",
-     "records": 12854
+     "records": 12855
     },
     {
      "name": "auto_infracao_2023.csv",
@@ -256,14 +256,14 @@
     },
     {
      "name": "auto_infracao_2026.csv",
-     "records": 13313
+     "records": 14142
     }
    ]
   },
   "tse_municipios": {
    "resource": "dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE",
    "fetch_status": "ok",
-   "sha256": "6a5372b143f1ad74c99000f1023918f673df55dadd37c9f0ac8c15dcca57a15f",
+   "sha256": "40d0a698d3d56c299e8afdbaa846453c230c8042c1b0b878010cc0e19f80c544",
    "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/municipio_tse_ibge/municipio_tse_ibge.zip",
    "file": "municipio_tse_ibge.zip",
    "files": null,

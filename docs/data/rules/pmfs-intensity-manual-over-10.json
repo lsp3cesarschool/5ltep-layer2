@@ -1,10 +1,10 @@
 {
  "rule": "pmfs-intensity-manual-over-10",
  "rule_version": "0.1.0",
- "evaluated_at": "2026-10-21T09:30:55+00:00",
- "run_id": "39577312135",
+ "evaluated_at": "2026-11-10T12:00:13+00:00",
+ "run_id": "42811839057",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/39577312135",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42811839057",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_pmfs": {
@@ -13,8 +13,8 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SINAFLOR/pmfs/AmazoniaLegal/pmfsAmazoniaLegal.csv",
    "archive_members": null,
-   "sha256": "69bfebbc85026b67ebcfc8cac68ce14e1189d22dbeba6ed4885b572f3a080ec8",
-   "records": 10145
+   "sha256": "b29ab11822225795885f2d49098adbf87f0cf8d5b64a4136960814539981a117",
+   "records": 10246
   }
  },
  "counts": {
@@ -24,9 +24,9 @@
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 10060
+  "out_of_scope": 10161
  },
- "total": 10145,
+ "total": 10246,
  "records": {
   "mismatch": {
    "pmfsAmazoniaLegal.csv": [
@@ -41,37 +41,37 @@
     988,
     996,
     1053,
-    1874,
-    1875,
-    1876,
-    1877,
-    1878,
-    8419,
-    8421,
-    8422,
-    8423,
-    8429,
-    8430,
-    8431,
-    8432,
-    8433,
-    8470,
-    9176,
-    9275
+    1906,
+    1907,
+    1908,
+    1909,
+    1910,
+    8489,
+    8491,
+    8492,
+    8493,
+    8499,
+    8500,
+    8501,
+    8502,
+    8503,
+    8540,
+    9255,
+    9355
    ]
   }
  },
  "members": [
   {
    "name": "pmfsAmazoniaLegal.csv",
-   "records": 10145
+   "records": 10246
   }
  ],
  "by_member": {
   "pmfsAmazoniaLegal.csv": {
    "match": 57,
    "mismatch": 28,
-   "out_of_scope": 10060
+   "out_of_scope": 10161
   }
  },
  "by_period": {
@@ -95,7 +95,7 @@
   },
   "2019": {
    "match": 3,
-   "out_of_scope": 485
+   "out_of_scope": 484
   },
   "2020": {
    "match": 30,
@@ -108,7 +108,7 @@
   "2022": {
    "match": 7,
    "mismatch": 12,
-   "out_of_scope": 1430
+   "out_of_scope": 1429
   },
   "2023": {
    "mismatch": 13,
@@ -120,12 +120,12 @@
   "2025": {
    "match": 1,
    "mismatch": 1,
-   "out_of_scope": 1099
+   "out_of_scope": 1100
   },
   "2026": {
    "match": 1,
    "mismatch": 2,
-   "out_of_scope": 930
+   "out_of_scope": 1032
   }
  },
  "timeline": "ibama_pmfs.DATA_DE_EMISSAO"

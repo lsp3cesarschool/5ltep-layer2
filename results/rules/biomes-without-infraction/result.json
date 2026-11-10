@@ -1,7 +1,7 @@
 {
- "run_id": "39577312135",
+ "run_id": "42811839057",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/39577312135",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42811839057",
  "id": "biomes-without-infraction",
  "rule_version": "0.1.0",
  "origin": "cross_reference",
@@ -35,22 +35,22 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-10-21T09:31:08+00:00",
- "total": 295110,
+ "evaluated_at": "2026-11-10T12:00:26+00:00",
+ "total": 296073,
  "counts": {
-  "match": 271587,
+  "match": 272183,
   "mismatch": 0,
-  "key_not_found": 14531,
-  "missing_value": 8992,
+  "key_not_found": 14572,
+  "missing_value": 9318,
   "invalid_value": 0,
   "ambiguous_key": 0,
   "out_of_scope": 0
  },
- "signals": 23523,
+ "signals": 23890,
  "signals_by_outcome": {
   "mismatch": 0,
-  "key_not_found": 14531,
-  "missing_value": 8992,
+  "key_not_found": 14572,
+  "missing_value": 9318,
   "invalid_value": 0,
   "ambiguous_key": 0
  },
@@ -59,28 +59,28 @@
   "ibama_filhos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - biomas",
    "fetch_status": "ok",
-   "sha256": "e2b5467957d35b5cfb33cb5c762628f70f3cf25e9551c04b60025ffa5f40a3b5",
+   "sha256": "aa6bcbd6ff4c1972fe0c7199c568d5d8d923d1a94432a7c784d72f28fad3ec56",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/bioma/bioma.csv",
    "file": "bioma.csv",
    "files": null,
    "archive_members": null,
-   "records": 295110,
+   "records": 296073,
    "members": [
     {
      "name": "bioma.csv",
-     "records": 295110
+     "records": 296073
     }
    ]
   },
   "ibama_autos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
    "fetch_status": "ok",
-   "sha256": "9d333264124b83a34bb2e18484fce6ea042912c475766a883ce2b3db203803db",
+   "sha256": "5f0aec889f87765d808dcfca6bf7003c9daa03e941874359fb753fb5be840d4a",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "file": "auto_infracao_csv.zip",
    "files": null,
    "archive_members": "auto_infracao_*.csv",
-   "records": 712362,
+   "records": 713194,
    "members": [
     {
      "name": "auto_infracao_1977.csv",
@@ -248,15 +248,15 @@
     },
     {
      "name": "auto_infracao_2020.csv",
-     "records": 9533
+     "records": 9534
     },
     {
      "name": "auto_infracao_2021.csv",
-     "records": 9662
+     "records": 9663
     },
     {
      "name": "auto_infracao_2022.csv",
-     "records": 12854
+     "records": 12855
     },
     {
      "name": "auto_infracao_2023.csv",
@@ -272,7 +272,7 @@
     },
     {
      "name": "auto_infracao_2026.csv",
-     "records": 13313
+     "records": 14142
     }
    ]
   }

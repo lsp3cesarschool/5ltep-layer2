@@ -1,33 +1,33 @@
 {
- "run_id": "39577312135",
+ "run_id": "42811839057",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/39577312135",
- "started_at": "2026-10-21T09:29:23+00:00",
- "finished_at": "2026-10-21T09:31:58+00:00",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42811839057",
+ "started_at": "2026-11-10T11:58:51+00:00",
+ "finished_at": "2026-11-10T12:01:15+00:00",
  "engine": {
-  "commit": "60e3689b74147757c84ad248307e3ee85378a80e",
+  "commit": "178b9f98300965b824abfbc4bbbbf79fae7f8240",
   "uncommitted_changes": false,
-  "python": "3.12.15",
-  "duckdb": "1.5.6"
+  "python": "3.12.16",
+  "duckdb": "2.0.0"
  },
  "primary_portal": "https://dadosabertos.ibama.gov.br",
  "download_speed": {
   "primary": {
    "resources": 16,
-   "bytes": 1359799788,
-   "seconds": 53.08,
-   "mb_per_s": 25.618
+   "bytes": 1363692128,
+   "seconds": 47.1,
+   "mb_per_s": 28.953
   },
   "secondary": {
    "resources": 4,
-   "bytes": 1074759,
-   "seconds": 2.42,
-   "mb_per_s": 0.444
+   "bytes": 1081112,
+   "seconds": 2.8,
+   "mb_per_s": 0.386
   },
   "processing": {
-   "bytes": 1360874547,
-   "seconds": 89.06,
-   "mb_per_s": 15.28
+   "bytes": 1364773240,
+   "seconds": 85.23,
+   "mb_per_s": 16.013
   }
  },
  "rules": [
@@ -74,12 +74,6 @@
    "sha256": "5e212c381b10588f825ce54c0942187585c4afe92efe974e9bcf06e77c9524bc"
   },
   {
-   "id": "explored-volume-above-authorized",
-   "rule_version": "0.1.0",
-   "file": "forest/explored-volume-above-authorized.yaml",
-   "sha256": "b7d8ceefca35ee8b6238e5acdac75e546fddd2187441a63394dc80a399c14ee6"
-  },
-  {
    "id": "pmfs-intensity-manual-over-10",
    "rule_version": "0.1.0",
    "file": "forest/pmfs-intensity-manual-over-10.yaml",
@@ -120,6 +114,12 @@
    "rule_version": "0.3.0",
    "file": "infraction/fact-after-issue.yaml",
    "sha256": "09a96d34e1b2fa98671baab77643acaddcee3fb127a4b4d36e5de8c7130721bb"
+  },
+  {
+   "id": "fine-outside-legal-limits",
+   "rule_version": "0.1.0",
+   "file": "infraction/fine-outside-legal-limits.yaml",
+   "sha256": "741eb078c8e50ce6ffca9beace4ed1c008756b9a837ae3d5617fd628a74c264e"
   },
   {
    "id": "infraction-coordinates-missing-or-zero",
@@ -248,8 +248,8 @@
    "status": "ok",
    "resource_id": "dddd819f-275a-4653-9104-772dd7519e6a",
    "metadata_modified": "2026-05-26T13:12:04.055944",
-   "bytes": 106947948,
-   "sha256": "b7d1c3675be251eaff44feafa02d738c972e735db46990a16fa3a9f3685679f9"
+   "bytes": 107186392,
+   "sha256": "fa7a18b252725313bacf04782072f334a7015df731b7e02d59222a5c5dcf10fc"
   },
   {
    "label": "dados.mma.gov.br › especies-ameacadas › FAUNA - Lista de Espécies Ameaçadas - 2021.csv",
@@ -264,8 +264,8 @@
    "status": "ok",
    "resource_id": "8f88b43e-287a-470b-a730-db440f9e37fa",
    "metadata_modified": "2026-10-07T19:31:48.206513",
-   "bytes": 210516004,
-   "sha256": "114d4c3174cbcedcf0a855631fa2f8743123938c468046c7098b1cd4022a47df"
+   "bytes": 212959325,
+   "sha256": "b2bacdc571dcbf299cbaecfb335e811537462010acf558ff1040dcea75df6456"
   },
   {
    "label": "dadosabertos.ibama.gov.br › sisfauna-plantel-exato › Sisfauna - Plantel Exato",
@@ -288,16 +288,16 @@
    "status": "ok",
    "resource_id": "ac345e77-863b-472c-a06a-4f171263bc70",
    "metadata_modified": "2026-10-08T18:25:45.623139",
-   "bytes": 51678502,
-   "sha256": "8949892f9e2e3ca5d44dc8ff7002a176cc7f0ed1e917c021a315be82761c9f47"
+   "bytes": 52283284,
+   "sha256": "0e16447b5f30a57dac45a1f59bc232d9e4da1c960d3d1bfccd4bdf5eb320e153"
   },
   {
    "label": "dadosabertos.ibama.gov.br › sinaflor-pmfs-amazonia-legal › PMFS Amazônia Legal",
    "status": "ok",
    "resource_id": "fac201c9-8e09-49d5-9113-1608cf45b8c8",
    "metadata_modified": "2026-07-08T14:24:45.875541",
-   "bytes": 5820471,
-   "sha256": "69bfebbc85026b67ebcfc8cac68ce14e1189d22dbeba6ed4885b572f3a080ec8"
+   "bytes": 5893673,
+   "sha256": "b29ab11822225795885f2d49098adbf87f0cf8d5b64a4136960814539981a117"
   },
   {
    "label": "dados.florestal.gov.br › especies-florestais-madeireiras-comerciais › Dados_abertos_especies_madeireiras_SNIF_fonte_LPF_SFB",
@@ -312,24 +312,24 @@
    "status": "ok",
    "resource_id": "b2aba344-95df-43c0-b2ba-f4353cfd9a00",
    "metadata_modified": "2026-05-27T18:01:46.734752",
-   "bytes": 123095496,
-   "sha256": "9d333264124b83a34bb2e18484fce6ea042912c475766a883ce2b3db203803db"
+   "bytes": 123477954,
+   "sha256": "5f0aec889f87765d808dcfca6bf7003c9daa03e941874359fb753fb5be840d4a"
   },
   {
    "label": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - biomas",
    "status": "ok",
    "resource_id": "afe30a48-eb96-4915-8f13-c4e838dae033",
    "metadata_modified": "2026-05-27T18:04:02.767720",
-   "bytes": 14302236,
-   "sha256": "e2b5467957d35b5cfb33cb5c762628f70f3cf25e9551c04b60025ffa5f40a3b5"
+   "bytes": 14347666,
+   "sha256": "aa6bcbd6ff4c1972fe0c7199c568d5d8d923d1a94432a7c784d72f28fad3ec56"
   },
   {
    "label": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - enquadramento legal",
    "status": "ok",
    "resource_id": "903120d7-9a73-46d2-8e22-93576f4f855b",
    "metadata_modified": "2026-05-27T18:02:06.168436",
-   "bytes": 8168836,
-   "sha256": "ff4fcee6024d6177eb866b49dc07234e2122da0a8e2a99c6364928378574e474"
+   "bytes": 8192931,
+   "sha256": "a23dcde565aea75628b39ef110f4316013407b0a2d096ada2e301b3b5c0dca57"
   },
   {
    "label": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-apreensao › Termo de apreensão",
@@ -344,24 +344,24 @@
    "status": "ok",
    "resource_id": "160b14e2-d7d8-40aa-b06c-295575a5fb9c",
    "metadata_modified": "2026-05-27T18:03:22.235198",
-   "bytes": 5312547,
-   "sha256": "030de3951cc7d8f3764c4d27efe0b04ba203727a9a13f69b034c4b16de7ac551"
+   "bytes": 5363381,
+   "sha256": "b7f7dc7504cbec81a851d54acc2104fcc183af1c4161de2819d39aef2db3f83e"
   },
   {
    "label": "dadosabertos.ibama.gov.br › ato-declaratorio-ambiental-ada › Ato Declaratório Ambiental (ADA)",
    "status": "ok",
    "resource_id": "09494a73-726a-4341-92ca-b97cf35914b2",
    "metadata_modified": "2026-07-08T20:22:30.700745",
-   "bytes": 401225756,
-   "sha256": "011813ed660894ba4a967e2fd314fdd271fac67e03ea5a5846071481f25370bd"
+   "bytes": 401210421,
+   "sha256": "ee444cea19f7f0645608aeebf4c5b8d7e18a94f92af86ca4bcbcbbbc7e9cc817"
   },
   {
    "label": "dadosabertos.ibama.gov.br › licencas-ambientais-de-atividades-e-empreendimentos-licenciados-pelo-ibama › Licenças ambientais de atividades e ...",
    "status": "ok",
    "resource_id": "9e4873d3-10d8-464f-a883-88be3b3abf06",
    "metadata_modified": "2026-05-29T14:52:20.514226",
-   "bytes": 3342907,
-   "sha256": "3d92925a0bfdaea998e5b5ff1f751e68ab139cec25ac77df33fd14f7730f0c28"
+   "bytes": 3347972,
+   "sha256": "a60bad61027ec36cfa76d9ec9efa46714e430a70296036caf74193a136c73b2b"
   },
   {
    "label": "dadosabertos.ibama.gov.br › julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama › Volume de Julgamento de Auto de Infração",
@@ -376,32 +376,32 @@
    "status": "ok",
    "resource_id": "cd55e477-2f11-43e5-b994-7be34e275561",
    "metadata_modified": "2026-08-26T15:04:02.026297",
-   "bytes": 27952955,
-   "sha256": "7b2fafbefe78ac0512a97c6ccf9bb5fb63439317caf46593d49ebd0437d22e40"
+   "bytes": 27992135,
+   "sha256": "dae1b391caaf228a4bcc95c1d80e664985667881818a549c1a2bba3a6b4c5fae"
   },
   {
    "label": "dadosabertos.ibama.gov.br › relatorios-de-comercializacao-de-agrotoxicos › Dados - CSV",
    "status": "ok",
    "resource_id": "5baa8719-cbc7-4a31-956c-d8d016ab5672",
    "metadata_modified": "2026-08-17T13:54:52.498258",
-   "bytes": 13575933,
-   "sha256": "b2ddca26905c9318f8bf77b9f43d70b238e587efdf8b6a4112bc46a795ca30a5"
+   "bytes": 13576797,
+   "sha256": "12fa08c61fb8102a7c1d03729f4d90af46697cbbd937553dd95243a9010ff849"
   },
   {
    "label": "dados.agricultura.gov.br › sistema-de-agrotoxicos-fitossanitarios-agrofit › Produto Técnico",
    "status": "ok",
    "resource_id": "a200c70b-e025-4a9a-be1b-ec7275d7921f",
    "metadata_modified": null,
-   "bytes": 710980,
-   "sha256": "aea98422f5f16a56e6983aca0dfcd6ae5e3a59f188704bc98d6a4c69783072fd"
+   "bytes": 717404,
+   "sha256": "5b802a37b67578f7879fd97ec62d41eca54fa8c48f9097107ae1be77985085bc"
   },
   {
    "label": "dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE",
    "status": "ok",
    "resource_id": "c6c767d7-f341-4256-8dff-010683a9c796",
    "metadata_modified": "2025-06-24T18:07:38.590296",
-   "bytes": 139137,
-   "sha256": "6a5372b143f1ad74c99000f1023918f673df55dadd37c9f0ac8c15dcca57a15f"
+   "bytes": 139066,
+   "sha256": "40d0a698d3d56c299e8afdbaa846453c230c8042c1b0b878010cc0e19f80c544"
   }
  ]
 }
