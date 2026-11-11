@@ -1,10 +1,10 @@
 {
  "rule": "installation-licence-over-six-years",
  "rule_version": "0.3.0",
- "evaluated_at": "2026-11-10T12:07:49+00:00",
- "run_id": "42812758765",
+ "evaluated_at": "2026-11-11T12:05:09+00:00",
+ "run_id": "43016574730",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42812758765",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_licencas": {
@@ -13,7 +13,7 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SISLIC/sislic-licencas.csv",
    "archive_members": null,
-   "sha256": "a60bad61027ec36cfa76d9ec9efa46714e430a70296036caf74193a136c73b2b",
+   "sha256": "17f287d49fb633be886eb2ada7dc8d3f794a3d08ed045e91d71324530b7f24c6",
    "records": 14376
   }
  },
@@ -31,7 +31,7 @@
   "mismatch": {
    "sislic-licencas.csv": [
     5219,
-    5245,
+    5243,
     5246,
     5294,
     6248

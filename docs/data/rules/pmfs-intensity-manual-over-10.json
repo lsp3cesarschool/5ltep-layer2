@@ -1,10 +1,10 @@
 {
  "rule": "pmfs-intensity-manual-over-10",
  "rule_version": "0.1.0",
- "evaluated_at": "2026-11-10T12:06:58+00:00",
- "run_id": "42812758765",
+ "evaluated_at": "2026-11-11T12:04:04+00:00",
+ "run_id": "43016574730",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42812758765",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_pmfs": {
@@ -13,8 +13,8 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SINAFLOR/pmfs/AmazoniaLegal/pmfsAmazoniaLegal.csv",
    "archive_members": null,
-   "sha256": "b29ab11822225795885f2d49098adbf87f0cf8d5b64a4136960814539981a117",
-   "records": 10246
+   "sha256": "e8ae0c684aa6dfcc1e519c812686e1c1d87af1549ba7ad6afa83df536a629f32",
+   "records": 10266
   }
  },
  "counts": {
@@ -24,9 +24,9 @@
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 10161
+  "out_of_scope": 10181
  },
- "total": 10246,
+ "total": 10266,
  "records": {
   "mismatch": {
    "pmfsAmazoniaLegal.csv": [
@@ -41,37 +41,37 @@
     988,
     996,
     1053,
-    1906,
     1907,
     1908,
     1909,
     1910,
-    8489,
-    8491,
-    8492,
-    8493,
-    8499,
-    8500,
-    8501,
-    8502,
-    8503,
-    8540,
-    9255,
-    9355
+    1911,
+    8509,
+    8511,
+    8512,
+    8513,
+    8519,
+    8520,
+    8521,
+    8522,
+    8523,
+    8560,
+    9275,
+    9375
    ]
   }
  },
  "members": [
   {
    "name": "pmfsAmazoniaLegal.csv",
-   "records": 10246
+   "records": 10266
   }
  ],
  "by_member": {
   "pmfsAmazoniaLegal.csv": {
    "match": 57,
    "mismatch": 28,
-   "out_of_scope": 10161
+   "out_of_scope": 10181
   }
  },
  "by_period": {
@@ -125,7 +125,7 @@
   "2026": {
    "match": 1,
    "mismatch": 2,
-   "out_of_scope": 1032
+   "out_of_scope": 1052
   }
  },
  "timeline": "ibama_pmfs.DATA_DE_EMISSAO"

@@ -1,10 +1,10 @@
 {
  "rule": "lifted-before-embargo",
  "rule_version": "0.3.0",
- "evaluated_at": "2026-11-10T12:06:38+00:00",
- "run_id": "42812758765",
+ "evaluated_at": "2026-11-11T12:03:40+00:00",
+ "run_id": "43016574730",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42812758765",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_embargo": {
@@ -13,53 +13,53 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/TERMOS_DE_EMBARGO/TERMO_EMBARGO/termo_de_embargo.csv",
    "archive_members": null,
-   "sha256": "b2bacdc571dcbf299cbaecfb335e811537462010acf558ff1040dcea75df6456",
-   "records": 117133
+   "sha256": "64987beaf598aae32f675b96e01d7bc789487bca3e9d3225e4d6691e65e4d760",
+   "records": 117174
   }
  },
  "counts": {
-  "match": 19782,
+  "match": 19785,
   "mismatch": 16,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 97335
+  "out_of_scope": 97373
  },
- "total": 117133,
+ "total": 117174,
  "records": {
   "mismatch": {
    "termo_de_embargo.csv": [
     2,
-    34507,
-    35048,
-    35539,
-    37197,
-    44065,
-    45196,
-    51573,
-    54724,
-    57559,
-    59639,
-    65198,
-    70416,
-    72201,
-    88409,
-    105454
+    34548,
+    35089,
+    35580,
+    37238,
+    44106,
+    45237,
+    51614,
+    54765,
+    57600,
+    59680,
+    65239,
+    70457,
+    72242,
+    88450,
+    105495
    ]
   }
  },
  "members": [
   {
    "name": "termo_de_embargo.csv",
-   "records": 117133
+   "records": 117174
   }
  ],
  "by_member": {
   "termo_de_embargo.csv": {
-   "match": 19782,
+   "match": 19785,
    "mismatch": 16,
-   "out_of_scope": 97335
+   "out_of_scope": 97373
   }
  },
  "by_period": {
@@ -181,19 +181,19 @@
    "out_of_scope": 4325
   },
   "2015": {
-   "match": 733,
+   "match": 734,
    "mismatch": 1,
-   "out_of_scope": 3671
+   "out_of_scope": 3670
   },
   "2016": {
-   "match": 812,
+   "match": 813,
    "mismatch": 1,
-   "out_of_scope": 4183
+   "out_of_scope": 4182
   },
   "2017": {
-   "match": 733,
+   "match": 732,
    "mismatch": 1,
-   "out_of_scope": 3964
+   "out_of_scope": 3965
   },
   "2018": {
    "match": 754,
@@ -222,16 +222,16 @@
    "out_of_scope": 5889
   },
   "2024": {
-   "match": 285,
-   "out_of_scope": 3809
+   "match": 286,
+   "out_of_scope": 3808
   },
   "2025": {
-   "match": 129,
-   "out_of_scope": 5289
+   "match": 130,
+   "out_of_scope": 5288
   },
   "2026": {
    "match": 41,
-   "out_of_scope": 4429
+   "out_of_scope": 4470
   },
   "2063": {
    "out_of_scope": 1

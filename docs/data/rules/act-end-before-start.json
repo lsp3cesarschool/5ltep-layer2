@@ -1,10 +1,10 @@
 {
  "rule": "act-end-before-start",
  "rule_version": "0.3.0",
- "evaluated_at": "2026-11-10T12:07:11+00:00",
- "run_id": "42812758765",
+ "evaluated_at": "2026-11-11T12:04:20+00:00",
+ "run_id": "43016574730",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42812758765",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_autos": {
@@ -13,20 +13,20 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "archive_members": "auto_infracao_*.csv",
-   "sha256": "5f0aec889f87765d808dcfca6bf7003c9daa03e941874359fb753fb5be840d4a",
-   "records": 713194
+   "sha256": "181b2ed83312de705c6e6a520d626fee0b3c72f9c6f680a170354186270005be",
+   "records": 713274
   }
  },
  "counts": {
-  "match": 86673,
-  "mismatch": 636,
+  "match": 86722,
+  "mismatch": 637,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 625885
+  "out_of_scope": 625915
  },
- "total": 713194,
+ "total": 713274,
  "records": {
   "mismatch": {
    "auto_infracao_2019.csv": [
@@ -672,14 +672,15 @@
     8741,
     10194,
     10507,
-    11113,
-    11515,
-    11826,
-    12639,
-    13187,
-    13830,
-    13868,
-    13883
+    11156,
+    11559,
+    11876,
+    12401,
+    12704,
+    13255,
+    13903,
+    13942,
+    13957
    ]
   }
  },
@@ -874,7 +875,7 @@
   },
   {
    "name": "auto_infracao_2026.csv",
-   "records": 14142
+   "records": 14222
   }
  ],
  "by_member": {
@@ -1037,9 +1038,9 @@
    "out_of_scope": 974
   },
   "auto_infracao_2026.csv": {
-   "match": 12660,
-   "mismatch": 44,
-   "out_of_scope": 1438
+   "match": 12709,
+   "mismatch": 45,
+   "out_of_scope": 1468
   }
  },
  "by_period": {
@@ -1123,7 +1124,7 @@
    "mismatch": 56
   },
   "2020": {
-   "match": 8432,
+   "match": 8434,
    "mismatch": 69
   },
   "2021": {
@@ -1131,7 +1132,7 @@
    "mismatch": 85
   },
   "2022": {
-   "match": 12103,
+   "match": 12104,
    "mismatch": 102
   },
   "2023": {
@@ -1144,19 +1145,19 @@
    "out_of_scope": 1
   },
   "2025": {
-   "match": 13810,
+   "match": 13811,
    "mismatch": 76,
    "out_of_scope": 1
   },
   "2026": {
-   "match": 10883,
-   "mismatch": 45
+   "match": 10928,
+   "mismatch": 46
   },
   "2027": {
    "mismatch": 1
   },
   "unknown": {
-   "out_of_scope": 625883
+   "out_of_scope": 625913
   }
  },
  "timeline": "ibama_autos.DT_INICIO_ATO_INEQUIVOCO"

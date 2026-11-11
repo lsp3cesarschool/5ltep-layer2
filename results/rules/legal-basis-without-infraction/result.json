@@ -1,7 +1,7 @@
 {
- "run_id": "42812758765",
+ "run_id": "43016574730",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/42812758765",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
  "id": "legal-basis-without-infraction",
  "rule_version": "0.1.0",
  "origin": "cross_reference",
@@ -35,22 +35,22 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-10T12:07:16+00:00",
- "total": 691786,
+ "evaluated_at": "2026-11-11T12:04:27+00:00",
+ "total": 691881,
  "counts": {
-  "match": 656182,
+  "match": 656226,
   "mismatch": 0,
-  "key_not_found": 24324,
-  "missing_value": 11280,
+  "key_not_found": 24335,
+  "missing_value": 11320,
   "invalid_value": 0,
   "ambiguous_key": 0,
   "out_of_scope": 0
  },
- "signals": 35604,
+ "signals": 35655,
  "signals_by_outcome": {
   "mismatch": 0,
-  "key_not_found": 24324,
-  "missing_value": 11280,
+  "key_not_found": 24335,
+  "missing_value": 11320,
   "invalid_value": 0,
   "ambiguous_key": 0
  },
@@ -59,12 +59,12 @@
   "ibama_filhos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - enquadramento legal",
    "fetch_status": "ok",
-   "sha256": "a23dcde565aea75628b39ef110f4316013407b0a2d096ada2e301b3b5c0dca57",
+   "sha256": "28b361fefe5f02e68859afb2573fd454a2bb6fb27e4812f150627071e40eea6f",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/enquadramento/enquadramento_csv.zip",
    "file": "enquadramento_csv.zip",
    "files": null,
    "archive_members": "enquadramento_*.csv",
-   "records": 691786,
+   "records": 691881,
    "members": [
     {
      "name": "enquadramento_1195.csv",
@@ -256,19 +256,19 @@
     },
     {
      "name": "enquadramento_2026.csv",
-     "records": 18592
+     "records": 18687
     }
    ]
   },
   "ibama_autos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
    "fetch_status": "ok",
-   "sha256": "5f0aec889f87765d808dcfca6bf7003c9daa03e941874359fb753fb5be840d4a",
+   "sha256": "181b2ed83312de705c6e6a520d626fee0b3c72f9c6f680a170354186270005be",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "file": "auto_infracao_csv.zip",
    "files": null,
    "archive_members": "auto_infracao_*.csv",
-   "records": 713194,
+   "records": 713274,
    "members": [
     {
      "name": "auto_infracao_1977.csv",
@@ -460,7 +460,7 @@
     },
     {
      "name": "auto_infracao_2026.csv",
-     "records": 14142
+     "records": 14222
     }
    ]
   }
