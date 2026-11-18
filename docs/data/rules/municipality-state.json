@@ -1,10 +1,10 @@
 {
  "rule": "municipality-state",
  "rule_version": "0.4.0",
- "evaluated_at": "2026-11-11T12:05:22+00:00",
- "run_id": "43016574730",
+ "evaluated_at": "2026-11-18T13:19:29+00:00",
+ "run_id": "44312201167",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_autos": {
@@ -13,8 +13,8 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "archive_members": "auto_infracao_*.csv",
-   "sha256": "181b2ed83312de705c6e6a520d626fee0b3c72f9c6f680a170354186270005be",
-   "records": 713274
+   "sha256": "d9e1abdda6c074b572fa77291e68c6725060c93077cb167f487b9923a906bbbb",
+   "records": 713632
   },
   "tse_municipios": {
    "label": "dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE",
@@ -22,12 +22,12 @@
    "files": null,
    "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/municipio_tse_ibge/municipio_tse_ibge.zip",
    "archive_members": "municipio_tse_ibge.csv",
-   "sha256": "40d0a698d3d56c299e8afdbaa846453c230c8042c1b0b878010cc0e19f80c544",
+   "sha256": "dba4a4a3bfcc34f4fbca827c539c614105b742434542ca2a535d8c0f34101428",
    "records": 5571
   }
  },
  "counts": {
-  "match": 712460,
+  "match": 712818,
   "mismatch": 0,
   "key_not_found": 547,
   "missing_value": 267,
@@ -35,7 +35,7 @@
   "ambiguous_key": 0,
   "out_of_scope": 0
  },
- "total": 713274,
+ "total": 713632,
  "records": {
   "key_not_found": {
    "auto_infracao_1986.csv": [
@@ -249,9 +249,9 @@
     6212,
     8870,
     9059,
-    15414,
-    23411,
-    24169
+    15415,
+    23412,
+    24170
    ],
    "auto_infracao_2001.csv": [
     3003,
@@ -273,14 +273,14 @@
     9505,
     9506,
     9507,
+    34902,
     34903,
-    34904,
-    34914,
-    35446,
-    35778,
-    35802,
-    35851,
-    37400
+    34913,
+    35445,
+    35777,
+    35801,
+    35850,
+    37399
    ],
    "auto_infracao_2003.csv": [
     420,
@@ -931,14 +931,14 @@
     16594
    ],
    "auto_infracao_2000.csv": [
-    12274,
-    15015
+    12275,
+    15016
    ],
    "auto_infracao_2001.csv": [
     8708
    ],
    "auto_infracao_2002.csv": [
-    31664
+    31663
    ],
    "auto_infracao_2003.csv": [
     11218,
@@ -1069,7 +1069,7 @@
   },
   {
    "name": "auto_infracao_2000.csv",
-   "records": 24898
+   "records": 24899
   },
   {
    "name": "auto_infracao_2001.csv",
@@ -1077,7 +1077,7 @@
   },
   {
    "name": "auto_infracao_2002.csv",
-   "records": 37647
+   "records": 37646
   },
   {
    "name": "auto_infracao_2003.csv",
@@ -1125,7 +1125,7 @@
   },
   {
    "name": "auto_infracao_2014.csv",
-   "records": 15293
+   "records": 15294
   },
   {
    "name": "auto_infracao_2015.csv",
@@ -1173,7 +1173,7 @@
   },
   {
    "name": "auto_infracao_2026.csv",
-   "records": 14222
+   "records": 14579
   }
  ],
  "by_member": {
@@ -1274,7 +1274,7 @@
   },
   "auto_infracao_2000.csv": {
    "key_not_found": 11,
-   "match": 24885,
+   "match": 24886,
    "missing_value": 2
   },
   "auto_infracao_2001.csv": {
@@ -1284,7 +1284,7 @@
   },
   "auto_infracao_2002.csv": {
    "key_not_found": 17,
-   "match": 37629,
+   "match": 37628,
    "missing_value": 1
   },
   "auto_infracao_2003.csv": {
@@ -1336,7 +1336,7 @@
    "match": 16175
   },
   "auto_infracao_2014.csv": {
-   "match": 15293
+   "match": 15294
   },
   "auto_infracao_2015.csv": {
    "match": 17326
@@ -1382,7 +1382,7 @@
    "match": 16272
   },
   "auto_infracao_2026.csv": {
-   "match": 14222
+   "match": 14579
   }
  },
  "by_period": {},

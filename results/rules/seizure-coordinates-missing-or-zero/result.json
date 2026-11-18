@@ -1,7 +1,7 @@
 {
- "run_id": "43016574730",
+ "run_id": "44312201167",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
  "id": "seizure-coordinates-missing-or-zero",
  "rule_version": "0.2.0",
  "origin": "expert",
@@ -30,7 +30,7 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-11T12:05:22+00:00",
+ "evaluated_at": "2026-11-18T13:19:28+00:00",
  "total": 157955,
  "counts": {
   "match": 54033,

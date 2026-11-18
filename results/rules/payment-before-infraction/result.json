@@ -1,7 +1,7 @@
 {
- "run_id": "43016574730",
+ "run_id": "44312201167",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
  "id": "payment-before-infraction",
  "rule_version": "0.2.0",
  "origin": "expert",
@@ -30,10 +30,10 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-11T12:05:21+00:00",
- "total": 1591442,
+ "evaluated_at": "2026-11-18T13:19:28+00:00",
+ "total": 1591933,
  "counts": {
-  "match": 1590657,
+  "match": 1591148,
   "mismatch": 785,
   "key_not_found": 0,
   "missing_value": 0,
@@ -54,120 +54,120 @@
   "ibama_arrecadacao": {
    "resource": "dadosabertos.ibama.gov.br › arrecadacao-de-multas-ambientais-bens-tutelados › Arrecadação de Multas por Bens Tutelados",
    "fetch_status": "ok",
-   "sha256": "6e415c56febd0674dc7919f411a7f3da0b8eb0d5bd0c649be0989119eba196b7",
+   "sha256": "cf28a55edc2f998411e7b9671cc174a07fbff9964f629cfa18da13f8dc9d2625",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/ARRECADACAO_DE_MULTAS_AMBIENTAIS_POR_BENS_TUTELADOS/arrecadacao_de_multas_ambientais_por_bens_tutelados_csv.zip",
    "file": "arrecadacao_de_multas_ambientais_por_bens_tutelados_csv.zip",
    "files": null,
    "archive_members": "arrecadacao_de_multas_ambientais_por_bens_tutelados_*.csv",
-   "records": 1591442,
+   "records": 1591933,
    "members": [
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_AC.csv",
-     "records": 18401
+     "records": 18411
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_AL.csv",
-     "records": 20187
+     "records": 20189
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_AM.csv",
-     "records": 32062
+     "records": 32071
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_AP.csv",
-     "records": 10790
+     "records": 10793
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_BA.csv",
-     "records": 71697
+     "records": 71729
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_CE.csv",
-     "records": 83982
+     "records": 84007
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_DF.csv",
-     "records": 16008
+     "records": 16012
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_ES.csv",
-     "records": 87055
+     "records": 87089
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_GO.csv",
-     "records": 108656
+     "records": 108685
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_MA.csv",
-     "records": 36262
+     "records": 36273
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_MG.csv",
-     "records": 237966
+     "records": 238027
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_MS.csv",
-     "records": 47636
+     "records": 47649
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_MT.csv",
-     "records": 71921
+     "records": 71942
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_PA.csv",
-     "records": 90332
+     "records": 90367
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_PB.csv",
-     "records": 65078
+     "records": 65088
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_PE.csv",
-     "records": 33490
+     "records": 33500
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_PI.csv",
-     "records": 27256
+     "records": 27260
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_PR.csv",
-     "records": 54257
+     "records": 54271
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_RJ.csv",
-     "records": 35144
+     "records": 35160
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_RN.csv",
-     "records": 53585
+     "records": 53603
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_RO.csv",
-     "records": 68479
+     "records": 68505
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_RR.csv",
-     "records": 16634
+     "records": 16644
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_RS.csv",
-     "records": 63617
+     "records": 63638
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_SC.csv",
-     "records": 97301
+     "records": 97314
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_SE.csv",
-     "records": 11136
+     "records": 11142
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_SP.csv",
-     "records": 63786
+     "records": 63814
     },
     {
      "name": "arrecadacao_de_multas_ambientais_por_bens_tutelados_TO.csv",
-     "records": 68724
+     "records": 68750
     }
    ]
   }

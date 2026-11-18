@@ -1,10 +1,10 @@
 {
  "rule": "lifted-before-embargo",
  "rule_version": "0.3.0",
- "evaluated_at": "2026-11-11T12:03:40+00:00",
- "run_id": "43016574730",
+ "evaluated_at": "2026-11-18T13:18:23+00:00",
+ "run_id": "44312201167",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_embargo": {
@@ -13,53 +13,53 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/TERMOS_DE_EMBARGO/TERMO_EMBARGO/termo_de_embargo.csv",
    "archive_members": null,
-   "sha256": "64987beaf598aae32f675b96e01d7bc789487bca3e9d3225e4d6691e65e4d760",
-   "records": 117174
+   "sha256": "70acfbd99c540d413e071fea29d0d94d924450623a2b93c7fe38c3e6a00bbcc0",
+   "records": 117309
   }
  },
  "counts": {
-  "match": 19785,
+  "match": 19814,
   "mismatch": 16,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 97373
+  "out_of_scope": 97479
  },
- "total": 117174,
+ "total": 117309,
  "records": {
   "mismatch": {
    "termo_de_embargo.csv": [
     2,
-    34548,
-    35089,
-    35580,
-    37238,
-    44106,
-    45237,
-    51614,
-    54765,
-    57600,
-    59680,
-    65239,
-    70457,
-    72242,
-    88450,
-    105495
+    34676,
+    35217,
+    35708,
+    37366,
+    44234,
+    45365,
+    51743,
+    54894,
+    57729,
+    59809,
+    65368,
+    70586,
+    72371,
+    88579,
+    105626
    ]
   }
  },
  "members": [
   {
    "name": "termo_de_embargo.csv",
-   "records": 117174
+   "records": 117309
   }
  ],
  "by_member": {
   "termo_de_embargo.csv": {
-   "match": 19785,
+   "match": 19814,
    "mismatch": 16,
-   "out_of_scope": 97373
+   "out_of_scope": 97479
   }
  },
  "by_period": {
@@ -116,18 +116,18 @@
   },
   "2000": {
    "match": 104,
-   "out_of_scope": 239
+   "out_of_scope": 240
   },
   "2001": {
    "match": 166,
-   "out_of_scope": 407
+   "out_of_scope": 409
   },
   "2002": {
    "match": 222,
    "out_of_scope": 1133
   },
   "2003": {
-   "match": 250,
+   "match": 251,
    "out_of_scope": 726
   },
   "2004": {
@@ -144,94 +144,94 @@
    "out_of_scope": 4463
   },
   "2007": {
-   "match": 1802,
-   "out_of_scope": 5318
+   "match": 1801,
+   "out_of_scope": 5319
   },
   "2008": {
-   "match": 1969,
+   "match": 1971,
    "mismatch": 1,
    "out_of_scope": 5669
   },
   "2009": {
-   "match": 1598,
-   "out_of_scope": 4636
+   "match": 1597,
+   "out_of_scope": 4637
   },
   "2010": {
    "match": 1403,
    "out_of_scope": 4455
   },
   "2011": {
-   "match": 1324,
+   "match": 1327,
    "mismatch": 1,
-   "out_of_scope": 4256
+   "out_of_scope": 4253
   },
   "2012": {
-   "match": 1129,
+   "match": 1130,
    "mismatch": 2,
-   "out_of_scope": 4406
+   "out_of_scope": 4405
   },
   "2013": {
-   "match": 1118,
+   "match": 1119,
    "mismatch": 1,
-   "out_of_scope": 4551
+   "out_of_scope": 4550
   },
   "2014": {
-   "match": 778,
+   "match": 779,
    "mismatch": 2,
-   "out_of_scope": 4325
+   "out_of_scope": 4324
   },
   "2015": {
-   "match": 734,
+   "match": 733,
    "mismatch": 1,
-   "out_of_scope": 3670
+   "out_of_scope": 3672
   },
   "2016": {
-   "match": 813,
+   "match": 816,
    "mismatch": 1,
-   "out_of_scope": 4182
+   "out_of_scope": 4179
   },
   "2017": {
-   "match": 732,
+   "match": 733,
    "mismatch": 1,
-   "out_of_scope": 3965
+   "out_of_scope": 3964
   },
   "2018": {
-   "match": 754,
+   "match": 756,
    "mismatch": 1,
-   "out_of_scope": 3825
+   "out_of_scope": 3823
   },
   "2019": {
-   "match": 414,
+   "match": 416,
    "mismatch": 3,
-   "out_of_scope": 3786
+   "out_of_scope": 3784
   },
   "2020": {
-   "match": 247,
-   "out_of_scope": 2356
+   "match": 248,
+   "out_of_scope": 2355
   },
   "2021": {
-   "match": 331,
-   "out_of_scope": 3141
+   "match": 332,
+   "out_of_scope": 3140
   },
   "2022": {
-   "match": 377,
-   "out_of_scope": 4801
+   "match": 379,
+   "out_of_scope": 4798
   },
   "2023": {
-   "match": 340,
-   "out_of_scope": 5889
+   "match": 344,
+   "out_of_scope": 5885
   },
   "2024": {
-   "match": 286,
-   "out_of_scope": 3808
+   "match": 289,
+   "out_of_scope": 3807
   },
   "2025": {
    "match": 130,
    "out_of_scope": 5288
   },
   "2026": {
-   "match": 41,
-   "out_of_scope": 4470
+   "match": 45,
+   "out_of_scope": 4593
   },
   "2063": {
    "out_of_scope": 1

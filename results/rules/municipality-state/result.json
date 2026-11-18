@@ -1,7 +1,7 @@
 {
- "run_id": "43016574730",
+ "run_id": "44312201167",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
  "id": "municipality-state",
  "rule_version": "0.4.0",
  "origin": "cross_reference",
@@ -35,10 +35,10 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-11T12:05:22+00:00",
- "total": 713274,
+ "evaluated_at": "2026-11-18T13:19:29+00:00",
+ "total": 713632,
  "counts": {
-  "match": 712460,
+  "match": 712818,
   "mismatch": 0,
   "key_not_found": 547,
   "missing_value": 267,
@@ -59,12 +59,12 @@
   "ibama_autos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
    "fetch_status": "ok",
-   "sha256": "181b2ed83312de705c6e6a520d626fee0b3c72f9c6f680a170354186270005be",
+   "sha256": "d9e1abdda6c074b572fa77291e68c6725060c93077cb167f487b9923a906bbbb",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "file": "auto_infracao_csv.zip",
    "files": null,
    "archive_members": "auto_infracao_*.csv",
-   "records": 713274,
+   "records": 713632,
    "members": [
     {
      "name": "auto_infracao_1977.csv",
@@ -152,7 +152,7 @@
     },
     {
      "name": "auto_infracao_2000.csv",
-     "records": 24898
+     "records": 24899
     },
     {
      "name": "auto_infracao_2001.csv",
@@ -160,7 +160,7 @@
     },
     {
      "name": "auto_infracao_2002.csv",
-     "records": 37647
+     "records": 37646
     },
     {
      "name": "auto_infracao_2003.csv",
@@ -208,7 +208,7 @@
     },
     {
      "name": "auto_infracao_2014.csv",
-     "records": 15293
+     "records": 15294
     },
     {
      "name": "auto_infracao_2015.csv",
@@ -256,14 +256,14 @@
     },
     {
      "name": "auto_infracao_2026.csv",
-     "records": 14222
+     "records": 14579
     }
    ]
   },
   "tse_municipios": {
    "resource": "dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE",
    "fetch_status": "ok",
-   "sha256": "40d0a698d3d56c299e8afdbaa846453c230c8042c1b0b878010cc0e19f80c544",
+   "sha256": "dba4a4a3bfcc34f4fbca827c539c614105b742434542ca2a535d8c0f34101428",
    "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/municipio_tse_ibge/municipio_tse_ibge.zip",
    "file": "municipio_tse_ibge.zip",
    "files": null,

@@ -1,7 +1,7 @@
 {
- "run_id": "43016574730",
+ "run_id": "44312201167",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
  "id": "exploration-outside-validity",
  "rule_version": "0.2.0",
  "origin": "expert",
@@ -30,20 +30,20 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-11T12:04:04+00:00",
- "total": 2435047,
+ "evaluated_at": "2026-11-18T13:18:38+00:00",
+ "total": 2448520,
  "counts": {
-  "match": 2365941,
-  "mismatch": 69106,
+  "match": 2378737,
+  "mismatch": 69783,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
   "out_of_scope": 0
  },
- "signals": 69106,
+ "signals": 69783,
  "signals_by_outcome": {
-  "mismatch": 69106,
+  "mismatch": 69783,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
@@ -54,12 +54,12 @@
   "ibama_if100": {
    "resource": "dadosabertos.ibama.gov.br › volumes-explorados-if-100 › Volumes Explorados - IF 100%",
    "fetch_status": "ok",
-   "sha256": "1ff909e0ad5cfafa7d689dde4a95d2bff058c666f17d37992cd9a375cbb99541",
+   "sha256": "56340e327b0a9bac7d9a3b0b0881626de631457ba37534701bee8c760282f448",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SINAFLOR/VolumesExploradosIf100/volumes_explorados_if_100_csv.zip",
    "file": "volumes_explorados_if_100_csv.zip",
    "files": null,
    "archive_members": "volumes_explorados_if_100_ano_*.csv",
-   "records": 2435047,
+   "records": 2448520,
    "members": [
     {
      "name": "volumes_explorados_if_100_ano_2017.csv",
@@ -83,7 +83,7 @@
     },
     {
      "name": "volumes_explorados_if_100_ano_2022.csv",
-     "records": 368367
+     "records": 368380
     },
     {
      "name": "volumes_explorados_if_100_ano_2023.csv",
@@ -91,15 +91,15 @@
     },
     {
      "name": "volumes_explorados_if_100_ano_2024.csv",
-     "records": 407885
+     "records": 408468
     },
     {
      "name": "volumes_explorados_if_100_ano_2025.csv",
-     "records": 277949
+     "records": 282375
     },
     {
      "name": "volumes_explorados_if_100_ano_2026.csv",
-     "records": 150258
+     "records": 158709
     }
    ]
   }

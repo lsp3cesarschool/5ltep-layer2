@@ -1,10 +1,10 @@
 {
  "rule": "notice-before-issue",
  "rule_version": "0.3.0",
- "evaluated_at": "2026-11-11T12:04:28+00:00",
- "run_id": "43016574730",
+ "evaluated_at": "2026-11-18T13:18:53+00:00",
+ "run_id": "44312201167",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_autos": {
@@ -13,20 +13,20 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "archive_members": "auto_infracao_*.csv",
-   "sha256": "181b2ed83312de705c6e6a520d626fee0b3c72f9c6f680a170354186270005be",
-   "records": 713274
+   "sha256": "d9e1abdda6c074b572fa77291e68c6725060c93077cb167f487b9923a906bbbb",
+   "records": 713632
   }
  },
  "counts": {
-  "match": 432288,
-  "mismatch": 1100,
+  "match": 432539,
+  "mismatch": 1106,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 279886
+  "out_of_scope": 279987
  },
- "total": 713274,
+ "total": 713632,
  "records": {
   "mismatch": {
    "auto_infracao_1989.csv": [
@@ -1071,12 +1071,12 @@
     14796,
     14980,
     15103,
-    15244,
-    15297,
-    15324,
-    15449,
-    15496,
-    15591,
+    15242,
+    15295,
+    15322,
+    15447,
+    15494,
+    15589,
     15771,
     15864,
     16253
@@ -1172,28 +1172,34 @@
     10632,
     10834,
     10877,
-    10913,
-    10939,
-    11650,
-    11818,
-    11878,
-    12037,
-    12038,
-    12075,
-    12076,
-    12150,
-    12153,
-    12245,
-    12258,
-    12259,
-    12782,
-    12914,
-    12967,
-    13051,
-    13260,
-    13286,
-    13751,
-    14172
+    11040,
+    11144,
+    11170,
+    11504,
+    11913,
+    12087,
+    12148,
+    12230,
+    12260,
+    12308,
+    12309,
+    12345,
+    12346,
+    12423,
+    12426,
+    12519,
+    12530,
+    12531,
+    13063,
+    13201,
+    13255,
+    13335,
+    13556,
+    13583,
+    14080,
+    14180,
+    14384,
+    14523
    ]
   }
  },
@@ -1284,7 +1290,7 @@
   },
   {
    "name": "auto_infracao_2000.csv",
-   "records": 24898
+   "records": 24899
   },
   {
    "name": "auto_infracao_2001.csv",
@@ -1292,7 +1298,7 @@
   },
   {
    "name": "auto_infracao_2002.csv",
-   "records": 37647
+   "records": 37646
   },
   {
    "name": "auto_infracao_2003.csv",
@@ -1340,7 +1346,7 @@
   },
   {
    "name": "auto_infracao_2014.csv",
-   "records": 15293
+   "records": 15294
   },
   {
    "name": "auto_infracao_2015.csv",
@@ -1388,7 +1394,7 @@
   },
   {
    "name": "auto_infracao_2026.csv",
-   "records": 14222
+   "records": 14579
   }
  ],
  "by_member": {
@@ -1485,31 +1491,31 @@
    "out_of_scope": 24730
   },
   "auto_infracao_2000.csv": {
-   "match": 8789,
+   "match": 8790,
    "mismatch": 1,
    "out_of_scope": 16108
   },
   "auto_infracao_2001.csv": {
-   "match": 11280,
-   "out_of_scope": 15534
+   "match": 11281,
+   "out_of_scope": 15533
   },
   "auto_infracao_2002.csv": {
    "match": 17360,
-   "out_of_scope": 20287
+   "out_of_scope": 20286
   },
   "auto_infracao_2003.csv": {
    "match": 12801,
    "out_of_scope": 9255
   },
   "auto_infracao_2004.csv": {
-   "match": 17743,
+   "match": 17744,
    "mismatch": 2,
-   "out_of_scope": 9445
+   "out_of_scope": 9444
   },
   "auto_infracao_2005.csv": {
-   "match": 23460,
+   "match": 23461,
    "mismatch": 2,
-   "out_of_scope": 9642
+   "out_of_scope": 9641
   },
   "auto_infracao_2006.csv": {
    "match": 19683,
@@ -1547,29 +1553,29 @@
    "out_of_scope": 951
   },
   "auto_infracao_2013.csv": {
-   "match": 15101,
+   "match": 15103,
    "mismatch": 15,
-   "out_of_scope": 1068
+   "out_of_scope": 1066
   },
   "auto_infracao_2014.csv": {
-   "match": 14455,
+   "match": 14456,
    "mismatch": 6,
    "out_of_scope": 832
   },
   "auto_infracao_2015.csv": {
-   "match": 16079,
+   "match": 16080,
    "mismatch": 8,
-   "out_of_scope": 1239
+   "out_of_scope": 1238
   },
   "auto_infracao_2016.csv": {
-   "match": 16686,
+   "match": 16687,
    "mismatch": 29,
-   "out_of_scope": 1109
+   "out_of_scope": 1108
   },
   "auto_infracao_2017.csv": {
-   "match": 14872,
+   "match": 14874,
    "mismatch": 5,
-   "out_of_scope": 2008
+   "out_of_scope": 2006
   },
   "auto_infracao_2018.csv": {
    "match": 15079,
@@ -1577,24 +1583,24 @@
    "out_of_scope": 2801
   },
   "auto_infracao_2019.csv": {
-   "match": 11716,
+   "match": 11717,
    "mismatch": 40,
-   "out_of_scope": 2774
+   "out_of_scope": 2773
   },
   "auto_infracao_2020.csv": {
-   "match": 7806,
+   "match": 7807,
    "mismatch": 157,
-   "out_of_scope": 1571
+   "out_of_scope": 1570
   },
   "auto_infracao_2021.csv": {
-   "match": 8061,
+   "match": 8063,
    "mismatch": 85,
-   "out_of_scope": 1517
+   "out_of_scope": 1515
   },
   "auto_infracao_2022.csv": {
-   "match": 10391,
+   "match": 10393,
    "mismatch": 81,
-   "out_of_scope": 2383
+   "out_of_scope": 2381
   },
   "auto_infracao_2023.csv": {
    "match": 13279,
@@ -1602,19 +1608,19 @@
    "out_of_scope": 3729
   },
   "auto_infracao_2024.csv": {
-   "match": 8331,
+   "match": 8336,
    "mismatch": 110,
-   "out_of_scope": 3867
+   "out_of_scope": 3862
   },
   "auto_infracao_2025.csv": {
-   "match": 10238,
+   "match": 10282,
    "mismatch": 192,
-   "out_of_scope": 5843
+   "out_of_scope": 5799
   },
   "auto_infracao_2026.csv": {
-   "match": 7377,
-   "mismatch": 112,
-   "out_of_scope": 6733
+   "match": 7562,
+   "mismatch": 118,
+   "out_of_scope": 6899
   }
  },
  "by_period": {
@@ -1711,31 +1717,31 @@
    "out_of_scope": 24730
   },
   "2000": {
-   "match": 8789,
+   "match": 8790,
    "mismatch": 1,
    "out_of_scope": 16108
   },
   "2001": {
-   "match": 11280,
-   "out_of_scope": 15534
+   "match": 11281,
+   "out_of_scope": 15533
   },
   "2002": {
    "match": 17360,
-   "out_of_scope": 20287
+   "out_of_scope": 20286
   },
   "2003": {
    "match": 12801,
    "out_of_scope": 9255
   },
   "2004": {
-   "match": 17743,
+   "match": 17744,
    "mismatch": 2,
-   "out_of_scope": 9445
+   "out_of_scope": 9444
   },
   "2005": {
-   "match": 23460,
+   "match": 23461,
    "mismatch": 2,
-   "out_of_scope": 9642
+   "out_of_scope": 9641
   },
   "2006": {
    "match": 19683,
@@ -1773,29 +1779,29 @@
    "out_of_scope": 951
   },
   "2013": {
-   "match": 15101,
+   "match": 15103,
    "mismatch": 15,
-   "out_of_scope": 1068
+   "out_of_scope": 1066
   },
   "2014": {
-   "match": 14455,
+   "match": 14456,
    "mismatch": 6,
    "out_of_scope": 832
   },
   "2015": {
-   "match": 16079,
+   "match": 16080,
    "mismatch": 8,
-   "out_of_scope": 1239
+   "out_of_scope": 1238
   },
   "2016": {
-   "match": 16686,
+   "match": 16687,
    "mismatch": 29,
-   "out_of_scope": 1109
+   "out_of_scope": 1108
   },
   "2017": {
-   "match": 14872,
+   "match": 14874,
    "mismatch": 5,
-   "out_of_scope": 2008
+   "out_of_scope": 2006
   },
   "2018": {
    "match": 15079,
@@ -1803,24 +1809,24 @@
    "out_of_scope": 2801
   },
   "2019": {
-   "match": 11716,
+   "match": 11717,
    "mismatch": 40,
-   "out_of_scope": 2774
+   "out_of_scope": 2773
   },
   "2020": {
-   "match": 7806,
+   "match": 7807,
    "mismatch": 157,
-   "out_of_scope": 1571
+   "out_of_scope": 1570
   },
   "2021": {
-   "match": 8061,
+   "match": 8063,
    "mismatch": 85,
-   "out_of_scope": 1517
+   "out_of_scope": 1515
   },
   "2022": {
-   "match": 10391,
+   "match": 10393,
    "mismatch": 81,
-   "out_of_scope": 2383
+   "out_of_scope": 2381
   },
   "2023": {
    "match": 13279,
@@ -1828,19 +1834,19 @@
    "out_of_scope": 3729
   },
   "2024": {
-   "match": 8331,
+   "match": 8336,
    "mismatch": 110,
-   "out_of_scope": 3867
+   "out_of_scope": 3862
   },
   "2025": {
-   "match": 10238,
+   "match": 10282,
    "mismatch": 192,
-   "out_of_scope": 5843
+   "out_of_scope": 5799
   },
   "2026": {
-   "match": 7377,
-   "mismatch": 112,
-   "out_of_scope": 6733
+   "match": 7562,
+   "mismatch": 118,
+   "out_of_scope": 6899
   }
  },
  "timeline": "ibama_autos.DAT_HORA_AUTO_INFRACAO"

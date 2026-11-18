@@ -1,11 +1,11 @@
 {
- "run_id": "43016574730",
+ "run_id": "44312201167",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
- "started_at": "2026-11-11T12:00:25+00:00",
- "finished_at": "2026-11-11T12:05:23+00:00",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
+ "started_at": "2026-11-18T13:17:35+00:00",
+ "finished_at": "2026-11-18T13:19:29+00:00",
  "engine": {
-  "commit": "a37d862eaf74c7c183fc61faf1655cbbea8a5320",
+  "commit": "4798e9d1b8c70b2258bc9222058b12654075fb2d",
   "uncommitted_changes": false,
   "python": "3.12.16",
   "duckdb": "2.0.0"
@@ -14,20 +14,20 @@
  "download_speed": {
   "primary": {
    "resources": 16,
-   "bytes": 1364595465,
-   "seconds": 175.51,
-   "mb_per_s": 7.775
+   "bytes": 1366338729,
+   "seconds": 35.41,
+   "mb_per_s": 38.586
   },
   "secondary": {
    "resources": 4,
-   "bytes": 1081112,
-   "seconds": 3.79,
-   "mb_per_s": 0.285
+   "bytes": 1085075,
+   "seconds": 2.15,
+   "mb_per_s": 0.505
   },
   "processing": {
-   "bytes": 1365676577,
-   "seconds": 107.56,
-   "mb_per_s": 12.697
+   "bytes": 1367423804,
+   "seconds": 69.23,
+   "mb_per_s": 19.752
   }
  },
  "rules": [
@@ -248,8 +248,8 @@
    "status": "ok",
    "resource_id": "dddd819f-275a-4653-9104-772dd7519e6a",
    "metadata_modified": "2026-05-26T13:12:04.055944",
-   "bytes": 107217223,
-   "sha256": "15a5ea14d219ccd4dd0dce346f261d1845a58db402a22a207d7658cfe25b6acd"
+   "bytes": 107266436,
+   "sha256": "a831881740788266e9bc705bf11199f8dfaf6d847b5f472d7287565fef5a09c3"
   },
   {
    "label": "dados.mma.gov.br › especies-ameacadas › FAUNA - Lista de Espécies Ameaçadas - 2021.csv",
@@ -264,8 +264,8 @@
    "status": "ok",
    "resource_id": "8f88b43e-287a-470b-a730-db440f9e37fa",
    "metadata_modified": "2026-10-07T19:31:48.206513",
-   "bytes": 213759924,
-   "sha256": "64987beaf598aae32f675b96e01d7bc789487bca3e9d3225e4d6691e65e4d760"
+   "bytes": 214859480,
+   "sha256": "70acfbd99c540d413e071fea29d0d94d924450623a2b93c7fe38c3e6a00bbcc0"
   },
   {
    "label": "dadosabertos.ibama.gov.br › sisfauna-plantel-exato › Sisfauna - Plantel Exato",
@@ -288,16 +288,16 @@
    "status": "ok",
    "resource_id": "ac345e77-863b-472c-a06a-4f171263bc70",
    "metadata_modified": "2026-10-08T18:25:45.623139",
-   "bytes": 52293547,
-   "sha256": "1ff909e0ad5cfafa7d689dde4a95d2bff058c666f17d37992cd9a375cbb99541"
+   "bytes": 52575867,
+   "sha256": "56340e327b0a9bac7d9a3b0b0881626de631457ba37534701bee8c760282f448"
   },
   {
    "label": "dadosabertos.ibama.gov.br › sinaflor-pmfs-amazonia-legal › PMFS Amazônia Legal",
    "status": "ok",
    "resource_id": "fac201c9-8e09-49d5-9113-1608cf45b8c8",
    "metadata_modified": "2026-07-08T14:24:45.875541",
-   "bytes": 5911379,
-   "sha256": "e8ae0c684aa6dfcc1e519c812686e1c1d87af1549ba7ad6afa83df536a629f32"
+   "bytes": 5927506,
+   "sha256": "a5198bf530ec9318d139b48200a550c1bc95bd5b6e96bfac6ece95f2c32072a3"
   },
   {
    "label": "dados.florestal.gov.br › especies-florestais-madeireiras-comerciais › Dados_abertos_especies_madeireiras_SNIF_fonte_LPF_SFB",
@@ -312,24 +312,24 @@
    "status": "ok",
    "resource_id": "b2aba344-95df-43c0-b2ba-f4353cfd9a00",
    "metadata_modified": "2026-05-27T18:01:46.734752",
-   "bytes": 123513636,
-   "sha256": "181b2ed83312de705c6e6a520d626fee0b3c72f9c6f680a170354186270005be"
+   "bytes": 123721773,
+   "sha256": "d9e1abdda6c074b572fa77291e68c6725060c93077cb167f487b9923a906bbbb"
   },
   {
    "label": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - biomas",
    "status": "ok",
    "resource_id": "afe30a48-eb96-4915-8f13-c4e838dae033",
    "metadata_modified": "2026-05-27T18:04:02.767720",
-   "bytes": 14351677,
-   "sha256": "9daa7e2309227f3a18877c5454088d2f7b21298708c91f8842a0aed6127f73cc"
+   "bytes": 14371487,
+   "sha256": "5839b0ec128888a19ff4d37355388638c25f17e02d28c03a48f7242dbe6d2383"
   },
   {
    "label": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - enquadramento legal",
    "status": "ok",
    "resource_id": "903120d7-9a73-46d2-8e22-93576f4f855b",
    "metadata_modified": "2026-05-27T18:02:06.168436",
-   "bytes": 8195010,
-   "sha256": "28b361fefe5f02e68859afb2573fd454a2bb6fb27e4812f150627071e40eea6f"
+   "bytes": 8201999,
+   "sha256": "81198f9ecf35b10c5998603efbf0c87af9ca575456bd5bf4fedfd3811b05ed2d"
   },
   {
    "label": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-apreensao › Termo de apreensão",
@@ -344,24 +344,24 @@
    "status": "ok",
    "resource_id": "160b14e2-d7d8-40aa-b06c-295575a5fb9c",
    "metadata_modified": "2026-05-27T18:03:22.235198",
-   "bytes": 5365945,
-   "sha256": "27b18b9cac9c39d6cfadc755c1923619083dd8847d5d5ed2ff5be3fe0b5d0d04"
+   "bytes": 5384440,
+   "sha256": "9fe9a8cd5ebf9f397bb9b81f65d2fc2f2fcf13340e5f2629fa7eadc7952f41c3"
   },
   {
    "label": "dadosabertos.ibama.gov.br › ato-declaratorio-ambiental-ada › Ato Declaratório Ambiental (ADA)",
    "status": "ok",
    "resource_id": "09494a73-726a-4341-92ca-b97cf35914b2",
    "metadata_modified": "2026-07-08T20:22:30.700745",
-   "bytes": 401210421,
-   "sha256": "ee444cea19f7f0645608aeebf4c5b8d7e18a94f92af86ca4bcbcbbbc7e9cc817"
+   "bytes": 401235104,
+   "sha256": "508a6df627466d35c99bc72b1a6d58558fdb4ac5974f118a2c290c8bc706c782"
   },
   {
    "label": "dadosabertos.ibama.gov.br › licencas-ambientais-de-atividades-e-empreendimentos-licenciados-pelo-ibama › Licenças ambientais de atividades e ...",
    "status": "ok",
    "resource_id": "9e4873d3-10d8-464f-a883-88be3b3abf06",
    "metadata_modified": "2026-05-29T14:52:20.514226",
-   "bytes": 3347952,
-   "sha256": "17f287d49fb633be886eb2ada7dc8d3f794a3d08ed045e91d71324530b7f24c6"
+   "bytes": 3355376,
+   "sha256": "36d47639717359f2a61e1086e0ff73374b30d382b3d52045ed02da5a516b0c2d"
   },
   {
    "label": "dadosabertos.ibama.gov.br › julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama › Volume de Julgamento de Auto de Infração",
@@ -376,8 +376,8 @@
    "status": "ok",
    "resource_id": "cd55e477-2f11-43e5-b994-7be34e275561",
    "metadata_modified": "2026-08-26T15:04:02.026297",
-   "bytes": 27991757,
-   "sha256": "6e415c56febd0674dc7919f411a7f3da0b8eb0d5bd0c649be0989119eba196b7"
+   "bytes": 28002267,
+   "sha256": "cf28a55edc2f998411e7b9671cc174a07fbff9964f629cfa18da13f8dc9d2625"
   },
   {
    "label": "dadosabertos.ibama.gov.br › relatorios-de-comercializacao-de-agrotoxicos › Dados - CSV",
@@ -392,16 +392,16 @@
    "status": "ok",
    "resource_id": "a200c70b-e025-4a9a-be1b-ec7275d7921f",
    "metadata_modified": null,
-   "bytes": 717404,
-   "sha256": "5b802a37b67578f7879fd97ec62d41eca54fa8c48f9097107ae1be77985085bc"
+   "bytes": 721379,
+   "sha256": "dc467f83bc6b446e92657e38e7b68b66e99bdb3c38aa69dbf4359ac3a4c3d640"
   },
   {
    "label": "dadosabertos.tse.jus.br › codigos-oficiais-de-uf-e-municipios-segundo-o-tse-e-o-ibge › Códigos oficiais de UF e municípios segundo o TSE e o IBGE",
    "status": "ok",
    "resource_id": "c6c767d7-f341-4256-8dff-010683a9c796",
    "metadata_modified": "2025-06-24T18:07:38.590296",
-   "bytes": 139066,
-   "sha256": "40d0a698d3d56c299e8afdbaa846453c230c8042c1b0b878010cc0e19f80c544"
+   "bytes": 139054,
+   "sha256": "dba4a4a3bfcc34f4fbca827c539c614105b742434542ca2a535d8c0f34101428"
   }
  ]
 }

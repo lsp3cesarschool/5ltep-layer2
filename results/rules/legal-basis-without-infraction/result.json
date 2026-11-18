@@ -1,7 +1,7 @@
 {
- "run_id": "43016574730",
+ "run_id": "44312201167",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
  "id": "legal-basis-without-infraction",
  "rule_version": "0.1.0",
  "origin": "cross_reference",
@@ -35,22 +35,22 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-11T12:04:27+00:00",
- "total": 691881,
+ "evaluated_at": "2026-11-18T13:18:53+00:00",
+ "total": 692406,
  "counts": {
-  "match": 656226,
+  "match": 656498,
   "mismatch": 0,
-  "key_not_found": 24335,
-  "missing_value": 11320,
+  "key_not_found": 24356,
+  "missing_value": 11552,
   "invalid_value": 0,
   "ambiguous_key": 0,
   "out_of_scope": 0
  },
- "signals": 35655,
+ "signals": 35908,
  "signals_by_outcome": {
   "mismatch": 0,
-  "key_not_found": 24335,
-  "missing_value": 11320,
+  "key_not_found": 24356,
+  "missing_value": 11552,
   "invalid_value": 0,
   "ambiguous_key": 0
  },
@@ -59,12 +59,12 @@
   "ibama_filhos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração - enquadramento legal",
    "fetch_status": "ok",
-   "sha256": "28b361fefe5f02e68859afb2573fd454a2bb6fb27e4812f150627071e40eea6f",
+   "sha256": "81198f9ecf35b10c5998603efbf0c87af9ca575456bd5bf4fedfd3811b05ed2d",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/enquadramento/enquadramento_csv.zip",
    "file": "enquadramento_csv.zip",
    "files": null,
    "archive_members": "enquadramento_*.csv",
-   "records": 691881,
+   "records": 692406,
    "members": [
     {
      "name": "enquadramento_1195.csv",
@@ -152,7 +152,7 @@
     },
     {
      "name": "enquadramento_2000.csv",
-     "records": 7268
+     "records": 7270
     },
     {
      "name": "enquadramento_2001.csv",
@@ -160,7 +160,7 @@
     },
     {
      "name": "enquadramento_2002.csv",
-     "records": 25101
+     "records": 25103
     },
     {
      "name": "enquadramento_2003.csv",
@@ -204,11 +204,11 @@
     },
     {
      "name": "enquadramento_2013.csv",
-     "records": 20357
+     "records": 20359
     },
     {
      "name": "enquadramento_2014.csv",
-     "records": 18205
+     "records": 18208
     },
     {
      "name": "enquadramento_2015.csv",
@@ -216,11 +216,11 @@
     },
     {
      "name": "enquadramento_2016.csv",
-     "records": 20017
+     "records": 20020
     },
     {
      "name": "enquadramento_2017.csv",
-     "records": 17802
+     "records": 17807
     },
     {
      "name": "enquadramento_2018.csv",
@@ -228,7 +228,7 @@
     },
     {
      "name": "enquadramento_2019.csv",
-     "records": 14799
+     "records": 14801
     },
     {
      "name": "enquadramento_2020.csv",
@@ -236,19 +236,19 @@
     },
     {
      "name": "enquadramento_2021.csv",
-     "records": 13348
+     "records": 13356
     },
     {
      "name": "enquadramento_2022.csv",
-     "records": 18258
+     "records": 18259
     },
     {
      "name": "enquadramento_2023.csv",
-     "records": 24228
+     "records": 24229
     },
     {
      "name": "enquadramento_2024.csv",
-     "records": 17829
+     "records": 17830
     },
     {
      "name": "enquadramento_2025.csv",
@@ -256,19 +256,19 @@
     },
     {
      "name": "enquadramento_2026.csv",
-     "records": 18687
+     "records": 19182
     }
    ]
   },
   "ibama_autos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
    "fetch_status": "ok",
-   "sha256": "181b2ed83312de705c6e6a520d626fee0b3c72f9c6f680a170354186270005be",
+   "sha256": "d9e1abdda6c074b572fa77291e68c6725060c93077cb167f487b9923a906bbbb",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "file": "auto_infracao_csv.zip",
    "files": null,
    "archive_members": "auto_infracao_*.csv",
-   "records": 713274,
+   "records": 713632,
    "members": [
     {
      "name": "auto_infracao_1977.csv",
@@ -356,7 +356,7 @@
     },
     {
      "name": "auto_infracao_2000.csv",
-     "records": 24898
+     "records": 24899
     },
     {
      "name": "auto_infracao_2001.csv",
@@ -364,7 +364,7 @@
     },
     {
      "name": "auto_infracao_2002.csv",
-     "records": 37647
+     "records": 37646
     },
     {
      "name": "auto_infracao_2003.csv",
@@ -412,7 +412,7 @@
     },
     {
      "name": "auto_infracao_2014.csv",
-     "records": 15293
+     "records": 15294
     },
     {
      "name": "auto_infracao_2015.csv",
@@ -460,7 +460,7 @@
     },
     {
      "name": "auto_infracao_2026.csv",
-     "records": 14222
+     "records": 14579
     }
    ]
   }

@@ -1,7 +1,7 @@
 {
- "run_id": "43016574730",
+ "run_id": "44312201167",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/43016574730",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
  "id": "embargo-link-without-term",
  "rule_version": "0.1.0",
  "origin": "cross_reference",
@@ -34,21 +34,21 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-11T12:04:22+00:00",
- "total": 713274,
+ "evaluated_at": "2026-11-18T13:18:50+00:00",
+ "total": 713632,
  "counts": {
-  "match": 75246,
+  "match": 75252,
   "mismatch": 0,
-  "key_not_found": 21792,
+  "key_not_found": 21889,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 616236
+  "out_of_scope": 616491
  },
- "signals": 21792,
+ "signals": 21889,
  "signals_by_outcome": {
   "mismatch": 0,
-  "key_not_found": 21792,
+  "key_not_found": 21889,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0
@@ -58,12 +58,12 @@
   "ibama_autos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
    "fetch_status": "ok",
-   "sha256": "181b2ed83312de705c6e6a520d626fee0b3c72f9c6f680a170354186270005be",
+   "sha256": "d9e1abdda6c074b572fa77291e68c6725060c93077cb167f487b9923a906bbbb",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "file": "auto_infracao_csv.zip",
    "files": null,
    "archive_members": "auto_infracao_*.csv",
-   "records": 713274,
+   "records": 713632,
    "members": [
     {
      "name": "auto_infracao_1977.csv",
@@ -151,7 +151,7 @@
     },
     {
      "name": "auto_infracao_2000.csv",
-     "records": 24898
+     "records": 24899
     },
     {
      "name": "auto_infracao_2001.csv",
@@ -159,7 +159,7 @@
     },
     {
      "name": "auto_infracao_2002.csv",
-     "records": 37647
+     "records": 37646
     },
     {
      "name": "auto_infracao_2003.csv",
@@ -207,7 +207,7 @@
     },
     {
      "name": "auto_infracao_2014.csv",
-     "records": 15293
+     "records": 15294
     },
     {
      "name": "auto_infracao_2015.csv",
@@ -255,23 +255,23 @@
     },
     {
      "name": "auto_infracao_2026.csv",
-     "records": 14222
+     "records": 14579
     }
    ]
   },
   "ibama_embargo": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-embargo › Termos de embargo",
    "fetch_status": "ok",
-   "sha256": "64987beaf598aae32f675b96e01d7bc789487bca3e9d3225e4d6691e65e4d760",
+   "sha256": "70acfbd99c540d413e071fea29d0d94d924450623a2b93c7fe38c3e6a00bbcc0",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/TERMOS_DE_EMBARGO/TERMO_EMBARGO/termo_de_embargo.csv",
    "file": "termo_de_embargo.csv",
    "files": null,
    "archive_members": null,
-   "records": 117174,
+   "records": 117309,
    "members": [
     {
      "name": "termo_de_embargo.csv",
-     "records": 117174
+     "records": 117309
     }
    ]
   }
