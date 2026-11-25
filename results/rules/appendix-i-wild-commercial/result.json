@@ -1,7 +1,7 @@
 {
- "run_id": "44312201167",
+ "run_id": "45637533855",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/45637533855",
  "id": "appendix-i-wild-commercial",
  "rule_version": "0.1.0",
  "origin": "expert",
@@ -31,16 +31,16 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-18T13:18:21+00:00",
- "total": 259683,
+ "evaluated_at": "2026-11-25T14:48:24+00:00",
+ "total": 259855,
  "counts": {
-  "match": 244779,
+  "match": 244946,
   "mismatch": 403,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 14501
+  "out_of_scope": 14506
  },
  "signals": 403,
  "signals_by_outcome": {
@@ -55,16 +55,16 @@
   "ibama_siscites": {
    "resource": "dadosabertos.ibama.gov.br › siscites-licencas-de-fauna-e-flora-emitidas › Siscites",
    "fetch_status": "ok",
-   "sha256": "a831881740788266e9bc705bf11199f8dfaf6d847b5f472d7287565fef5a09c3",
+   "sha256": "2636a81cf426863792e8e105313b287bc0cd885706b4552efcb2727c023d1d44",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/CITES/licencas.csv",
    "file": "licencas.csv",
    "files": null,
    "archive_members": null,
-   "records": 259683,
+   "records": 259855,
    "members": [
     {
      "name": "licencas.csv",
-     "records": 259683
+     "records": 259855
     }
    ]
   }

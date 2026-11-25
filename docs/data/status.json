@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
  "label": "Layer 2",
- "color": "brightgreen",
- "message": "35/35 rules · 20/20 sources ok · 1084163 signals"
+ "color": "orange",
+ "message": "28/35 rules · 19/20 sources ok · 1071407 signals"
 }

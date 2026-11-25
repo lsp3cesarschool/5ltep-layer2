@@ -1,7 +1,7 @@
 {
- "run_id": "44312201167",
+ "run_id": "45637533855",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/45637533855",
  "id": "ingredient-without-registered-technical-product",
  "rule_version": "0.1.0",
  "origin": "cross_reference",
@@ -35,7 +35,7 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-18T13:19:28+00:00",
+ "evaluated_at": "2026-11-25T14:49:35+00:00",
  "total": 124311,
  "counts": {
   "match": 13227,
@@ -75,16 +75,16 @@
   "mapa_agrofit": {
    "resource": "dados.agricultura.gov.br › sistema-de-agrotoxicos-fitossanitarios-agrofit › Produto Técnico",
    "fetch_status": "ok",
-   "sha256": "dc467f83bc6b446e92657e38e7b68b66e99bdb3c38aa69dbf4359ac3a4c3d640",
+   "sha256": "b9a1a4d392a06003cd53bdd0ede827e6e05dc98ff015de71a30168e398faf64f",
    "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/a200c70b-e025-4a9a-be1b-ec7275d7921f/download/agrofitprodutostecnicos.csv",
    "file": "agrofitprodutostecnicos.csv",
    "files": null,
    "archive_members": null,
-   "records": 3043,
+   "records": 3051,
    "members": [
     {
      "name": "agrofitprodutostecnicos.csv",
-     "records": 3043
+     "records": 3051
     }
    ]
   }

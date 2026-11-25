@@ -1,7 +1,7 @@
 {
- "run_id": "44312201167",
+ "run_id": "45637533855",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/45637533855",
  "id": "declared-areas-above-property",
  "rule_version": "0.1.0",
  "origin": "expert",
@@ -30,7 +30,7 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-18T13:19:20+00:00",
+ "evaluated_at": "2026-11-25T14:49:34+00:00",
  "total": 6206860,
  "counts": {
   "match": 6160354,
@@ -54,7 +54,7 @@
   "ibama_ada": {
    "resource": "dadosabertos.ibama.gov.br › ato-declaratorio-ambiental-ada › Ato Declaratório Ambiental (ADA)",
    "fetch_status": "ok",
-   "sha256": "508a6df627466d35c99bc72b1a6d58558fdb4ac5974f118a2c290c8bc706c782",
+   "sha256": "75877c0e58499d41fb68003227e280185fdab47338aefd34d0c6ba51ef6dbd71",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/ADA/atoDeclaratorio/ADA_atoDeclaratorio_csv.zip",
    "file": "ADA_atoDeclaratorio_csv.zip",
    "files": null,

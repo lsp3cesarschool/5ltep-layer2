@@ -1,7 +1,7 @@
 {
- "run_id": "44312201167",
+ "run_id": "45637533855",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/45637533855",
  "id": "seizure-link-without-term",
  "rule_version": "0.1.0",
  "origin": "cross_reference",
@@ -32,39 +32,19 @@
    "label": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-apreensao › Termo de apreensão"
   }
  ],
- "status": "evaluated",
- "reason_code": null,
- "reason": null,
- "evaluated_at": "2026-11-18T13:18:55+00:00",
- "total": 713632,
- "counts": {
-  "match": 98923,
-  "mismatch": 0,
-  "key_not_found": 10822,
-  "missing_value": 0,
-  "invalid_value": 0,
-  "ambiguous_key": 0,
-  "out_of_scope": 603887
- },
- "signals": 10822,
- "signals_by_outcome": {
-  "mismatch": 0,
-  "key_not_found": 10822,
-  "missing_value": 0,
-  "invalid_value": 0,
-  "ambiguous_key": 0
- },
- "list": "rules/seizure-link-without-term.json",
+ "status": "not_evaluated",
+ "reason_code": "archive_invalid",
+ "reason": "termo_de_apreensao.csv: o recurso não é um zip válido",
  "sources": {
   "ibama_autos": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-auto-de-infracao › Autos de infração",
    "fetch_status": "ok",
-   "sha256": "d9e1abdda6c074b572fa77291e68c6725060c93077cb167f487b9923a906bbbb",
+   "sha256": "844522a0002d9fd2ee3737fc4de06be157a12a9292663a74ae39884c49dd6c78",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
    "file": "auto_infracao_csv.zip",
    "files": null,
    "archive_members": "auto_infracao_*.csv",
-   "records": 713632,
+   "records": 713895,
    "members": [
     {
      "name": "auto_infracao_1977.csv",
@@ -256,25 +236,18 @@
     },
     {
      "name": "auto_infracao_2026.csv",
-     "records": 14579
+     "records": 14842
     }
    ]
   },
   "ibama_apreensao": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-apreensao › Termo de apreensão",
    "fetch_status": "ok",
-   "sha256": "afd442f6d8af42303c6015154b26bd227eb240a778928e71063dfcf6a86db2dc",
-   "url": "https://dadosabertos.ibama.gov.br/dados/SIFISC/termo_apreensao/apreensao/apreensao_csv.zip",
-   "file": "apreensao_csv.zip",
+   "sha256": "f92db55212b73e4be92a3e9777f3d7b3415a77bb0f029da9ea7404b11c96a8ec",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/FISCALIZACAO/TERMO_APREENSAO/termo_de_apreensao.csv",
+   "file": "termo_de_apreensao.csv",
    "files": null,
-   "archive_members": "apreensao.csv",
-   "records": 157955,
-   "members": [
-    {
-     "name": "apreensao.csv",
-     "records": 157955
-    }
-   ]
+   "archive_members": "apreensao.csv"
   }
  }
 }

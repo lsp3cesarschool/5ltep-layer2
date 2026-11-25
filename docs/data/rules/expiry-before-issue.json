@@ -1,10 +1,10 @@
 {
  "rule": "expiry-before-issue",
  "rule_version": "0.2.0",
- "evaluated_at": "2026-11-18T13:19:20+00:00",
- "run_id": "44312201167",
+ "evaluated_at": "2026-11-25T14:49:34+00:00",
+ "run_id": "45637533855",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/45637533855",
  "numbering": "registro por arquivo (o publicado, ou cada arquivo dentro do zip); 1 = primeira linha após o cabeçalho",
  "sources": {
   "ibama_licencas": {
@@ -13,76 +13,77 @@
    "files": null,
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SISLIC/sislic-licencas.csv",
    "archive_members": null,
-   "sha256": "36d47639717359f2a61e1086e0ff73374b30d382b3d52045ed02da5a516b0c2d",
-   "records": 14405
+   "sha256": "c38f29c150b780e79df5ddb23474ca96047ae99036082518f0438da2701775be",
+   "records": 14418
   }
  },
  "counts": {
-  "match": 14344,
-  "mismatch": 53,
+  "match": 14356,
+  "mismatch": 54,
   "key_not_found": 0,
   "missing_value": 8,
   "invalid_value": 0,
   "ambiguous_key": 0,
   "out_of_scope": 0
  },
- "total": 14405,
+ "total": 14418,
  "records": {
   "mismatch": {
    "sislic-licencas.csv": [
-    51,
-    105,
-    152,
+    50,
+    107,
+    154,
     636,
     678,
-    929,
+    927,
     944,
     970,
-    978,
+    980,
     998,
     1407,
     2055,
     2152,
     2183,
     2217,
-    2655,
-    3786,
-    4316,
-    5083,
-    5112,
-    5114,
-    6622,
-    6842,
-    7186,
-    8022,
-    8518,
+    2654,
+    3788,
+    4317,
+    5084,
+    5113,
+    5115,
+    6623,
+    6843,
+    7187,
+    8023,
+    8519,
     8555,
-    8923,
-    9776,
-    9948,
-    11695,
-    11776,
-    11874,
-    12128,
-    12153,
-    12155,
-    12177,
-    12270,
-    12348,
-    12463,
-    12526,
-    12587,
-    12955,
-    13083,
-    13686,
-    13984,
-    14003,
-    14063,
-    14078,
-    14080,
-    14104,
-    14105,
-    14106
+    8924,
+    9777,
+    9950,
+    11700,
+    11781,
+    11880,
+    12132,
+    12135,
+    12160,
+    12162,
+    12184,
+    12277,
+    12355,
+    12470,
+    12533,
+    12594,
+    12965,
+    13089,
+    13695,
+    13996,
+    14015,
+    14076,
+    14090,
+    14092,
+    14114,
+    14119,
+    14120
    ]
   },
   "missing_value": {
@@ -90,24 +91,24 @@
     702,
     705,
     707,
-    5072,
     5073,
     5074,
-    9760,
-    11556
+    5075,
+    9761,
+    11560
    ]
   }
  },
  "members": [
   {
    "name": "sislic-licencas.csv",
-   "records": 14405
+   "records": 14418
   }
  ],
  "by_member": {
   "sislic-licencas.csv": {
-   "match": 14344,
-   "mismatch": 53,
+   "match": 14356,
+   "mismatch": 54,
    "missing_value": 8
   }
  },
@@ -246,8 +247,8 @@
    "mismatch": 8
   },
   "2026": {
-   "match": 727,
-   "mismatch": 5
+   "match": 739,
+   "mismatch": 6
   },
   "unknown": {
    "missing_value": 1

@@ -1,7 +1,7 @@
 {
- "run_id": "44312201167",
+ "run_id": "45637533855",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/45637533855",
  "id": "lifted-before-embargo",
  "rule_version": "0.3.0",
  "origin": "expert",
@@ -30,16 +30,16 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-18T13:18:23+00:00",
- "total": 117309,
+ "evaluated_at": "2026-11-25T14:48:26+00:00",
+ "total": 117424,
  "counts": {
-  "match": 19814,
+  "match": 19829,
   "mismatch": 16,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 97479
+  "out_of_scope": 97579
  },
  "signals": 16,
  "signals_by_outcome": {
@@ -54,16 +54,16 @@
   "ibama_embargo": {
    "resource": "dadosabertos.ibama.gov.br › fiscalizacao-termo-de-embargo › Termos de embargo",
    "fetch_status": "ok",
-   "sha256": "70acfbd99c540d413e071fea29d0d94d924450623a2b93c7fe38c3e6a00bbcc0",
+   "sha256": "9d02ce32deb396bab674953262761fdc065e03aa1f834ac61aa9710d6ede0e5f",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/TERMOS_DE_EMBARGO/TERMO_EMBARGO/termo_de_embargo.csv",
    "file": "termo_de_embargo.csv",
    "files": null,
    "archive_members": null,
-   "records": 117309,
+   "records": 117424,
    "members": [
     {
      "name": "termo_de_embargo.csv",
-     "records": 117309
+     "records": 117424
     }
    ]
   }

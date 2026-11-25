@@ -1,7 +1,7 @@
 {
- "run_id": "44312201167",
+ "run_id": "45637533855",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/45637533855",
  "id": "appeal-before-main-judgment",
  "rule_version": "0.3.0",
  "origin": "expert",
@@ -28,45 +28,18 @@
    "label": "dadosabertos.ibama.gov.br › julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama › Volume de Julgamento de Auto de Infração"
   }
  ],
- "status": "evaluated",
- "reason_code": null,
- "reason": null,
- "evaluated_at": "2026-11-18T13:19:20+00:00",
- "total": 2917,
- "counts": {
-  "match": 490,
-  "mismatch": 115,
-  "key_not_found": 0,
-  "missing_value": 71,
-  "invalid_value": 0,
-  "ambiguous_key": 0,
-  "out_of_scope": 2241
- },
- "signals": 186,
- "signals_by_outcome": {
-  "mismatch": 115,
-  "key_not_found": 0,
-  "missing_value": 71,
-  "invalid_value": 0,
-  "ambiguous_key": 0
- },
- "list": "rules/appeal-before-main-judgment.json",
+ "status": "not_evaluated",
+ "reason_code": "decode_error",
+ "reason": "julgamentos_auto_infracao_realizado_ambito_ibama_csv.zip: bytes inválidos para utf-8 perto do registro 1 (invalid start byte)",
  "sources": {
   "ibama_julgamentos": {
    "resource": "dadosabertos.ibama.gov.br › julgamentos-de-auto-de-infracao-realizado-no-ambito-do-ibama › Volume de Julgamento de Auto de Infração",
    "fetch_status": "ok",
-   "sha256": "7780312127223a853a01ced2be76b9631850ce282fc32af0e72dbf8eae81004d",
-   "url": "https://dadosabertos.ibama.gov.br/dados/SICAFI/AC/Volume/volumeJulgamentoAI.csv",
-   "file": "volumeJulgamentoAI.csv",
+   "sha256": "b1c39232c51f64bfba7997545ffa1fb5d2c22398f2513f71c5847aa44ae57d65",
+   "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/JULGAMENTOS_AUTO_INFRACAO_REALIZADO_AMBITO_IBAMA/julgamentos_auto_infracao_realizado_ambito_ibama_csv.zip",
+   "file": "julgamentos_auto_infracao_realizado_ambito_ibama_csv.zip",
    "files": null,
-   "archive_members": null,
-   "records": 2917,
-   "members": [
-    {
-     "name": "volumeJulgamentoAI.csv",
-     "records": 2917
-    }
-   ]
+   "archive_members": null
   }
  }
 }

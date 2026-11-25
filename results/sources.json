@@ -1,8 +1,8 @@
 {
- "run_id": "44312201167",
+ "run_id": "45637533855",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
- "checked_at": "2026-11-18T13:19:29+00:00",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/45637533855",
+ "checked_at": "2026-11-25T14:49:36+00:00",
  "sources": [
   {
    "portal": "https://dadosabertos.ibama.gov.br",
@@ -19,7 +19,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.34
+    "seconds": 0.44
    },
    "dataset": {
     "title": "Siscites - licenças de fauna e flora emitidas",
@@ -39,22 +39,22 @@
    },
    "download": {
     "http_status": 200,
-    "etag": "0x8DF45240A09DD0B",
-    "last_modified": "Wed, 18 Nov 2026 03:28:39 GMT",
+    "etag": "0x8DF4AA3F3DEAE2E",
+    "last_modified": "Wed, 25 Nov 2026 03:26:54 GMT",
     "content_type": "application/octet-stream",
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
-    "bytes": 107266436,
-    "sha256": "a831881740788266e9bc705bf11199f8dfaf6d847b5f472d7287565fef5a09c3",
-    "seconds": 4.98,
-    "mb_per_s": 21.537
+    "bytes": 107350278,
+    "sha256": "2636a81cf426863792e8e105313b287bc0cd885706b4552efcb2727c023d1d44",
+    "seconds": 11.95,
+    "mb_per_s": 8.982
    },
    "files": [
     {
      "file": "licencas.csv",
      "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/CITES/licencas.csv",
      "resource_id": "dddd819f-275a-4653-9104-772dd7519e6a",
-     "bytes": 107266436,
-     "sha256": "a831881740788266e9bc705bf11199f8dfaf6d847b5f472d7287565fef5a09c3"
+     "bytes": 107350278,
+     "sha256": "2636a81cf426863792e8e105313b287bc0cd885706b4552efcb2727c023d1d44"
     }
    ]
   },
@@ -72,7 +72,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.78
+    "seconds": 0.92
    },
    "dataset": {
     "title": "Espécies Ameaçadas",
@@ -98,8 +98,8 @@
     "served_by": "dados.mma.gov.br",
     "bytes": 172311,
     "sha256": "d05dda8ece1f7d62aabfa1326c4808d5b1738bf2e7d20e3cdf74b6cab1cd14ad",
-    "seconds": 0.64,
-    "mb_per_s": 0.268
+    "seconds": 0.72,
+    "mb_per_s": 0.238
    },
    "files": [
     {
@@ -127,7 +127,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.3
+    "seconds": 0.27
    },
    "dataset": {
     "title": "Fiscalização - termo de embargo",
@@ -135,34 +135,34 @@
     "license": "Outra (Aberta)",
     "license_id": "other-open",
     "license_url": null,
-    "metadata_modified": "2026-10-07T19:32:21.034682"
+    "metadata_modified": "2026-11-25T14:23:11.932367"
    },
    "resource": {
     "id": "8f88b43e-287a-470b-a730-db440f9e37fa",
     "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/TERMOS_DE_EMBARGO/TERMO_EMBARGO/termo_de_embargo.csv",
     "name": "Termos de embargo",
-    "metadata_modified": "2026-10-07T19:31:48.206513",
+    "metadata_modified": "2026-11-25T13:45:27.721348",
     "last_modified": null,
     "size_declared": null
    },
    "download": {
     "http_status": 200,
-    "etag": "0x8DF4527B22637A1",
-    "last_modified": "Wed, 18 Nov 2026 03:54:50 GMT",
+    "etag": "0x8DF4AA76A665EDB",
+    "last_modified": "Wed, 25 Nov 2026 03:51:41 GMT",
     "content_type": "application/octet-stream",
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
-    "bytes": 214859480,
-    "sha256": "70acfbd99c540d413e071fea29d0d94d924450623a2b93c7fe38c3e6a00bbcc0",
-    "seconds": 7.11,
-    "mb_per_s": 30.226
+    "bytes": 215400222,
+    "sha256": "9d02ce32deb396bab674953262761fdc065e03aa1f834ac61aa9710d6ede0e5f",
+    "seconds": 22.66,
+    "mb_per_s": 9.505
    },
    "files": [
     {
      "file": "termo_de_embargo.csv",
      "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/TERMOS_DE_EMBARGO/TERMO_EMBARGO/termo_de_embargo.csv",
      "resource_id": "8f88b43e-287a-470b-a730-db440f9e37fa",
-     "bytes": 214859480,
-     "sha256": "70acfbd99c540d413e071fea29d0d94d924450623a2b93c7fe38c3e6a00bbcc0"
+     "bytes": 215400222,
+     "sha256": "9d02ce32deb396bab674953262761fdc065e03aa1f834ac61aa9710d6ede0e5f"
     }
    ]
   },
@@ -180,7 +180,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.17
+    "seconds": 0.22
    },
    "dataset": {
     "title": "Sisfauna - Plantel Exato",
@@ -206,8 +206,8 @@
     "served_by": "dadosabertos.ibama.gov.br",
     "bytes": 73251517,
     "sha256": "26250d38da458413546d7f981ebc115f80c0d278aa5edef3304f372ff075ab8e",
-    "seconds": 0.45,
-    "mb_per_s": 164.53
+    "seconds": 2.84,
+    "mb_per_s": 25.761
    },
    "files": [
     {
@@ -233,7 +233,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.16
+    "seconds": 0.21
    },
    "dataset": {
     "title": "Sisfogo - ROI",
@@ -241,34 +241,34 @@
     "license": "Creative Commons Atribuição",
     "license_id": "cc-by",
     "license_url": "http://www.opendefinition.org/licenses/cc-by",
-    "metadata_modified": "2025-11-13T12:32:39.128641"
+    "metadata_modified": "2026-11-18T15:09:56.580786"
    },
    "resource": {
     "id": "c2ac514d-3701-4255-9b47-fcbb042fb9b2",
-    "url": "https://dadosabertos.ibama.gov.br/dados/SISFOGO/ROI.csv",
+    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SISFOGO_ROI/sisfogo_roi.csv",
     "name": "ROI formato csv",
-    "metadata_modified": "2021-11-18T11:55:55.660266",
+    "metadata_modified": "2026-11-18T15:09:29.585498",
     "last_modified": null,
     "size_declared": null
    },
    "download": {
     "http_status": 200,
-    "etag": "\"10ef6e6a-650f3e6d0b263\"",
-    "last_modified": "Mon, 04 May 2026 01:32:19 GMT",
-    "content_type": "text/csv",
-    "served_by": "dadosabertos.ibama.gov.br",
-    "bytes": 284126826,
-    "sha256": "252aa380626d9377c0e24b9fbcc8a0c7572e5e7ee8acab0c152b1888ad0ebc91",
-    "seconds": 0.74,
-    "mb_per_s": 384.819
+    "etag": "0x8DF49113D8993C5",
+    "last_modified": "Mon, 23 Nov 2026 03:24:10 GMT",
+    "content_type": "application/octet-stream",
+    "served_by": "stibamadadosabertosprd.blob.core.windows.net",
+    "bytes": 283568086,
+    "sha256": "1e26d497b332bf3dde1663524c92522343c1c6a3c1ed94444f678128dbd791a1",
+    "seconds": 31.91,
+    "mb_per_s": 8.885
    },
    "files": [
     {
-     "file": "ROI.csv",
-     "url": "https://dadosabertos.ibama.gov.br/dados/SISFOGO/ROI.csv",
+     "file": "sisfogo_roi.csv",
+     "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SISFOGO_ROI/sisfogo_roi.csv",
      "resource_id": "c2ac514d-3701-4255-9b47-fcbb042fb9b2",
-     "bytes": 284126826,
-     "sha256": "252aa380626d9377c0e24b9fbcc8a0c7572e5e7ee8acab0c152b1888ad0ebc91"
+     "bytes": 283568086,
+     "sha256": "1e26d497b332bf3dde1663524c92522343c1c6a3c1ed94444f678128dbd791a1"
     }
    ]
   },
@@ -287,7 +287,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.16
+    "seconds": 0.21
    },
    "dataset": {
     "title": "Volumes Explorados - IF 100%",
@@ -307,22 +307,22 @@
    },
    "download": {
     "http_status": 200,
-    "etag": "0x8DF4534BA63F9E2",
-    "last_modified": "Wed, 18 Nov 2026 05:28:07 GMT",
+    "etag": "0x8DF4AB3FCFFC1E7",
+    "last_modified": "Wed, 25 Nov 2026 05:21:41 GMT",
     "content_type": "application/octet-stream",
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
-    "bytes": 52575867,
-    "sha256": "56340e327b0a9bac7d9a3b0b0881626de631457ba37534701bee8c760282f448",
-    "seconds": 1.78,
-    "mb_per_s": 29.551
+    "bytes": 52752398,
+    "sha256": "3f362aa19c353e274be26edb8e718760bf12f5791d99a1a6a0d9fb73ff4ba5a4",
+    "seconds": 7.41,
+    "mb_per_s": 7.122
    },
    "files": [
     {
      "file": "volumes_explorados_if_100_csv.zip",
      "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SINAFLOR/VolumesExploradosIf100/volumes_explorados_if_100_csv.zip",
      "resource_id": "ac345e77-863b-472c-a06a-4f171263bc70",
-     "bytes": 52575867,
-     "sha256": "56340e327b0a9bac7d9a3b0b0881626de631457ba37534701bee8c760282f448"
+     "bytes": 52752398,
+     "sha256": "3f362aa19c353e274be26edb8e718760bf12f5791d99a1a6a0d9fb73ff4ba5a4"
     }
    ]
   },
@@ -341,7 +341,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.16
+    "seconds": 0.25
    },
    "dataset": {
     "title": "Sinaflor - PMFS Amazônia Legal",
@@ -361,22 +361,22 @@
    },
    "download": {
     "http_status": 200,
-    "etag": "0x8DF452940728FB4",
-    "last_modified": "Wed, 18 Nov 2026 04:05:58 GMT",
+    "etag": "0x8DF4AA8E5A0E171",
+    "last_modified": "Wed, 25 Nov 2026 04:02:17 GMT",
     "content_type": "application/octet-stream",
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
-    "bytes": 5927506,
-    "sha256": "a5198bf530ec9318d139b48200a550c1bc95bd5b6e96bfac6ece95f2c32072a3",
-    "seconds": 0.29,
-    "mb_per_s": 20.617
+    "bytes": 5987130,
+    "sha256": "cf0add8cd59c4ebdf749b9e16c0d4c8021a68c2fd1d5856c1858a3a363efee05",
+    "seconds": 0.83,
+    "mb_per_s": 7.213
    },
    "files": [
     {
      "file": "pmfsAmazoniaLegal.csv",
      "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SINAFLOR/pmfs/AmazoniaLegal/pmfsAmazoniaLegal.csv",
      "resource_id": "fac201c9-8e09-49d5-9113-1608cf45b8c8",
-     "bytes": 5927506,
-     "sha256": "a5198bf530ec9318d139b48200a550c1bc95bd5b6e96bfac6ece95f2c32072a3"
+     "bytes": 5987130,
+     "sha256": "cf0add8cd59c4ebdf749b9e16c0d4c8021a68c2fd1d5856c1858a3a363efee05"
     }
    ]
   },
@@ -394,7 +394,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.62
+    "seconds": 0.8
    },
    "dataset": {
     "title": "Espécies florestais madeireiras comerciais",
@@ -420,8 +420,8 @@
     "served_by": "dados.florestal.gov.br",
     "bytes": 52331,
     "sha256": "5ff3e04290644e5b739a354d1e452ca8c78a9ecb9a6b0e7c10df30f07d36f64d",
-    "seconds": 0.44,
-    "mb_per_s": 0.118
+    "seconds": 0.59,
+    "mb_per_s": 0.089
    },
    "files": [
     {
@@ -460,7 +460,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.33
+    "seconds": 0.66
    },
    "dataset": {
     "title": "Fiscalização - auto de infração",
@@ -480,22 +480,22 @@
    },
    "download": {
     "http_status": 200,
-    "etag": "0x8DF452F7165039B",
-    "last_modified": "Wed, 18 Nov 2026 04:50:17 GMT",
+    "etag": "0x8DF4AAECF797ED0",
+    "last_modified": "Wed, 25 Nov 2026 04:44:37 GMT",
     "content_type": "application/octet-stream",
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
-    "bytes": 123721773,
-    "sha256": "d9e1abdda6c074b572fa77291e68c6725060c93077cb167f487b9923a906bbbb",
-    "seconds": 4.02,
-    "mb_per_s": 30.748
+    "bytes": 123857219,
+    "sha256": "844522a0002d9fd2ee3737fc4de06be157a12a9292663a74ae39884c49dd6c78",
+    "seconds": 11.32,
+    "mb_per_s": 10.944
    },
    "files": [
     {
      "file": "auto_infracao_csv.zip",
      "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/auto_infracao/auto_infracao_csv.zip",
      "resource_id": "b2aba344-95df-43c0-b2ba-f4353cfd9a00",
-     "bytes": 123721773,
-     "sha256": "d9e1abdda6c074b572fa77291e68c6725060c93077cb167f487b9923a906bbbb"
+     "bytes": 123857219,
+     "sha256": "844522a0002d9fd2ee3737fc4de06be157a12a9292663a74ae39884c49dd6c78"
     }
    ]
   },
@@ -513,7 +513,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.34
+    "seconds": 0.36
    },
    "dataset": {
     "title": "Fiscalização - auto de infração",
@@ -533,22 +533,22 @@
    },
    "download": {
     "http_status": 200,
-    "etag": "0x8DF452A83B08E89",
-    "last_modified": "Wed, 18 Nov 2026 04:15:01 GMT",
+    "etag": "0x8DF4AAA23D869B2",
+    "last_modified": "Wed, 25 Nov 2026 04:11:11 GMT",
     "content_type": "application/octet-stream",
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
-    "bytes": 14371487,
-    "sha256": "5839b0ec128888a19ff4d37355388638c25f17e02d28c03a48f7242dbe6d2383",
-    "seconds": 0.55,
-    "mb_per_s": 26.041
+    "bytes": 14387543,
+    "sha256": "8361eb30c8daf8887410cd22d20f540185aa603c659b9df89c284f1310bd7a7f",
+    "seconds": 0.77,
+    "mb_per_s": 18.711
    },
    "files": [
     {
      "file": "bioma.csv",
      "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/bioma/bioma.csv",
      "resource_id": "afe30a48-eb96-4915-8f13-c4e838dae033",
-     "bytes": 14371487,
-     "sha256": "5839b0ec128888a19ff4d37355388638c25f17e02d28c03a48f7242dbe6d2383"
+     "bytes": 14387543,
+     "sha256": "8361eb30c8daf8887410cd22d20f540185aa603c659b9df89c284f1310bd7a7f"
     }
    ]
   },
@@ -566,7 +566,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.31
+    "seconds": 0.42
    },
    "dataset": {
     "title": "Fiscalização - auto de infração",
@@ -586,22 +586,22 @@
    },
    "download": {
     "http_status": 200,
-    "etag": "0x8DF45225A1547F5",
-    "last_modified": "Wed, 18 Nov 2026 03:16:35 GMT",
+    "etag": "0x8DF4AA25AA3CE81",
+    "last_modified": "Wed, 25 Nov 2026 03:15:27 GMT",
     "content_type": "application/octet-stream",
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
-    "bytes": 8201999,
-    "sha256": "81198f9ecf35b10c5998603efbf0c87af9ca575456bd5bf4fedfd3811b05ed2d",
-    "seconds": 0.31,
-    "mb_per_s": 26.755
+    "bytes": 8208496,
+    "sha256": "86c913c293252819796d22af7fb4f6ccf7defb03647d633c5f2c99eb6500008c",
+    "seconds": 0.43,
+    "mb_per_s": 19.071
    },
    "files": [
     {
      "file": "enquadramento_csv.zip",
      "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/enquadramento/enquadramento_csv.zip",
      "resource_id": "903120d7-9a73-46d2-8e22-93576f4f855b",
-     "bytes": 8201999,
-     "sha256": "81198f9ecf35b10c5998603efbf0c87af9ca575456bd5bf4fedfd3811b05ed2d"
+     "bytes": 8208496,
+     "sha256": "86c913c293252819796d22af7fb4f6ccf7defb03647d633c5f2c99eb6500008c"
     }
    ]
   },
@@ -621,7 +621,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.21
+    "seconds": 0.27
    },
    "dataset": {
     "title": "Fiscalização - termo de apreensão",
@@ -629,34 +629,34 @@
     "license": "Outra (Domínio Público)",
     "license_id": "other-pd",
     "license_url": null,
-    "metadata_modified": "2025-10-13T11:45:49.681782"
+    "metadata_modified": "2026-11-18T14:00:04.780221"
    },
    "resource": {
     "id": "3364a902-067a-469a-bd9a-b865d234eed9",
-    "url": "https://dadosabertos.ibama.gov.br/dados/SIFISC/termo_apreensao/apreensao/apreensao_csv.zip",
+    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/FISCALIZACAO/TERMO_APREENSAO/termo_de_apreensao.csv",
     "name": "Termo de apreensão",
-    "metadata_modified": "2025-06-04T17:39:09.265547",
+    "metadata_modified": "2026-11-18T13:51:22.064650",
     "last_modified": null,
     "size_declared": null
    },
    "download": {
     "http_status": 200,
-    "etag": "\"1c7670b-650f0fdb8bc61\"",
-    "last_modified": "Sun, 03 May 2026 22:03:59 GMT",
-    "content_type": "application/zip",
-    "served_by": "dadosabertos.ibama.gov.br",
-    "bytes": 29845259,
-    "sha256": "afd442f6d8af42303c6015154b26bd227eb240a778928e71063dfcf6a86db2dc",
-    "seconds": 0.13,
-    "mb_per_s": 222.113
+    "etag": "0x8DF3BE6DAE17F88",
+    "last_modified": "Fri, 06 Nov 2026 09:18:01 GMT",
+    "content_type": "application/octet-stream",
+    "served_by": "stibamadadosabertosprd.blob.core.windows.net",
+    "bytes": 117366242,
+    "sha256": "f92db55212b73e4be92a3e9777f3d7b3415a77bb0f029da9ea7404b11c96a8ec",
+    "seconds": 10.12,
+    "mb_per_s": 11.595
    },
    "files": [
     {
-     "file": "apreensao_csv.zip",
-     "url": "https://dadosabertos.ibama.gov.br/dados/SIFISC/termo_apreensao/apreensao/apreensao_csv.zip",
+     "file": "termo_de_apreensao.csv",
+     "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/FISCALIZACAO/TERMO_APREENSAO/termo_de_apreensao.csv",
      "resource_id": "3364a902-067a-469a-bd9a-b865d234eed9",
-     "bytes": 29845259,
-     "sha256": "afd442f6d8af42303c6015154b26bd227eb240a778928e71063dfcf6a86db2dc"
+     "bytes": 117366242,
+     "sha256": "f92db55212b73e4be92a3e9777f3d7b3415a77bb0f029da9ea7404b11c96a8ec"
     }
    ]
   },
@@ -674,7 +674,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.55
+    "seconds": 1.58
    },
    "dataset": {
     "title": "Fiscalização - auto de infração",
@@ -694,22 +694,22 @@
    },
    "download": {
     "http_status": 200,
-    "etag": "0x8DF4528CE446B96",
-    "last_modified": "Wed, 18 Nov 2026 04:02:47 GMT",
+    "etag": "0x8DF4AA881C43A3E",
+    "last_modified": "Wed, 25 Nov 2026 03:59:30 GMT",
     "content_type": "application/octet-stream",
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
-    "bytes": 5384440,
-    "sha256": "9fe9a8cd5ebf9f397bb9b81f65d2fc2f2fcf13340e5f2629fa7eadc7952f41c3",
-    "seconds": 0.28,
-    "mb_per_s": 19.226
+    "bytes": 5388046,
+    "sha256": "582ea95c05063779c025bc00ddd56da5d55baad5b50b3e9af75456915bba37a2",
+    "seconds": 0.7,
+    "mb_per_s": 7.69
    },
    "files": [
     {
      "file": "especime.csv",
      "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SIFISC/auto_infracao/especime/especime.csv",
      "resource_id": "160b14e2-d7d8-40aa-b06c-295575a5fb9c",
-     "bytes": 5384440,
-     "sha256": "9fe9a8cd5ebf9f397bb9b81f65d2fc2f2fcf13340e5f2629fa7eadc7952f41c3"
+     "bytes": 5388046,
+     "sha256": "582ea95c05063779c025bc00ddd56da5d55baad5b50b3e9af75456915bba37a2"
     }
    ]
   },
@@ -727,7 +727,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.16
+    "seconds": 0.2
    },
    "dataset": {
     "title": "Ato Declaratório Ambiental (ADA)",
@@ -747,22 +747,22 @@
    },
    "download": {
     "http_status": 200,
-    "etag": "0x8DF439A03AA786E",
-    "last_modified": "Mon, 16 Nov 2026 04:28:07 GMT",
+    "etag": "0x8DF4919AFE7877D",
+    "last_modified": "Mon, 23 Nov 2026 04:24:38 GMT",
     "content_type": "application/octet-stream",
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
-    "bytes": 401235104,
-    "sha256": "508a6df627466d35c99bc72b1a6d58558fdb4ac5974f118a2c290c8bc706c782",
-    "seconds": 13.02,
-    "mb_per_s": 30.813
+    "bytes": 401226703,
+    "sha256": "75877c0e58499d41fb68003227e280185fdab47338aefd34d0c6ba51ef6dbd71",
+    "seconds": 46.53,
+    "mb_per_s": 8.623
    },
    "files": [
     {
      "file": "ADA_atoDeclaratorio_csv.zip",
      "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/ADA/atoDeclaratorio/ADA_atoDeclaratorio_csv.zip",
      "resource_id": "09494a73-726a-4341-92ca-b97cf35914b2",
-     "bytes": 401235104,
-     "sha256": "508a6df627466d35c99bc72b1a6d58558fdb4ac5974f118a2c290c8bc706c782"
+     "bytes": 401226703,
+     "sha256": "75877c0e58499d41fb68003227e280185fdab47338aefd34d0c6ba51ef6dbd71"
     }
    ]
   },
@@ -783,7 +783,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.19
+    "seconds": 0.21
    },
    "dataset": {
     "title": "Licenças ambientais de atividades e empreendimentos licenciados pelo Ibama",
@@ -803,22 +803,22 @@
    },
    "download": {
     "http_status": 200,
-    "etag": "0x8DF45295D0D946B",
-    "last_modified": "Wed, 18 Nov 2026 04:06:46 GMT",
+    "etag": "0x8DF4AA8F81FF041",
+    "last_modified": "Wed, 25 Nov 2026 04:02:48 GMT",
     "content_type": "application/octet-stream",
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
-    "bytes": 3355376,
-    "sha256": "36d47639717359f2a61e1086e0ff73374b30d382b3d52045ed02da5a516b0c2d",
-    "seconds": 0.15,
-    "mb_per_s": 23.043
+    "bytes": 3358310,
+    "sha256": "c38f29c150b780e79df5ddb23474ca96047ae99036082518f0438da2701775be",
+    "seconds": 0.4,
+    "mb_per_s": 8.378
    },
    "files": [
     {
      "file": "sislic-licencas.csv",
      "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SISLIC/sislic-licencas.csv",
      "resource_id": "9e4873d3-10d8-464f-a883-88be3b3abf06",
-     "bytes": 3355376,
-     "sha256": "36d47639717359f2a61e1086e0ff73374b30d382b3d52045ed02da5a516b0c2d"
+     "bytes": 3358310,
+     "sha256": "c38f29c150b780e79df5ddb23474ca96047ae99036082518f0438da2701775be"
     }
    ]
   },
@@ -837,42 +837,42 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.16
+    "seconds": 0.2
    },
    "dataset": {
     "title": "Julgamentos de Auto de Infração - Realizado no âmbito do IBAMA",
     "organization": "Dados Abertos",
-    "license": "Other (Open)",
+    "license": "Outra (Aberta)",
     "license_id": "other-open",
     "license_url": null,
-    "metadata_modified": "2021-09-18T13:07:31.127734"
+    "metadata_modified": "2026-11-18T14:08:01.068236"
    },
    "resource": {
     "id": "6fe07a2f-718a-4d04-a386-2a1cd3e96afb",
-    "url": "https://dadosabertos.ibama.gov.br/dados/SICAFI/AC/Volume/volumeJulgamentoAI.csv",
+    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/JULGAMENTOS_AUTO_INFRACAO_REALIZADO_AMBITO_IBAMA/julgamentos_auto_infracao_realizado_ambito_ibama_csv.zip",
     "name": "Volume de Julgamento de Auto de Infração",
-    "metadata_modified": "2021-09-16T18:46:21.448610",
+    "metadata_modified": "2026-11-18T14:07:29.363903",
     "last_modified": null,
     "size_declared": null
    },
    "download": {
     "http_status": 200,
-    "etag": "\"9b6b3-64fd9dc94a36c\"",
-    "last_modified": "Mon, 20 Apr 2026 01:03:07 GMT",
-    "content_type": "text/csv",
-    "served_by": "dadosabertos.ibama.gov.br",
-    "bytes": 636595,
-    "sha256": "7780312127223a853a01ced2be76b9631850ce282fc32af0e72dbf8eae81004d",
-    "seconds": 0.04,
-    "mb_per_s": 14.767
+    "etag": "0x8DF4AD402D70F30",
+    "last_modified": "Wed, 25 Nov 2026 09:10:55 GMT",
+    "content_type": "application/octet-stream",
+    "served_by": "stibamadadosabertosprd.blob.core.windows.net",
+    "bytes": 11992967,
+    "sha256": "b1c39232c51f64bfba7997545ffa1fb5d2c22398f2513f71c5847aa44ae57d65",
+    "seconds": 1.18,
+    "mb_per_s": 10.17
    },
    "files": [
     {
-     "file": "volumeJulgamentoAI.csv",
-     "url": "https://dadosabertos.ibama.gov.br/dados/SICAFI/AC/Volume/volumeJulgamentoAI.csv",
+     "file": "julgamentos_auto_infracao_realizado_ambito_ibama_csv.zip",
+     "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/JULGAMENTOS_AUTO_INFRACAO_REALIZADO_AMBITO_IBAMA/julgamentos_auto_infracao_realizado_ambito_ibama_csv.zip",
      "resource_id": "6fe07a2f-718a-4d04-a386-2a1cd3e96afb",
-     "bytes": 636595,
-     "sha256": "7780312127223a853a01ced2be76b9631850ce282fc32af0e72dbf8eae81004d"
+     "bytes": 11992967,
+     "sha256": "b1c39232c51f64bfba7997545ffa1fb5d2c22398f2513f71c5847aa44ae57d65"
     }
    ]
   },
@@ -883,15 +883,15 @@
    "resource_format": "CSV",
    "label": "dadosabertos.ibama.gov.br › arrecadacao-de-multas-ambientais-bens-tutelados › Arrecadação de Multas por Bens Tutelados",
    "role": "primary",
-   "status": "ok",
-   "reason": null,
+   "status": "resource_not_found",
+   "reason": "0 recursos com nome 'Arrecadação de Multas por Bens Tutelados' e formato CSV; disponíveis: ['Arrecadação de multas ambientais por bens (CSV)', 'Arrecadação de multas ambientais por bens (JSON)', 'Arrecadação de multas ambientais por bens  (XML)', 'Metadados - Arrecadação de Multas Ambientais por Bens (CSV)']",
    "used_by": [
     "paid-ten-times-original",
     "payment-before-infraction"
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.16
+    "seconds": 0.22
    },
    "dataset": {
     "title": "Arrecadação de Multas Ambientais Bens tutelados",
@@ -899,36 +899,11 @@
     "license": "Outra (Aberta)",
     "license_id": "other-open",
     "license_url": null,
-    "metadata_modified": "2026-08-26T15:05:57.278039"
+    "metadata_modified": "2026-11-25T14:40:02.581985"
    },
-   "resource": {
-    "id": "cd55e477-2f11-43e5-b994-7be34e275561",
-    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/ARRECADACAO_DE_MULTAS_AMBIENTAIS_POR_BENS_TUTELADOS/arrecadacao_de_multas_ambientais_por_bens_tutelados_csv.zip",
-    "name": "Arrecadação de Multas por Bens Tutelados",
-    "metadata_modified": "2026-08-26T15:04:02.026297",
-    "last_modified": null,
-    "size_declared": null
-   },
-   "download": {
-    "http_status": 200,
-    "etag": "0x8DF455461B38F17",
-    "last_modified": "Wed, 18 Nov 2026 09:14:42 GMT",
-    "content_type": "application/octet-stream",
-    "served_by": "stibamadadosabertosprd.blob.core.windows.net",
-    "bytes": 28002267,
-    "sha256": "cf28a55edc2f998411e7b9671cc174a07fbff9964f629cfa18da13f8dc9d2625",
-    "seconds": 1.02,
-    "mb_per_s": 27.548
-   },
-   "files": [
-    {
-     "file": "arrecadacao_de_multas_ambientais_por_bens_tutelados_csv.zip",
-     "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/ARRECADACAO_DE_MULTAS_AMBIENTAIS_POR_BENS_TUTELADOS/arrecadacao_de_multas_ambientais_por_bens_tutelados_csv.zip",
-     "resource_id": "cd55e477-2f11-43e5-b994-7be34e275561",
-     "bytes": 28002267,
-     "sha256": "cf28a55edc2f998411e7b9671cc174a07fbff9964f629cfa18da13f8dc9d2625"
-    }
-   ]
+   "resource": {},
+   "download": {},
+   "files": []
   },
   {
    "portal": "https://dadosabertos.ibama.gov.br",
@@ -944,7 +919,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.16
+    "seconds": 0.25
    },
    "dataset": {
     "title": "Relatórios de Comercialização de Agrotóxicos",
@@ -964,14 +939,14 @@
    },
    "download": {
     "http_status": 200,
-    "etag": "0x8DF452FB9681DE0",
-    "last_modified": "Wed, 18 Nov 2026 04:52:18 GMT",
+    "etag": "0x8DF4AAF0BF2B213",
+    "last_modified": "Wed, 25 Nov 2026 04:46:19 GMT",
     "content_type": "application/octet-stream",
     "served_by": "stibamadadosabertosprd.blob.core.windows.net",
     "bytes": 13576797,
     "sha256": "12fa08c61fb8102a7c1d03729f4d90af46697cbbd937553dd95243a9010ff849",
-    "seconds": 0.54,
-    "mb_per_s": 25.297
+    "seconds": 1.17,
+    "mb_per_s": 11.566
    },
    "files": [
     {
@@ -997,7 +972,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.68
+    "seconds": 0.91
    },
    "dataset": {
     "title": "Sistema de Agrotóxicos Fitossanitários - Agrofit",
@@ -1005,34 +980,34 @@
     "license": "Creative Commons Attribution",
     "license_id": "cc-by",
     "license_url": "http://www.opendefinition.org/licenses/cc-by",
-    "metadata_modified": "2026-11-18T12:30:13.570614"
+    "metadata_modified": "2026-11-25T12:30:11.953379"
    },
    "resource": {
     "id": "a200c70b-e025-4a9a-be1b-ec7275d7921f",
     "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/a200c70b-e025-4a9a-be1b-ec7275d7921f/download/agrofitprodutostecnicos.csv",
     "name": "Produto Técnico",
     "metadata_modified": null,
-    "last_modified": "2026-11-18T12:30:13.554597",
+    "last_modified": "2026-11-25T12:30:11.936656",
     "size_declared": null
    },
    "download": {
     "http_status": 200,
-    "etag": "\"1795005013.67-721379\"",
-    "last_modified": "Wed, 18 Nov 2026 12:30:13 GMT",
+    "etag": "\"1795609812.04-722650\"",
+    "last_modified": "Wed, 25 Nov 2026 12:30:12 GMT",
     "content_type": "text/csv",
     "served_by": "dados.agricultura.gov.br",
-    "bytes": 721379,
-    "sha256": "dc467f83bc6b446e92657e38e7b68b66e99bdb3c38aa69dbf4359ac3a4c3d640",
-    "seconds": 0.62,
-    "mb_per_s": 1.165
+    "bytes": 722650,
+    "sha256": "b9a1a4d392a06003cd53bdd0ede827e6e05dc98ff015de71a30168e398faf64f",
+    "seconds": 0.81,
+    "mb_per_s": 0.894
    },
    "files": [
     {
      "file": "agrofitprodutostecnicos.csv",
      "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/a200c70b-e025-4a9a-be1b-ec7275d7921f/download/agrofitprodutostecnicos.csv",
      "resource_id": "a200c70b-e025-4a9a-be1b-ec7275d7921f",
-     "bytes": 721379,
-     "sha256": "dc467f83bc6b446e92657e38e7b68b66e99bdb3c38aa69dbf4359ac3a4c3d640"
+     "bytes": 722650,
+     "sha256": "b9a1a4d392a06003cd53bdd0ede827e6e05dc98ff015de71a30168e398faf64f"
     }
    ]
   },
@@ -1050,7 +1025,7 @@
    ],
    "package_show": {
     "http_status": 200,
-    "seconds": 0.46
+    "seconds": 0.29
    },
    "dataset": {
     "title": "Códigos oficiais de UF e municípios segundo o TSE e o IBGE",
@@ -1070,22 +1045,22 @@
    },
    "download": {
     "http_status": 200,
-    "etag": "\"21f2e-66064ba7cda11\"",
-    "last_modified": "Mon, 16 Nov 2026 13:26:42 GMT",
+    "etag": "\"21f31-660dc3880f43b\"",
+    "last_modified": "Sun, 22 Nov 2026 12:00:17 GMT",
     "content_type": "application/zip",
     "served_by": "cdn.tse.jus.br",
-    "bytes": 139054,
-    "sha256": "dba4a4a3bfcc34f4fbca827c539c614105b742434542ca2a535d8c0f34101428",
-    "seconds": 0.45,
-    "mb_per_s": 0.308
+    "bytes": 139057,
+    "sha256": "a0a9551c2e9acc83c98f2b9bc3c167d4cbbf0490708b5425365b7da063e89db7",
+    "seconds": 0.42,
+    "mb_per_s": 0.329
    },
    "files": [
     {
      "file": "municipio_tse_ibge.zip",
      "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/municipio_tse_ibge/municipio_tse_ibge.zip",
      "resource_id": "c6c767d7-f341-4256-8dff-010683a9c796",
-     "bytes": 139054,
-     "sha256": "dba4a4a3bfcc34f4fbca827c539c614105b742434542ca2a535d8c0f34101428"
+     "bytes": 139057,
+     "sha256": "a0a9551c2e9acc83c98f2b9bc3c167d4cbbf0490708b5425365b7da063e89db7"
     }
    ]
   }

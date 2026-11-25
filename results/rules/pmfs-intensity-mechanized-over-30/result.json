@@ -1,7 +1,7 @@
 {
- "run_id": "44312201167",
+ "run_id": "45637533855",
  "environment": "github-actions",
- "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/44312201167",
+ "run_url": "https://github.com/lsp3cesarschool/5ltep-layer2/actions/runs/45637533855",
  "id": "pmfs-intensity-mechanized-over-30",
  "rule_version": "0.1.0",
  "origin": "expert",
@@ -31,16 +31,16 @@
  "status": "evaluated",
  "reason_code": null,
  "reason": null,
- "evaluated_at": "2026-11-18T13:18:39+00:00",
- "total": 10292,
+ "evaluated_at": "2026-11-25T14:48:45+00:00",
+ "total": 10372,
  "counts": {
-  "match": 4970,
+  "match": 5048,
   "mismatch": 87,
   "key_not_found": 0,
   "missing_value": 0,
   "invalid_value": 0,
   "ambiguous_key": 0,
-  "out_of_scope": 5235
+  "out_of_scope": 5237
  },
  "signals": 87,
  "signals_by_outcome": {
@@ -55,16 +55,16 @@
   "ibama_pmfs": {
    "resource": "dadosabertos.ibama.gov.br › sinaflor-pmfs-amazonia-legal › PMFS Amazônia Legal",
    "fetch_status": "ok",
-   "sha256": "a5198bf530ec9318d139b48200a550c1bc95bd5b6e96bfac6ece95f2c32072a3",
+   "sha256": "cf0add8cd59c4ebdf749b9e16c0d4c8021a68c2fd1d5856c1858a3a363efee05",
    "url": "https://stibamadadosabertosprd.blob.core.windows.net/dados-abertos/dados/SINAFLOR/pmfs/AmazoniaLegal/pmfsAmazoniaLegal.csv",
    "file": "pmfsAmazoniaLegal.csv",
    "files": null,
    "archive_members": null,
-   "records": 10292,
+   "records": 10372,
    "members": [
     {
      "name": "pmfsAmazoniaLegal.csv",
-     "records": 10292
+     "records": 10372
     }
    ]
   }
